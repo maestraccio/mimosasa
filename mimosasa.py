@@ -3,7 +3,7 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.13"
+versie = "0.0.14"
 versiedatum = "20240428"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
@@ -1551,18 +1551,14 @@ def kleinegetalkleuren(getal):
 def grotegetalkleuren(rekening,header,getal):
     try:
         kleuren,catcol = updatekleuren(rekening)
-        if getal > 0:
+        if getal >= 0:
             getalkleur = kleuren["colgoed"]
-        elif getal == 0:
-            getalkleur = kleuren["colmatig"]
         else:
             getalkleur = kleuren["colslecht"]
     except(Exception) as f:
         #print(f)
-        if getal > 0:
+        if getal >= 0:
             getalkleur = colgoed
-        elif getal == 0:
-            getalkleur = colmatig
         else:
             getalkleur = colslecht
     return getalkleur
@@ -1868,7 +1864,7 @@ def geefonderwerp(rekening,header,col,ok):
         elcat = elementen
         elcat.append(woordcategorie)
         maxlen = len(max(elcat,key = len))
-    print(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[4].upper())+ResetAll)
+    print(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[3].upper())+ResetAll)
     onderwerp = input(col+inputindent).replace(",",".")
     print(ResetAll, end = "")
     if onderwerp.upper() in afsluitlijst:
@@ -2254,7 +2250,8 @@ def samenvattingcategorie(rekening,cat,datumlijst):
         woorden = ["Totaal","Budget","Procent","Gemiddeld","Aantal"]
     maxlen = len(max(woorden, key = len))
     budget = categorie[0][1]
-    gemiddeld = som/tel
+    if tel != 0:
+        gemiddeld = som/tel
     procent = som/categorie[0][1]*-100
     if procent > 100:
         procentkleur = kleuren["colslecht"]
@@ -2266,7 +2263,8 @@ def samenvattingcategorie(rekening,cat,datumlijst):
     print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[1])+kleuren["ResetAll"]+": "+grotegetalkleuren(rekening,header,budget)+valuta+kleuren["ResetAll"]+fornum(budget))
     if budget != budgetnul:
         print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[2])+kleuren["ResetAll"]+": "+procentkleur+"%"+kleuren["ResetAll"]+fornum(procent))
-    print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[3])+kleuren["ResetAll"]+": "+kleinegetalkleuren(gemiddeld)+valuta+kleuren["ResetAll"]+fornum(gemiddeld))
+    if tel != 0:
+        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[3])+kleuren["ResetAll"]+": "+kleinegetalkleuren(gemiddeld)+valuta+kleuren["ResetAll"]+fornum(gemiddeld))
     print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[4])+kleuren["ResetAll"]+": "+forr6(tel))
     print(" "*10+col+"+-"+"-"*maxlen+"+"+"-"*10+kleuren["ResetAll"])
 
@@ -2745,8 +2743,9 @@ def nieuwnieuw(rekening,ok):
                 break
             nieuwetransactie.append(onderwerp)
             categoriekeuzelijst = geefcategorie(rekening,header,col,ok)
-            if len(categoriekeuzelijst) > 0 and categoriekeuzelijst[0] in categorieenlijst:
-                nieuwetransactiecategorie = categoriekeuzelijst[0]
+            if len(categoriekeuzelijst) > 0:
+                if categoriekeuzelijst[0] in categorieenlijst:
+                    nieuwetransactiecategorie = categoriekeuzelijst[0]
             else:
                 break
         if nieuwetransactieinputlijst[0].upper() != "H":
