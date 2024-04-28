@@ -2,7 +2,8 @@
 import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
-versie = "0.0.02"
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
+versie = "0.0.03"
 versiedatum = "20240428"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
@@ -602,8 +603,16 @@ helpmenu = {
             "0,2,4": textwrap.wrap("Denk eraan dat u met het verwijderen van een categorie ook alle transacties erin verwijdert! Verzeker u ervan dat de categorie leeg is (gebruik de functie \"3,5\" indien nodig) voordat u deze functie gebruikt. In veel gevallen hoeft dit niet; u kunt eventueel niet-gebruikte categorieën verbergen met optie \"0,1,9\".",w),
             "0,2,5": textwrap.wrap("U kunt alle transacties wissen door de categorieën te resetten, huishoudelijke categorieën (%s t/m %s) vervangen door zakelijke (%s t/m %s), of vice versa. Hierbij worden ook de eventueel gepersonaliseerde categorienamen vervangen door de standaardnamen." % (huishoudelijkelijst[0],huishoudelijkelijst[-1],zakelijkelijst[0],zakelijkelijst[-1]),w),
             "0,2,6": textwrap.wrap("U kunt hier de eventueel gepersonaliseerde categorienamen terugzetten naar de standaard categorienamen.",w),
-
-            "1,0,8": textwrap.wrap("De collectie wordt alfabetisch van A naar Z gestorteerd op %s" % elementen[3].lower(),w),
+    "1": textwrap.wrap("Toon individuele transacties in detail, maak gefilterde samenvattingen, analyseer je inkomsten en uitgaven. Als eerste wordt het dagsaldo en de maandelijkse score per categorie getoond.",w),
+        "1,0": textwrap.wrap("Verzamel transacties per \"ID\" of verwijder de eerder gemaakte verzameling, zonder die transacties weer te geven. De geselecteerde transacties kunnen vervolgens op elk element in oplopende of aflopende volgorde worden gesorteerd. Standaard wordt er geen sortering toegepast; de transacties worden in eerste instantie opgeroepen in de volgorde waarin de \"ID's\" zijn gespecificeerd. Voor efficiënt gebruik wordt aanbevolen om de lijst kort en overzichtelijk te houden.",w),
+            "1,0,1": textwrap.wrap("De collectie wordt gestorteerd op %s, met de laatste %s vooraan" % (elementen[0].lower(),elementen[0].lower()),w),
+            "1,0,2": textwrap.wrap("De collectie wordt gestorteerd op %s, met de eerste %s vooraan" % (elementen[0].lower(),elementen[0].lower()),w),
+            "1,0,3": textwrap.wrap("De collectie wordt gestorteerd op %s, met het hoogste %s vooraan" % (elementen[1].lower(),elementen[1].lower()),w),
+            "1,0,4": textwrap.wrap("De collectie wordt gestorteerd op %s, met het laagste %s vooraan" % (elementen[1].lower(),elementen[1].lower()),w),
+            "1,0,5": textwrap.wrap("De collectie wordt gestorteerd op %s, van Z naar A" % (elementen[2].lower()),w),
+            "1,0,6": textwrap.wrap("De collectie wordt gestorteerd op %s, van A naar Z" % (elementen[2].lower()),w),
+            "1,0,7": textwrap.wrap("De collectie wordt gestorteerd op %s, van Z naar A" % (elementen[3].lower()),w),
+            "1,0,8": textwrap.wrap("De collectie wordt gestorteerd op %s, van A naar Z" % (elementen[3].lower()),w),
         "1,1": textwrap.wrap("Selecteer transacties op basis van verschillende criteria (%s, %s, %s, %s en %s) en genereer een overzichtelijke tabel. Er kan gebruik worden gemaakt van \"sneltoetsen\", of u kunt alle elementen afzonderlijk opgeven. De mogelijke \"sneltoetsen\" worden getoond; het is mogelijk \"M\" (maand) of \"W\" (week) te voorzien van een getal. Alle geselecteerde transacties worden ook verzameld in de collectie, die steeds getoond wordt boven het keuzemenu. Omvat de selectie één dag, dan wordt het dagtotaal op die dag getoond." % (elementen[0].lower(),elementen[1].lower(),elementen[2].lower(),elementen[3].lower(),woordcategorie.lower()),w),
         "1,2": textwrap.wrap("Toon de budgetanalyse van één maand. Standaard wordt de huidige maand getoond. U ziet de voortgang van iedere categorie ten opzichte van het daaraan toegekende budget, en de maandprestatie.",w),
         "1,3": textwrap.wrap("Toon de details van individuele transacties in de collectie. Het toegestaan aantal karakters in \"%s\" en \"%s\" is onbeperkt, maar in de tabel (\"1,1\") worden die afgekapt en slechts ten dele getoond. Alle informatie in die extra karakters wordt hier wel uitgevouwen." % (elementen[2].lower(),elementen[3].lower()),w),
