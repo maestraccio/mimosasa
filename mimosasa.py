@@ -3,7 +3,7 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.03"
+versie = "0.0.04"
 versiedatum = "20240428"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
@@ -19,6 +19,7 @@ forl4 = "{:<4}".format
 forr4 = "{:>4}".format
 forc5 = "{:^5}".format
 forr5 = "{:>5}".format
+forr6 = "{:>6}".format
 forc7 = "{:^7}".format
 forl8 = "{:<8}".format
 forc8 = "{:^8}".format
@@ -432,7 +433,7 @@ menu = {
         "1,3": "Bekijk %ss in collectie" % woordtransactie.lower(),
     "2": "%s toevoegen" % woordtransactie,
         "2,1": "Voeg een nieuwe transactie aan de rekening toe",
-        "2,2": "Kopiëer een bestaande transactie naar vandaag",
+        "2,2": "Kopieer een bestaande transactie naar vandaag",
     "3": "%s wijzigen" % woordtransactie,
         "3,1": "Wijzig %s%s" % (woordtransactie.lower(),elementen[0]),
         "3,2": "Wijzig %s%s" % (woordtransactie.lower(),elementen[1]),
@@ -2190,7 +2191,43 @@ def printselectie(rekening,header,col,ok):
             ########## print naar file stop ##########
     if datumlijst[0] == datumlijst[1]:
         dagtotaal(rekening,header,col,datumlijst[0])
+    if len(categoriekeuzelijst) == 1:
+        samenvattingcategorie(rekening,categoriekeuzelijst[0],datumlijst)
     return rekening,header,col,keuze1lijst,ok
+
+def samenvattingcategorie(rekening,cat,datumlijst):
+    kleuren,catcol = updatekleuren(rekening)
+    header = haalheader(rekening)
+    Taal = header[nieuwheaderlijst[3]]
+    valuta = header[nieuwheaderlijst[4]]
+    categorie = haalcategorie(rekening,cat)
+    som = 0
+    tel = 0
+    dezecategoriedezemaand = []
+    for i in categorie[1:]:
+        if datumlijst[0] <= i[0] <= datumlijst[1]:
+            dezecategoriedezemaand.append(i)
+            som += i[1]
+            tel += 1
+    if Taal == "EN":
+        woorden = ["Total","Budget","Percent","Average","Count"]
+    elif Taal == "IT":
+        woorden = ["Totale","Budget","Percentuale","Media","Numero"]
+    else:
+        woorden = ["Totaal","Budget","Procent","Gemiddeld","Aantal"]
+    maxlen = len(max(woorden, key = len))
+    budget = categorie[0][1]
+    gemiddeld = som/tel
+    procent = som/categorie[0][1]*-100
+    print(" "*10+col+"+-"+kleuren["Omkeren"]+catcol[cat]+cat+kleuren["ResetAll"]+col+"-"*(maxlen-(len(cat)))+"+"+"-"*10+kleuren["ResetAll"])
+    print(" "*10+col+"| "+kleuren["ResetAll"]+catcol[cat]+("{:^%d}" % (maxlen+11)).format(vertaalv(categorie[0][0]))+kleuren["ResetAll"])
+    print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[0])+kleuren["ResetAll"]+": "+grotegetalkleuren(rekening,header,som)+valuta+kleuren["ResetAll"]+fornum(som))
+    print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[1])+kleuren["ResetAll"]+": "+grotegetalkleuren(rekening,header,budget)+valuta+kleuren["ResetAll"]+fornum(budget))
+    print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[2])+kleuren["ResetAll"]+": "+grotegetalkleuren(rekening,header,procent)+"%"+kleuren["ResetAll"]+fornum(procent))
+    print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[3])+kleuren["ResetAll"]+": "+kleinegetalkleuren(gemiddeld)+valuta+kleuren["ResetAll"]+fornum(gemiddeld))
+    print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[4])+kleuren["ResetAll"]+": "+forr6(tel))
+    print(" "*10+col+"+-"+"-"*maxlen+"+"+"-"*10+kleuren["ResetAll"])
+
 
 def dagtotaal(rekening,header,col,datum):
     kleuren,catcol = updatekleuren(rekening)
@@ -2481,7 +2518,7 @@ def toontransactie(rekening,header,col,ok):
         maxlen = len(max(el, key = len))
         try:
             alternatievenamendict = haalalternatievenamen(rekening)
-            alt = vertaalv(ID[0])
+            alt = vertaalv(alternatievenamendict[ID[0]])
             datum = ok[ID][0]
             datum = opmaakdatum(datum)
             print(" "*10+col+"+-"+kleuren["Omkeren"]+catcol[ID[0]]+ID+kleuren["ResetAll"]+col+"-"*(maxlen-(len(ID)))+"+"+"-"*10+kleuren["ResetAll"])
