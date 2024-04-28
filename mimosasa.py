@@ -3,7 +3,7 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.14"
+versie = "0.0.15"
 versiedatum = "20240428"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
@@ -1111,7 +1111,7 @@ def grootgetal(getal,forsom,K):
         forsom = "{:>5}".format
         K = " ~K"
         return getal,forsom,K
-    elif getal <= -10000 or 10000 <= getal:
+    elif getal <= -100000 or 100000 <= getal:
         getal = int(getal/1000)
         forsom = "{:>5}".format
         K = " ~K"
