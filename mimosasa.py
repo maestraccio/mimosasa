@@ -2,7 +2,7 @@
 import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
-versie = "0.0.01"
+versie = "0.0.02"
 versiedatum = "20240428"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
@@ -3376,8 +3376,6 @@ def wijzigactief(rekening,header):
                     antwoord = geefjaofnee(rekening,header)
                     if antwoord.upper() in afsluitlijst:
                         doei()
-                    elif antwoord.upper() in neelijst:
-                        return header
                     else:
                         andereheader[nieuwheaderlijst[2]] = antwoord
                         with open(os.path.join(andererekening,"header"),"w") as h:
@@ -3490,8 +3488,6 @@ def wijzigtoonsaldo(rekening,header):
     antwoord = geefjaofnee(rekening,header)
     if antwoord.upper() in afsluitlijst:
         doei()
-    elif antwoord.upper() in neelijst:
-        return header
     else:
         header[nieuwheaderlijst[6]] = antwoord
         with open(os.path.join(rekening,"header"),"w") as h:
@@ -3568,8 +3564,6 @@ def wijzignullijnen(rekening,header):
     antwoord = geefjaofnee(rekening,header)
     if antwoord.upper() in afsluitlijst:
         doei()
-    elif antwoord.upper() in neelijst:
-        return header
     else:
         header[nieuwheaderlijst[8]] = antwoord
         with open(os.path.join(rekening,"header"),"w") as h:
@@ -3689,8 +3683,6 @@ def wijziganalyse2txt(rekening,header):
     antwoord = geefjaofnee(rekening,header)
     if antwoord.upper() in afsluitlijst:
         doei()
-    elif antwoord.upper() in neelijst:
-        return header
     else:
         header[nieuwheaderlijst[12]] = antwoord
         with open(os.path.join(rekening,"header"),"w") as h:
@@ -3713,8 +3705,6 @@ def wijzigexport2csv(rekening,header):
     antwoord = geefjaofnee(rekening,header)
     if antwoord.upper() in afsluitlijst:
         doei()
-    elif antwoord.upper() in neelijst:
-        return header
     else:
         header[nieuwheaderlijst[13]] = antwoord
         with open(os.path.join(rekening,"header"),"w") as h:
@@ -3737,8 +3727,6 @@ def wijzigtipvandedag(rekening,header):
     antwoord = geefjaofnee(rekening,header)
     if antwoord.upper() in afsluitlijst:
         doei()
-    elif antwoord.upper() in neelijst:
-        return header
     else:
         header[nieuwheaderlijst[14]] = antwoord
         with open(os.path.join(rekening,"header"),"w") as h:
