@@ -3,7 +3,7 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.12"
+versie = "0.0.13"
 versiedatum = "20240428"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
@@ -322,8 +322,8 @@ menuEN = {
             "5,2,2": "Savings pot value",
         "5,3": "Add new savings pot",
         "5,4": "Delete savings pot",
-    "<": "Back to main menu",
-    "Q": "Quit program"
+    "<": "Back",
+    "Q": "Quit"
         }
 menuIT = {
     "0": "Gestione account e aiuto",
@@ -385,8 +385,8 @@ menuIT = {
             "5,2,2": "Contenitore di risparmio valore",
         "5,3": "Aggiungere nuovo contenitore di risparmio",
         "5,4": "Eliminare contenitore di risparmio",
-    "<": "Tornare al menù principale",
-    "Q": "Uscire dal programma"
+    "<": "Tornare",
+    "Q": "Uscire"
         }
 menu = {
     "0": "Rekeningbeheer en help",
@@ -448,8 +448,8 @@ menu = {
             "5,2,2": "Spaarpot waarde",
         "5,3": "Voeg nieuwe spaarpot toe",
         "5,4": "Verwijder spaarpot",
-    "<": "Terug naar hoofdmenu",
-    "Q": "Verlaat programma"
+    "<": "Terug",
+    "Q": "Afsluiten"
         }
 helpmenuEN = {
     "0": textwrap.wrap("Version: %s, Date: %s \\\\ \"mimosasa\" is an app in which you can manage your expenses and savings in various bank accounts. It is written in Python by Maestraccio and is available for free download and use. \"mimosasa\" stands for \"Money In, Money Out: Spendings And Savings Aid\" and is the successor of \"mimo\". You can call up the relevant help article for many functions with \"H\". Choose \"<\" to return to the main menu or \"Q\" to exit the program entirely." % (versie,versiedatum),w),
@@ -1603,15 +1603,11 @@ def programmastart():
 def haalcategorie(rekening,cat):
     categorieenlijst = haalcategorieen(rekening)
     if cat in categorieenlijst:
-        try:
-            with open(os.path.join(rekening,cat),"r") as c:
-                categorie = ast.literal_eval(c.read())
-        except(Exception) as f:
-            #print(f)
-            with open(os.path.join(rekening,cat),"w") as c:
-                categorie = [["",budgetnul]]
-                print(categorie, file = c, end = "")
-    return categorie
+        with open(os.path.join(rekening,cat),"r") as c:
+            categorie = ast.literal_eval(c.read())
+        return categorie
+    else:
+        return "<"
 
 def schrijfcategorie(rekening,cat,categorie):
     kat = [categorie[0]]
@@ -1650,11 +1646,18 @@ def geefeendatum(rekening,header,col,ok,datum):
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     if Taal == "EN":
-        print(kleuren["Omkeren"]+col+elementenEN[0].upper()+ResetAll)
+        elcat = elementenEN
+        elcat.append(woordcategorieEN)
+        maxlen = len(max(elcat,key = len))
     elif Taal == "IT":
-        print(kleuren["Omkeren"]+col+elementenIT[0].upper()+ResetAll)
+        elcat = elementenIT
+        elcat.append(woordcategorieIT)
+        maxlen = len(max(elcat,key = len))
     else:
-        print(kleuren["Omkeren"]+col+elementen[0].upper()+ResetAll)
+        elcat = elementen
+        elcat.append(woordcategorie)
+        maxlen = len(max(elcat,key = len))
+    print(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[0].upper())+ResetAll)
     datumkeuze = input(col+inputindent)
     print(ResetAll, end = "")
     if datumkeuze.upper() in afsluitlijst:
@@ -1735,11 +1738,18 @@ def geefeenbedrag(rekening,header,col,ok,bedrag):
         return transactiebedrag
     else:
         if Taal == "EN":
-            print(kleuren["Omkeren"]+col+elementenEN[1].upper()+ResetAll)
+            elcat = elementenEN
+            elcat.append(woordcategorieEN)
+            maxlen = len(max(elcat,key = len))
         elif Taal == "IT":
-            print(kleuren["Omkeren"]+col+elementenIT[1].upper()+ResetAll)
+            elcat = elementenIT
+            elcat.append(woordcategorieIT)
+            maxlen = len(max(elcat,key = len))
         else:
-            print(kleuren["Omkeren"]+col+elementen[1].upper()+ResetAll)
+            elcat = elementen
+            elcat.append(woordcategorie)
+            maxlen = len(max(elcat,key = len))
+        print(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[1].upper())+ResetAll)
         bedragkeuze = input(col+inputindent)
         print(ResetAll, end = "")
         if bedragkeuze.upper() in afsluitlijst:
@@ -1821,11 +1831,18 @@ def geefwederpartij(rekening,header,col,ok):
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     if Taal == "EN":
-        print(kleuren["Omkeren"]+col+elementenEN[2].upper()+ResetAll)
+        elcat = elementenEN
+        elcat.append(woordcategorieEN)
+        maxlen = len(max(elcat,key = len))
     elif Taal == "IT":
-        print(kleuren["Omkeren"]+col+elementenIT[2].upper()+ResetAll)
+        elcat = elementenIT
+        elcat.append(woordcategorieIT)
+        maxlen = len(max(elcat,key = len))
     else:
-        print(kleuren["Omkeren"]+col+elementen[2].upper()+ResetAll)
+        elcat = elementen
+        elcat.append(woordcategorie)
+        maxlen = len(max(elcat,key = len))
+    print(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[2].upper())+ResetAll)
     wederpartij = input(col+inputindent).replace(",",".")
     print(ResetAll, end = "")
     if wederpartij.upper() in afsluitlijst:
@@ -1840,11 +1857,18 @@ def geefonderwerp(rekening,header,col,ok):
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     if Taal == "EN":
-        print(kleuren["Omkeren"]+col+elementenEN[3].upper()+ResetAll)
+        elcat = elementenEN
+        elcat.append(woordcategorieEN)
+        maxlen = len(max(elcat,key = len))
     elif Taal == "IT":
-        print(kleuren["Omkeren"]+col+elementenIT[3].upper()+ResetAll)
+        elcat = elementenIT
+        elcat.append(woordcategorieIT)
+        maxlen = len(max(elcat,key = len))
     else:
-        print(kleuren["Omkeren"]+col+elementen[3].upper()+ResetAll)
+        elcat = elementen
+        elcat.append(woordcategorie)
+        maxlen = len(max(elcat,key = len))
+    print(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[4].upper())+ResetAll)
     onderwerp = input(col+inputindent).replace(",",".")
     print(ResetAll, end = "")
     if onderwerp.upper() in afsluitlijst:
@@ -1860,11 +1884,18 @@ def geefcategorie(rekening,header,col,ok):
     Taal = header[nieuwheaderlijst[3]]
     categoriekeuzelijst = []
     if Taal == "EN":
-        print(kleuren["Omkeren"]+col+"CATEGORY"+ResetAll)
+        elcat = elementenEN
+        elcat.append(woordcategorieEN)
+        maxlen = len(max(elcat,key = len))
     elif Taal == "IT":
-        print(kleuren["Omkeren"]+col+"CATEGORIA"+ResetAll)
+        elcat = elementenIT
+        elcat.append(woordcategorieIT)
+        maxlen = len(max(elcat,key = len))
     else:
-        print(kleuren["Omkeren"]+col+"CATEGORIE"+ResetAll)
+        elcat = elementen
+        elcat.append(woordcategorie)
+        maxlen = len(max(elcat,key = len))
+    print(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[4].upper())+ResetAll)
     tooncategorieen(rekening,header)
     categoriekeuze = input(col+inputindent).upper()
     print(ResetAll, end = "")
@@ -2201,6 +2232,8 @@ def samenvattingcategorie(rekening,cat,datumlijst):
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
     categorie = haalcategorie(rekening,cat)
+    if categorie == "<":
+        return
     som = 0
     tel = 0
     dezecategoriedezemaand = []
@@ -2223,12 +2256,16 @@ def samenvattingcategorie(rekening,cat,datumlijst):
     budget = categorie[0][1]
     gemiddeld = som/tel
     procent = som/categorie[0][1]*-100
+    if procent > 100:
+        procentkleur = kleuren["colslecht"]
+    else:
+        procentkleur = kleuren["colgoed"]
     print(" "*10+col+"+-"+kleuren["Omkeren"]+catcol[cat]+cat+kleuren["ResetAll"]+col+"-"*(maxlen-(len(cat)))+"+"+"-"*10+kleuren["ResetAll"])
     print(" "*10+col+"| "+kleuren["ResetAll"]+catcol[cat]+("{:^%d}" % (maxlen+11)).format(vertaalv(categorie[0][0]))+kleuren["ResetAll"])
     print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[0])+kleuren["ResetAll"]+": "+grotegetalkleuren(rekening,header,som)+valuta+kleuren["ResetAll"]+fornum(som))
     print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[1])+kleuren["ResetAll"]+": "+grotegetalkleuren(rekening,header,budget)+valuta+kleuren["ResetAll"]+fornum(budget))
     if budget != budgetnul:
-        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[2])+kleuren["ResetAll"]+": "+grotegetalkleuren(rekening,header,procent)+"%"+kleuren["ResetAll"]+fornum(procent))
+        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[2])+kleuren["ResetAll"]+": "+procentkleur+"%"+kleuren["ResetAll"]+fornum(procent))
     print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[3])+kleuren["ResetAll"]+": "+kleinegetalkleuren(gemiddeld)+valuta+kleuren["ResetAll"]+fornum(gemiddeld))
     print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[4])+kleuren["ResetAll"]+": "+forr6(tel))
     print(" "*10+col+"+-"+"-"*maxlen+"+"+"-"*10+kleuren["ResetAll"])
@@ -2479,10 +2516,10 @@ def maandanalyse(rekening,datumlijst):
     if score < 0:
         aantalstreepjes *= -1
         getalkleur = kleuren["colhuh"]
-    elif score < budgetnegatief * -1:
-        getalkleur = kleuren["colgoed"]
-    else:
+    if aantalstreepjes > honderdprocent:
         getalkleur = kleuren["colslecht"]
+    else:
+        getalkleur = kleuren["colgoed"]
     if aantalstreepjes >= 56:
         aantalstreepjes = 56
     if aantalstreepjes == 0:
