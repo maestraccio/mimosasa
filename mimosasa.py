@@ -3,7 +3,7 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.04"
+versie = "0.0.11"
 versiedatum = "20240428"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
@@ -2204,6 +2204,10 @@ def samenvattingcategorie(rekening,cat,datumlijst):
     som = 0
     tel = 0
     dezecategoriedezemaand = []
+    if datumlijst[0] == "-*":
+        datumlijst[0] = standaardstartdatum
+    if datumlijst[1] == "+*":
+        datumlijst[1] = standaardeinddatum
     for i in categorie[1:]:
         if datumlijst[0] <= i[0] <= datumlijst[1]:
             dezecategoriedezemaand.append(i)
