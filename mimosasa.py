@@ -3,7 +3,7 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.11"
+versie = "0.0.12"
 versiedatum = "20240428"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
@@ -2227,7 +2227,8 @@ def samenvattingcategorie(rekening,cat,datumlijst):
     print(" "*10+col+"| "+kleuren["ResetAll"]+catcol[cat]+("{:^%d}" % (maxlen+11)).format(vertaalv(categorie[0][0]))+kleuren["ResetAll"])
     print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[0])+kleuren["ResetAll"]+": "+grotegetalkleuren(rekening,header,som)+valuta+kleuren["ResetAll"]+fornum(som))
     print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[1])+kleuren["ResetAll"]+": "+grotegetalkleuren(rekening,header,budget)+valuta+kleuren["ResetAll"]+fornum(budget))
-    print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[2])+kleuren["ResetAll"]+": "+grotegetalkleuren(rekening,header,procent)+"%"+kleuren["ResetAll"]+fornum(procent))
+    if budget != budgetnul:
+        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[2])+kleuren["ResetAll"]+": "+grotegetalkleuren(rekening,header,procent)+"%"+kleuren["ResetAll"]+fornum(procent))
     print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[3])+kleuren["ResetAll"]+": "+kleinegetalkleuren(gemiddeld)+valuta+kleuren["ResetAll"]+fornum(gemiddeld))
     print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[4])+kleuren["ResetAll"]+": "+forr6(tel))
     print(" "*10+col+"+-"+"-"*maxlen+"+"+"-"*10+kleuren["ResetAll"])
