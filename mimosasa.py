@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.15"
-versiedatum = "20240428"
+versie = "0.0.16"
+versiedatum = "20240429"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 w = 80
@@ -3320,11 +3320,11 @@ def resetheader(rekening,header):
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     if Taal == "EN":
-        zekervraag = textwrap.wrap("Are you sure you want to reset the account settings to the default? The transaction data are kept intact",w)
+        zekervraag = textwrap.wrap("Are you sure you want to reset the account settings to the default? The transaction data and the opening balance are kept intact",w)
     elif Taal == "IT":
-        zekervraag = textwrap.wrap("Sei sicuro di voler ripristinare le impostazioni dell'account ai valori predefiniti? I dati delle transazioni rimarranno invariati",w)
+        zekervraag = textwrap.wrap("Sei sicuro di voler ripristinare le impostazioni dell'account ai valori predefiniti? I dati delle transazioni e il saldo iniziale rimarranno invariati",w)
     else:
-        zekervraag = textwrap.wrap("Weet u zeker dat u de rekeninginstellingen wilt terugzetten naar de standaardinstellingen? Transactiedata blijven ongewijzigd",w)
+        zekervraag = textwrap.wrap("Weet u zeker dat u de rekeninginstellingen wilt terugzetten naar de standaardinstellingen? Transactiedata en het startsaldo blijven ongewijzigd",w)
     for i in zekervraag:
         print(i)
     antwoord = geefjaofnee(rekening,header)
@@ -3333,11 +3333,18 @@ def resetheader(rekening,header):
     elif antwoord.upper() in neelijst:
         return header
     else:
-        header = nieuwheader
+        ditstartsaldo = header[nieuwheaderlijst[5]]
+        verseheader = {}
+        for i in nieuwheader:
+            if i == nieuwheaderlijst[5]:
+                verseheader[i] = ditstartsaldo
+            else:
+                verseheader[i] = nieuwheader[i]
         with open(os.path.join(rekening,"header"),"w") as h:
-            print(header, file = h, end = "")
+            print(verseheader, file = h, end = "")
         with open(os.path.join("header"),"w") as hbu:
-            print(header, file = hbu, end = "")
+            print(nieuwheader, file = hbu, end = "")
+    header = haalheader(rekening)
     return header
 
 def resetalt(rekening,header):
@@ -4567,64 +4574,64 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok):
     )
                     keuze3 = input(col+inputindent)
                     print(ResetAll, end = "")
-                if keuze3.upper() in afsluitlijst:
-                    doei()
-                elif keuze3.upper() in neelijst:
-                    del keuze3
-                    return rekening,header,col,keuze1lijst,ok
-                elif keuze3.upper() == "H":
-                    dithelp(rekening,header,col,[keuze1lijst[0]+","+keuze2])
-                    del keuze3
-                elif keuze3 == "0":
-                    header = resetheader(rekening,header)
-                    del keuze3
-                elif keuze3 == "1":
-                    header = wijzigrekeningnaam(rekening,header)
-                    del keuze3
-                elif keuze3 == "2":
-                    header = wijzigrekeninghoudernaam(rekening,header)
-                    del keuze3
-                elif keuze3 == "3":
-                    header = wijzigactief(rekening,header)
-                    del keuze3
-                elif keuze3 == "4":
-                    header = wijzigtaal(rekening,header)
-                    del keuze3
-                elif keuze3 == "5":
-                    header = wijzigvaluta(rekening,header)
-                    del keuze3
-                elif keuze3 == "6":
-                    header = wijzigstartsaldo(rekening,header)
-                    del keuze3
-                elif keuze3 == "7":
-                    header = wijzigtoonsaldo(rekening,header)
-                    del keuze3
-                elif keuze3 == "8":
-                    header = wijzigmarkering(rekening,header)
-                    del keuze3
-                elif keuze3 == "9":
-                    header = wijzignullijnen(rekening,header)
-                    del keuze3
-                elif keuze3 == "10":
-                    header = wijzigdatumopmaak(rekening,header)
-                    del keuze3
-                elif keuze3 == "11":
-                    header = wijzigkleurenschema(rekening,header)
-                    del keuze3
-                elif keuze3 == "12":
-                    header = wijzigmenuniveau(rekening,header)
-                    del keuze3
-                elif keuze3 == "13":
-                    header = wijziganalyse2txt(rekening,header)
-                    del keuze3
-                elif keuze3 == "14":
-                    header = wijzigexport2csv(rekening,header)
-                    del keuze3
-                elif keuze3 == "15":
-                    header = wijzigtipvandedag(rekening,header)
-                    del keuze3
-                else:
-                    pass
+                    if keuze3.upper() in afsluitlijst:
+                        doei()
+                    elif keuze3.upper() in neelijst:
+                        del keuze3
+                        return rekening,header,col,keuze1lijst,ok
+                    elif keuze3.upper() == "H":
+                        dithelp(rekening,header,col,[keuze1lijst[0]+","+keuze2])
+                        del keuze3
+                    elif keuze3 == "0":
+                        header = resetheader(rekening,header)
+                        del keuze3
+                    elif keuze3 == "1":
+                        header = wijzigrekeningnaam(rekening,header)
+                        del keuze3
+                    elif keuze3 == "2":
+                        header = wijzigrekeninghoudernaam(rekening,header)
+                        del keuze3
+                    elif keuze3 == "3":
+                        header = wijzigactief(rekening,header)
+                        del keuze3
+                    elif keuze3 == "4":
+                        header = wijzigtaal(rekening,header)
+                        del keuze3
+                    elif keuze3 == "5":
+                        header = wijzigvaluta(rekening,header)
+                        del keuze3
+                    elif keuze3 == "6":
+                        header = wijzigstartsaldo(rekening,header)
+                        del keuze3
+                    elif keuze3 == "7":
+                        header = wijzigtoonsaldo(rekening,header)
+                        del keuze3
+                    elif keuze3 == "8":
+                        header = wijzigmarkering(rekening,header)
+                        del keuze3
+                    elif keuze3 == "9":
+                        header = wijzignullijnen(rekening,header)
+                        del keuze3
+                    elif keuze3 == "10":
+                        header = wijzigdatumopmaak(rekening,header)
+                        del keuze3
+                    elif keuze3 == "11":
+                        header = wijzigkleurenschema(rekening,header)
+                        del keuze3
+                    elif keuze3 == "12":
+                        header = wijzigmenuniveau(rekening,header)
+                        del keuze3
+                    elif keuze3 == "13":
+                        header = wijziganalyse2txt(rekening,header)
+                        del keuze3
+                    elif keuze3 == "14":
+                        header = wijzigexport2csv(rekening,header)
+                        del keuze3
+                    elif keuze3 == "15":
+                        header = wijzigtipvandedag(rekening,header)
+                        del keuze3
+                    else:
+                        del keuze3
             return rekening,header,col,keuze1lijst,ok
 
 def toonkeuze(rekening,header,col,keuze1lijst,ok):
@@ -4765,25 +4772,29 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok):
     )
                     keuze3 = input(col+inputindent)
                     print(ResetAll, end = "")
-                if keuze3 == "1":
-                    ok = sortokdatumreverse(rekening,ok)
-                elif keuze3 == "2":
-                    ok = sortokdatum(rekening,ok)
-                elif keuze3 == "3":
-                    ok = sortokbedragreverse(rekening,ok)
-                elif keuze3 == "4":
-                    ok = sortokbedrag(rekening,ok)
-                elif keuze3 == "5":
-                    ok = sortokwederpartijreverse(rekening,ok)
-                elif keuze3 == "6":
-                    ok = sortokwederpartij(rekening,ok)
-                elif keuze3 == "7":
-                    ok = sortokonderwerpreverse(rekening,ok)
-                elif keuze3 == "8":
-                    ok = sortokonderwerp(rekening,ok)
-                else:
-                    ok = collectie(rekening,ok)
-                return rekening,header,col,keuze1lijst,ok
+                    if keuze3.upper() in afsluitlijst:
+                        doei()
+                    elif keuze3.upper() in neelijst:
+                        return rekening,header,col,keuze1lijst,ok
+                    elif keuze3 == "1":
+                        ok = sortokdatumreverse(rekening,ok)
+                    elif keuze3 == "2":
+                        ok = sortokdatum(rekening,ok)
+                    elif keuze3 == "3":
+                        ok = sortokbedragreverse(rekening,ok)
+                    elif keuze3 == "4":
+                        ok = sortokbedrag(rekening,ok)
+                    elif keuze3 == "5":
+                        ok = sortokwederpartijreverse(rekening,ok)
+                    elif keuze3 == "6":
+                        ok = sortokwederpartij(rekening,ok)
+                    elif keuze3 == "7":
+                        ok = sortokonderwerpreverse(rekening,ok)
+                    elif keuze3 == "8":
+                        ok = sortokonderwerp(rekening,ok)
+                    else:
+                        ok = collectie(rekening,ok)
+                    return rekening,header,col,keuze1lijst,ok
         elif keuze2 == "2":
             try:
                 keuze3
