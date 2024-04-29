@@ -3,7 +3,7 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.16"
+versie = "0.0.17"
 versiedatum = "20240429"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
@@ -3436,10 +3436,10 @@ def wijzigactief(rekening,header):
         wraptekst = textwrap.wrap("De status van de gemarkeerde rekening, die nu in gebruik is, kan tijdens deze sessie niet worden gewijzigd",w)
     for i in wraptekst:
         print(i)
-    rekeningenlijst = rekeningenoverzicht()
-    toonrekeningenactief(rekeningenlijst)
     loop = True
     while loop == True:
+        rekeningenlijst = rekeningenoverzicht()
+        toonrekeningenactief(rekeningenlijst)
         wijzigactief = input(col+inputindent)
         print(ResetAll, end = "")
         if wijzigactief.upper() in afsluitlijst:
@@ -4219,13 +4219,13 @@ def headeroverzetten(rekening,header,col):
     Taal = header[nieuwheaderlijst[3]]
     kleuren,catcol = updatekleuren(rekening)
     if Taal == "EN":
-        wraptekst = textwrap.wrap("Transfer all account settings to another account",w)
+        wraptekst = textwrap.wrap("Transfer all account settings to another account, including the opening balance from this account",w)
         headerlijst = nieuwheaderlijstEN
     elif Taal == "IT":
-        wraptekst = textwrap.wrap("Trasferire tutte le impostazioni del conto a un altro account",w)
+        wraptekst = textwrap.wrap("Trasferire tutte le impostazioni del conto a un altro account, incluso il saldo iniziale di questo conto",w)
         headerlijst = nieuwheaderlijstIT
     else:
-        wraptekst = textwrap.wrap("Alle rekeninginstellingen overzetten naar andere rekening",w)
+        wraptekst = textwrap.wrap("Alle rekeninginstellingen overzetten naar andere rekening, inclusief het startsaldo van deze rekening",w)
         headerlijst = nieuwheaderlijst
     maxlen = len(max(headerlijst, key = len))
     for i in wraptekst:
