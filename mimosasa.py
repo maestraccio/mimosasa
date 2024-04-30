@@ -491,7 +491,7 @@ helpmenuEN = {
             "1,0,6": textwrap.wrap("The collection is sorted alphabetically from A to Z based on %s." % elementenEN[2].lower(),w),
             "1,0,7": textwrap.wrap("The collection is sorted alphabetically from Z to A based on %s." % elementenEN[3].lower(),w),
             "1,0,8": textwrap.wrap("The collection is sorted alphabetically from A to Z based on %s." % elementenEN[3].lower(),w),
-        "1,1": textwrap.wrap("Select transactions based on various criteria (%s, %s, %s, %s and %s) and generate a clear table. You can use \"keyboard shortcuts\", or specify each element individually. The possible \"keyboard shortcuts\" are displayed; it is possible to add a number to \"M\" (month) or \"W\" (week). All selected transactions are also collected in the collection, which is always displayed above the selection menu. If the selection covers one day, the daily total for that day is shown." % (elementenEN[0].lower(),elementenEN[1].lower(),elementenEN[2].lower(),elementenEN[3].lower(),woordcategorieEN.lower()),w),
+        "1,1": textwrap.wrap("Select transactions based on various criteria (%s, %s, %s, %s and %s) and generate a clear table. You can use \"keyboard shortcuts\", or specify each element individually. The possible \"keyboard shortcuts\" are displayed; it is possible to add a number to \"M\" (month) or \"W\" (week): \"0\" includes today. All selected transactions are also collected in the collection, which is always displayed above the selection menu. If the selection covers one day, the daily total for that day is shown." % (elementenEN[0].lower(),elementenEN[1].lower(),elementenEN[2].lower(),elementenEN[3].lower(),woordcategorieEN.lower()),w),
         "1,2": textwrap.wrap("Show the budget analysis of one month. By default, the current month is displayed. You will see the progress of each category compared to the assigned budget, and the monthly performance.",w),
         "1,3": textwrap.wrap("Show the details of individual transactions in the collection. The number of characters in \"%s\" and \"%s\" is unlimited but is truncated in the table. All additional information is expanded here." % (elementenEN[2].lower(),elementenEN[3].lower()),w),
     "2": textwrap.wrap("You can add new transactions to your account, and assign each one to a category. You can enter a new transaction per element or consecutively on one line in CSV style, or you can make a copy of a previous transaction and later adjust the details using the options under \"3\". New transactions are immediately added to the collection, so you can view or modify them right away.",w),
@@ -554,7 +554,7 @@ helpmenuIT = {
             "1,0,6": textwrap.wrap("La collezione viene ordinata in ordine alfabetico da A ad Z per %s." % elementenIT[2].lower(),w),
             "1,0,7": textwrap.wrap("La collezione viene ordinata in ordine alfabetico da Z ad A per %s." % elementenIT[3].lower(),w),
             "1,0,8": textwrap.wrap("La collezione viene ordinata in ordine alfabetico da A ad Z per %s." % elementenIT[3].lower(),w),
-        "1,1": textwrap.wrap("Seleziona transazioni basate su diversi criteri (%s, %s, %s, %s e %s) e genera una tabella ben organizzata. Puoi utilizzare \"scorciatoie da tastiera\", oppure specificare singolarmente tutti gli elementi. Le possibili \"scorciatoie da tastiera\" vengono mostrate; è possibile aggiungere un numero a \"M\" (mese) o \"W\" (settimana). Tutte le transazioni selezionate vengono anche raccolte nella collezione, che viene mostrata sempre sopra il menu a discesa. Se la selezione comprende un solo giorno, verrà mostrato il totale di quel giorno." % (elementenIT[0].lower(),elementenIT[1].lower(),elementenIT[2].lower(),elementenIT[3].lower(),woordcategorieIT.lower()),w),
+        "1,1": textwrap.wrap("Seleziona transazioni basate su diversi criteri (%s, %s, %s, %s e %s) e genera una tabella ben organizzata. Puoi utilizzare \"scorciatoie da tastiera\", oppure specificare singolarmente tutti gli elementi. Le possibili \"scorciatoie da tastiera\" vengono mostrate; è possibile aggiungere un numero a \"M\" (mese) o \"W\" (settimana): \"0\" include oggi. Tutte le transazioni selezionate vengono anche raccolte nella collezione, che viene mostrata sempre sopra il menu a discesa. Se la selezione comprende un solo giorno, verrà mostrato il totale di quel giorno." % (elementenIT[0].lower(),elementenIT[1].lower(),elementenIT[2].lower(),elementenIT[3].lower(),woordcategorieIT.lower()),w),
         "1,2": textwrap.wrap("Mostra l'analisi del bilancio di un mese. Di default viene mostrato il mese corrente. Vedrai il progresso di ogni categoria rispetto al budget assegnato e le prestazioni mensili.",w),
         "1,3": textwrap.wrap("Mostra i dettagli delle singole transazioni nella collezione. Il numero di caratteri consentito in \"%s\" e \"%s\" è illimitato, ma nella tabella (\"1,1\") verranno tagliati e mostrati solo parzialmente. Tutte le informazioni in quei caratteri extra verranno comunque espansi qui." % (elementenIT[2].lower(),elementenIT[3].lower()),w),
     "2": textwrap.wrap("È possibile aggiungere nuove transazioni al proprio conto, assegnandole ciascuna a una categoria. Una nuova transazione può essere inserita per elemento o in successione su una singola riga in stile CSV, oppure è possibile creare una copia di una transazione precedente e modificare i dettagli successivamente con le opzioni sotto \"3\". Le nuove transazioni vengono aggiunte direttamente alla collezione, in modo da poterle visualizzare o modificare immediatamente.",w),
@@ -614,7 +614,7 @@ helpmenu = {
             "1,0,6": textwrap.wrap("De collectie wordt gestorteerd op %s, van A naar Z" % (elementen[2].lower()),w),
             "1,0,7": textwrap.wrap("De collectie wordt gestorteerd op %s, van Z naar A" % (elementen[3].lower()),w),
             "1,0,8": textwrap.wrap("De collectie wordt gestorteerd op %s, van A naar Z" % (elementen[3].lower()),w),
-        "1,1": textwrap.wrap("Selecteer transacties op basis van verschillende criteria (%s, %s, %s, %s en %s) en genereer een overzichtelijke tabel. Er kan gebruik worden gemaakt van \"sneltoetsen\", of u kunt alle elementen afzonderlijk opgeven. De mogelijke \"sneltoetsen\" worden getoond; het is mogelijk \"M\" (maand) of \"W\" (week) te voorzien van een getal. Alle geselecteerde transacties worden ook verzameld in de collectie, die steeds getoond wordt boven het keuzemenu. Omvat de selectie één dag, dan wordt het dagtotaal op die dag getoond." % (elementen[0].lower(),elementen[1].lower(),elementen[2].lower(),elementen[3].lower(),woordcategorie.lower()),w),
+        "1,1": textwrap.wrap("Selecteer transacties op basis van verschillende criteria (%s, %s, %s, %s en %s) en genereer een overzichtelijke tabel. Er kan gebruik worden gemaakt van \"sneltoetsen\", of u kunt alle elementen afzonderlijk opgeven. De mogelijke \"sneltoetsen\" worden getoond; het is mogelijk \"M\" (maand) of \"W\" (week) te voorzien van een getal; \"0\" is inclusief vandaag. Alle geselecteerde transacties worden ook verzameld in de collectie, die steeds getoond wordt boven het keuzemenu. Omvat de selectie één dag, dan wordt het dagtotaal op die dag getoond." % (elementen[0].lower(),elementen[1].lower(),elementen[2].lower(),elementen[3].lower(),woordcategorie.lower()),w),
         "1,2": textwrap.wrap("Toon de budgetanalyse van één maand. Standaard wordt de huidige maand getoond. U ziet de voortgang van iedere categorie ten opzichte van het daaraan toegekende budget, en de maandprestatie.",w),
         "1,3": textwrap.wrap("Toon de details van individuele transacties in de collectie. Het toegestaan aantal karakters in \"%s\" en \"%s\" is onbeperkt, maar in de tabel (\"1,1\") worden die afgekapt en slechts ten dele getoond. Alle informatie in die extra karakters wordt hier wel uitgevouwen." % (elementen[2].lower(),elementen[3].lower()),w),
     "2": textwrap.wrap("U kunt nieuwe transacties aan uw rekening toevoegen, die elk aan een categorie worden toegekend. Een nieuwe transactie kunt u per element invoeren of achter elkaar op één regel in CSV-stijl, of u kunt een kopie maken van een eerdere transactie en de details later aanpassen met de opties onder \"3\". Nieuwe transacties worden direct aan de collectie toegevoegd, zodat u die meteen kunt inzien of aanpassen.",w),
@@ -2073,7 +2073,7 @@ def geefsneltoets(rekening,header,col,ok):
         else:
             test = checkint(sneltoets[1:])
             if test == True:
-                weekverschil = int(sneltoets[1:])
+                weekverschil = int(sneltoets[1:])+1
                 startdatum = int(datetime.strftime(datetime.strptime(nustr,"%Y%m%d")-timedelta(weeks = weekverschil),"%Y%m%d"))
                 einddatum = int(nustr)
                 datumlijst = [startdatum,einddatum]
@@ -2166,6 +2166,87 @@ def printselectie(rekening,header,col,ok):
     else:
         kopregel = forc78((elementen[0][:3]+": "+str(datumlijst[0])+">=<"+str(datumlijst[1])+", "+elementen[1][:3]+": "+valuta+" "+forno(bedraglijst[0])+">=<"+valuta+" "+forni(bedraglijst[1])+", "+elementen[2][:3]+": "+wederpartij+", "+elementen[3][:3]+": "+onderwerp+", "+strcategoriekeuzelijst)[:78])
         elementenlijn = forr5("ID")+" :"+forc10(elementen[0])+" "+forc10(elementen[1])+forr15(elementen[2])+" "+forl34(elementen[3])
+    if Taal == "EN":
+        print("""  1 : %s
+  2 : %s
+  3 : %s
+  4 : %s
+  5 : %s
+  6 : %s
+  7 : %s
+  8 : %s""" % (
+          menuEN["1,0,1"],
+          menuEN["1,0,2"],
+          menuEN["1,0,3"],
+          menuEN["1,0,4"],
+          menuEN["1,0,5"],
+          menuEN["1,0,6"],
+          menuEN["1,0,7"],
+          menuEN["1,0,8"]
+          )
+    )
+    elif Taal == "IT":
+        print("""  1 : %s
+  2 : %s
+  3 : %s
+  4 : %s
+  5 : %s
+  6 : %s
+  7 : %s
+  8 : %s""" % (
+          menuIT["1,0,1"],
+          menuIT["1,0,2"],
+          menuIT["1,0,3"],
+          menuIT["1,0,4"],
+          menuIT["1,0,5"],
+          menuIT["1,0,6"],
+          menuIT["1,0,7"],
+          menuIT["1,0,8"]
+          )
+    )
+    else:
+        print("""  1 : %s
+  2 : %s
+  3 : %s
+  4 : %s
+  5 : %s
+  6 : %s
+  7 : %s
+  8 : %s""" % (
+          menu["1,0,1"],
+          menu["1,0,2"],
+          menu["1,0,3"],
+          menu["1,0,4"],
+          menu["1,0,5"],
+          menu["1,0,6"],
+          menu["1,0,7"],
+          menu["1,0,8"]
+          )
+    )
+        sorteren = input(col+inputindent)
+        print(ResetAll, end = "")
+    if sorteren.upper() in afsluitlijst:
+        doei()
+    elif sorteren.upper() in neelijst:
+        return rekening,header,col,keuze1lijst,ok
+    elif sorteren == "1":
+        ok = sortokdatumreverse(rekening,ok)
+    elif sorteren == "2":
+        ok = sortokdatum(rekening,ok)
+    elif sorteren == "3":
+        ok = sortokbedragreverse(rekening,ok)
+    elif sorteren == "4":
+        ok = sortokbedrag(rekening,ok)
+    elif sorteren == "5":
+        ok = sortokwederpartijreverse(rekening,ok)
+    elif sorteren == "6":
+        ok = sortokwederpartij(rekening,ok)
+    elif sorteren == "7":
+        ok = sortokonderwerpreverse(rekening,ok)
+    elif sorteren == "8":
+        ok = sortokonderwerp(rekening,ok)
+    else:
+        pass
     ########## print naar scherm start ##########
     print(kleuren["coltoon"]+toplijn+kleuren["ResetAll"])
     print(kleuren["coltoon"]+"|"+kleuren["ResetAll"], end = "")
@@ -2716,7 +2797,7 @@ def nieuwnieuw(rekening,ok):
             else:
                 nieuwetransactie.append(int(nustr))
             if checkfloat(nieuwetransactieinputlijst[1]) == True:
-                nieuwetransactie.append(int(nieuwetransactieinputlijst[1]))
+                nieuwetransactie.append(round(float(nieuwetransactieinputlijst[1]),2))
             else:
                 nieuwetransactie.append(0.0)
             nieuwetransactie.append(nieuwetransactieinputlijst[2])
@@ -4574,64 +4655,64 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok):
     )
                     keuze3 = input(col+inputindent)
                     print(ResetAll, end = "")
-                    if keuze3.upper() in afsluitlijst:
-                        doei()
-                    elif keuze3.upper() in neelijst:
-                        del keuze3
-                        return rekening,header,col,keuze1lijst,ok
-                    elif keuze3.upper() == "H":
-                        dithelp(rekening,header,col,[keuze1lijst[0]+","+keuze2])
-                        del keuze3
-                    elif keuze3 == "0":
-                        header = resetheader(rekening,header)
-                        del keuze3
-                    elif keuze3 == "1":
-                        header = wijzigrekeningnaam(rekening,header)
-                        del keuze3
-                    elif keuze3 == "2":
-                        header = wijzigrekeninghoudernaam(rekening,header)
-                        del keuze3
-                    elif keuze3 == "3":
-                        header = wijzigactief(rekening,header)
-                        del keuze3
-                    elif keuze3 == "4":
-                        header = wijzigtaal(rekening,header)
-                        del keuze3
-                    elif keuze3 == "5":
-                        header = wijzigvaluta(rekening,header)
-                        del keuze3
-                    elif keuze3 == "6":
-                        header = wijzigstartsaldo(rekening,header)
-                        del keuze3
-                    elif keuze3 == "7":
-                        header = wijzigtoonsaldo(rekening,header)
-                        del keuze3
-                    elif keuze3 == "8":
-                        header = wijzigmarkering(rekening,header)
-                        del keuze3
-                    elif keuze3 == "9":
-                        header = wijzignullijnen(rekening,header)
-                        del keuze3
-                    elif keuze3 == "10":
-                        header = wijzigdatumopmaak(rekening,header)
-                        del keuze3
-                    elif keuze3 == "11":
-                        header = wijzigkleurenschema(rekening,header)
-                        del keuze3
-                    elif keuze3 == "12":
-                        header = wijzigmenuniveau(rekening,header)
-                        del keuze3
-                    elif keuze3 == "13":
-                        header = wijziganalyse2txt(rekening,header)
-                        del keuze3
-                    elif keuze3 == "14":
-                        header = wijzigexport2csv(rekening,header)
-                        del keuze3
-                    elif keuze3 == "15":
-                        header = wijzigtipvandedag(rekening,header)
-                        del keuze3
-                    else:
-                        del keuze3
+                if keuze3.upper() in afsluitlijst:
+                    doei()
+                elif keuze3.upper() in neelijst:
+                    del keuze3
+                    return rekening,header,col,keuze1lijst,ok
+                elif keuze3.upper() == "H":
+                    dithelp(rekening,header,col,[keuze1lijst[0]+","+keuze2])
+                    del keuze3
+                elif keuze3 == "0":
+                    header = resetheader(rekening,header)
+                    del keuze3
+                elif keuze3 == "1":
+                    header = wijzigrekeningnaam(rekening,header)
+                    del keuze3
+                elif keuze3 == "2":
+                    header = wijzigrekeninghoudernaam(rekening,header)
+                    del keuze3
+                elif keuze3 == "3":
+                    header = wijzigactief(rekening,header)
+                    del keuze3
+                elif keuze3 == "4":
+                    header = wijzigtaal(rekening,header)
+                    del keuze3
+                elif keuze3 == "5":
+                    header = wijzigvaluta(rekening,header)
+                    del keuze3
+                elif keuze3 == "6":
+                    header = wijzigstartsaldo(rekening,header)
+                    del keuze3
+                elif keuze3 == "7":
+                    header = wijzigtoonsaldo(rekening,header)
+                    del keuze3
+                elif keuze3 == "8":
+                    header = wijzigmarkering(rekening,header)
+                    del keuze3
+                elif keuze3 == "9":
+                    header = wijzignullijnen(rekening,header)
+                    del keuze3
+                elif keuze3 == "10":
+                    header = wijzigdatumopmaak(rekening,header)
+                    del keuze3
+                elif keuze3 == "11":
+                    header = wijzigkleurenschema(rekening,header)
+                    del keuze3
+                elif keuze3 == "12":
+                    header = wijzigmenuniveau(rekening,header)
+                    del keuze3
+                elif keuze3 == "13":
+                    header = wijziganalyse2txt(rekening,header)
+                    del keuze3
+                elif keuze3 == "14":
+                    header = wijzigexport2csv(rekening,header)
+                    del keuze3
+                elif keuze3 == "15":
+                    header = wijzigtipvandedag(rekening,header)
+                    del keuze3
+                else:
+                    del keuze3
             return rekening,header,col,keuze1lijst,ok
 
 def toonkeuze(rekening,header,col,keuze1lijst,ok):
@@ -4772,29 +4853,29 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok):
     )
                     keuze3 = input(col+inputindent)
                     print(ResetAll, end = "")
-                    if keuze3.upper() in afsluitlijst:
-                        doei()
-                    elif keuze3.upper() in neelijst:
-                        return rekening,header,col,keuze1lijst,ok
-                    elif keuze3 == "1":
-                        ok = sortokdatumreverse(rekening,ok)
-                    elif keuze3 == "2":
-                        ok = sortokdatum(rekening,ok)
-                    elif keuze3 == "3":
-                        ok = sortokbedragreverse(rekening,ok)
-                    elif keuze3 == "4":
-                        ok = sortokbedrag(rekening,ok)
-                    elif keuze3 == "5":
-                        ok = sortokwederpartijreverse(rekening,ok)
-                    elif keuze3 == "6":
-                        ok = sortokwederpartij(rekening,ok)
-                    elif keuze3 == "7":
-                        ok = sortokonderwerpreverse(rekening,ok)
-                    elif keuze3 == "8":
-                        ok = sortokonderwerp(rekening,ok)
-                    else:
-                        ok = collectie(rekening,ok)
+                if keuze3.upper() in afsluitlijst:
+                    doei()
+                elif keuze3.upper() in neelijst:
                     return rekening,header,col,keuze1lijst,ok
+                elif keuze3 == "1":
+                    ok = sortokdatumreverse(rekening,ok)
+                elif keuze3 == "2":
+                    ok = sortokdatum(rekening,ok)
+                elif keuze3 == "3":
+                    ok = sortokbedragreverse(rekening,ok)
+                elif keuze3 == "4":
+                    ok = sortokbedrag(rekening,ok)
+                elif keuze3 == "5":
+                    ok = sortokwederpartijreverse(rekening,ok)
+                elif keuze3 == "6":
+                    ok = sortokwederpartij(rekening,ok)
+                elif keuze3 == "7":
+                    ok = sortokonderwerpreverse(rekening,ok)
+                elif keuze3 == "8":
+                    ok = sortokonderwerp(rekening,ok)
+                else:
+                    ok = collectie(rekening,ok)
+                return rekening,header,col,keuze1lijst,ok
         elif keuze2 == "2":
             try:
                 keuze3
@@ -5003,6 +5084,83 @@ def wijzigkeuze(keuze1lijst,rekening,ok):
                 ok = wijzigbedrag(rekening,header,col,ok)
                 return rekening,header,col,keuze1lijst,ok
 
+#def spaarpotkeuze(keuze1lijst,rekening,ok):
+#    kleuren,catcol = updatekleuren(rekening)
+#    header = haalheader(rekening)
+#    Taal = header[nieuwheaderlijst[3]]
+#    if len(keuze1lijst) > 4:
+#        keuze2 = keuze1lijst[1]
+#        keuze3 = keuze1lijst[2]
+#        keuze4 = keuze1lijst[3]
+#        keuze5 = keuze1lijst[4]
+#    elif len(keuze1lijst) > 3:
+#        keuze2 = keuze1lijst[1]
+#        keuze3 = keuze1lijst[2]
+#        keuze4 = keuze1lijst[3]
+#    elif len(keuze1lijst) > 2:
+#        keuze2 = keuze1lijst[1]
+#        keuze3 = keuze1lijst[2]
+#    elif len(keuze1lijst) > 1:
+#        keuze2 = keuze1lijst[1]
+#    else:
+#        if Taal == "EN":
+#            print(
+#                    """  1 : %s
+# >2 : %s
+#  3 : %s
+#  4 : %s""" % (
+#          menuEN["5,1"],
+#          menuEN["5,2"],
+#          menuEN["5,3"],
+#          menuEN["5,4"]
+#          )
+#      )
+#        elif Taal == "IT":
+#            print(
+#                    """  1 : %s
+# >2 : %s
+#  3 : %s
+#  4 : %s""" % (
+#          menuIT["5,1"],
+#          menuIT["5,2"],
+#          menuIT["5,3"],
+#          menuIT["5,4"]
+#          )
+#      )
+#        else:
+#            print(
+#                    """  1 : %s
+# >2 : %s
+#  3 : %s
+#  4 : %s""" % (
+#          menu["5,1"],
+#          menu["5,2"],
+#          menu["5,3"],
+#          menu["5,4"]
+#          )
+#      )
+#    loop = True
+#    while loop == True:
+#        try:
+#            keuze2
+#        except(Exception) as f:
+#            #print(f)
+#            keuze2 = input(col+inputindent)
+#            print(ResetAll, end = "")
+#        if keuze2.upper() in afsluitlijst:
+#            doei()
+#        elif keuze2.upper() in neelijst:
+#            return rekening,header,col,keuze1lijst,ok
+#        elif keuze2.upper() == "H":
+#            dithelp(rekening,header,col,keuze1lijst)
+#            del keuze2
+#        elif keuze2 == "1":
+#            try:
+#                keuze3
+#            except(Exception) as f:
+#                #print(f)
+#                toonspaarpotten(rekening,header,col,ok)
+
 def keuze1menu(rekening):
     kleuren,catcol = updatekleuren(rekening)
     header = haalheader(rekening)
@@ -5094,5 +5252,5 @@ while loop == True:
         rekening,header,col,keuze1lijst,ok = wijzigkeuze(keuze1lijst,rekening,ok)
     if keuze1lijst[0] == "4":
         rekening,header,col,keuze1lijst,ok = verwijderkeuze(rekening,header,col,keuze1lijst,ok)
-    if keuze1lijst[0] == "5":
-        pass
+#    if keuze1lijst[0] == "5":
+#        rekening,header,col,keuze1lijst,ok = spaarpotkeuze(keuze1lijst,rekening,ok)
