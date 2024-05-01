@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.17"
-versiedatum = "20240429"
+versie = "0.0.21"
+versiedatum = "20240501"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 w = 80
@@ -1024,11 +1024,10 @@ for i in logo:
     sleep(0.00125)
 print()
 
-print(coltekst+forcw(nustr)+ResetAll)
-
 def printdatum(nustr):
+    kleuren,catcol = updatekleuren(rekening)
     datum = opmaakdatum(nustr)
-    print(forcw(datum))
+    print(kleuren["coltoon"]+forcw(("%s = " % nustr)+datum)+kleuren["ResetAll"])
 
 def doei():
     try:
@@ -1315,7 +1314,7 @@ def kiesrekeningalleennummer(rekeningenlijst,rekening):
         rekeningalleennummer = rekening
     return rekeningalleennummer
 
-def taalkeuze(header):
+def taalkeuze():
     col = coltekst
     for i in taaldict:
         if i == taallijst[0]:
@@ -1337,20 +1336,16 @@ def taalkeuze(header):
             Taal = "NL"
     else:
         Taal = "NL"
-    header[nieuwheaderlijst[3]] = Taal
-    with open(os.path.join(rekening,"header"),"w") as h:
-        print(header, file = h, end = "")
     return Taal
 
-def geefIBAN(header):
-    Taal = header[nieuwheaderlijst[3]]
+def geefIBAN(Taal):
     if Taal == "EN":
         print("Enter your account number")
     elif Taal == "IT":
         print("Inserisci il numero del conto")
     else:
         print("Geef het rekeningnummer")
-    IBAN = input(coltoe+inputindent)
+    IBAN = input(coltoe+inputindent).upper()
     print(ResetAll, end = "")
     if IBAN.upper() in afsluitlijst:
         doei()
@@ -1359,15 +1354,14 @@ def geefIBAN(header):
     else:
         return IBAN
 
-def geefJAAR(header):
-    Taal = header[nieuwheaderlijst[3]]
+def geefJAAR(Taal):
     if Taal == "EN":
         print("Enter the year")
     elif Taal == "IT":
         print("Inserisci l'anno")
     else:
         print("Geef het jaar")
-    JAAR = input(coltoe+inputindent)
+    JAAR = input(coltoe+inputindent).upper()
     print(ResetAll, end = "")
     if JAAR.upper() in afsluitlijst:
         doei()
@@ -1383,17 +1377,15 @@ def maaknieuwerekening():
     except(Exception) as f:
         #print(f)
         col = coltoe
-    header = nieuwheader
-    Taal = taalkeuze(header)
-    if Taal.upper() in neelijst:
+    nieuweTaal = taalkeuze()
+    if nieuweTaal.upper() in neelijst:
         return "<"
-    Taal = header[nieuwheaderlijst[3]]
-    if Taal == "EN":
+    if nieuweTaal == "EN":
         for i in helpmenuEN["0"]:
             print(i)
         for i in helpmenuEN["0,0"]:
             print(i)
-    elif Taal == "IT":
+    elif nieuweTaal == "IT":
         for i in helpmenuIT["0"]:
             print(i)
         for i in helpmenuIT["0,0"]:
@@ -1403,25 +1395,24 @@ def maaknieuwerekening():
             print(i)
         for i in helpmenu["0,0"]:
             print(i)
-    IBAN = geefIBAN(header)
+    IBAN = geefIBAN(nieuweTaal)
     if IBAN in neelijst:
         return "<"
-    JAAR = geefJAAR(header)
+    JAAR = geefJAAR(nieuweTaal)
     if IBAN in neelijst:
         return "<"
-    rekeningenlijst = rekeningenoverzicht()
-    rekening = IBAN+"#"+JAAR
-    os.mkdir(rekening)
+    nieuwerekening = IBAN+"#"+JAAR
+    os.mkdir(nieuwerekening)
     # print bestanden naar map: categorieen, header
-    with open(os.path.join(rekening,"header"),"w") as h:
-        print(header, file = h, end = "")
-    with open(os.path.join("header"),"w") as hbu:
-        print(header, file = hbu, end = "")
+    nieuwheader[nieuwheaderlijst[3]] = nieuweTaal
+    with open(os.path.join(nieuwerekening,"header"),"w") as h:
+        print(nieuwheader, file = h, end = "")
+    with open("header","w") as hbu:
+        print(nieuwheader, file = hbu, end = "")
     for i in huishoudelijkelijst:
-        with open(os.path.join(rekening,i),"w") as c:
+        with open(os.path.join(nieuwerekening,i),"w") as c:
             print([[nieuwalternatievenamendict[i],budgetnul]], file = c, end = "")
-    rekeningenlijst = rekeningenoverzicht()
-    return rekening
+    return nieuwerekening
 
 def vertaalv(v):
     Taal = header[nieuwheaderlijst[3]]
@@ -2104,6 +2095,7 @@ def printselectie(rekening,header,col,ok):
     for i in ok:
         noodok[i] = ok[i]
     ok = haaltransacties(rekening,ok)
+    printdatum(nustr)
     sneltoets,ok,datumlijst,bedraglijst,wederpartij,onderwerp,categoriekeuzelijst = geefsneltoets(rekening,header,col,ok)
     if sneltoets == False:
         datumlijst = geefdatumbereik(rekening,header,col,ok,int(nustr))
@@ -2155,6 +2147,10 @@ def printselectie(rekening,header,col,ok):
     strcategoriekeuzelijst = ""
     for i in categoriekeuzelijst:
         strcategoriekeuzelijst += i
+    if wederpartij == "":
+        wederpartij = "*"
+    if onderwerp == "":
+        onderwerp = "*"
     if categoriekeuzelijst == lijst:
         strcategoriekeuzelijst = "*"
     if Taal == "EN":
@@ -2223,8 +2219,8 @@ def printselectie(rekening,header,col,ok):
           menu["1,0,8"]
           )
     )
-        sorteren = input(col+inputindent)
-        print(ResetAll, end = "")
+    sorteren = input(col+inputindent)
+    print(ResetAll, end = "")
     if sorteren.upper() in afsluitlijst:
         doei()
     elif sorteren.upper() in neelijst:
@@ -2768,6 +2764,7 @@ def nieuwnieuw(rekening,ok):
     header = haalheader(rekening)
     Taal = header[nieuwheaderlijst[3]]
     categorieenlijst = haalcategorieen(rekening)
+    printdatum(nustr)
     IDlijst = []
     for i in ok:
         IDlijst.append(i)
@@ -2882,11 +2879,11 @@ def nieuwkopie(rekening,header,col,ok):
         dezeok = {i[0]+str(categorie.index(oudetransactie)-1):oudetransactie}
         dezeok = toontransactie(rekening,header,col,dezeok)
         if Taal == "EN":
-            print("%s:" % (col+menuEN["2,2"]+kleuren["ResetAll"]))
+            print("%s %s:" % (col+menuEN["2,2"],opmaakdatum(nustr)+kleuren["ResetAll"]))
         elif Taal == "IT":
-            print("%s:" % (col+menuIT["2,2"]+kleuren["ResetAll"]))
+            print("%s %s:" % (col+menuIT["2,2"],opmaakdatum(nustr)+kleuren["ResetAll"]))
         else:
-            print("%s:" % (col+menu["2,2"]+kleuren["ResetAll"]))
+            print("%s %s:" % (col+menu["2,2"],opmaakdatum(nustr)+kleuren["ResetAll"]))
         jn = geefjaofnee(rekening,header)
         if jn.upper() in afsluitlijst:
             doei()
@@ -5229,7 +5226,7 @@ rekening = programmastart()
 printdatum(nustr)
 header = haalheader(rekening)
 budgetcorrectie(rekening)
-printheader(rekening)
+#printheader(rekening)
 eenrekeningtotaal(rekening)
 tooncategorieen(rekening,header)
 startdatum = nustr[:6]+"01"
