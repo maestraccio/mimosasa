@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.21"
-versiedatum = "20240501"
+versie = "0.0.22"
+versiedatum = "20240502"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 w = 80
@@ -90,6 +90,7 @@ scheidtransactielijn = "-"*23+"+"+"-"*23
 opmaakdatumlijst = [
         "YYYYMMDD",
         "DDMMYYYY",
+        "YY-MM-DD",
         "DD-MM-YY",
         "DD/MM/YY",
         "DD-mmmYY",
@@ -174,7 +175,7 @@ nieuwheader = {
         nieuwheaderlijst[6]:"<",
         nieuwheaderlijst[7]:[-100.00,100.00],
         nieuwheaderlijst[8]:"<",
-        nieuwheaderlijst[9]:"YYYYMMDD",
+        nieuwheaderlijst[9]:"YY-MM-DD",
         nieuwheaderlijst[10]:"Categorie",
         nieuwheaderlijst[11]:2,
         nieuwheaderlijst[12]:"<",
@@ -1029,6 +1030,11 @@ def printdatum(nustr):
     datum = opmaakdatum(nustr)
     print(kleuren["coltoon"]+forcw(("%s = " % nustr)+datum)+kleuren["ResetAll"])
 
+def printdatumlinks(datum):
+    kleuren,catcol = updatekleuren(rekening)
+    dat = opmaakdatum(datum)
+    print(col+("%s = " % nustr)+dat+ResetAll)
+
 def doei():
     try:
         with open("laatstgekozen","r") as l:
@@ -1200,11 +1206,11 @@ def toonrekeningsaldo(rekeningenlijst):
                 getal,forsom,K = grootgetal(rekeningtotaal,forsom,"")
                 printstuffzw = L+forl3(rekeningenlijst.index(i)+1)+" "+("{:>%s}" % maxreklen).format(IBAN+" "+JAAR)+" "+valuta+forsom(getal)+K+forr25(rekeningnaam)
                 lenprtstfzw = len(printstuffzw)
-                print(int((w-lenprtstfzw)/2)*" "+kleuren["coltoe"]+L+forl3(rekeningenlijst.index(i)+1)+" "+kleuren["coltoon"]+("{:>%s}" % maxreklen).format(IBAN+" "+JAAR)+" "+grotegetalkleuren(i,header,rekeningtotaal)+valuta+forsom(getal)+K+kleuren["ResetAll"]+kleuren["coltekst"]+forr25(rekeningnaam)+kleuren["ResetAll"])
+                print(int((w-lenprtstfzw)/2)*" "+kleuren["coltoe"]+L+forl3(rekeningenlijst.index(i)+1)+" "+catcol["5"]+("{:>%s}" % maxreklen).format(IBAN+" "+JAAR)+" "+grotegetalkleuren(i,header,rekeningtotaal)+valuta+forsom(getal)+K+kleuren["ResetAll"]+kleuren["coltekst"]+forr25(rekeningnaam)+kleuren["ResetAll"])
             else:
                 printstuffzw = L+forl3(rekeningenlijst.index(i)+1)+" "+("{:>%s}" % maxreklen).format(IBAN+" "+JAAR)+" "+valuta+" "*8+forr25(rekeningnaam)
                 lenprtstfzw = len(printstuffzw)
-                print(int((w-lenprtstfzw)/2)*" "+kleuren["coltoe"]+L+forl3(rekeningenlijst.index(i)+1)+" "+kleuren["coltoon"]+("{:>%s}" % maxreklen).format(IBAN+" "+JAAR)+" "+grotegetalkleuren(i,header,rekeningtotaal)+kleuren["ResetAll"]+valuta+" "*8+kleuren["coltekst"]+forr25(rekeningnaam)+kleuren["ResetAll"])
+                print(int((w-lenprtstfzw)/2)*" "+kleuren["coltoe"]+L+forl3(rekeningenlijst.index(i)+1)+" "+catcol["5"]+("{:>%s}" % maxreklen).format(IBAN+" "+JAAR)+" "+grotegetalkleuren(i,header,rekeningtotaal)+kleuren["ResetAll"]+valuta+" "*8+kleuren["coltekst"]+forr25(rekeningnaam)+kleuren["ResetAll"])
     valutalijst = sorted(valutalijst)
     if len(valutalijst) > 0:
         if valutalijst[0] == valutalijst[-1]:
@@ -1283,20 +1289,16 @@ def kiesrekening(rekeningenlijst):
             doei()
         try:
             keuze = int(rekeningkeuze)
-            if 0 <= keuze <= len(rekeningenlijst):
+            if 0 < keuze <= len(rekeningenlijst):
                 rekening = rekeningenlijst[keuze-1]
                 with open("laatstgekozen","w") as l:
                     print(rekening, file = l, end = "")
-            else:
-                rekening = rekeningenlijst[0]
-            return rekening
+                return rekening
         except(Exception) as f:
             #print(f)
             if rekeningkeuze == "":
                 rekening = haallaatstgekozen()
                 return rekening
-            else:
-                pass
 
 def kiesrekeningalleennummer(rekeningenlijst,rekening):
     laatstgekozen = haallaatstgekozen()
@@ -1436,7 +1438,8 @@ def vertaalv(v):
         .replace(">","Sì")\
         .replace("<","No")\
         .replace("DDMMYYYY","GGMMAAAA")\
-        .replace("DD-MM-YY","GG-MM-YY")\
+        .replace("DD-MM-YY","GG-MM-AA")\
+        .replace("YY-MM-DD","AA-MM-GG")\
         .replace("DD/MM/YY","GG/MM/AA")\
         .replace("DDmmm\'YY","GGmmm\'AA")\
         .replace("DD-mmmYY","GG-mmmAA")\
@@ -1449,6 +1452,7 @@ def vertaalv(v):
         .replace(">","Ja")\
         .replace("<","Nee")\
         .replace("DDMMYYYY","DDMMJJJJ")\
+        .replace("YY-MM-DD","JJ-MM-DD")\
         .replace("DD-MM-YY","DD-MM-JJ")\
         .replace("DD/MM/YY","DD/MM/JJ")\
         .replace("DDmmm\'YY","DDmmm\'JJ")\
@@ -1664,6 +1668,22 @@ def geefeendatum(rekening,header,col,ok,datum):
                 transactiedatum = standaardeinddatum
             elif datumkeuze == "":
                 transactiedatum = int(nustr) 
+            elif len(datumkeuze) > 1 and datumkeuze[0].upper() in ["M","W"]:
+                test = checkint(datumkeuze[1:])
+                if test == True:
+                    if datumkeuze[0].upper() == "M":
+                        maandverschil = int(datumkeuze[1:])
+                        maand = int(nustr[4:6])
+                        jaar = int(nustr[:4])
+                        while maandverschil > 0:
+                            maand -= 1
+                            if maand == 0:
+                                maand = 12
+                                jaar -= 1
+                            maandverschil -= 1
+                        transactiedatum = int("{:0>4}".format(jaar)+"{:0>2}".format(maand)+"01")
+                    else:
+                        transactiedatum = int(datetime.strftime(datetime.strptime(str(datum),"%Y%m%d") - timedelta(weeks = int(datumkeuze[1:])+1),"%Y%m%d"))
             elif len(datumkeuze) > 1 and datumkeuze[0] in ["-","+"]:
                 test = checkint(datumkeuze[1:])
                 if test == True:
@@ -1672,11 +1692,11 @@ def geefeendatum(rekening,header,col,ok,datum):
                     else:
                         transactiedatum = int(datetime.strftime(datetime.strptime(str(datum),"%Y%m%d") + timedelta(days = int(datumkeuze[1:])),"%Y%m%d"))
                 else:
-                    transactiedatum = datum
+                   transactiedatum = datum
             else:
                 transactiedatum = datum 
         toondatum = opmaakdatum(transactiedatum)
-        print(col+toondatum+ResetAll)
+        printdatumlinks(transactiedatum)
         return transactiedatum
 
 def geefdatumbereik(rekening,header,col,ok,datum):
@@ -1948,18 +1968,23 @@ def vertaalmnd(datum):
         .replace("12","dec")
     return mnd
 
-def toondatumopmaakopties(datum):
-    header = haalheader(rekening)
-    datumopmaak = header[nieuwheaderlijst[9]]
+def haalopmaakdatumdict(datum):
     mnd = vertaalmnd(datum)
     opmaakdatumdict = {
         opmaakdatumlijst[0]: str(datum),
         opmaakdatumlijst[1]: str(datum)[6:]+str(datum)[4:6]+str(datum)[:4],
-        opmaakdatumlijst[2]: str(datum)[6:]+"-"+str(datum)[4:6]+"-"+str(datum)[2:4],
-        opmaakdatumlijst[3]: str(datum)[6:]+"/"+str(datum)[4:6]+"/"+str(datum)[2:4],
-        opmaakdatumlijst[4]: str(datum)[6:]+"-"+mnd+str(datum)[2:4],
-        opmaakdatumlijst[5]: str(datum)[6:]+mnd+"\'"+str(datum)[2:4]
+        opmaakdatumlijst[2]: str(datum)[2:4]+"-"+str(datum)[4:6]+"-"+str(datum)[6:],
+        opmaakdatumlijst[3]: str(datum)[6:]+"-"+str(datum)[4:6]+"-"+str(datum)[2:4],
+        opmaakdatumlijst[4]: str(datum)[6:]+"/"+str(datum)[4:6]+"/"+str(datum)[2:4],
+        opmaakdatumlijst[5]: str(datum)[6:]+"-"+mnd+str(datum)[2:4],
+        opmaakdatumlijst[6]: str(datum)[6:]+mnd+"\'"+str(datum)[2:4]
     }
+    return opmaakdatumdict
+
+def toondatumopmaakopties(datum):
+    header = haalheader(rekening)
+    datumopmaak = header[nieuwheaderlijst[9]]
+    opmaakdatumdict = haalopmaakdatumdict(datum)
     tel = 0
     for i in opmaakdatumdict:
         print(forr3(tel)+" : %s (%s)" % (i,opmaakdatumdict[i]))
@@ -1968,15 +1993,7 @@ def toondatumopmaakopties(datum):
 def opmaakdatum(datum):
     header = haalheader(rekening)
     datumopmaak = header[nieuwheaderlijst[9]]
-    mnd = vertaalmnd(datum)
-    opmaakdatumdict = {
-        opmaakdatumlijst[0]: str(datum),
-        opmaakdatumlijst[1]: str(datum)[6:]+str(datum)[4:6]+str(datum)[:4],
-        opmaakdatumlijst[2]: str(datum)[6:]+"-"+str(datum)[4:6]+"-"+str(datum)[2:4],
-        opmaakdatumlijst[3]: str(datum)[6:]+"/"+str(datum)[4:6]+"/"+str(datum)[2:4],
-        opmaakdatumlijst[4]: str(datum)[6:]+"-"+mnd+str(datum)[2:4],
-        opmaakdatumlijst[5]: str(datum)[6:]+mnd+"\'"+str(datum)[2:4]
-    }
+    opmaakdatumdict = haalopmaakdatumdict(datum)
     try:
         for i in opmaakdatumdict:
             datum = opmaakdatumdict[datumopmaak]
@@ -2574,11 +2591,11 @@ def maandanalyse(rekening,datumlijst):
                 print(maandlijndezecategoriezw, file = a)
     print(analyselijn)
     if Taal == "EN":
-        voortgang = "Score"[:12]
+        voortgang = ("Score %s" % (str(datumlijst[0])[4:6]))[:12]
     elif Taal == "IT":
-        voortgang = "Score"[:12]
+        voortgang = ("Score %s" % (str(datumlijst[0])[4:6]))[:12]
     else:
-        voortgang = "Score"[:12]
+        voortgang = ("Score %s" % (str(datumlijst[0])[4:6]))[:12]
     if budgetcategorieensom + budgetnegatief >= 0:
         binnen = "+"
         colbinnen = kleuren["Omkeren"]+kleuren["colgoed"]
@@ -2599,12 +2616,12 @@ def maandanalyse(rekening,datumlijst):
         aantalstreepjes = 56
     if aantalstreepjes == 0:
         aantalstreepjes = 1
-    print(col+"|"+kleuren["ResetAll"]+getalkleur+forl12(voortgang)+kleuren["Omkeren"]+" "*(aantalstreepjes-1)+"|"+valuta+forsom(somal)+K+kleuren["ResetAll"]+" "*(56-aantalstreepjes)+colbinnen+binnen+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"])
+    print(col+"|"+kleuren["ResetAll"]+getalkleur+forl12(voortgang)+kleuren["Omkeren"]+"#"*(aantalstreepjes-1)+"|"+valuta+forsom(somal)+K+kleuren["ResetAll"]+" "*(56-aantalstreepjes)+colbinnen+binnen+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"])
     print(analyselijn)
     if header[nieuwheaderlijst[12]] == ">" and str(datumlijst[0])[:6] == str(datumlijst[1])[:6]:
         with open(os.path.join(rekening,str(datumlijst[0])[:6])+"a","a") as a:
             print(analyselijnzw, file = a)
-            print("|"+forl12(voortgang)+" "*(aantalstreepjes-1)+"|"+valuta+forsom(somal)+K+" "*(56-aantalstreepjes)+binnen+"|", file = a)
+            print("|"+forl12(voortgang)+"#"*(aantalstreepjes-1)+"|"+valuta+forsom(somal)+K+" "*(56-aantalstreepjes)+binnen+"|", file = a)
             print(analyselijnzw, file = a)
 
 def IDlijst2ok(IDlijst):
@@ -2824,8 +2841,10 @@ def nieuwnieuw(rekening,ok):
             if len(categoriekeuzelijst) > 0:
                 if categoriekeuzelijst[0] in categorieenlijst:
                     nieuwetransactiecategorie = categoriekeuzelijst[0]
+                else:
+                    nieuwetransactiecategorie = "O"
             else:
-                break
+                nieuwetransactiecategorie = "O"
         if nieuwetransactieinputlijst[0].upper() != "H":
             try:
                 categorie = haalcategorie(rekening,nieuwetransactiecategorie)
@@ -2839,11 +2858,6 @@ def nieuwnieuw(rekening,ok):
                 IDlijst.append(nieuwetransactiecategorie+str(categorie.index(nieuwetransactie)-1))
                 ok = IDlijst2ok(IDlijst)
                 toontransactie(rekening,header,col,ok)
-                jn = geefjaofnee(rekening,header)
-                if jn.upper() in afsluitlijst:
-                    doei()
-                elif jn.upper() in neelijst:
-                    break
             except(Exception) as f:
                 #print(f)
                 if Taal == "EN":
@@ -5081,7 +5095,31 @@ def wijzigkeuze(keuze1lijst,rekening,ok):
                 ok = wijzigbedrag(rekening,header,col,ok)
                 return rekening,header,col,keuze1lijst,ok
 
-#def spaarpotkeuze(keuze1lijst,rekening,ok):
+def haalspaarpotten(rekening):
+    with open(os.path.join(rekening,"spaarpotten"),"r") as s:
+        spaarpotten = ast.literal_eval(s.read())
+    return spaarpotten
+
+def kiesspaarpot(rekening,header,spaarpotten):
+    kleuren,catcol = updatekleuren(rekening)
+    Taal = header[nieuwheaderlijst[3]]
+    valuta = header[nieuwheaderlijst[4]]
+    tel = 1
+    for i in spaarpotten:
+        print(forr3(tel)+" : "+i+" : doel : "+valuta+fornum(spaarpotten[i][0])+" : waarde : "+valuta+fornum(spaarpotten[i][1]))
+        tel += 1
+
+
+
+
+def spaarpotkeuze(keuze1lijst,rekening,ok):
+    spaarpotten = haalspaarpotten(rekening)
+    kiesspaarpot(rekening,header,spaarpotten)
+    return rekening,header,col,keuze1lijst,ok
+
+
+
+
 #    kleuren,catcol = updatekleuren(rekening)
 #    header = haalheader(rekening)
 #    Taal = header[nieuwheaderlijst[3]]
@@ -5249,5 +5287,5 @@ while loop == True:
         rekening,header,col,keuze1lijst,ok = wijzigkeuze(keuze1lijst,rekening,ok)
     if keuze1lijst[0] == "4":
         rekening,header,col,keuze1lijst,ok = verwijderkeuze(rekening,header,col,keuze1lijst,ok)
-#    if keuze1lijst[0] == "5":
-#        rekening,header,col,keuze1lijst,ok = spaarpotkeuze(keuze1lijst,rekening,ok)
+    #if keuze1lijst[0] == "5":
+    #    rekening,header,col,keuze1lijst,ok = spaarpotkeuze(keuze1lijst,rekening,ok)
