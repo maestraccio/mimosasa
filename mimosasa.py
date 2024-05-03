@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.22"
-versiedatum = "20240502"
+versie = "0.0.23"
+versiedatum = "20240503"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 w = 80
@@ -193,7 +193,7 @@ nieuwalternatievenamendictEN = {
         "7":"cost of goods",
         "8":"sales",
         "9":"private",
-        "A":"funds & income",
+        "A":"income & buffer",
         "B":"fixed costs",
         "C":"groceries",
         "D":"travel & stay",
@@ -220,7 +220,7 @@ nieuwalternatievenamendictIT = {
         "7":"costi vendute",
         "8":"ricavi",
         "9":"privato",
-        "A":"saldo & reddito",
+        "A":"reddito&buffer",
         "B":"costi fissi",
         "C":"spese",
         "D":"viaggioalloggio",
@@ -247,7 +247,7 @@ nieuwalternatievenamendict = {
         "7":"inkoopwaarde",
         "8":"omzet",
         "9":"privé",
-        "A":"saldo & inkomen",
+        "A":"inkomen&buffer",
         "B":"vaste lasten",
         "C":"boodschappen",
         "D":"reis & verblijf",
@@ -5096,25 +5096,60 @@ def wijzigkeuze(keuze1lijst,rekening,ok):
                 return rekening,header,col,keuze1lijst,ok
 
 def haalspaarpotten(rekening):
-    with open(os.path.join(rekening,"spaarpotten"),"r") as s:
-        spaarpotten = ast.literal_eval(s.read())
+    try:
+        with open(os.path.join(rekening,"spaarpotten"),"r") as s:
+            spaarpotten = ast.literal_eval(s.read())
+    except(Exception) as f:
+        #print(f)
+        spaarpotten = {}
     return spaarpotten
 
 def kiesspaarpot(rekening,header,spaarpotten):
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
-    tel = 1
+    spaarpottenlijst = []
     for i in spaarpotten:
-        print(forr3(tel)+" : "+i+" : doel : "+valuta+fornum(spaarpotten[i][0])+" : waarde : "+valuta+fornum(spaarpotten[i][1]))
-        tel += 1
-
-
-
+        spaarpottenlijst.append(i)
+    if len(spaarpotten) > 0:
+        tel = 1
+        for i in spaarpotten:
+            print(forr3(tel)+" : "+col+i+" "+kleuren["Vaag"]+valuta+fornum(spaarpotten[i][0])+kleuren["ResetAll"]+" : "+grotegetalkleuren(rekening,header,spaarpotten[i][1])+valuta+fornum(spaarpotten[i][1])+kleuren["ResetAll"])
+            tel += 1
+        if Taal == "EN":
+            wraptekst = textwrap.wrap("Choose a savings pot",w)
+        elif Taal == "IT":
+            wraptekst = textwrap.wrap("Scegliere un salvadanaio",w)
+        else:
+            wraptekst = textwrap.wrap("Kies een spaarpot",w)
+        for i in wraptekst:
+            print(i)
+        loop = True
+        while loop == True:
+            spaarpotkeuze = input(col+inputindent)
+            print(ResetAll, end = "")
+            if spaarpotkeuze.upper() in afsluitlijst:
+                doei()
+            elif spaarpotkeuze.upper() in neelijst:
+                return "<"
+            else:
+                test = checkint(spaarpotkeuze)
+                if test == True:
+                    if int(spaarpotkeuze)-1 in range(len(spaarpotten)):
+                        spaarpot = spaarpottenlijst[int(spaarpotkeuze)-1]
+                        return spaarpot
+                else:
+                    return "<"
+    else:
+        return "<"
 
 def spaarpotkeuze(keuze1lijst,rekening,ok):
     spaarpotten = haalspaarpotten(rekening)
-    kiesspaarpot(rekening,header,spaarpotten)
+    spaarpot = kiesspaarpot(rekening,header,spaarpotten)
+    if spaarpot.upper() in neelijst:
+        return rekening,header,col,keuze1lijst,ok
+    else:
+        print(spaarpot)
     return rekening,header,col,keuze1lijst,ok
 
 
@@ -5287,5 +5322,5 @@ while loop == True:
         rekening,header,col,keuze1lijst,ok = wijzigkeuze(keuze1lijst,rekening,ok)
     if keuze1lijst[0] == "4":
         rekening,header,col,keuze1lijst,ok = verwijderkeuze(rekening,header,col,keuze1lijst,ok)
-    #if keuze1lijst[0] == "5":
-    #    rekening,header,col,keuze1lijst,ok = spaarpotkeuze(keuze1lijst,rekening,ok)
+#    if keuze1lijst[0] == "5":
+#        rekening,header,col,keuze1lijst,ok = spaarpotkeuze(keuze1lijst,rekening,ok)
