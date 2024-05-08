@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.27"
-versiedatum = "20240507"
+versie = "0.0.28"
+versiedatum = "20240508"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 w = 80
@@ -59,12 +59,14 @@ afsluitlijst = ["Q","X",":Q"]
 taallijst = [
     "NL",
     "EN",
-    "IT"
+    "IT",
+    "CJ"
     ]
 taaldict = {
     taallijst[0]: "Nederlands",
     taallijst[1]: "English",
     taallijst[2]: "Italiano"
+    taallijst[3]: "Hucoji"
     }
 jalijst = [">","]",")","}"]
 neelijst = ["<","[","(","{"]
@@ -77,15 +79,19 @@ standaardtopbedrag = 9999999.99
 budgetnul = 0.0001
 oepsEN = "Oops, something went wrong"
 oepsIT = "Ups, qualcosa è andato storto"
+oepsCJ = "ma huwaxüo"
 oeps = "Oeps, daar ging wat mis"
 woordcategorieEN = "Category"
 woordcategorieIT = "Categoria"
+woordcategorieCJ = "hupa"
 woordcategorie = "Categorie"
 woordtransactieEN = "Transaction"
 woordtransactieIT = "Transazione"
+woordtransactieCJ = "huʃese"
 woordtransactie = "Transactie"
 geenspaarpottenEN = "There are no savings pots (yet)"
 geenspaarpottenIT = "Non ci sono (ancora) salvadanai"
+geenspaarpottenCJ = "ma huʃeselüu (hiqi)"
 geenspaarpotten = "Er zijn (nog) geen spaarpotten"
 
 lijn = "|"+78*"-"+"|"
@@ -113,6 +119,12 @@ elementenIT = [
         "Importo",
         "Controparte",
         "Riferimento"
+        ]
+elementenCJ = [
+        "huqi",
+        "huba",
+        "huhe",
+        "huwo"
         ]
 elementen = [
         "Datum",       # 0
@@ -154,6 +166,23 @@ nieuwheaderlijstIT = [
         "Esporta tutto in file CSV",
         "Consiglio del giorno"
         ]
+nieuwheaderlijstCJ = [
+        "huhuʒi",
+        "huhuʒihe",
+        "huhuʒiʃa",
+        "hupaco",
+        "huhuwa",
+        "hupuzi",
+        "haca hupupu hiʒi hucazi",
+        "huca hoñüo >< hoño",
+        "haca huʃese hupañi",
+        "huca huqi",
+        "huca'apa",
+        "hupecame",
+        "haŋo hucaqipabobi",
+        "haŋo hupu hise huCSV",
+        "haca hudareqi"
+        ]
 nieuwheaderlijst = [
         "Rekeningnaam",                      # 0
         "Rekeninghouder",                    # 1
@@ -175,7 +204,7 @@ nieuwheaderlijst = [
 lijnlijstEN = [
         "ID",
         "Name",
-        "Target",
+        "Target amount",
         "Credit",
         "Spent",
         "Rest"
@@ -183,15 +212,23 @@ lijnlijstEN = [
 lijnlijstIT = [
         "ID",
         "Nome",
-        "Obiettivo",
+        "Saldo obiettivo",
         "Credito",
         "Pagato",
         "Rimanente"
         ]
+lijnlijstCJ = [
+        "hubi",
+        "huhu",
+        "hupuzu",
+        "hupuŋo",
+        "hupusezu",
+        "hupuzo"
+        ]
 lijnlijst = [
         "ID",       # 0
         "Naam",     # 1
-        "Doel",     # 2
+        "Doelsaldo",# 2
         "Tegoed",   # 3
         "Betaald",  # 4
         "Rest"      # 5
@@ -5309,11 +5346,11 @@ def toonspaarpotten(rekening,header):
         lijnst = lijnlijst
     if len(spaarpotten) == 0:
         print(geenspaarpot)
-    spaarpottentoplijn = col+"+"+"-"*3+"+"+"-"*17+"+"+"-"*11+"+"+"-"*11+"+"+"-"*11+"+"+"-"*11+"+"+kleuren["ResetAll"]
+    spaarpottentoplijn = col+"+"+"-"*3+"+"+"-"*17+"+"+"-"*len(lijnst[2])+"+"+"-"*11+"+"+"-"*11+"+"+"-"*11+"+"+kleuren["ResetAll"]
     lijnlijstlijn = col+"|"+kleuren["ResetAll"]\
     +forc3(lijnst[0])+" "\
     +forc17(lijnst[1])+" "\
-    +forc11(lijnst[2])+" "\
+    +("{:^%d}" % len(lijnst[2])).format(lijnst[2])+" "\
     +forc11(lijnst[3])+" "\
     +forc11(lijnst[4])+" "\
     +forc11(lijnst[5])+col\
@@ -5326,8 +5363,8 @@ def toonspaarpotten(rekening,header):
         tegaan = (spaarpotten[i][0] + spaarpotten[i][2]) * -1
         print(col+"|"+kleuren["ResetAll"]\
             +forc3(tel)+": "\
-            +kleuren["5"]+forl15(i[:15])+" : "\
-            +kleuren["Vaag"]+valuta+grootgetal(spaarpotten[i][0],fornum,"")[1](grootgetal(spaarpotten[i][0],fornum,"")[0])+grootgetal(spaarpotten[i][0],fornum,"")[2]+kleuren["ResetAll"]+" : "\
+            +kleuren["5"]+forl15(i[:15])+" :"\
+            +kleuren["Vaag"]+("{:^%d}" % len(lijnst[2])).format(valuta+grootgetal(spaarpotten[i][0],fornum,"")[1](grootgetal(spaarpotten[i][0],fornum,"")[0])+grootgetal(spaarpotten[i][0],fornum,"")[2])+kleuren["ResetAll"]+": "\
             +grotegetalkleuren(rekening,header,spaarpotten[i][1])+valuta+grootgetal(spaarpotten[i][1],fornum,"")[1](grootgetal(spaarpotten[i][1],fornum,"")[0])+grootgetal(spaarpotten[i][1],fornum,"")[2]+kleuren["ResetAll"]+" : "\
             +grotegetalkleuren(rekening,header,spaarpotten[i][2])+valuta+grootgetal(spaarpotten[i][2],fornum,"")[1](grootgetal(spaarpotten[i][2],fornum,"")[0])+grootgetal(spaarpotten[i][2],fornum,"")[2]+kleuren["ResetAll"]+" : "\
             +grotegetalkleuren(rekening,header,tegaan)+valuta+grootgetal(tegaan,fornum,"")[1](grootgetal(tegaan,fornum,"")[0])+grootgetal(tegaan,fornum,"")[2]+kleuren["ResetAll"]\
@@ -5371,7 +5408,7 @@ def nieuwespaarpot(rekening,header):
     for i in spaarpotten:
         spaarpottenlijst.append(i)
     if len(spaarpotten) > 0:
-        toonspaarpotten(rekening,header,spaarpotten)
+        toonspaarpotten(rekening,header)
         if Taal == "EN":
             print(menuEN["5,2"])
             vragenlijst = ["Name","Target value"]
@@ -5410,9 +5447,9 @@ def nieuwespaarpot(rekening,header):
                 if test == True:
                     print(col+valuta+fornum(float(doel))+kleuren["ResetAll"])
                     spaarpotten[naam] = [float(doel),0,0]
-                    toonspaarpotten(rekening,header,spaarpotten)
                     with open(os.path.join(rekening,"spaarpotten"),"w") as s:
                         print(spaarpotten, file = s, end = "")
+                    toonspaarpotten(rekening,header)
                 else:
                     print(kleuren["colslecht"]+oeps+kleuren["ResetAll"])
                 
@@ -5428,7 +5465,7 @@ def kiesspaarpot(rekening,header):
     for i in spaarpotten:
         spaarpottenlijst.append(i)
     if len(spaarpotten) > 0:
-        toonspaarpotten(rekening,header,spaarpotten)
+        toonspaarpotten(rekening,header)
         if Taal == "EN":
             wraptekst = textwrap.wrap("Choose a savings pot",w)
         elif Taal == "IT":
@@ -5463,7 +5500,7 @@ def verwijderspaarpot(rekening,header):
     for i in spaarpotten:
         spaarpottenlijst.append(i)
     if len(spaarpotten) > 0:
-        toonspaarpotten(rekening,header,spaarpotten)
+        toonspaarpotten(rekening,header)
         if Taal == "EN":
             wraptekst1 = textwrap.wrap(kleuren["colslecht"]+menuEN["5,4"]+kleuren["ResetAll"],w)
             wraptekst2 = textwrap.wrap("Choose a savings pot",w)
@@ -5497,13 +5534,14 @@ def verwijderspaarpot(rekening,header):
                             return "<"
                         else:
                             del spaarpotten[spaarpottenlijst[int(spaarpotkeuze)-1]]
-                            toonspaarpotten(rekening,header,spaarpotten)
+                            toonspaarpotten(rekening,header)
                             with open(os.path.join(rekening,"spaarpotten"),"w") as s:
                                 print(spaarpotten, file = s, end = "")
                             spaarpotten = haalspaarpotten(rekening)
                             spaarpottenlijst = []
                             for i in spaarpotten:
                                 spaarpottenlijst.append(i)
+                            toonspaarpotten(rekening,header)
     else:
         return "<"
 
