@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.29"
-versiedatum = "20240509"
+versie = "0.0.30"
+versiedatum = "20240511"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 w = 80
@@ -121,7 +121,7 @@ elementenIT = [
         ]
 elementenCJ = [
         "huqi",
-        "huba",
+        "hubi",
         "huhe",
         "huwo"
         ]
@@ -304,19 +304,19 @@ nieuwalternatievenamendictIT = {
         "O":"altro"
         }
 nieuwalternatievenamendictCJ = {
-        "0":"",
-        "1":"",
-        "2":"",
-        "3":"",
-        "4":"",
-        "5":"",
-        "6":"",
-        "7":"",
-        "8":"",
-        "9":"",
+        "0":"0000",
+        "1":"1000",
+        "2":"2000",
+        "3":"3000",
+        "4":"4000",
+        "5":"5000",
+        "6":"6000",
+        "7":"7000",
+        "8":"8000",
+        "9":"9000",
         "A":"huwasüi&huwaŋo",
         "B":"huwaseŋo",
-        "C":"huwasevavoseŋüi",
+        "C":"~sevavosüiŋüi",
         "D":"huwasehaʒoʒi",
         "E":"huwasefuxüo",
         "F":"huwasesüi",
@@ -328,7 +328,7 @@ nieuwalternatievenamendictCJ = {
         "L":"",
         "M":"",
         "N":"",
-        "O":"huwasepaŋüi"
+        "O":"huwaseŋepali"
         }
 nieuwalternatievenamendict = {
         "0":"vaste act/pass.",
@@ -670,15 +670,15 @@ helpmenuEN = {
         "3,4": textwrap.wrap("Adjust the %s of the transaction. Here you provide a description of the content of this transaction, such as a billed service or a number of items purchased. You can also include payment references or invoice numbers here. The number of characters to use is free, but will be truncated in the table display (\"1,1\"). It is therefore wise to always start with a recognizable fragment, especially with longer descriptions." % elementenEN[3],w),
         "3,5": textwrap.wrap("Place a transaction in another category. Each transaction is assigned to a category to which a budget is allocated. These budgets are distributed in \"0,2,3\" and the progress can be seen per month in \"1,2\".",w),
     "4": textwrap.wrap("",w),
-    "5": textwrap.wrap("The function %s is not ready yet." % menuEN["5"],w),
-        "5,1": textwrap.wrap("The function %s is not ready yet." % menuEN["5,1"],w),
-        "5,2": textwrap.wrap("The function %s is not ready yet." % menuEN["5,2"],w),
-        "5,3": textwrap.wrap("The function %s is not ready yet." % menuEN["5,3"],w),
-            "5,3,1": textwrap.wrap("The function %s is not ready yet." % menuEN["5,3,1"],w),
-            "5,3,2": textwrap.wrap("The function %s is not ready yet." % menuEN["5,3,2"],w),
-            "5,3,3": textwrap.wrap("The function %s is not ready yet." % menuEN["5,3,3"],w),
-            "5,3,4": textwrap.wrap("The function %s is not ready yet." % menuEN["5,3,4"],w),
-        "5,4": textwrap.wrap("The function %s is not ready yet." % menuEN["5,4"],w),
+    "5": textwrap.wrap("You can set money aside in multiple savings pots. These savings pots can be manually topped up from the discretionary balance or directly in a new transaction. If a specific savings pot is mentioned in the %s with a \"#\", you can reconcile that transaction with that savings pot. Incoming amounts can be added in full or in part to the savings pot balance, and negative amounts can be deducted in full from the paid balance. Using the shortcut \"#\", you can collect all previous transactions containing a \"#\" in the %s with \"1,1\". It is advisable to only use this character in the %s for transactions related to a savings pot. The displayed \"Discretionary balance\" is the account total from which the buffer in the categories (needed for monthly expenses) and the balances in the different savings pots are deducted." % (elementenEN[3],elementenEN[3],elementenEN[3]),w),
+        "5,1": textwrap.wrap("View all savings pots in a simple and clear table",w),
+        "5,2": textwrap.wrap("Add a new empty savings pot. You can already give it a name and a target balance. As long as no credit is added to it, it will remain empty and will not affect your discretionary balance. The name always starts with a \"#\", which you can refer to in new transactions or in \"1,1\"",w),
+        "5,3": textwrap.wrap("Manually change the properties of a savings pot: %s, %s, %s, and/or %s" % (lijnlijstEN[1],lijnlijstEN[2],lijnlijstEN[3],lijnlijstEN[4],),w),
+            "5,3,1": textwrap.wrap("Change the %s of a savings pot" % lijnlijstEN[1],w),
+            "5,3,2": textwrap.wrap("Change the %s of a savings pot" % lijnlijstEN[2],w),
+            "5,3,3": textwrap.wrap("Change the %s of a savings pot" % lijnlijstEN[3],w),
+            "5,3,4": textwrap.wrap("Change the %s amount of a savings pot" % lijnlijstEN[4],w),
+        "5,4": textwrap.wrap("Remove a savings pot from the account. Any saved credit will go back to the discretionary balance",w),
     "<": textwrap.wrap("Back to main menu",w), # Wordt nooit aangesproken
     "Q": textwrap.wrap("Quit app",w) # Wordt nooit aangesproken
         }
@@ -735,15 +735,15 @@ helpmenuIT = {
         "3,4": textwrap.wrap("Modifica l'oggetto della transazione. Qui fornisci una descrizione del contenuto di questa transazione, come ad esempio un servizio fatturato o un insieme di articoli acquistati. Puoi includere anche informazioni di pagamento o numeri di fattura. Il numero di caratteri da utilizzare è libero, ma verrà abbreviato nella visualizzazione tabellare (\"1,1\"). È quindi consigliabile iniziare sempre con un frammento riconoscibile, specialmente per descrizioni più lunghe.",w),
         "3,5": textwrap.wrap("Sposta una transazione in un'altra categoria. Ogni transazione viene assegnata a una categoria a cui è associato un budget. Questi budget sono distribuiti in \"0,2,3\" e il progresso è visibile mensilmente in \"1,2\".",w),
     "4": textwrap.wrap("Qui puoi eliminare definitivamente singole transazioni. Se esiste già una collezione, queste transazioni vengono offerte una per volta; in caso contrario, ti verrà chiesto di specificare un \"ID\" - o meglio: una lista di \"ID\" sotto forma di un elenco CSV.",w),
-    "5": textwrap.wrap("La funzione %s non è ancora completa." % menu["5"],w),
-        "5,1": textwrap.wrap("La funzione %s non è ancora completa." % menu["5,1"],w),
-        "5,2": textwrap.wrap("La funzione %s non è ancora completa." % menu["5,2"],w),
-        "5,3": textwrap.wrap("La funzione %s non è ancora completa." % menu["5,3"],w),
-            "5,3,1": textwrap.wrap("La funzione %s non è ancora completa." % menu["5,3,1"],w),
-            "5,3,2": textwrap.wrap("La funzione %s non è ancora completa." % menu["5,3,2"],w),
-            "5,3,3": textwrap.wrap("La funzione %s non è ancora completa." % menu["5,3,3"],w),
-            "5,3,4": textwrap.wrap("La funzione %s non è ancora completa." % menu["5,3,4"],w),
-        "5,4": textwrap.wrap("La funzione %s non è ancora completa." % menu["5,4"],w),
+    "5": textwrap.wrap("È possibile mettere da parte denaro in più salvadanai. Questi salvadanai possono essere ricaricati manualmente dal saldo disponibile o direttamente da una nuova transazione. Se nel %s viene specificato un salvadanaio con un \"#\", è possibile addebitare quella transazione su quel salvadanaio. Le somme in entrata possono essere interamente o parzialmente aggiunte al saldo del salvadanaio e le somme negative sottratte interamente dal saldo pagato. Usando il tasto rapido \"#\", si raccolgono tutte le transazioni precedenti che contengono un \"#\" nel %s. È pertanto consigliabile utilizzare questo carattere nel %s solo per le transazioni relative a un salvadanaio. Il \"Saldo disponibile\" mostrato è il totale del conto da cui sono stati sottratti il buffer nei categorie (necessario per le spese mensili) e i crediti nei vari salvadanai." % (elementenIT[3],elementenIT[3],elementenIT[3]),w),
+        "5,1": textwrap.wrap("Visualizza tutti i salvadanai in una tabella semplice e chiara.",w),
+        "5,2": textwrap.wrap("Aggiungi un nuovo salvadanaio vuoto. Puoi dargli un nome e un saldo obiettivo. Finché non viene aggiunto alcun credito, rimarrà vuoto e non influenzerà il tuo saldo disponibile. Il nome inizia sempre con un \"#\", a cui puoi fare riferimento in nuove transazioni o in \"1,1\"",w),
+        "5,3": textwrap.wrap("Modifica manualmente le proprietà di un salvadanaio: %s, %s, %s e/o %s." % (lijnlijstIT[1],lijnlijstIT[2],lijnlijstIT[3],lijnlijstIT[4],),w),
+            "5,3,1": textwrap.wrap("Modifica il %s di un salvadanaio" % lijnlijstIT[1],w),
+            "5,3,2": textwrap.wrap("Modifica il %s di un salvadanaio" % lijnlijstIT[2],w),
+            "5,3,3": textwrap.wrap("Modifica il %s di un salvadanaio" % lijnlijstIT[3],w),
+            "5,3,4": textwrap.wrap("Modifica il saldo %s di un salvadanaio" % lijnlijstIT[4],w),
+        "5,4": textwrap.wrap("Rimuovi un salvadanaio dal conto. Eventuali fondi risparmiati tornano al totale disponibile",w),
     "<": textwrap.wrap("Ritorna al menu principale",w),
     "Q": textwrap.wrap("Esci dali'app",w)
         }
@@ -862,15 +862,15 @@ helpmenu = {
         "3,4": textwrap.wrap("Pas het %s van de transactie aan. Hierin geeft u een beschrijving van de inhoud van deze transactie op, zoals een dienst die is gefactureerd of een aantal artikelen dat werd aangeschaft. Ook betalingskenmerken of factuurnummers kunt u hier kwijt. Het aantal karakers om te gebruiken is vrij, maar wordt in de tabelweergave (\"1,1\") wel afgekort. Het is daarom verstandig om zeker bij langere beschrijvingen altijd te beginnen met een herkenbaar fragment." % (elementen[3].lower()),w),
         "3,5": textwrap.wrap("Plaats een transactie in een andere %s. Iedere transactie wordt toegekend aan een categorie waaraan een budget is toegekend. Deze budgetten worden verdeeld in \"0,2,3\" en de voortgang is per maand te zien in \"1,2\"." % (woordcategorie.lower()),w),
     "4": textwrap.wrap("Hier kunt u individuele transacties definitief verwijderen. Als er al een collectie bestaat worden die transacties één voor één aangeboden, anders wordt u gevraagd een \"ID\" - of beter: een lijst van \"ID's\" in de vorm van een CSV-lijst - op te geven.",w),
-    "5": textwrap.wrap("U kunt geld opzij zetten in meerdere spaarpotten. Deze spaarpotten kunnen handmatig worden aangevuld vanuit het vrij besteedbaar saldo of direct bij een nieuwe transactie. Als er in het %s met een \"#\" een specifieke spaarpot wordt vermeld kunt u die transactie met die spaarpot verrekenen. Binnenkomende bedragen worden aan het spaarpottegoed toegevoegd en negatieve bedragen van het betaalde saldo afgetrokken. Met de sneltoets \"#\" verzamelt u alle eerdere transacties die een \"#\" in het %s bevatten. Het is daarom verstandig dat karakter in het %s alleen te gebruiken bij transacties die op een spaarpot betrekking hebben. Het getoonde \"Vrij besteedbaar saldo\" is het rekeningtotaal waarvan de buffer in de categorieën (nodig voor de maandelijkse uitgaven) en de tegoeden in de verschillende spaarpotten is afgetrokken." % (elementen[3],elementen[3],elementen[3]),w),
-        "5,1": textwrap.wrap("De functie %s is nog niet af." % menu["5,1"],w),
-        "5,2": textwrap.wrap("De functie %s is nog niet af." % menu["5,2"],w),
-        "5,3": textwrap.wrap("De functie %s is nog niet af." % menu["5,3"],w),
-            "5,3,1": textwrap.wrap("De functie %s is nog niet af." % menu["5,3,1"],w),
-            "5,3,2": textwrap.wrap("De functie %s is nog niet af." % menu["5,3,2"],w),
-            "5,3,3": textwrap.wrap("De functie %s is nog niet af." % menu["5,3,3"],w),
-            "5,3,4": textwrap.wrap("De functie %s is nog niet af." % menu["5,3,4"],w),
-        "5,4": textwrap.wrap("De functie %s is nog niet af." % menu["5,4"],w),
+    "5": textwrap.wrap("U kunt geld opzij zetten in meerdere spaarpotten. Deze spaarpotten kunnen handmatig worden aangevuld vanuit het vrij besteedbaar saldo of direct bij een nieuwe transactie. Als er in het %s met een \"#\" een specifieke spaarpot wordt vermeld kunt u die transactie met die spaarpot verrekenen. Binnenkomende bedragen kunnen geheel of gedeeltelijk aan het spaarpottegoed worden toegevoegd en negatieve bedragen in hun geheel van het betaalde saldo afgetrokken. Met de sneltoets \"#\" verzamelt u bij \"1,1\" alle eerdere transacties die een \"#\" in het %s bevatten. Het is daarom verstandig dat karakter in het %s alleen te gebruiken bij transacties die op een spaarpot betrekking hebben. Het getoonde \"Vrij besteedbaar saldo\" is het rekeningtotaal waarvan de buffer in de categorieën (nodig voor de maandelijkse uitgaven) en de tegoeden in de verschillende spaarpotten is afgetrokken." % (elementen[3],elementen[3],elementen[3]),w),
+        "5,1": textwrap.wrap("Bekijk alle spaarpotten in een simpele en overzichtelijke tabel",w),
+        "5,2": textwrap.wrap("Voeg een nieuwe lege spaarpot toe. U kunt deze alvast een naam geven en een doelsaldo. Zo lang er geen tegoed aan wordt toegevoegd blijft deze leeg en doet deze geen aanspraak op uw vrij besteedbaar saldo. De naam begint altijd met een \"#\", waaraan u kunt refereren bij nieuwe transacties of in \"1,1\"",w),
+        "5,3": textwrap.wrap("Wijzig handmatig de eigenschappen van een spaarpot: %s, %s, %s en/of %s" % (lijnlijst[1],lijnlijst[2],lijnlijst[3],lijnlijst[4]),w),
+            "5,3,1": textwrap.wrap("Wijzig de %s van een spaarpot" % lijnlijst[1],w),
+            "5,3,2": textwrap.wrap("Wijzig het %s van een spaarpot" % lijnlijst[2],w),
+            "5,3,3": textwrap.wrap("Wijzig het %s van een spaarpot" % lijnlijst[3],w),
+            "5,3,4": textwrap.wrap("Wijzig het %s bedrag van een spaarpot" % lijnlijst[4],w),
+        "5,4": textwrap.wrap("Verwijder een spaarpot uit de rekening. Eventueel gespaard tegoed gaat terug naar het vrij besteedbaar rekeningtotaal",w),
     "<": textwrap.wrap("Terug naar hoofdmenu",w), # Wordt nooit aangesproken
     "Q": textwrap.wrap("Verlaat de app",w) # Wordt nooit aangesproken
         }
@@ -1291,7 +1291,7 @@ def doei():
     elif Taal == "IT":
         print(coltekst+forcw("Grazie per usare mimosasa e buona giornata")+ResetAll)
     elif Taal == "CJ":
-        print(coltekst+forcw("mu he'ega m hea haʃa mimosasa. mo heagaqe m he'ega")+ResetAll)
+        print(coltekst+forcw("mu he'ega m hea haʃa'mimosasa. mo heagaqe m he'ega")+ResetAll)
     else:
         print(coltekst+forcw("Bedankt voor het gebruiken van mimosasa en nog een fijne dag")+ResetAll)
     print()
@@ -2795,7 +2795,7 @@ def maandanalyse(rekening,datumlijst):
     elif Taal == "IT":
         print("Inserisci il numero di mesi nel passato")
     elif Taal == "CJ":
-        print("haŋo hupabi huqipabobiqüa")
+        print("haŋo hubipa huqipabobiqüa")
     else:
         print("Geef het aantal maanden in het verleden")
     print(col, end = "")
@@ -4100,6 +4100,8 @@ def wijzigvaluta(rekening,header):
         vraag = textwrap.wrap("Change %s %s %s from %s to:" % (IBAN,JAAR,nieuwheaderlijstEN[4],header[nieuwheaderlijst[4]]),w)
     elif Taal == "IT":
         vraag = textwrap.wrap("Cambia %s %s %s da %s in:" % (IBAN,JAAR,nieuwheaderlijstIT[4],header[nieuwheaderlijst[4]]),w)
+    elif Taal == "CJ":
+        vraag = textwrap.wrap("hazüi %s %s %s qi %s qe:" % (IBAN,JAAR,nieuwheaderlijstCJ[4],header[nieuwheaderlijst[4]]),w)
     else:
         vraag = textwrap.wrap("Wijzig %s %s %s van %s naar:" % (IBAN,JAAR,nieuwheaderlijst[4],header[nieuwheaderlijst[4]]),w)
     for i in vraag:
@@ -4125,6 +4127,8 @@ def wijzigstartsaldo(rekening,header):
         vraag = textwrap.wrap("Change %s %s %s from %s to:" % (IBAN,JAAR,nieuwheaderlijstEN[5],header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[5]])),w)
     elif Taal == "IT":
         vraag = textwrap.wrap("Cambia %s %s %s da %s in:" % (IBAN,JAAR,nieuwheaderlijstIT[5],header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[5]])),w)
+    elif Taal == "CJ":
+        vraag = textwrap.wrap("hazüi %s %s %s qi %s qe:" % (IBAN,JAAR,nieuwheaderlijstCJ[5],header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[5]])),w)
     else:
         vraag = textwrap.wrap("Wijzig %s %s %s van %s naar:" % (IBAN,JAAR,nieuwheaderlijst[5],header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[5]])),w)
     for i in vraag:
@@ -4152,6 +4156,8 @@ def wijzigtoonsaldo(rekening,header):
         vraag = textwrap.wrap("Change %s %s %s from %s to:" % (IBAN,JAAR,nieuwheaderlijstEN[6],coljanee(rekening,header,header[nieuwheaderlijst[6]])+vertaalv(header[nieuwheaderlijst[6]])+kleuren["ResetAll"]),w)
     elif Taal == "IT":
         vraag = textwrap.wrap("Cambia %s %s %s da %s in:" % (IBAN,JAAR,nieuwheaderlijstIT[6],coljanee(rekening,header,header[nieuwheaderlijst[6]])+vertaalv(header[nieuwheaderlijst[6]])+kleuren["ResetAll"]),w)
+    elif Taal == "CJ":
+        vraag = textwrap.wrap("hazüi %s %s %s qi %s qe:" % (IBAN,JAAR,nieuwheaderlijstCJ[6],coljanee(rekening,header,header[nieuwheaderlijst[6]])+vertaalv(header[nieuwheaderlijst[6]])+kleuren["ResetAll"]),w)
     else:
         vraag = textwrap.wrap("Wijzig %s %s %s van %s naar:" % (IBAN,JAAR,nieuwheaderlijst[6],coljanee(rekening,header,header[nieuwheaderlijst[6]])+vertaalv(header[nieuwheaderlijst[6]])+kleuren["ResetAll"]),w)
     for i in vraag:
@@ -4174,6 +4180,8 @@ def wijzigmarkering(rekening,header):
         vraag = textwrap.wrap("Change %s %s %s from %s to:" % (IBAN,JAAR,nieuwheaderlijstEN[7],header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][0])+" >< "+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][1])),w)
     elif Taal == "IT":
         vraag = textwrap.wrap("Cambia %s %s %s da %s in:" % (IBAN,JAAR,nieuwheaderlijstIT[7],header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][0])+" >< "+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][1])),w)
+    elif Taal == "CJ":
+        vraag = textwrap.wrap("hazüi %s %s %s qi %s qe:" % (IBAN,JAAR,nieuwheaderlijstCJ[7],header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][0])+" >< "+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][1])),w)
     else:
         vraag = textwrap.wrap("Wijzig %s %s %s van %s naar:" % (IBAN,JAAR,nieuwheaderlijst[7],header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][0])+" >< "+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][1])),w)
     for i in vraag:
@@ -4182,6 +4190,8 @@ def wijzigmarkering(rekening,header):
         print("Low marking")
     elif Taal == "IT":
         print("Indicazione inferiore")
+    elif Taal == "CJ":
+        print("huca hoñüo")
     else:
         print("Laag markering")
     laag = input(col+inputindent)
@@ -4200,6 +4210,8 @@ def wijzigmarkering(rekening,header):
         print("High marking")
     elif Taal == "IT":
         print("Indicazione superiore")
+    elif Taal == "CJ":
+        print("huca hoño")
     else:
         print("Hoog markering")
     hoog = input(col+inputindent)
@@ -4228,6 +4240,8 @@ def wijzignullijnen(rekening,header):
         vraag = textwrap.wrap("Change %s %s %s from %s to:" % (IBAN,JAAR,nieuwheaderlijstEN[8],coljanee(rekening,header,header[nieuwheaderlijst[8]])+vertaalv(header[nieuwheaderlijst[8]])+kleuren["ResetAll"]),w)
     elif Taal == "IT":
         vraag = textwrap.wrap("Cambia %s %s %s da %s in:" % (IBAN,JAAR,nieuwheaderlijstIT[8],coljanee(rekening,header,header[nieuwheaderlijst[8]])+vertaalv(header[nieuwheaderlijst[8]])+kleuren["ResetAll"]),w)
+    elif Taal == "CJ":
+        vraag = textwrap.wrap("hazüi %s %s %s qi %s qe:" % (IBAN,JAAR,nieuwheaderlijstCJ[8],coljanee(rekening,header,header[nieuwheaderlijst[8]])+vertaalv(header[nieuwheaderlijst[8]])+kleuren["ResetAll"]),w)
     else:
         vraag = textwrap.wrap("Wijzig %s %s %s van %s naar:" % (IBAN,JAAR,nieuwheaderlijst[8],coljanee(rekening,header,header[nieuwheaderlijst[8]])+vertaalv(header[nieuwheaderlijst[8]])+kleuren["ResetAll"]),w)
     for i in vraag:
@@ -4252,6 +4266,8 @@ def wijzigdatumopmaak(rekening,header):
         vraag = textwrap.wrap("Change %s %s %s from %s (%s) to:" % (IBAN,JAAR,nieuwheaderlijstEN[9],vertaalv(header[nieuwheaderlijst[9]]),datum),w)
     elif Taal == "IT":
         vraag = textwrap.wrap("Cambia %s %s %s da %s (%s) in:" % (IBAN,JAAR,nieuwheaderlijstIT[9],vertaalv(header[nieuwheaderlijst[9]]),datum),w)
+    elif Taal == "CJ":
+        vraag = textwrap.wrap("hazüi %s %s %s qi %s (%s) qe:" % (IBAN,JAAR,nieuwheaderlijstCJ[9],vertaalv(header[nieuwheaderlijst[9]]),datum),w)
     else:
         vraag = textwrap.wrap("Wijzig %s %s %s van %s (%s) naar:" % (IBAN,JAAR,nieuwheaderlijst[9],vertaalv(header[nieuwheaderlijst[9]]),datum),w)
     for i in vraag:
@@ -4280,6 +4296,8 @@ def wijzigkleurenschema(rekening,header):
         vraag = textwrap.wrap("Change %s %s %s from %s to:" % (IBAN,JAAR,nieuwheaderlijstEN[10],vertaalv(header[nieuwheaderlijst[10]])),w)
     elif Taal == "IT":
         vraag = textwrap.wrap("Cambia %s %s %s da %s in:" % (IBAN,JAAR,nieuwheaderlijstIT[10],vertaalv(header[nieuwheaderlijst[10]])),w)
+    elif Taal == "CJ":
+        vraag = textwrap.wrap("hazüi %s %s %s qi %s qe:" % (IBAN,JAAR,nieuwheaderlijstCJ[10],vertaalv(header[nieuwheaderlijst[10]])),w)
     else:
         vraag = textwrap.wrap("Wijzig %s %s %s van %s naar:" % (IBAN,JAAR,nieuwheaderlijst[10],vertaalv(header[nieuwheaderlijst[10]])),w)
     for i in vraag:
@@ -4316,6 +4334,8 @@ def wijzigmenuniveau(rekening,header):
         vraag = textwrap.wrap("Change %s %s %s from %s to:" % (IBAN,JAAR,nieuwheaderlijstEN[11],header[nieuwheaderlijst[11]]),w)
     elif Taal == "IT":
         vraag = textwrap.wrap("Cambia %s %s %s da %s in:" % (IBAN,JAAR,nieuwheaderlijstIT[11],header[nieuwheaderlijst[11]]),w)
+    elif Taal == "CJ":
+        vraag = textwrap.wrap("hazüi %s %s %s qi %s qe:" % (IBAN,JAAR,nieuwheaderlijstCJ[11],header[nieuwheaderlijst[11]]),w)
     else:
         vraag = textwrap.wrap("Wijzig %s %s %s van %s naar:" % (IBAN,JAAR,nieuwheaderlijst[11],header[nieuwheaderlijst[11]]),w)
     for i in vraag:
@@ -4347,6 +4367,8 @@ def wijziganalyse2txt(rekening,header):
         vraag = textwrap.wrap("Change %s %s %s from %s to:" % (IBAN,JAAR,nieuwheaderlijstEN[12],coljanee(rekening,header,header[nieuwheaderlijst[12]])+vertaalv(header[nieuwheaderlijst[12]])+kleuren["ResetAll"]),w)
     elif Taal == "IT":
         vraag = textwrap.wrap("Cambia %s %s %s da %s in:" % (IBAN,JAAR,nieuwheaderlijstIT[12],coljanee(rekening,header,header[nieuwheaderlijst[12]])+vertaalv(header[nieuwheaderlijst[12]])+kleuren["ResetAll"]),w)
+    elif Taal == "CJ":
+        vraag = textwrap.wrap("hazüi %s %s %s qi %s qe:" % (IBAN,JAAR,nieuwheaderlijstCJ[12],coljanee(rekening,header,header[nieuwheaderlijst[12]])+vertaalv(header[nieuwheaderlijst[12]])+kleuren["ResetAll"]),w)
     else:
         vraag = textwrap.wrap("Wijzig %s %s %s van %s naar:" % (IBAN,JAAR,nieuwheaderlijst[12],coljanee(rekening,header,header[nieuwheaderlijst[12]])+vertaalv(header[nieuwheaderlijst[12]])+kleuren["ResetAll"]),w)
     for i in vraag:
@@ -4369,6 +4391,8 @@ def wijzigexport2csv(rekening,header):
         vraag = textwrap.wrap("Change %s %s %s from %s to:" % (IBAN,JAAR,nieuwheaderlijstEN[13],coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"]),w)
     elif Taal == "IT":
         vraag = textwrap.wrap("Cambia %s %s %s da %s in:" % (IBAN,JAAR,nieuwheaderlijstIT[13],coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"]),w)
+    elif Taal == "CJ":
+        vraag = textwrap.wrap("hazüi %s %s %s qi %s qe:" % (IBAN,JAAR,nieuwheaderlijstCJ[13],coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"]),w)
     else:
         vraag = textwrap.wrap("Wijzig %s %s %s van %s naar:" % (IBAN,JAAR,nieuwheaderlijst[13],coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"]),w)
     for i in vraag:
@@ -4391,6 +4415,8 @@ def wijzigtipvandedag(rekening,header):
         vraag = textwrap.wrap("Change %s %s %s from %s to:" % (IBAN,JAAR,nieuwheaderlijstEN[14],coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"]),w)
     elif Taal == "IT":
         vraag = textwrap.wrap("Cambia %s %s %s da %s in:" % (IBAN,JAAR,nieuwheaderlijstIT[14],coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"]),w)
+    elif Taal == "CJ":
+        vraag = textwrap.wrap("hazüi %s %s %s qi %s qe:" % (IBAN,JAAR,nieuwheaderlijstCJ[14],coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"]),w)
     else:
         vraag = textwrap.wrap("Wijzig %s %s %s van %s naar:" % (IBAN,JAAR,nieuwheaderlijst[14],coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"]),w)
     for i in vraag:
@@ -4422,6 +4448,13 @@ def tipvandedag(rekening,header,col):
         keuze = random.choice(keuzelijst)
         index = list(helpmenuIT.keys())[list(helpmenuIT.values()).index(keuze)]
         keuzemenu = menuIT
+    elif Taal == "CJ":
+        print(col+kleuren["Vaag"]+kleuren["Omkeren"]+forcw(menuCJ["0,1,15"])+kleuren["ResetAll"])
+        for i in helpmenuCJ:
+            keuzelijst.append(helpmenuCJ[i])
+        keuze = random.choice(keuzelijst)
+        index = list(helpmenuCJ.keys())[list(helpmenuCJ.values()).index(keuze)]
+        keuzemenu = menuCJ
     else:
         print(col+kleuren["Vaag"]+kleuren["Omkeren"]+forcw(menu["0,1,15"])+kleuren["ResetAll"])
         for i in helpmenu:
@@ -4440,6 +4473,8 @@ def dithelp(rekening,header,col,item):
         helpme = helpmenuEN
     elif Taal == "IT":
         helpme = helpmenuIT
+    elif Taal == "CJ":
+        helpme = helpmenuCJ
     else:
         helpme = helpmenu
     for i in item:
@@ -4457,6 +4492,9 @@ def presenteerhelp(rekening,header,col,keuze1lijst):
     elif Taal == "IT":
         keuzemenu = menuIT
         helpkeuzemenu = helpmenuIT
+    elif Taal == "CJ":
+        keuzemenu = menuCJ
+        helpkeuzemenu = helpmenuCJ
     else:
         keuzemenu = menu
         helpkeuzemenu = helpmenu
@@ -4479,6 +4517,8 @@ def presenteerhelp(rekening,header,col,keuze1lijst):
         wraptekst = textwrap.wrap("Enter the index of the item - for example, as \"1,2\" or \"1 2\" - and then press \"Enter\" for help with that item",w)
     elif Taal == "IT":
         wraptekst = textwrap.wrap("Digita l'indice dell'elemento - ad esempio come \"1,2\" o \"1 2\" - e poi premi \"Invio\" per assistenza su quell'elemento",w)
+    elif Taal == "CJ":
+        wraptekst = textwrap.wrap("mo hakadapo m haŋo hiqi hubihu - melüi \"1,2\" m \"1 2\" - hiqa \"Enter\"",w)
     else:
         wraptekst = textwrap.wrap("Typ de index van het item - bijvoorbeeld als \"1,2\" of \"1 2\" - en dan \"Enter\" voor hulp bij dat item",w)
     for i in wraptekst:
@@ -4494,6 +4534,9 @@ def kieshelp(rekening,header,col,keuze1lijst):
     elif Taal == "IT":
         keuzemenu = menuIT
         helpkeuzemenu = helpmenuIT
+    elif Taal == "CJ":
+        keuzemenu = menuCJ
+        helpkeuzemenu = helpmenuCJ
     else:
         keuzemenu = menu
         helpkeuzemenu = helpmenu
@@ -4525,6 +4568,9 @@ def toevoegencategorie(rekening,header,col):
     elif Taal == "IT":
         nieuwalternatievenamendictTaal = nieuwalternatievenamendictIT
         wraptekst = textwrap.wrap("Scegli una nuova categoria. Le categorie denominate sono categorie standard (ma possono essere rinominate), le opzioni evidenziate sono già occupate e non più disponibili",w)
+    elif Taal == "CJ":
+        nieuwalternatievenamendictTaal = nieuwalternatievenamendictCJ
+        wraptekst = textwrap.wrap("ma hame hupazivi. ma.  mo hupaŋaca hoʃa m haʃoñaŋali.",w)
     else:
         nieuwalternatievenamendictTaal = nieuwalternatievenamendict
         wraptekst = textwrap.wrap("Kies een nieuwe categorie. Benoemde categorieën zijn standaardcategorieën (maar kunnen worden hernoemd), gearceerde opties zijn al in gebruik en niet langer beschikbaar",w)
