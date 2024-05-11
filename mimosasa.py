@@ -3,7 +3,7 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.30"
+versie = "0.0.31"
 versiedatum = "20240511"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
@@ -735,7 +735,7 @@ helpmenuIT = {
         "3,4": textwrap.wrap("Modifica l'oggetto della transazione. Qui fornisci una descrizione del contenuto di questa transazione, come ad esempio un servizio fatturato o un insieme di articoli acquistati. Puoi includere anche informazioni di pagamento o numeri di fattura. Il numero di caratteri da utilizzare è libero, ma verrà abbreviato nella visualizzazione tabellare (\"1,1\"). È quindi consigliabile iniziare sempre con un frammento riconoscibile, specialmente per descrizioni più lunghe.",w),
         "3,5": textwrap.wrap("Sposta una transazione in un'altra categoria. Ogni transazione viene assegnata a una categoria a cui è associato un budget. Questi budget sono distribuiti in \"0,2,3\" e il progresso è visibile mensilmente in \"1,2\".",w),
     "4": textwrap.wrap("Qui puoi eliminare definitivamente singole transazioni. Se esiste già una collezione, queste transazioni vengono offerte una per volta; in caso contrario, ti verrà chiesto di specificare un \"ID\" - o meglio: una lista di \"ID\" sotto forma di un elenco CSV.",w),
-    "5": textwrap.wrap("È possibile mettere da parte denaro in più salvadanai. Questi salvadanai possono essere ricaricati manualmente dal saldo disponibile o direttamente da una nuova transazione. Se nel %s viene specificato un salvadanaio con un \"#\", è possibile addebitare quella transazione su quel salvadanaio. Le somme in entrata possono essere interamente o parzialmente aggiunte al saldo del salvadanaio e le somme negative sottratte interamente dal saldo pagato. Usando il tasto rapido \"#\", si raccolgono tutte le transazioni precedenti che contengono un \"#\" nel %s. È pertanto consigliabile utilizzare questo carattere nel %s solo per le transazioni relative a un salvadanaio. Il \"Saldo disponibile\" mostrato è il totale del conto da cui sono stati sottratti il buffer nei categorie (necessario per le spese mensili) e i crediti nei vari salvadanai." % (elementenIT[3],elementenIT[3],elementenIT[3]),w),
+    "5": textwrap.wrap("È possibile mettere da parte denaro in più salvadanai. Questi salvadanai possono essere ricaricati manualmente dal saldo disponibile o direttamente da una nuova transazione. Se nel %s viene specificato un salvadanaio con un \"#\", è possibile addebitare quella transazione su quel salvadanaio. Le somme in entrata possono essere interamente o parzialmente aggiunte al saldo del salvadanaio e le somme negative sottratte interamente dal saldo pagato. Usando il tasto rapido \"#\" in \"1,1\", si raccolgono tutte le transazioni precedenti che contengono un \"#\" nel %s. È pertanto consigliabile utilizzare questo carattere nel %s solo per le transazioni relative a un salvadanaio. Il \"Saldo disponibile\" mostrato è il totale del conto da cui sono stati sottratti il buffer nei categorie (necessario per le spese mensili) e i crediti nei vari salvadanai." % (elementenIT[3],elementenIT[3],elementenIT[3]),w),
         "5,1": textwrap.wrap("Visualizza tutti i salvadanai in una tabella semplice e chiara.",w),
         "5,2": textwrap.wrap("Aggiungi un nuovo salvadanaio vuoto. Puoi dargli un nome e un saldo obiettivo. Finché non viene aggiunto alcun credito, rimarrà vuoto e non influenzerà il tuo saldo disponibile. Il nome inizia sempre con un \"#\", a cui puoi fare riferimento in nuove transazioni o in \"1,1\"",w),
         "5,3": textwrap.wrap("Modifica manualmente le proprietà di un salvadanaio: %s, %s, %s e/o %s." % (lijnlijstIT[1],lijnlijstIT[2],lijnlijstIT[3],lijnlijstIT[4],),w),
@@ -1521,7 +1521,7 @@ def toonrekeningenactief(rekeningenlijst):
             lenprtstfzw = len(printstuffzw)
             print(int((w-lenprtstfzw)/2)*" "+kleuren["coltoe"]+L+forl3(rekeningenlijst.index(i)+1)+" "+kleuren["coltoon"]+("{:>%s}" % maxreklen).format(IBAN+" "+JAAR)+" "+grotegetalkleuren(i,header,rekeningtotaal)+kleuren["ResetAll"]+valuta+" "*8+kleuren["coltekst"]+forl25(actief)+kleuren["ResetAll"])
 
-def kiesrekening(rekeningenlijst):
+def kiesrekening(rekeningenlijst): # geen H
     laatstgekozen = haallaatstgekozen()
     col = coltekst
     rekeningloop = True
@@ -1543,7 +1543,7 @@ def kiesrekening(rekeningenlijst):
                 rekening = haallaatstgekozen()
                 return rekening
 
-def kiesrekeningalleennummer(rekeningenlijst,rekening):
+def kiesrekeningalleennummer(rekeningenlijst,rekening): # geen H
     laatstgekozen = haallaatstgekozen()
     col = coltekst
     rekeningkeuze = input(inputindent+col)
@@ -1559,7 +1559,7 @@ def kiesrekeningalleennummer(rekeningenlijst,rekening):
         rekeningalleennummer = rekening
     return rekeningalleennummer
 
-def taalkeuze():
+def taalkeuze(): # geen H
     col = coltekst
     for i in taaldict:
         if i == taallijst[0]:
@@ -1585,7 +1585,7 @@ def taalkeuze():
         Taal = "NL"
     return Taal
 
-def geefIBAN(Taal):
+def geefIBAN(Taal): # geen H
     if Taal == "EN":
         print("Enter your account number")
     elif Taal == "IT":
@@ -1603,7 +1603,7 @@ def geefIBAN(Taal):
     else:
         return IBAN
 
-def geefJAAR(Taal):
+def geefJAAR(Taal): # geen H
     if Taal == "EN":
         print("Enter the year")
     elif Taal == "IT":
@@ -1621,7 +1621,7 @@ def geefJAAR(Taal):
     else:
         return JAAR
 
-def maaknieuwerekening():
+def maaknieuwerekening(): # geen H
     try:
         kleuren,catcol = updatekleuren(rekening)
         col = kleuren["coltoe"]
@@ -1670,7 +1670,7 @@ def maaknieuwerekening():
             print([[nieuwalternatievenamendict[i],budgetnul]], file = c, end = "")
     return nieuwerekening
 
-def vertaalv(v):
+def vertaalv(v): # geen H
     Taal = header[nieuwheaderlijst[3]]
     if Taal == "EN":
         v = v\
@@ -1725,7 +1725,7 @@ def vertaalv(v):
         .replace("YYYYMMDD","JJJJMMDD")
     return v
 
-def printheaderall(rekening):
+def printheaderall(rekening): # geen H
     kleuren,catcol = updatekleuren(rekening)
     header = haalheader(rekening)
     Taal = header[nieuwheaderlijst[3]]
@@ -1754,7 +1754,7 @@ def printheaderall(rekening):
     print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[13])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[13]])+ResetAll)
     print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[14])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[14]])+ResetAll)
 
-def printheader(rekening):
+def printheader(rekening): # geen H
     kleuren,catcol = updatekleuren(rekening)
     header = haalheader(rekening)
     Taal = header[nieuwheaderlijst[3]]
@@ -1770,7 +1770,7 @@ def printheader(rekening):
     print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[0])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+header[nieuwheaderlijst[0]][:w-maxlen-2]+ResetAll)
     print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[1])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+header[nieuwheaderlijst[1]][:w-maxlen-2]+ResetAll)
 
-def haalalternatievenamen(rekening):
+def haalalternatievenamen(rekening): # geen H
     categorieenlijst = haalcategorieen(rekening)
     alternatievenamendict = {}
     for i in categorieenlijst:
@@ -1779,7 +1779,7 @@ def haalalternatievenamen(rekening):
             alternatievenamendict[i] = catnaam
     return alternatievenamendict
 
-def tooncategorieen(rekening,header):
+def tooncategorieen(rekening,header): # geen H
     kleuren,catcol = updatekleuren(rekening)
     valuta = header[nieuwheaderlijst[4]]
     alternatievenamendict = haalalternatievenamen(rekening)
@@ -1795,7 +1795,7 @@ def tooncategorieen(rekening,header):
         bud,forbud,Kb = grootgetal(budget,fornum,"")
         print(catcol[i]+forcw(forc3(i)+forc15(vertaalv(alternatievenamendict[i]))+forc3(valuta)+forsom(som)+K+"/"+forc3(valuta)+forbud(bud)+Kb)+ResetAll)
 
-def kleinegetalkleuren(getal):
+def kleinegetalkleuren(getal): # geen H
     header = haalheader(rekening)
     ondergrens = header[nieuwheaderlijst[7]][0]
     bovengrens = header[nieuwheaderlijst[7]][1]
@@ -1812,7 +1812,7 @@ def kleinegetalkleuren(getal):
         getalkleur = kleuren["colslecht"]
     return getalkleur
 
-def grotegetalkleuren(rekening,header,getal):
+def grotegetalkleuren(rekening,header,getal): # geen H
     try:
         kleuren,catcol = updatekleuren(rekening)
         if getal >= 0:
@@ -1827,7 +1827,7 @@ def grotegetalkleuren(rekening,header,getal):
             getalkleur = colslecht
     return getalkleur
 
-def eenrekeningtotaal(rekening):
+def eenrekeningtotaal(rekening): # geen H
     header = haalheader(rekening)
     rekeningnaam = header[nieuwheaderlijst[0]]
     rekeninghouder = header[nieuwheaderlijst[1]]
@@ -1847,7 +1847,7 @@ def eenrekeningtotaal(rekening):
     vrijbesteedbaar(rekening,header)
     return getal,forsom,K
 
-def programmastart():
+def programmastart(): # geen H
     with open("header","w") as h:
         print(nieuwheader, file = h, end = "")
     try:
@@ -1861,7 +1861,7 @@ def programmastart():
         rekening = maaknieuwerekening()
     return rekening
 
-def haalcategorie(rekening,cat):
+def haalcategorie(rekening,cat): # geen H
     categorieenlijst = haalcategorieen(rekening)
     if cat in categorieenlijst:
         with open(os.path.join(rekening,cat),"r") as c:
@@ -1870,7 +1870,7 @@ def haalcategorie(rekening,cat):
     else:
         return "<"
 
-def schrijfcategorie(rekening,cat,categorie):
+def schrijfcategorie(rekening,cat,categorie): # geen H
     kat = [categorie[0]]
     kate = sorted(categorie[1:])
     for i in kate:
@@ -1878,7 +1878,7 @@ def schrijfcategorie(rekening,cat,categorie):
     with open(os.path.join(rekening,cat),"w") as c:
         print(kat, file = c, end = "")
 
-def haalcategorieen(rekening):
+def haalcategorieen(rekening): # geen H
     categorieenlijst = []
     for i in os.listdir(rekening):
         if i in lijst:
@@ -1886,7 +1886,7 @@ def haalcategorieen(rekening):
     categorieenlijst = sorted(categorieenlijst)
     return categorieenlijst
 
-def haaltransacties(rekening,ok):
+def haaltransacties(rekening,ok): # geen H
     categorieenlijst = haalcategorieen(rekening)
     ok = {}
     for i in categorieenlijst:
@@ -1903,7 +1903,7 @@ def haaltransacties(rekening,ok):
                 ok[oki] = j
     return ok
 
-def geefeendatum(rekening,header,col,ok,datum):
+def geefeendatum(rekening,header,col,ok,datum): # H
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     if Taal == "EN":
@@ -1919,64 +1919,78 @@ def geefeendatum(rekening,header,col,ok,datum):
         elcat = elementen
         elcat.append(woordcategorie)
     maxlen = len(max(elcat,key = len))
-    datumkeuze = input(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[0].upper())+ResetAll+inputindent)
-    if datumkeuze.upper() in afsluitlijst:
-        doei()
-    elif datumkeuze.upper() in neelijst:
-        return "<"
-    elif datumkeuze.upper() == "*":
-        return "*"
-    else:
-        test = checkdatum(datumkeuze)
-        if test == True:
-            transactiedatum = int(datumkeuze)
-        else:
-            if datumkeuze == "-":
-                transactiedatum = standaardstartdatum
-            elif datumkeuze == "+":
-                transactiedatum = standaardeinddatum
-            elif datumkeuze == "":
-                transactiedatum = int(nustr) 
-            elif datumkeuze.upper() == "M" and datum == int(nustr):
-                transactiedatum = int(str(nustr[:6])+"01")
-            elif datumkeuze.upper() == "W" and datum == int(nustr):
-                transactiedatum = int(datetime.strftime(datetime.strptime(str(datum),"%Y%m%d") - timedelta(weeks = 1),"%Y%m%d"))
-            elif len(datumkeuze) > 1 and datumkeuze[0].upper() in ["M","W"]:
-                test = checkint(datumkeuze[1:])
-                if test == True:
-                    if datumkeuze[0].upper() == "M":
-                        maandverschil = int(datumkeuze[1:])
-                        maand = int(nustr[4:6])
-                        jaar = int(nustr[:4])
-                        while maandverschil > 0:
-                            maand -= 1
-                            if maand == 0:
-                                maand = 12
-                                jaar -= 1
-                            maandverschil -= 1
-                        transactiedatum = int("{:0>4}".format(jaar)+"{:0>2}".format(maand)+"01")
-                    else:
-                        transactiedatum = int(datetime.strftime(datetime.strptime(str(datum),"%Y%m%d") - timedelta(weeks = int(datumkeuze[1:])+1),"%Y%m%d"))
-            elif len(datumkeuze) > 1 and datumkeuze[0] in ["-","+"]:
-                test = checkint(datumkeuze[1:])
-                if test == True:
-                    if datumkeuze[0] == "-":
-                        transactiedatum = int(datetime.strftime(datetime.strptime(str(datum),"%Y%m%d") - timedelta(days = int(datumkeuze[1:])),"%Y%m%d"))
-                    else:
-                        transactiedatum = int(datetime.strftime(datetime.strptime(str(datum),"%Y%m%d") + timedelta(days = int(datumkeuze[1:])),"%Y%m%d"))
-                else:
-                   transactiedatum = datum
+    loop = True
+    while loop == True:
+        datumkeuze = input(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[0].upper())+ResetAll+inputindent)
+        if datumkeuze.upper() in afsluitlijst:
+            doei()
+        elif datumkeuze.upper() in neelijst:
+            return "<"
+        elif datumkeuze.upper() == "*":
+            return "*"
+        elif datumkeuze.upper() == "H":
+            if Taal == "EN":
+                wraptekst = textwrap.wrap("You can enter the date in various ways. If you enter an absolute date, use date format \"YYYYMMDD\". The default (first/start) date (\"\") is today's date. You can enter a number for \"this number of days earlier\". Note that in a date range, the first entered date is used as a reference for the second date. For a number of months in the past, add \"M\" before the number (this month is \"0\"), or for a number of weeks, use the letter \"W\". Furthermore, you can use \"*\" - only in a date range - for \"all dates\". If the end date of the range is before the start date, the range is reversed.",w)
+            elif Taal == "IT":
+                wraptekst = textwrap.wrap("Puoi inserire la data in vari modi. Se inserisci una data assoluta, utilizza il formato data \"AAAAMMGG\". La data predefinita (prima/dell'inizio: \"\") è quella di oggi. Puoi inserire un numero per \"questo numero di giorni prima\". Nota che in un intervallo di date, la prima data inserita viene utilizzata come riferimento per la seconda. Per un numero di mesi nel passato, aggiungi una \"M\" prima del numero (questo mese è \"0\"), o per un numero di settimane, usa la lettera \"W\". Inoltre, puoi usare \"*\" - solo in un intervallo di date - per \"tutte le date\". Se la data di fine dell'intervallo è prima della data di inizio, l'intervallo viene invertito.",w)
+            elif Taal == "CJ":
+                wraptekst = textwrap.wrap("",w)
             else:
-                test = checkint(datumkeuze)
-                if test == True:
-                    transactiedatum = int(datetime.strftime(datetime.strptime(str(datum),"%Y%m%d") - timedelta(days = int(datumkeuze)),"%Y%m%d"))
+                wraptekst = textwrap.wrap("U kunt de datum op veschillende manieren ingeven. Geeft u een absolute datum in, gebruik dan datumopmaak \"JJJJMMDD\". De standaard (eerste/start-) datum (\"\") is de datum van vandaag. U kunt een getal ingeven voor \"dit aantal dagen eerder\". Let erop dat bij een datumbereik de eerstgekozen datum als referentie voor de tweede wordt gebruikt. Voor een aantal maanden in het verleden zet u daar een \"M\" voor (deze maand is \"0\"), of voor een aantal weken de letter \"W\". Verder kunt u - alleen in een datumbereik - \"*\" gebruiken voor \"alle data\". Als de einddatum van het bereik vóór de startdatum ligt, wordt het bereik omgekeerd.",w)
+            for i in wraptekst:
+                print(i)
+            del datumkeuze
+        else:
+            test = checkdatum(datumkeuze)
+            if test == True:
+                transactiedatum = int(datumkeuze)
+            else:
+                if datumkeuze == "":
+                    transactiedatum = int(nustr) 
+                elif datumkeuze == "-":
+                    transactiedatum = standaardstartdatum
+                elif datumkeuze == "+":
+                    transactiedatum = standaardeinddatum
+                elif datumkeuze.upper() == "M" and datum == int(nustr):
+                    transactiedatum = int(str(nustr[:6])+"01")
+                elif datumkeuze.upper() == "W" and datum == int(nustr):
+                    transactiedatum = int(datetime.strftime(datetime.strptime(str(datum),"%Y%m%d") - timedelta(weeks = 1),"%Y%m%d"))
+                elif len(datumkeuze) > 1 and datumkeuze[0].upper() in ["M","W"]:
+                    test = checkint(datumkeuze[1:])
+                    if test == True:
+                        if datumkeuze[0].upper() == "M":
+                            maandverschil = int(datumkeuze[1:])
+                            maand = int(nustr[4:6])
+                            jaar = int(nustr[:4])
+                            while maandverschil > 0:
+                                maand -= 1
+                                if maand == 0:
+                                    maand = 12
+                                    jaar -= 1
+                                maandverschil -= 1
+                            transactiedatum = int("{:0>4}".format(jaar)+"{:0>2}".format(maand)+"01")
+                        else:
+                            transactiedatum = int(datetime.strftime(datetime.strptime(str(datum),"%Y%m%d") - timedelta(weeks = int(datumkeuze[1:])+1),"%Y%m%d"))
+                elif len(datumkeuze) > 1 and datumkeuze[0] in ["-","+"]:
+                    test = checkint(datumkeuze[1:])
+                    if test == True:
+                        if datumkeuze[0] == "-":
+                            transactiedatum = int(datetime.strftime(datetime.strptime(str(datum),"%Y%m%d") - timedelta(days = int(datumkeuze[1:])),"%Y%m%d"))
+                        else:
+                            transactiedatum = int(datetime.strftime(datetime.strptime(str(datum),"%Y%m%d") + timedelta(days = int(datumkeuze[1:])),"%Y%m%d"))
+                    else:
+                       transactiedatum = datum
                 else:
-                    transactiedatum = datum 
-        toondatum = opmaakdatum(transactiedatum)
-        printdatumlinks(transactiedatum)
-        return transactiedatum
+                    test = checkint(datumkeuze)
+                    if test == True:
+                        transactiedatum = int(datetime.strftime(datetime.strptime(str(datum),"%Y%m%d") - timedelta(days = int(datumkeuze)),"%Y%m%d"))
+                    else:
+                        transactiedatum = datum 
+            toondatum = opmaakdatum(transactiedatum)
+            printdatumlinks(transactiedatum)
+            return transactiedatum
 
-def geefdatumbereik(rekening,header,col,ok,datum):
+def geefdatumbereik(rekening,header,col,ok,datum): # geen H
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     datumlijst = []
@@ -2014,7 +2028,7 @@ def geefdatumbereik(rekening,header,col,ok,datum):
         datumlijst.append(startdatum)
     return datumlijst
 
-def geefeenbedrag(rekening,header,col,ok,bedrag):
+def geefeenbedrag(rekening,header,col,ok,bedrag): # H
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -2038,36 +2052,50 @@ def geefeenbedrag(rekening,header,col,ok,bedrag):
             elcat = elementen
             elcat.append(woordcategorie)
         maxlen = len(max(elcat,key = len))
-        bedragkeuze = input(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[1].upper())+ResetAll+inputindent)
-        if bedragkeuze.upper() in afsluitlijst:
-            doei()
-        elif bedragkeuze.upper() in neelijst:
-            return "<"
-        elif bedragkeuze.upper() == "*":
-            return "*"
-        else:
-            test = checkfloat(bedragkeuze)
-            if test == True:
-                transactiebedrag = float(bedragkeuze)
-            else:
-                if bedragkeuze in ["-","+"] and bedrag != 0.0:
-                    transactiebedrag = bedrag * -1
-                elif bedragkeuze == "-":
-                    transactiebedrag = standaardbodembedrag
-                elif bedragkeuze == "+":
-                    transactiebedrag = standaardtopbedrag
-                elif bedragkeuze == "*" and bedrag == 0.0:
-                    transactiebedrag = standaardbodembedrag
-                elif bedragkeuze == "" and bedrag != 0.0:
-                    transactiebedrag = bedrag
+        loop = True
+        while loop == True:
+            bedragkeuze = input(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[1].upper())+ResetAll+inputindent)
+            if bedragkeuze.upper() in afsluitlijst:
+                doei()
+            elif bedragkeuze.upper() in neelijst:
+                return "<"
+            elif bedragkeuze.upper() == "*":
+                return "*"
+            elif bedragkeuze.upper() == "H":
+                if Taal == "EN":
+                    wraptekst = textwrap.wrap("You can enter an amount in various ways. If you enter an absolute amount, always use a period (\".\") as the decimal separator and never a currency symbol. The default (bottom) amount (\"\") is the bottom amount determined in \"0,1,8\". If you enter a range, the default top amount is also specified in \"0,1,8\". If an amount was taken from a previous transaction (\"2.2\"), you can reverse it with \"-\" or \"+\", otherwise you are indicating the absolute minimum amount, or respectively maximum amount. Furthermore, you can use \"*\" - only in a range - for \"all amounts\". If the top amount is smaller than the bottom amount, the range is reversed.",w)
+                elif Taal == "IT":
+                    wraptekst = textwrap.wrap("È possibile inserire un importo in diversi modi. Se si inserisce un importo assoluto, utilizzare sempre un punto (\".\") come separatore decimale e mai un simbolo della valuta. L'importo di base predefinito (\"\") è l'importo di base stabilito in \"0,1,8\". Se si inserisce un intervallo, l'importo massimo predefinito è anche fissato a \"0,1,8\". Se un importo è stato preso da una transazione precedente (\"2,2\"), puoi invertirlo con \"-\" o \"+\", altrimenti stai indicando l'importo minimo assoluto o massimo rispettivamente. Inoltre, è possibile utilizzare \"*\" - solo in un intervallo - per \"tutti gli importi\". Se l'importo massimo è inferiore all'importo di base, l'intervallo sarà invertito.",w)
+                elif Taal == "CJ":
+                    wraptekst = textwrap.wrap("",w)
                 else:
-                    transactiebedrag = header[nieuwheaderlijst[7]][0]
-            K = ""
-            toongetal,forsom,K = grootgetal(transactiebedrag,fornum,K)
-            print(col+valuta+forsom(toongetal)+K+ResetAll)
-            return transactiebedrag
+                    wraptekst = textwrap.wrap("U kunt een bedrag op verschillende manieren ingeven. Geeft u een absoluut bedrag in, gebruik dan altijd een punt (\".\") als decimaalscheidingsteken en nooit een valutateken. Het standaard (bodem-)bedrag (\"\") is het in \"0,1,8\" bepaalde bodembedrag. Geeft u een bereik in, dan is het standaard topbedrag ook in \"0,1,8\" vastgelegd. Als er een bedrag uit een eerdere transactie werd overgenomen (\"2,2\") kunt u het met \"-\" of \"+\" omkeren, anders geeft u daarmee het absolute minimumbedrag, respectievelijk maximumbedrag in. Verder kunt u - alleen in een bereik - \"*\" gebruiken voor \"alle bedragen\". Als het topbedrag kleiner is dan het bodembedrag, wordt het bereik omgekeerd.",w)
+                for i in wraptekst:
+                    print(i)
+                del bedragkeuze
+            else:
+                test = checkfloat(bedragkeuze)
+                if test == True:
+                    transactiebedrag = float(bedragkeuze)
+                else:
+                    if bedragkeuze in ["-","+"] and bedrag != 0.0:
+                        transactiebedrag = bedrag * -1
+                    elif bedragkeuze == "-":
+                        transactiebedrag = standaardbodembedrag
+                    elif bedragkeuze == "+":
+                        transactiebedrag = standaardtopbedrag
+                    elif bedragkeuze == "*" and bedrag == 0.0:
+                        transactiebedrag = standaardbodembedrag
+                    elif bedragkeuze == "" and bedrag != 0.0:
+                        transactiebedrag = bedrag
+                    else:
+                        transactiebedrag = header[nieuwheaderlijst[7]][0]
+                K = ""
+                toongetal,forsom,K = grootgetal(transactiebedrag,fornum,K)
+                print(col+valuta+forsom(toongetal)+K+ResetAll)
+                return transactiebedrag
 
-def geefbedragbereik(rekening,header,col,ok,bedrag):
+def geefbedragbereik(rekening,header,col,ok,bedrag): # geen H
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -2107,7 +2135,7 @@ def geefbedragbereik(rekening,header,col,ok,bedrag):
             print("huñu")
         else:
             print("Top")
-        topbedrag = geefeenbedrag(rekening,header,col,keuze1lijst,ok,bodembedrag)
+        topbedrag = geefeenbedrag(rekening,header,col,ok,bodembedrag)
     if topbedrag == "<":
         return "<"
     elif topbedrag == "*":
@@ -2120,7 +2148,7 @@ def geefbedragbereik(rekening,header,col,ok,bedrag):
         bedraglijst.append(bodembedrag)
     return bedraglijst
 
-def geefwederpartij(rekening,header,col,ok):
+def geefwederpartij(rekening,header,col,ok): # H
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     if Taal == "EN":
@@ -2136,16 +2164,31 @@ def geefwederpartij(rekening,header,col,ok):
         elcat = elementen
         elcat.append(woordcategorie)
     maxlen = len(max(elcat,key = len))
-    wederpartij = input(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[2].upper())+ResetAll+inputindent)
-    if wederpartij.upper() in afsluitlijst:
-        doei()
-    elif wederpartij.upper() in neelijst:
-        wederpartij = "<"
-    elif wederpartij == "*":
-        wederpartij = ""
-    return wederpartij
+    loop = True
+    while loop == True:
+        wederpartij = input(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[2].upper())+ResetAll+inputindent)
+        if wederpartij.upper() in afsluitlijst:
+            doei()
+        elif wederpartij.upper() in neelijst:
+            return "<"
+        elif wederpartij == "*":
+            return ""
+        elif wederpartij.upper() == "H":
+            if Taal == "EN":
+                wraptekst = textwrap.wrap("",w)
+            elif Taal == "IT":
+                wraptekst = textwrap.wrap("",w)
+            elif Taal == "CJ":
+                wraptekst = textwrap.wrap("",w)
+            else:
+                wraptekst = textwrap.wrap("",w)
+            for i in wraptekst:
+                print(i)
+            del wederpartij
+        else:
+            return wederpartij
 
-def geefonderwerp(rekening,header,col,ok):
+def geefonderwerp(rekening,header,col,ok): # H
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     if Taal == "EN":
@@ -2161,14 +2204,29 @@ def geefonderwerp(rekening,header,col,ok):
         elcat = elementen
         elcat.append(woordcategorie)
     maxlen = len(max(elcat,key = len))
-    onderwerp = input(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[3].upper())+ResetAll+inputindent)
-    if onderwerp.upper() in afsluitlijst:
-        doei()
-    elif onderwerp.upper() in neelijst:
-        onderwerp = "<"
-    elif onderwerp == "*":
-        onderwerp = ""
-    return onderwerp
+    loop = True
+    while loop == True:
+        onderwerp = input(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[3].upper())+ResetAll+inputindent)
+        if onderwerp.upper() in afsluitlijst:
+            doei()
+        elif onderwerp.upper() in neelijst:
+            return "<"
+        elif onderwerp == "*":
+            return ""
+        elif onderwerp.upper() == "H":
+            if Taal == "EN":
+                wraptekst = textwrap.wrap("",w)
+            elif Taal == "IT":
+                wraptekst = textwrap.wrap("",w)
+            elif Taal == "CJ":
+                wraptekst = textwrap.wrap("",w)
+            else:
+                wraptekst = textwrap.wrap("",w)
+            for i in wraptekst:
+                print(i)
+            del onderwerp
+        else:
+            return onderwerp
 
 def geefcategorie(rekening,header,col,ok):
     kleuren,catcol = updatekleuren(rekening)
@@ -3250,10 +3308,10 @@ def nieuwnieuw(rekening,ok):
                 nieuwetransactiecategorie = "O"
         else:
             transactiedatum = geefeendatum(rekening,header,col,ok,int(nustr))
-            if str(transactiedatum).upper() in neelijst:
+            if str(transactiedatum).upper() in ["<","*"]:
                 break
             transactiebedrag = geefeenbedrag(rekening,header,col,ok,0.0)
-            if str(transactiebedrag).upper() in neelijst:
+            if str(transactiebedrag).upper() in ["<","*"]:
                 break
             wederpartij = geefwederpartij(rekening,header,col,ok)
             if wederpartij.upper() in neelijst:
