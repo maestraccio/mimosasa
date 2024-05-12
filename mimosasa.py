@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.31"
-versiedatum = "20240511"
+versie = "0.0.32"
+versiedatum = "20240512"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 w = 80
@@ -2154,15 +2154,19 @@ def geefwederpartij(rekening,header,col,ok): # H
     if Taal == "EN":
         elcat = elementenEN
         elcat.append(woordcategorieEN)
+        wraptekst = textwrap.wrap("Here you can enter the name of the %s. This could be the name of the store where you made a purchase, a customer's or your employer's name, for example. You can enter the full name with an unlimited number of characters, but in the table \"1,1\", only the first part will be displayed, so it's wise to place a recognizable and distinctive part of the name at the beginning." % elcat[2],w)
     elif Taal == "IT":
         elcat = elementenIT
         elcat.append(woordcategorieIT)
+        wraptekst = textwrap.wrap("Qui puoi inserire il nome della %s. Ad esempio, il nome del negozio dove hai acquistato qualcosa, o quello di un cliente o del tuo datore di lavoro. Puoi inserire il nome completo in un numero illimitato di caratteri, ma nella tabella \"1,1\" verrà visualizzata solo la prima parte, quindi è consigliabile mettere una parte riconoscibile e distinguibile del nome all'inizio." % elcat[2],w)
     elif Taal == "CJ":
         elcat = elementenCJ
         elcat.append(woordcategorieCJ)
+        wraptekst = textwrap.wrap("",w)
     else:
         elcat = elementen
         elcat.append(woordcategorie)
+        wraptekst = textwrap.wrap("Hier kunt u de naam van de %s opgeven. Dat is bijvoorbeeld de naam van de winkel waar u iets gekocht heeft, of die van een klant of uw werkgever. U kunt de volledige naam in een onbeperkt aantal karakters invoeren, maar in de tabel \"1,1\" wordt alleen het eerste deel weergegeven, dus het is verstandig om een herkenbaar en onderscheidend gedeelte van de naam vooraan te plaatsen." % elcat[2],w)
     maxlen = len(max(elcat,key = len))
     loop = True
     while loop == True:
@@ -2174,14 +2178,6 @@ def geefwederpartij(rekening,header,col,ok): # H
         elif wederpartij == "*":
             return ""
         elif wederpartij.upper() == "H":
-            if Taal == "EN":
-                wraptekst = textwrap.wrap("",w)
-            elif Taal == "IT":
-                wraptekst = textwrap.wrap("",w)
-            elif Taal == "CJ":
-                wraptekst = textwrap.wrap("",w)
-            else:
-                wraptekst = textwrap.wrap("",w)
             for i in wraptekst:
                 print(i)
             del wederpartij
@@ -2194,15 +2190,19 @@ def geefonderwerp(rekening,header,col,ok): # H
     if Taal == "EN":
         elcat = elementenEN
         elcat.append(woordcategorieEN)
+        wraptekst = textwrap.wrap("Here you can enter the %s. For example, this could be a description of something you bought, or a reference to an order or purchase. You can enter the complete text in an unlimited number of characters, but in the table \"1,1\", only the first part will be displayed, so it's wise to place a recognizable and distinctive part of the description at the beginning." % elcat[3],w)
     elif Taal == "IT":
         elcat = elementenIT
         elcat.append(woordcategorieIT)
+        wraptekst = textwrap.wrap("Qui puoi inserire il %s. Ad esempio, è una descrizione di qualcosa che hai acquistato, o un riferimento a un ordine o acquisto. Puoi inserire il testo completo in un numero illimitato di caratteri, ma nella tabella \"1,1\" verrà visualizzato solo il primo pezzo, quindi è saggio mettere una parte riconoscibile e distintiva della descrizione all'inizio." % elcat[3],w)
     elif Taal == "CJ":
         elcat = elementenCJ
         elcat.append(woordcategorieCJ)
+        wraptekst = textwrap.wrap("",w)
     else:
         elcat = elementen
         elcat.append(woordcategorie)
+        wraptekst = textwrap.wrap("Hier kunt u het %s opgeven. Dat is bijvoorbeeld een beschrijving van iets dat u gekocht heeft, of een referentie aan een order of bestelling. U kunt de volledige tekst in een onbeperkt aantal karakters invoeren, maar in de tabel \"1,1\" wordt alleen het eerste deel weergegeven, dus het is verstandig om een herkenbaar en onderscheidend gedeelte van de beschrijving vooraan te plaatsen." % elcat[3],w)
     maxlen = len(max(elcat,key = len))
     loop = True
     while loop == True:
@@ -2214,14 +2214,6 @@ def geefonderwerp(rekening,header,col,ok): # H
         elif onderwerp == "*":
             return ""
         elif onderwerp.upper() == "H":
-            if Taal == "EN":
-                wraptekst = textwrap.wrap("",w)
-            elif Taal == "IT":
-                wraptekst = textwrap.wrap("",w)
-            elif Taal == "CJ":
-                wraptekst = textwrap.wrap("",w)
-            else:
-                wraptekst = textwrap.wrap("",w)
             for i in wraptekst:
                 print(i)
             del onderwerp
@@ -2235,32 +2227,41 @@ def geefcategorie(rekening,header,col,ok):
     if Taal == "EN":
         elcat = elementenEN
         elcat.append(woordcategorieEN)
+        wraptekst = textwrap.wrap("Here you can specify the %s. All transactions are assigned to a specific %s, allowing you to monitor how your money is being spent." % (woordcategorieEN,woordcategorieEN),w)
     elif Taal == "IT":
         elcat = elementenIT
         elcat.append(woordcategorieIT)
+        wraptekst = textwrap.wrap("Qui puoi specificare la %s. Tutte le transazioni vengono assegnate a una specifica %s, consentendoti di capire come viene speso il tuo denaro." % (woordcategorieIT,woordcategorieIT),w)
     elif Taal == "CJ":
         elcat = elementenCJ
         elcat.append(woordcategorieCJ)
+        wraptekst = textwrap.wrap("",w)
     else:
         elcat = elementen
         elcat.append(woordcategorie)
+        wraptekst = textwrap.wrap("Hier kunt u de %s opgeven. Alle transacties worden aan een specifieke %s toegewezen, waardoor u inzichtelijk kunt maken hoe uw geld besteed wordt." % (woordcategorie,woordcategorie),w)
     maxlen = len(max(elcat,key = len))
     tooncategorieen(rekening,header)
-    categoriekeuze = input(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[4].upper())+ResetAll+inputindent)
-    if categoriekeuze.upper() in afsluitlijst:
-        doei()
-    elif categoriekeuze.upper() in neelijst:
-        categoriekeuze = "<"
-        return "<"
-    elif categoriekeuze == "*":
-        categoriekeuze = lijst
-    else:
-        for i in categoriekeuze:
-            if i.upper() in lijst:
-                categoriekeuzelijst.append(i.upper())
-        if categoriekeuzelijst == []:
-            categoriekeuzelijst = lijst
-    return categoriekeuzelijst
+    loop = True
+    while loop == True:
+        categoriekeuze = input(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[4].upper())+ResetAll+inputindent)
+        if categoriekeuze.upper() in afsluitlijst:
+            doei()
+        elif categoriekeuze.upper() in neelijst:
+            return "<"
+        elif categoriekeuze == "*":
+            return lijst
+        elif categoriekeuze.upper() == "HELP":
+            for i in wraptekst:
+                print(i)
+            del categoriekeuze
+        else:
+            for i in categoriekeuze:
+                if i.upper() in lijst:
+                    categoriekeuzelijst.append(i.upper())
+            if categoriekeuzelijst == []:
+                categoriekeuzelijst = lijst
+            return categoriekeuzelijst
 
 def vertaalmnd(datum):
     header = haalheader(rekening)
