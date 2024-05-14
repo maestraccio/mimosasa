@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.32"
-versiedatum = "20240512"
+versie = "0.0.33"
+versiedatum = "20240514"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 w = 80
@@ -6467,19 +6467,16 @@ def keuze1menu(rekening):
     if len(ok) > 0:
         for i in ok:
             okstring += i+" "
-        if len(okstring.strip()) <= maxleni+maxlenj+5:
-            for i in okstring.strip().split(" "):
+        okstringslice = okstring[:maxleni+2+maxlenj]
+        if len(okstring) > len(okstringslice):
+            okstringslice = okstringslice[:-2]+" >"
+        for i in okstringslice.strip().split(" "):
+            if i == ">":
+                print(kleuren["coltoon"]+">"+kleuren["ResetAll"], end = "")
+            else:
                 print(catcol[i[0]], end = "")
-                print(i, end = "")
-                print(ResetAll+" ", end = "")
-            print()
-        else:
-            okstring = okstring.strip()[:maxleni+maxlenj]
-            for i in okstring.strip().split(" "):
-                print(catcol[i[0]], end = "")
-                print(i, end = "")
-                print(ResetAll+" ", end = "")
-            print(">")
+                print(i+kleuren["ResetAll"], end = " ")
+        print()
     keuze1menulijst = []
     for i,j in keuzemenu.items():
         aantalkommasini = i.count(",")
