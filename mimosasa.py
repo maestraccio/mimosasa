@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.34"
-versiedatum = "20240514"
+versie = "0.0.35"
+versiedatum = "20240515"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 w = 80
@@ -2220,7 +2220,7 @@ def geefonderwerp(rekening,header,col,ok): # H
         else:
             return onderwerp
 
-def geefcategorie(rekening,header,col,ok):
+def geefcategorie(rekening,header,col,ok): # H
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     categoriekeuzelijst = []
@@ -2263,7 +2263,7 @@ def geefcategorie(rekening,header,col,ok):
                 categoriekeuzelijst = lijst
             return categoriekeuzelijst
 
-def vertaalmnd(datum):
+def vertaalmnd(datum): # geen H
     header = haalheader(rekening)
     Taal = header[nieuwheaderlijst[3]]
     if Taal == "EN":
@@ -2324,7 +2324,7 @@ def vertaalmnd(datum):
         .replace("12","dec")
     return mnd
 
-def haalopmaakdatumdict(datum):
+def haalopmaakdatumdict(datum): # geen H
     mnd = vertaalmnd(datum)
     opmaakdatumdict = {
         opmaakdatumlijst[0]: str(datum),
@@ -2337,7 +2337,7 @@ def haalopmaakdatumdict(datum):
     }
     return opmaakdatumdict
 
-def toondatumopmaakopties(datum):
+def toondatumopmaakopties(datum): # geen H
     header = haalheader(rekening)
     datumopmaak = header[nieuwheaderlijst[9]]
     opmaakdatumdict = haalopmaakdatumdict(datum)
@@ -2346,7 +2346,7 @@ def toondatumopmaakopties(datum):
         print(forr3(tel)+" : %s (%s)" % (i,opmaakdatumdict[i]))
         tel += 1
 
-def opmaakdatum(datum):
+def opmaakdatum(datum): # geen H
     header = haalheader(rekening)
     datumopmaak = header[nieuwheaderlijst[9]]
     opmaakdatumdict = haalopmaakdatumdict(datum)
@@ -2358,7 +2358,7 @@ def opmaakdatum(datum):
         pass
     return datum
 
-def geefsneltoets(rekening,header,col,ok):
+def geefsneltoets(rekening,header,col,ok): # H
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -2375,94 +2375,114 @@ def geefsneltoets(rekening,header,col,ok):
     if Taal == "EN":
         wraptekst = textwrap.wrap("Type shortkey or skip",w)
         sneltoetstips = "*, #, MI, MO, M{number}, WI, WO, W{number}, %s" % woordcategorieEN.lower()
+        helpwrap = textwrap.wrap("There are keyboard shortcuts programmed for commonly used selections, allowing you to skip manual filters and get to the table faster. You can choose \"*\" (all transactions, this can be a very long list), \"#\" (all transactions with a \"#\" in the %s, particularly related to savings pots), \"MI\" or \"WI\" (all positive transactions of this month, respectively week), \"MO\" or \"WO\" (all negative transactions of this month, respectively week), \"M\"+\"{number}\" (all transactions in one month, \"{number}\" months ago; \"0\" is \"this month\"), \"W\"+\"{number}\" (all transactions from \"{number}\" weeks ago up to today, where \"0\" is the past week, with today as the last day), and %s for all transactions of this month within one %s, including a brief monthly overview of that %s below the table. With \"\" or another non-shortcut, you skip the shortcut and proceed to the step-by-step filtering. Just before the table, you will always be asked in which order you want to see the transactions. If the date range is exactly one day, the total for that specific day will also be shown below the table." % (elementenEN[3],woordcategorieEN.lower(),woordcategorieEN.lower(),woordcategorieEN.lower()),w)
     elif Taal == "IT":
         wraptekst = textwrap.wrap("Digita tasto rapido o salta",w)
         sneltoetstips = "*, #, MI, MO, M{numero}, WI, WO, W{numero}, %s" % woordcategorieIT.lower()
+        helpwrap = textwrap.wrap("Sono state programmate scorciatoie per selezioni frequenti, che consentono di saltare i filtri manuali e accedere più rapidamente alla tabella. Potete optare per \"*\" (tutte le transazioni, che potrebbero essere molte), \"#\" (tutte le transazioni con un \"#\" nel %s, associate principalmente ai salvadanai), \"MI\" o \"WI\" (tutte le transazioni positive di questo mese, rispettivamente settimana), \"MO\" o \"WO\" (tutte le transazioni negative di questo mese, rispettivamente settimana), \"M\"+\"{numero}\" (tutte le transazioni di un mese, \"{numero}\" mesi fa; \"0\" rappresenta \"questo mese\"), \"W\"+\"{numero}\" (tutte le transazioni di \"{numero}\" settimane fa fino a oggi, dove \"0\" indica la scorsa settimana, con oggi come ultimo giorno), e %s per tutte le transazioni di questo mese all'interno di una %s, comprendente un breve riepilogo mensile di quella %s sotto la tabella. Con \"\", o un'altro tasto non-scorciatoia, si salta la scorciatoia e si passa al filtraggio passo dopo passo. Subito prima della tabella, vi verrà sempre chiesto in quale ordine desiderate visualizzare le transazioni. Se l'intervallo di date riguarda esattamente un giorno, verrà mostrato anche il totale giornaliero di quel giorno specifico sotto la tabella." % (elementenIT[3],woordcategorieIT.lower(),woordcategorieIT.lower(),woordcategorieIT.lower()),w)
     elif Taal == "CJ":
         wraptekst = textwrap.wrap("me haŋo huʃano m hasepeba",w)
         sneltoetstips = "*, #, MI, MO, M{hubi}, WI, WO, W{hubi}, %s" % woordcategorieCJ.lower()
+        helpwrap = textwrap.wrap("",w)
     else:
         wraptekst = textwrap.wrap("Typ sneltoets of sla over",w)
         sneltoetstips = "*, #, MI, MO, M{getal}, WI, WO, W{getal}, %s" % woordcategorie.lower()
+        helpwrap = textwrap.wrap("Er zijn sneltoetsen geprogrammeerd voor veelgebruikte selecties, waardoor u de handmatige filters overslaat en sneller bij de tabel bent. U kunt kiezen voor \"*\" (alle transacties, dit kan een heel lange lijst zijn), \"#\" (alle transacties met een \"#\" in het %s, en dus met name spaarpotten), \"MI\" of \"WI\" (alle positieve transacties van deze maand, respectievelijk week), \"MO\" of \"WO\" (alle negatieve transacties van deze maand, respectievelijk week), \"M\"+\"{getal}\" (alle transacties in één maand, het \"{getal}\" aantal maanden geleden; \"0\" is \"deze maand\"), \"W\"+\"{getal}\" (alle transacties in \"{getal}\" aantal weken geleden tot en met vandaag, waarbij \"0\" de afgelopen week is, met vandaag als laatste dag), en %s voor alle transacties van deze maand binnen één %s, inclusief een kort maandoverzicht van die %s onder de tabel. Met \"\" of een andere niet-sneltoets slaat u de sneltoets over, en gaat u door naar de stap-voor-stap filteringave. Vlak vóór de tabel wordt u altijd gevraagd in welke volgorde u de transacties wilt zien. Als het datumbereik precies één dag betreft, wordt onder de tabel ook het dagtotaal op die specifieke dag getoond." % (elementen[3],woordcategorie.lower(),woordcategorie.lower(),woordcategorie.lower()),w)
     print(col+kleuren["Omkeren"], end = "")
     for i in wraptekst:
         print(i)
     print(ResetAll, end = "")
-    print(sneltoetstips)
-    sneltoets = input(col+inputindent)
-    print(ResetAll, end = "")
-    if sneltoets.upper() in afsluitlijst:
-        doei()
-    elif sneltoets.upper() in neelijst:
-        return "<",ok,[],[],"","",lijst
-    elif sneltoets.upper() == "*":
-        datumlijst = [standaardstartdatum,standaardeinddatum]
-        bedraglijst = [standaardbodembedrag,standaardtopbedrag]
-    elif sneltoets.upper() == "#":
-        datumlijst = [standaardstartdatum,standaardeinddatum]
-        bedraglijst = [standaardbodembedrag,standaardtopbedrag]
-        wederpartij = ""
-        onderwerp = "#"
-        categoriekeuzelijst = lijst
-        return sneltoets,ok,datumlijst,bedraglijst,wederpartij,onderwerp,categoriekeuzelijst
-    elif sneltoets.upper() in lijst:
-        startdatum = int(nustr[:6]+"01")
-        maandeind = calendar.monthrange(int(str(startdatum)[:4]),int(str(startdatum)[4:6]))[1]
-        einddatum = int(str(startdatum)[:6]+str(maandeind))
-        datumlijst = [startdatum,einddatum]
-        bedraglijst = [standaardbodembedrag,standaardtopbedrag]
-        wederpartij = ""
-        onderwerp = ""
-        categoriekeuzelijst = [sneltoets.upper()]
-        return sneltoets,ok,datumlijst,bedraglijst,wederpartij,onderwerp,categoriekeuzelijst
-    elif len(sneltoets) > 1 and sneltoets[0].upper() in ["M","W"]:
-        if sneltoets[0].upper() == "M":
-            test = checkint(sneltoets[1:])
-            if test == True:
-                maandverschil = int(sneltoets[1:])
-                maand = int(nustr[4:6])
-                jaar = int(nustr[:4])
-                while maandverschil > 0:
-                    maand -= 1
-                    if maand == 0:
-                        maand = 12
-                        jaar -= 1
-                    maandverschil -= 1
-                startdatum = int("{:0>4}".format(jaar)+"{:0>2}".format(maand)+"01")
-                maandeind = calendar.monthrange(int(str(startdatum)[:4]),int(str(startdatum)[4:6]))[1]
-                einddatum = int(str(startdatum)[:6]+str(maandeind))
-                datumlijst = [startdatum,einddatum]
-                bedraglijst = [standaardbodembedrag,standaardtopbedrag]
-            elif sneltoets[1:].upper() == "I":
-                datumlijst = dezemaand
-                bedraglijst = [0.0,standaardtopbedrag]
-            elif sneltoets[1:].upper() == "O":
-                datumlijst = dezemaand
-                bedraglijst = [standaardbodembedrag,0.0]
+    loop = True
+    while loop == True:
+        print(sneltoetstips)
+        sneltoets = input(col+inputindent)
+        print(ResetAll, end = "")
+        if sneltoets.upper() in afsluitlijst:
+            doei()
+        elif sneltoets.upper() in neelijst:
+            return "<",ok,[],[],"","",lijst
+        elif sneltoets.upper() == "H":
+            for i in helpwrap:
+                print(i)
+            del sneltoets
+        elif sneltoets.upper() == "*":
+            datumlijst = [standaardstartdatum,standaardeinddatum]
+            bedraglijst = [standaardbodembedrag,standaardtopbedrag]
+            loop = False
+        elif sneltoets.upper() == "#":
+            datumlijst = [standaardstartdatum,standaardeinddatum]
+            bedraglijst = [standaardbodembedrag,standaardtopbedrag]
+            wederpartij = ""
+            onderwerp = "#"
+            categoriekeuzelijst = lijst
+            return sneltoets,ok,datumlijst,bedraglijst,wederpartij,onderwerp,categoriekeuzelijst
+        elif sneltoets.upper() in lijst:
+            startdatum = int(nustr[:6]+"01")
+            maandeind = calendar.monthrange(int(str(startdatum)[:4]),int(str(startdatum)[4:6]))[1]
+            einddatum = int(str(startdatum)[:6]+str(maandeind))
+            datumlijst = [startdatum,einddatum]
+            bedraglijst = [standaardbodembedrag,standaardtopbedrag]
+            wederpartij = ""
+            onderwerp = ""
+            categoriekeuzelijst = [sneltoets.upper()]
+            return sneltoets,ok,datumlijst,bedraglijst,wederpartij,onderwerp,categoriekeuzelijst
+        elif len(sneltoets) > 1 and sneltoets[0].upper() in ["M","W"]:
+            if sneltoets[0].upper() == "M":
+                test = checkint(sneltoets[1:])
+                if test == True:
+                    maandverschil = int(sneltoets[1:])
+                    maand = int(nustr[4:6])
+                    jaar = int(nustr[:4])
+                    while maandverschil > 0:
+                        maand -= 1
+                        if maand == 0:
+                            maand = 12
+                            jaar -= 1
+                        maandverschil -= 1
+                    startdatum = int("{:0>4}".format(jaar)+"{:0>2}".format(maand)+"01")
+                    maandeind = calendar.monthrange(int(str(startdatum)[:4]),int(str(startdatum)[4:6]))[1]
+                    einddatum = int(str(startdatum)[:6]+str(maandeind))
+                    datumlijst = [startdatum,einddatum]
+                    bedraglijst = [standaardbodembedrag,standaardtopbedrag]
+                    loop = False
+                elif sneltoets[1:].upper() == "I":
+                    datumlijst = dezemaand
+                    bedraglijst = [0.0,standaardtopbedrag]
+                    loop = False
+                elif sneltoets[1:].upper() == "O":
+                    datumlijst = dezemaand
+                    bedraglijst = [standaardbodembedrag,0.0]
+                    loop = False
+                else:
+                    datumlijst = dezemaand
+                    bedraglijst = [standaardbodembedrag,standaardtopbedrag]
+                    loop = False
             else:
-                datumlijst = dezemaand
-                bedraglijst = [standaardbodembedrag,standaardtopbedrag]
+                test = checkint(sneltoets[1:])
+                if test == True:
+                    weekverschil = int(sneltoets[1:])+1
+                    startdatum = int(datetime.strftime(datetime.strptime(nustr,"%Y%m%d")-timedelta(weeks = weekverschil),"%Y%m%d"))
+                    einddatum = int(nustr)
+                    datumlijst = [startdatum,einddatum]
+                    bedraglijst = [standaardbodembedrag,standaardtopbedrag]
+                    loop = False
+                elif sneltoets[1:].upper() == "I":
+                    datumlijst = dezeweek
+                    bedraglijst = [0.0,standaardtopbedrag]
+                    loop = False
+                elif sneltoets[1:].upper() == "O":
+                    datumlijst = dezeweek
+                    bedraglijst = [standaardbodembedrag,0.0]
+                    loop = False
+                else:
+                    datumlijst = dezeweek
+                    bedraglijst = [standaardbodembedrag,standaardtopbedrag]
+                    loop = False
         else:
-            test = checkint(sneltoets[1:])
-            if test == True:
-                weekverschil = int(sneltoets[1:])+1
-                startdatum = int(datetime.strftime(datetime.strptime(nustr,"%Y%m%d")-timedelta(weeks = weekverschil),"%Y%m%d"))
-                einddatum = int(nustr)
-                datumlijst = [startdatum,einddatum]
-                bedraglijst = [standaardbodembedrag,standaardtopbedrag]
-            elif sneltoets[1:].upper() == "I":
-                datumlijst = dezeweek
-                bedraglijst = [0.0,standaardtopbedrag]
-            elif sneltoets[1:].upper() == "O":
-                datumlijst = dezeweek
-                bedraglijst = [standaardbodembedrag,0.0]
-            else:
-                datumlijst = dezeweek
-                bedraglijst = [standaardbodembedrag,standaardtopbedrag]
-    else:
-        sneltoets = False
-        datumlijst = [dezemaandeerste,int(nustr)]
-        bedraglijst = [standaardbodembedrag,standaardtopbedrag]
+            sneltoets = False
+            datumlijst = [dezemaandeerste,int(nustr)]
+            bedraglijst = [standaardbodembedrag,standaardtopbedrag]
+            loop = False
     wederpartij = ""
     onderwerp = ""
     categoriekeuzelijst = lijst
