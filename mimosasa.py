@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.35"
-versiedatum = "20240515"
+versie = "0.0.36"
+versiedatum = "20240516"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 w = 80
@@ -3056,6 +3056,7 @@ def toontransactie(rekening,header,col,ok):
     header = haalheader(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
+    tel = 1
     ok = ifok(rekening,header,col,ok)
     for ID in ok:
         if Taal == "EN":
@@ -3092,6 +3093,9 @@ def toontransactie(rekening,header,col,ok):
         except(Exception) as f:
             #print(f)
             pass
+        tel += 1
+        if tel % 10 == 0:
+            input(tel)
     return ok
 
 def geefIDlijst(rekening,header,col,ok):
