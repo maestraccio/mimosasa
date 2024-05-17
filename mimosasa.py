@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.36"
-versiedatum = "20240516"
+versie = "0.0.37"
+versiedatum = "20240517"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 w = 80
@@ -3096,6 +3096,8 @@ def toontransactie(rekening,header,col,ok):
         tel += 1
         if tel % 10 == 0:
             input(tel)
+    if tel % 10 != 0:
+        print(tel)
     return ok
 
 def geefIDlijst(rekening,header,col,ok):
@@ -6465,17 +6467,17 @@ def spaarpotkeuze(keuze1lijst,rekening,ok):
             toonspaarpotten(rekening,header)
             del keuze2
 
-def keuze1menu(rekening):
+def okstringlijn(rekening,header,ok):
     kleuren,catcol = updatekleuren(rekening)
     header = haalheader(rekening)
     Taal = header[nieuwheaderlijst[3]]
     niveau = header[nieuwheaderlijst[11]]
-    if niveau < 1:
-        niveau = 1
     if Taal == "EN":
         keuzemenu = menuEN
     elif Taal == "IT":
         keuzemenu = menuIT
+    elif Taal == "CJ":
+        keuzemenu = menuCJ
     else:
         keuzemenu = menu
     keuzemaxi = []
@@ -6497,10 +6499,36 @@ def keuze1menu(rekening):
         for i in okstringslice.strip().split(" "):
             if i == ">":
                 print(kleuren["coltoon"]+">"+kleuren["ResetAll"], end = "")
+            elif i == "":
+                print(kleuren["coltoon"]+">"+kleuren["ResetAll"], end = "")
             else:
                 print(catcol[i[0]], end = "")
                 print(i+kleuren["ResetAll"], end = " ")
         print()
+
+def keuze1menu(rekening):
+    kleuren,catcol = updatekleuren(rekening)
+    header = haalheader(rekening)
+    Taal = header[nieuwheaderlijst[3]]
+    niveau = header[nieuwheaderlijst[11]]
+    if Taal == "EN":
+        keuzemenu = menuEN
+    elif Taal == "IT":
+        keuzemenu = menuIT
+    elif Taal == "CJ":
+        keuzemenu = menuCJ
+    else:
+        keuzemenu = menu
+    keuzemaxi = []
+    keuzemaxj = []
+    for i,j in keuzemenu.items():
+        aantalkommasini = i.count(",")
+        if aantalkommasini < niveau:
+            keuzemaxi.append(i)
+            keuzemaxj.append(j)
+    maxleni = len(max(keuzemaxi, key = len))
+    maxlenj = len(max(keuzemaxj, key = len))
+    okstringlijn(rekening,header,ok)
     keuze1menulijst = []
     for i,j in keuzemenu.items():
         aantalkommasini = i.count(",")
