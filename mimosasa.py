@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.37"
-versiedatum = "20240517"
+versie = "0.0.50"
+versiedatum = "20240518"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 w = 80
@@ -144,6 +144,7 @@ nieuwheaderlijstEN = [
         "Date format",
         "Color scheme",
         "Level of menu expansion",
+        "Number of transactions until stop",
         "Print monthly overview to file",
         "Export everything to CSV file",
         "Tip of the day"
@@ -161,6 +162,7 @@ nieuwheaderlijstIT = [
         "Formato data",
         "Schema di colori",
         "Livello di espansione del menu",
+        "Numero di transazioni fino all'arresto",
         "Stampa riepilogo mensile su file",
         "Esporta tutto in file CSV",
         "Consiglio del giorno"
@@ -178,6 +180,7 @@ nieuwheaderlijstCJ = [
         "huca huqi",
         "huca'apa",
         "hupecame",
+        "hupewoca hiqeseʃi",
         "haŋo hucaqipabobi",
         "haŋo hupu hise huCSV",
         "haca hudareqi"
@@ -195,9 +198,10 @@ nieuwheaderlijst = [
         "Datumformaat",                      # 9
         "Kleurenschema",                     # 10
         "Niveau van uitvouwen menu",         # 11
-        "Print maandoverzicht naar bestand", # 12
-        "Exporteer alles naar csv-bestand",  # 13
-        "Tip van de dag"                     # 14
+        "Aantal transacties tot stop",       # 12
+        "Print maandoverzicht naar bestand", # 13
+        "Exporteer alles naar csv-bestand",  # 14
+        "Tip van de dag"                     # 15
         ]
 
 lijnlijstEN = [
@@ -245,9 +249,10 @@ nieuwheader = {
         nieuwheaderlijst[9]:"YY-MM-DD",
         nieuwheaderlijst[10]:"Categorie",
         nieuwheaderlijst[11]:2,
-        nieuwheaderlijst[12]:"<",
+        nieuwheaderlijst[12]:10,
         nieuwheaderlijst[13]:"<",
-        nieuwheaderlijst[14]:">"
+        nieuwheaderlijst[14]:"<",
+        nieuwheaderlijst[15]:">"
         }
 nieuwalternatievenamendictEN = {
         "0":"fixd ass/equity",
@@ -377,6 +382,7 @@ menuEN = {
             "0,1,13": " "+nieuwheaderlijstEN[12],
             "0,1,14": " "+nieuwheaderlijstEN[13],
             "0,1,15": " "+nieuwheaderlijstEN[14],
+            "0,1,16": " "+nieuwheaderlijstEN[15],
         "0,2": "%s management" % woordcategorieEN,
             "0,2,1": " Add new %s" % woordcategorieEN.lower(),
             "0,2,2": " Modify %s name" % woordcategorieEN.lower(),
@@ -442,6 +448,7 @@ menuIT = {
             "0,1,13": " "+nieuwheaderlijstIT[12],
             "0,1,14": " "+nieuwheaderlijstIT[13],
             "0,1,15": " "+nieuwheaderlijstIT[14],
+            "0,1,16": " "+nieuwheaderlijstIT[15],
         "0,2": "Gestione %s" % woordcategorieIT.lower(),
             "0,2,1": " Aggiundere nuova %s" % woordcategorieIT.lower(),
             "0,2,2": " Modificare nome %s" % woordcategorieIT.lower(),
@@ -507,6 +514,7 @@ menuCJ = {
             "0,1,13": " "+nieuwheaderlijstCJ[12],
             "0,1,14": " "+nieuwheaderlijstCJ[13],
             "0,1,15": " "+nieuwheaderlijstCJ[14],
+            "0,1,16": " "+nieuwheaderlijstCJ[15],
         "0,2": " %s" % woordcategorieCJ.lower(),
             "0,2,1": "  %s" % woordcategorieCJ.lower(),
             "0,2,2": "  %s" % woordcategorieCJ.lower(),
@@ -572,6 +580,7 @@ menu = {
             "0,1,13": " "+nieuwheaderlijst[12],
             "0,1,14": " "+nieuwheaderlijst[13],
             "0,1,15": " "+nieuwheaderlijst[14],
+            "0,1,16": " "+nieuwheaderlijst[15],
         "0,2": "%sbeheer" % woordcategorie,
             "0,2,1": " Voeg nieuwe %s toe" % woordcategorie.lower(),
             "0,2,2": " %snaam wijzigen" % woordcategorie,
@@ -634,9 +643,10 @@ helpmenuEN = {
             "0,1,10": textwrap.wrap("The default date formatting is \"YYYYMMDD\" but not everyone finds that clear. Therefore, multiple display options have been added to make the date readable for you as well.",w),
             "0,1,11": textwrap.wrap("There are multiple color schemes available. Apart from being more pleasant to look at, this can be very useful if you work with multiple accounts and want to make a clear visual distinction.",w),
             "0,1,12": textwrap.wrap("You can choose the level at which the menu is displayed to you. The higher the value, the more menu options are expanded.",w),
-            "0,1,13": textwrap.wrap("The displayed monthly totals can also be saved as a plain text file. To avoid having to choose every time, you can set this as the default here or turn it off. You will find these files in the \"account folder\" with the \"year+month\" (\"YYYYMM\") for the transactions, and as \"year+month+a\" (\"YYYYMMa\") for the budget analysis, without a file extension. These files are created if they do not exist yet, and otherwise overwritten each time. If necessary, you can manually add the file extension \".txt\", but then it will not be updated.",w),
-            "0,1,14": textwrap.wrap("You can choose to save a csv file with all transactions from that account each time you close the app. You will find this csv file in the \"account folder\" as \"export.csv\". This file is created if it does not exist yet, and otherwise overwritten with fresh data.",w),
-            "0,1,15": textwrap.wrap("At the start of the app, a random help article can be shown as the \"Tip of the day\". This can be useful, especially in the beginning, to familiarize yourself with the functionalities. This can be turned on or off here.",w),
+            "0,1,13": textwrap.wrap("You can choose the number of transactions that are shown to you per stopover in \"1,3\". The higher the value, the more transactions will be displayed on your screen. The default number is \"10\". You can choose a lower value on smaller screens or with a larger font size.",w),
+            "0,1,14": textwrap.wrap("The displayed monthly totals can also be saved as a plain text file. To avoid having to choose every time, you can set this as the default here or turn it off. You will find these files in the \"account folder\" with the \"year+month\" (\"YYYYMM\") for the transactions, and as \"year+month+a\" (\"YYYYMMa\") for the budget analysis, without a file extension. These files are created if they do not exist yet, and otherwise overwritten each time. If necessary, you can manually add the file extension \".txt\", but then it will not be updated.",w),
+            "0,1,15": textwrap.wrap("You can choose to save a csv file with all transactions from that account each time you close the app. You will find this csv file in the \"account folder\" as \"export.csv\". This file is created if it does not exist yet, and otherwise overwritten with fresh data.",w),
+            "0,1,16": textwrap.wrap("At the start of the app, a random help article can be shown as the \"Tip of the day\". This can be useful, especially in the beginning, to familiarize yourself with the functionalities. This can be turned on or off here.",w),
         "0,2": textwrap.wrap("Here you can adjust the names of different categories, allocate budgets, and more. Categories where money comes in (monthly) are assigned a negative budget, which is used as a buffer at the beginning of a new month. In the monthly analysis, the balance booked on those categories is ignored until the buffer is reached.",w),
             "0,2,1": textwrap.wrap("Add a new category. Business accounts contain standard ledgers \"%s\" through \"%s\", household accounts the categories \"%s\" through \"%s\" and \"%s\", but all intermediate letters can be used, and all those letters and numbers can also be exchanged between business and household accounts." % (zakelijkelijst[0],zakelijkelijst[-1],huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
             "0,2,2": textwrap.wrap("Initially, standard names are assigned to the categories, but you can adjust them here as desired. The default categories for business accounts are: 0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s, 9: %s, and for household accounts (standard): A: %s, B: %s, C: %s, D: %s, E: %s, F: %s, O: %s. All these standard category names are automatically translated from Dutch (the default language) to other languages when you switch languages, but not if you have adjusted a category name yourself." % (nieuwalternatievenamendictEN[zakelijkelijst[0]],nieuwalternatievenamendictEN[zakelijkelijst[1]],nieuwalternatievenamendictEN[zakelijkelijst[2]],nieuwalternatievenamendictEN[zakelijkelijst[3]],nieuwalternatievenamendictEN[zakelijkelijst[4]],nieuwalternatievenamendictEN[zakelijkelijst[5]],nieuwalternatievenamendictEN[zakelijkelijst[6]],nieuwalternatievenamendictEN[zakelijkelijst[7]],nieuwalternatievenamendictEN[zakelijkelijst[8]],nieuwalternatievenamendictEN[zakelijkelijst[9]],nieuwalternatievenamendictEN[huishoudelijkelijst[0]],nieuwalternatievenamendictEN[huishoudelijkelijst[1]],nieuwalternatievenamendictEN[huishoudelijkelijst[2]],nieuwalternatievenamendictEN[huishoudelijkelijst[3]],nieuwalternatievenamendictEN[huishoudelijkelijst[4]],nieuwalternatievenamendictEN[huishoudelijkelijst[5]],nieuwalternatievenamendictEN[huishoudelijkelijst[6]]),w),
@@ -699,9 +709,10 @@ helpmenuIT = {
             "0,1,10": textwrap.wrap("La visualizzazione predefinita della data è \"AAAAMMGG\" ma non tutti la trovano chiara. Sono state quindi aggiunte diverse opzioni di visualizzazione per rendere la data più facilmente leggibile anche per voi.",w),
             "0,1,11": textwrap.wrap("Sono disponibili diversi schemi di colori. Oltre a rendere più piacevole la vista, questo può essere molto utile se lavori su più conti e desideri fare una chiara distinzione visiva.",w),
             "0,1,12": textwrap.wrap("È possibile scegliere il livello in cui viene visualizzato il menu a tendina. Più alta è la valore, più opzioni di menu vengono espandete.",w),
-            "0,1,13": textwrap.wrap("I totali mensili mostrati possono essere salvati anche come file di testo semplice. Per evitare di dover scegliere ogni volta, è possibile impostarlo o disattivarlo qui per impostazione predefinita. Troverete questi nella \"cartella del conto\" con l'anno e il mese (\"AAAAMM\") per le transazioni, e come \"anno+mese+a\" (\"AAAAMMa\") per l'analisi del budget, senza estensione del file. Questi file vengono creati se non esistono ancora, altrimenti vengono sovrascritti continuamente. Se necessario, è possibile aggiungere manualmente l'estensione del file \".txt\", ma in tal caso non verrà aggiornato.",w),
-            "0,1,14": textwrap.wrap("È possibile scegliere di salvare sempre un file csv con tutte le transazioni di quel conto quando si chiude l'applicazione. Troverete questo file csv nella \"cartella del conto\" come \"export.csv\". Questo viene creato se non esiste ancora, altrimenti sovrascritto con nuovi dati.",w),
-            "0,1,15": textwrap.wrap("All'avvio dell'app, può essere visualizzato un articolo casuale di aiuto come \"Suggerimento del giorno\". Questo può essere utile soprattutto all'inizio per familiarizzare con le funzionalità. È possibile attivarlo o disattivarlo qui.",w),
+            "0,1,13": textwrap.wrap("È possibile selezionare il numero di transazioni visualizzate in \"1,3\" per ogni fermata. Più alto è il valore, più transazioni verranno mostrate sullo schermo. Il valore predefinito è \"10\". È possibile scegliere un valore inferiore su schermi più piccoli o con una dimensione del carattere più grande.",w),
+            "0,1,14": textwrap.wrap("I totali mensili mostrati possono essere salvati anche come file di testo semplice. Per evitare di dover scegliere ogni volta, è possibile impostarlo o disattivarlo qui per impostazione predefinita. Troverete questi nella \"cartella del conto\" con l'anno e il mese (\"AAAAMM\") per le transazioni, e come \"anno+mese+a\" (\"AAAAMMa\") per l'analisi del budget, senza estensione del file. Questi file vengono creati se non esistono ancora, altrimenti vengono sovrascritti continuamente. Se necessario, è possibile aggiungere manualmente l'estensione del file \".txt\", ma in tal caso non verrà aggiornato.",w),
+            "0,1,15": textwrap.wrap("È possibile scegliere di salvare sempre un file csv con tutte le transazioni di quel conto quando si chiude l'applicazione. Troverete questo file csv nella \"cartella del conto\" come \"export.csv\". Questo viene creato se non esiste ancora, altrimenti sovrascritto con nuovi dati.",w),
+            "0,1,16": textwrap.wrap("All'avvio dell'app, può essere visualizzato un articolo casuale di aiuto come \"Suggerimento del giorno\". Questo può essere utile soprattutto all'inizio per familiarizzare con le funzionalità. È possibile attivarlo o disattivarlo qui.",w),
         "0,2": textwrap.wrap("Qui è possibile modificare il nome delle varie categorie, distribuire i budget, eccetera. Le categorie su cui entra denaro (mensilmente) ricevono un budget negativo, che viene utilizzato come buffer all'inizio di un nuovo mese. Nell'analisi mensile il saldo registrato su tali categorie viene ignorato fino a quando il buffer non è raggiunto.",w),
             "0,2,1": textwrap.wrap("Aggiungi una nuova categoria. I conti aziendali contengono di default i conti \"%s\" a \"%s\", i conti domestici le categorie \"%s\" a \"%s\" e \"%s\", ma tutte le lettere intermedie possono essere utilizzate, e tutte quelle lettere e numeri possono anche essere scambiati tra conti aziendali e domestici." % (zakelijkelijst[0],zakelijkelijst[-1],huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
             "0,2,2": textwrap.wrap("Di base vengono assegnati nomi standard alle categorie, ma qui puoi modificarli a tuo piacimento. Le categorie standard per i conti aziendali sono: 0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s, 9: %s, e per i conti domestici (standard): A: %s, B: %s, C: %s, D: %s, E: %s, F: %s, O: %s. Tutti questi nomi (standard olandesi) vengono tradotti quando si cambia lingua, ma non se hai personalizzato il nome di una categoria." % (nieuwalternatievenamendictIT[zakelijkelijst[0]],nieuwalternatievenamendictIT[zakelijkelijst[1]],nieuwalternatievenamendictIT[zakelijkelijst[2]],nieuwalternatievenamendictIT[zakelijkelijst[3]],nieuwalternatievenamendictIT[zakelijkelijst[4]],nieuwalternatievenamendictIT[zakelijkelijst[5]],nieuwalternatievenamendictIT[zakelijkelijst[6]],nieuwalternatievenamendictIT[zakelijkelijst[7]],nieuwalternatievenamendictIT[zakelijkelijst[8]],nieuwalternatievenamendictIT[zakelijkelijst[9]],nieuwalternatievenamendictIT[huishoudelijkelijst[0]],nieuwalternatievenamendictIT[huishoudelijkelijst[1]],nieuwalternatievenamendictIT[huishoudelijkelijst[2]],nieuwalternatievenamendictIT[huishoudelijkelijst[3]],nieuwalternatievenamendictIT[huishoudelijkelijst[4]],nieuwalternatievenamendictIT[huishoudelijkelijst[5]],nieuwalternatievenamendictIT[huishoudelijkelijst[6]]),w),
@@ -764,9 +775,10 @@ helpmenuCJ = {
             "0,1,10": textwrap.wrap("La visualizzazione predefinita della data è \"AAAAMMGG\" ma non tutti la trovano chiara. Sono state quindi aggiunte diverse opzioni di visualizzazione per rendere la data più facilmente leggibile anche per voi.",w),
             "0,1,11": textwrap.wrap("Sono disponibili diversi schemi di colori. Oltre a rendere più piacevole la vista, questo può essere molto utile se lavori su più conti e desideri fare una chiara distinzione visiva.",w),
             "0,1,12": textwrap.wrap("È possibile scegliere il livello in cui viene visualizzato il menu a tendina. Più alta è la valore, più opzioni di menu vengono espandete.",w),
-            "0,1,13": textwrap.wrap("I totali mensili mostrati possono essere salvati anche come file di testo semplice. Per evitare di dover scegliere ogni volta, è possibile impostarlo o disattivarlo qui per impostazione predefinita. Troverete questi nella \"cartella del conto\" con l'anno e il mese (\"AAAAMM\") per le transazioni, e come \"anno+mese+a\" (\"AAAAMMa\") per l'analisi del budget, senza estensione del file. Questi file vengono creati se non esistono ancora, altrimenti vengono sovrascritti continuamente. Se necessario, è possibile aggiungere manualmente l'estensione del file \".txt\", ma in tal caso non verrà aggiornato.",w),
-            "0,1,14": textwrap.wrap("È possibile scegliere di salvare sempre un file csv con tutte le transazioni di quel conto quando si chiude l'applicazione. Troverete questo file csv nella \"cartella del conto\" come \"export.csv\". Questo viene creato se non esiste ancora, altrimenti sovrascritto con nuovi dati.",w),
-            "0,1,15": textwrap.wrap("All'avvio dell'app, può essere visualizzato un articolo casuale di aiuto come \"Suggerimento del giorno\". Questo può essere utile soprattutto all'inizio per familiarizzare con le funzionalità. È possibile attivarlo o disattivarlo qui.",w),
+            "0,1,13": textwrap.wrap("È possibile selezionare il numero di transazioni visualizzate in \"1,3\" per ogni fermata. Più alto è il valore, più transazioni verranno mostrate sullo schermo. Il valore predefinito è \"10\". È possibile scegliere un valore inferiore su schermi più piccoli o con una dimensione del carattere più grande.",w),
+            "0,1,14": textwrap.wrap("I totali mensili mostrati possono essere salvati anche come file di testo semplice. Per evitare di dover scegliere ogni volta, è possibile impostarlo o disattivarlo qui per impostazione predefinita. Troverete questi nella \"cartella del conto\" con l'anno e il mese (\"AAAAMM\") per le transazioni, e come \"anno+mese+a\" (\"AAAAMMa\") per l'analisi del budget, senza estensione del file. Questi file vengono creati se non esistono ancora, altrimenti vengono sovrascritti continuamente. Se necessario, è possibile aggiungere manualmente l'estensione del file \".txt\", ma in tal caso non verrà aggiornato.",w),
+            "0,1,15": textwrap.wrap("È possibile scegliere di salvare sempre un file csv con tutte le transazioni di quel conto quando si chiude l'applicazione. Troverete questo file csv nella \"cartella del conto\" come \"export.csv\". Questo viene creato se non esiste ancora, altrimenti sovrascritto con nuovi dati.",w),
+            "0,1,16": textwrap.wrap("All'avvio dell'app, può essere visualizzato un articolo casuale di aiuto come \"Suggerimento del giorno\". Questo può essere utile soprattutto all'inizio per familiarizzare con le funzionalità. È possibile attivarlo o disattivarlo qui.",w),
         "0,2": textwrap.wrap("Qui è possibile modificare il nome delle varie categorie, distribuire i budget, eccetera. Le categorie su cui entra denaro (mensilmente) ricevono un budget negativo, che viene utilizzato come buffer all'inizio di un nuovo mese. Nell'analisi mensile il saldo registrato su tali categorie viene ignorato fino a quando il buffer non è raggiunto.",w),
             "0,2,1": textwrap.wrap("Aggiungi una nuova categoria. I conti aziendali contengono di default i conti \"%s\" a \"%s\", i conti domestici le categorie \"%s\" a \"%s\" e \"%s\", ma tutte le lettere intermedie possono essere utilizzate, e tutte quelle lettere e numeri possono anche essere scambiati tra conti aziendali e domestici." % (zakelijkelijst[0],zakelijkelijst[-1],huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
             "0,2,2": textwrap.wrap("Di base vengono assegnati nomi standard alle categorie, ma qui puoi modificarli a tuo piacimento. Le categorie standard per i conti aziendali sono: 0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s, 9: %s, e per i conti domestici (standard): A: %s, B: %s, C: %s, D: %s, E: %s, F: %s, O: %s. Tutti questi nomi (standard olandesi) vengono tradotti quando si cambia lingua, ma non se hai personalizzato il nome di una categoria." % (nieuwalternatievenamendictCJ[zakelijkelijst[0]],nieuwalternatievenamendictCJ[zakelijkelijst[1]],nieuwalternatievenamendictCJ[zakelijkelijst[2]],nieuwalternatievenamendictCJ[zakelijkelijst[3]],nieuwalternatievenamendictCJ[zakelijkelijst[4]],nieuwalternatievenamendictCJ[zakelijkelijst[5]],nieuwalternatievenamendictCJ[zakelijkelijst[6]],nieuwalternatievenamendictCJ[zakelijkelijst[7]],nieuwalternatievenamendictCJ[zakelijkelijst[8]],nieuwalternatievenamendictCJ[zakelijkelijst[9]],nieuwalternatievenamendictCJ[huishoudelijkelijst[0]],nieuwalternatievenamendictCJ[huishoudelijkelijst[1]],nieuwalternatievenamendictCJ[huishoudelijkelijst[2]],nieuwalternatievenamendictCJ[huishoudelijkelijst[3]],nieuwalternatievenamendictCJ[huishoudelijkelijst[4]],nieuwalternatievenamendictCJ[huishoudelijkelijst[5]],nieuwalternatievenamendictCJ[huishoudelijkelijst[6]]),w),
@@ -829,9 +841,10 @@ helpmenu = {
             "0,1,10": textwrap.wrap("De standaard-datumweergave is \"JJJJMMDD\" maar niet iedereen vindt dat duidelijk. Er zijn daarom meerdere weergave-opties toegevoegd om de datum ook voor u duidelijk leesbaar te maken.",w),
             "0,1,11": textwrap.wrap("Er zijn meerdere kleurenschema's beschikbaar. Behalve aangenamer om naar te kijken kan dit goed van pas komen als u in meerdere rekeningen werkt en duidelijk visueel onderscheid wilt maken.",w),
             "0,1,12": textwrap.wrap("U kunt het niveau kiezen waarin het keuzemenu aan u wordt getoond. Hoe hoger de waarde, hoe meer menu-opties er worden uitgevouwd.",w),
-            "0,1,13": textwrap.wrap("De getoonde maandtotalen kunt u ook als platte-tekstbestand opslaan. Om niet iedere keer te hoeven kiezen kunt u dat hier standaard instellen of uitzetten. U vindt deze dan in de \"rekeningmap\" met het \"jaartal+maand\" (\"JJJJMM\") voor de transacties, en als \"jaartal+maand+a\" (\"JJJJMMa\") voor de budgetanalyse, zonder bestandsextensie. Deze bestanden worden aangemaakt als ze nog niet bestaan, en anders steeds overschreven. U kunt hier zelf, indien nodig, handmatig de bestandsextensie \".txt\" achter zetten, maar dan zal het niet worden ververst.",w),
-            "0,1,14": textwrap.wrap("U kunt ervoor kiezen om bij het afsluiten van de app steeds een csv-bestand op te slaan met alle transacties van die rekening erin. U vindt dit csv-bestand dan in de \"rekeningmap\" als \"export.csv\". Dit wordt aangemaakt als het nog niet bestaat, en anders overschreven met verse data.",w),
-            "0,1,15": textwrap.wrap("Bij aanvang van de app kan steeds een willekeurig helpartikel als \"Tip van de dag\" worden getoond. Dat kan zeker in het begin handig zijn om kennis te maken met de functionaliteiten. Dit kan hier worden aan- of uitgezet.",w),
+            "0,1,13": textwrap.wrap("U kunt het aantal transacties kiezen dat per tussenstop in \"1,3\" aan u wordt getoond. Hoe hoger de waarde, hoe meer transacties er op uw scherm worden getoond. Het standaardaantal staat op \"10\". U kunt op kleinere schermen of bij een groter letterformaat voor een lagere waarde kiezen.",w),
+            "0,1,14": textwrap.wrap("De getoonde maandtotalen kunt u ook als platte-tekstbestand opslaan. Om niet iedere keer te hoeven kiezen kunt u dat hier standaard instellen of uitzetten. U vindt deze dan in de \"rekeningmap\" met het \"jaartal+maand\" (\"JJJJMM\") voor de transacties, en als \"jaartal+maand+a\" (\"JJJJMMa\") voor de budgetanalyse, zonder bestandsextensie. Deze bestanden worden aangemaakt als ze nog niet bestaan, en anders steeds overschreven. U kunt hier zelf, indien nodig, handmatig de bestandsextensie \".txt\" achter zetten, maar dan zal het niet worden ververst.",w),
+            "0,1,15": textwrap.wrap("U kunt ervoor kiezen om bij het afsluiten van de app steeds een csv-bestand op te slaan met alle transacties van die rekening erin. U vindt dit csv-bestand dan in de \"rekeningmap\" als \"export.csv\". Dit wordt aangemaakt als het nog niet bestaat, en anders overschreven met verse data.",w),
+            "0,1,16": textwrap.wrap("Bij aanvang van de app kan steeds een willekeurig helpartikel als \"Tip van de dag\" worden getoond. Dat kan zeker in het begin handig zijn om kennis te maken met de functionaliteiten. Dit kan hier worden aan- of uitgezet.",w),
         "0,2": textwrap.wrap("Hier kunt u de naam van de verschillende categorieën aanpassen, budgetten verdelen, enzovoorts. De categorieën waarop (maandelijks) geld binnenkomt krijgen een negatief budget, dat als buffer wordt gebruikt bij aanvang van een nieuwe maand. In de maandanalyse wordt het saldo dat op die categorieën wordt ingeboekt genegeerd totdat de buffer is bereikt.",w),
             "0,2,1": textwrap.wrap("Voeg een nieuwe categorie toe. Zakelijke rekeningen bevatten standaard de grootboeken \"%s\" t/m \"%s\", huishoudelijke rekeningen de categorieën \"%s\" t/m \"%s\" en \"%s\", maar alle tussenliggende letters kunnen worden gebruikt, en al die letters en cijfers kunnen ook tussen zakelijke en huishoudelijke rekeningen worden uitgewisseld." % (zakelijkelijst[0],zakelijkelijst[-1],huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
             "0,2,2": textwrap.wrap("Aan de categorieën worden in beginsel standaardnamen toegekend, maar u kunt die hier zelf naar wens aanpassen. De standaardcategorieën zijn voor zakelijke rekeningen: 0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s, 9: %s, en voor huishoudelijke rekeningen (standaard): A: %s, B: %s, C: %s, D: %s, E: %s, F: %s, O: %s. Al deze (standaard Nederlandse) namen worden vertaald als u van taal wisselt, maar niet als u zelf een categorienaam heeft aangepast." % (nieuwalternatievenamendict[zakelijkelijst[0]],nieuwalternatievenamendict[zakelijkelijst[1]],nieuwalternatievenamendict[zakelijkelijst[2]],nieuwalternatievenamendict[zakelijkelijst[3]],nieuwalternatievenamendict[zakelijkelijst[4]],nieuwalternatievenamendict[zakelijkelijst[5]],nieuwalternatievenamendict[zakelijkelijst[6]],nieuwalternatievenamendict[zakelijkelijst[7]],nieuwalternatievenamendict[zakelijkelijst[8]],nieuwalternatievenamendict[zakelijkelijst[9]],nieuwalternatievenamendict[huishoudelijkelijst[0]],nieuwalternatievenamendict[huishoudelijkelijst[1]],nieuwalternatievenamendict[huishoudelijkelijst[2]],nieuwalternatievenamendict[huishoudelijkelijst[3]],nieuwalternatievenamendict[huishoudelijkelijst[4]],nieuwalternatievenamendict[huishoudelijkelijst[5]],nieuwalternatievenamendict[huishoudelijkelijst[6]]),w),
@@ -3056,48 +3069,50 @@ def toontransactie(rekening,header,col,ok):
     header = haalheader(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
-    tel = 1
+    aantal = header[nieuwheaderlijst[12]]
+    tel = 0
     ok = ifok(rekening,header,col,ok)
-    for ID in ok:
-        if Taal == "EN":
-            el = elementenEN
-        elif Taal == "IT":
-            el = elementenIT
-        elif Taal == "CJ":
-            el = elementenCJ
-        else:
-            el = elementen
-        maxlen = len(max(el, key = len))
-        try:
-            alternatievenamendict = haalalternatievenamen(rekening)
-            alt = vertaalv(alternatievenamendict[ID[0]])
-            datum = ok[ID][0]
-            datum = opmaakdatum(datum)
-            print(" "*10+col+"+-"+kleuren["Omkeren"]+catcol[ID[0]]+ID+kleuren["ResetAll"]+col+"-"*(maxlen-(len(ID)))+"+"+"-"*10+kleuren["ResetAll"])
-            print(" "*10+col+"| "+kleuren["ResetAll"]+catcol[ID[0]]+("{:^%d}" % (maxlen+11)).format(alt)+kleuren["ResetAll"])
-            print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(el[0])+kleuren["ResetAll"]+":  "+datum)
-            print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(el[1])+kleuren["ResetAll"]+": "+kleinegetalkleuren(ok[ID][1])+valuta+kleuren["ResetAll"]+fornum(ok[ID][1]))
-            wraptekstlijst2 = textwrap.wrap(ok[ID][2],w-maxlen-14)
-            for i in wraptekstlijst2:
-                if i == wraptekstlijst2[0]:
-                    print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(el[2])+kleuren["ResetAll"]+": "+str(i))
-                else:
-                    print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(" ")+kleuren["ResetAll"]+": "+str(i))
-            wraptekstlijst3 = textwrap.wrap(ok[ID][3],w-maxlen-14)
-            for i in wraptekstlijst3:
-                if i == wraptekstlijst3[0]:
-                    print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(el[3])+kleuren["ResetAll"]+": "+str(i))
-                else:
-                    print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(" ")+kleuren["ResetAll"]+": "+str(i))
-            print(" "*10+col+"+-"+"-"*maxlen+"+"+"-"*10+kleuren["ResetAll"])
-        except(Exception) as f:
-            #print(f)
-            pass
-        tel += 1
-        if tel % 10 == 0:
-            input(tel)
-    if tel % 10 != 0:
-        print(tel)
+    if len(ok) > 0:
+        for ID in ok:
+            if Taal == "EN":
+                el = elementenEN
+            elif Taal == "IT":
+                el = elementenIT
+            elif Taal == "CJ":
+                el = elementenCJ
+            else:
+                el = elementen
+            maxlen = len(max(el, key = len))
+            try:
+                alternatievenamendict = haalalternatievenamen(rekening)
+                alt = vertaalv(alternatievenamendict[ID[0]])
+                datum = ok[ID][0]
+                datum = opmaakdatum(datum)
+                print(" "*10+col+"+-"+kleuren["Omkeren"]+catcol[ID[0]]+ID+kleuren["ResetAll"]+col+"-"*(maxlen-(len(ID)))+"+"+"-"*10+kleuren["ResetAll"])
+                print(" "*10+col+"| "+kleuren["ResetAll"]+catcol[ID[0]]+("{:^%d}" % (maxlen+11)).format(alt)+kleuren["ResetAll"])
+                print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(el[0])+kleuren["ResetAll"]+":  "+datum)
+                print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(el[1])+kleuren["ResetAll"]+": "+kleinegetalkleuren(ok[ID][1])+valuta+kleuren["ResetAll"]+fornum(ok[ID][1]))
+                wraptekstlijst2 = textwrap.wrap(ok[ID][2],w-maxlen-14)
+                for i in wraptekstlijst2:
+                    if i == wraptekstlijst2[0]:
+                        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(el[2])+kleuren["ResetAll"]+": "+str(i))
+                    else:
+                        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(" ")+kleuren["ResetAll"]+": "+str(i))
+                wraptekstlijst3 = textwrap.wrap(ok[ID][3],w-maxlen-14)
+                for i in wraptekstlijst3:
+                    if i == wraptekstlijst3[0]:
+                        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(el[3])+kleuren["ResetAll"]+": "+str(i))
+                    else:
+                        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(" ")+kleuren["ResetAll"]+": "+str(i))
+                print(" "*10+col+"+-"+"-"*maxlen+"+"+"-"*10+kleuren["ResetAll"])
+            except(Exception) as f:
+                #print(f)
+                pass
+            tel += 1
+            if tel % aantal == 0:
+                input(col+str(tel)+kleuren["ResetAll"])
+        if tel % aantal != 0:
+            input(col+str(tel)+kleuren["ResetAll"])
     return ok
 
 def geefIDlijst(rekening,header,col,ok):
@@ -4443,6 +4458,37 @@ def wijzigmenuniveau(rekening,header):
                 print(header, file = h, end = "")
     return header
 
+def wijzigtoonstop(rekening,header):
+    kleuren,catcol = updatekleuren(rekening)
+    Taal = header[nieuwheaderlijst[3]]
+    IBAN = rekening[:rekening.index("#")]
+    JAAR = forr4(rekening[rekening.index("#")+1:])
+    if Taal == "EN":
+        vraag = textwrap.wrap("Change %s %s %s from %s to:" % (IBAN,JAAR,nieuwheaderlijstEN[12],header[nieuwheaderlijst[12]]),w)
+    elif Taal == "IT":
+        vraag = textwrap.wrap("Cambia %s %s %s da %s in:" % (IBAN,JAAR,nieuwheaderlijstIT[12],header[nieuwheaderlijst[12]]),w)
+    elif Taal == "CJ":
+        vraag = textwrap.wrap("hazüi %s %s %s qi %s qe:" % (IBAN,JAAR,nieuwheaderlijstCJ[12],header[nieuwheaderlijst[12]]),w)
+    else:
+        vraag = textwrap.wrap("Wijzig %s %s %s van %s naar:" % (IBAN,JAAR,nieuwheaderlijst[12],header[nieuwheaderlijst[12]]),w)
+    for i in vraag:
+        print(i)
+    antwoord = input(col+inputindent)
+    print(ResetAll, end = "")
+    if antwoord.upper() in afsluitlijst:
+        doei()
+    elif antwoord.upper() in neelijst:
+        return header
+    else:
+        test = checkint(antwoord)
+        if test == True:
+            if int(antwoord) < 1:
+                antwoord = 1
+            header[nieuwheaderlijst[12]] = int(antwoord)
+            with open(os.path.join(rekening,"header"),"w") as h:
+                print(header, file = h, end = "")
+    return header
+
 def wijziganalyse2txt(rekening,header):
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
@@ -5189,7 +5235,8 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok):
  12 : %s %s
  13 : %s %s
  14 : %s %s
- 15 : %s %s""" % (
+ 15 : %s %s
+ 16 : %s %s""" % (
           menuEN["0,1,0"],
           ("{:<%d}" % maxlen).format(menuEN["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
           ("{:<%d}" % maxlen).format(menuEN["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
@@ -5203,9 +5250,10 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok):
           ("{:<%d}" % maxlen).format(menuEN["0,1,10"]), vertaalv(header[nieuwheaderlijst[9]]+" (%s)" % opmaakdatum(int(nustr))),
           ("{:<%d}" % maxlen).format(menuEN["0,1,11"]), vertaalv(header[nieuwheaderlijst[10]]),
           ("{:<%d}" % maxlen).format(menuEN["0,1,12"]), header[nieuwheaderlijst[11]],
-          ("{:<%d}" % maxlen).format(menuEN["0,1,13"]), coljanee(rekening,header,header[nieuwheaderlijst[12]])+vertaalv(header[nieuwheaderlijst[12]])+kleuren["ResetAll"],
+          ("{:<%d}" % maxlen).format(menuEN["0,1,13"]), header[nieuwheaderlijst[12]],
           ("{:<%d}" % maxlen).format(menuEN["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menuEN["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]]+kleuren["ResetAll"])
+          ("{:<%d}" % maxlen).format(menuEN["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
+          ("{:<%d}" % maxlen).format(menuEN["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]]+kleuren["ResetAll"])
           )
     )
                     elif Taal == "IT":
@@ -5225,7 +5273,8 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok):
  12 : %s %s
  13 : %s %s
  14 : %s %s
- 15 : %s %s""" % (
+ 15 : %s %s
+ 16 : %s %s""" % (
           menuIT["0,1,0"],
           ("{:<%d}" % maxlen).format(menuIT["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
           ("{:<%d}" % maxlen).format(menuIT["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
@@ -5239,9 +5288,48 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok):
           ("{:<%d}" % maxlen).format(menuIT["0,1,10"]), vertaalv(header[nieuwheaderlijst[9]]+" (%s)" % opmaakdatum(int(nustr))),
           ("{:<%d}" % maxlen).format(menuIT["0,1,11"]), vertaalv(header[nieuwheaderlijst[10]]),
           ("{:<%d}" % maxlen).format(menuIT["0,1,12"]), header[nieuwheaderlijst[11]],
-          ("{:<%d}" % maxlen).format(menuIT["0,1,13"]), coljanee(rekening,header,header[nieuwheaderlijst[12]])+vertaalv(header[nieuwheaderlijst[12]])+kleuren["ResetAll"],
+          ("{:<%d}" % maxlen).format(menuIT["0,1,13"]), header[nieuwheaderlijst[12]],
           ("{:<%d}" % maxlen).format(menuIT["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menuIT["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]]+kleuren["ResetAll"])
+          ("{:<%d}" % maxlen).format(menuIT["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
+          ("{:<%d}" % maxlen).format(menuIT["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]]+kleuren["ResetAll"])
+          )
+    )
+                    elif Taal == "CJ":
+                        maxlen = len(max(nieuwheaderlijstCJ, key = len))+1
+                        print("""  0 : %s
+  1 : %s %s
+  2 : %s %s
+  3 : %s %s
+  4 : %s %s
+  5 : %s %s
+  6 : %s %s
+  7 : %s %s
+  8 : %s %s
+  9 : %s %s
+ 10 : %s %s
+ 11 : %s %s
+ 12 : %s %s
+ 13 : %s %s
+ 14 : %s %s
+ 15 : %s %s
+ 16 : %s %s""" % (
+          menuCJ["0,1,0"],
+          ("{:<%d}" % maxlen).format(menuCJ["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
+          ("{:<%d}" % maxlen).format(menuCJ["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
+          ("{:<%d}" % maxlen).format(menuCJ["0,1,3"]), coljanee(rekening,header,header[nieuwheaderlijst[2]])+vertaalv(header[nieuwheaderlijst[2]])+kleuren["ResetAll"],
+          ("{:<%d}" % maxlen).format(menuCJ["0,1,4"]), taaldict[header[nieuwheaderlijst[3]]],
+          ("{:<%d}" % maxlen).format(menuCJ["0,1,5"]), header[nieuwheaderlijst[4]],
+          ("{:<%d}" % maxlen).format(menuCJ["0,1,6"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[5]]),
+          ("{:<%d}" % maxlen).format(menuCJ["0,1,7"]), coljanee(rekening,header,header[nieuwheaderlijst[6]])+vertaalv(header[nieuwheaderlijst[6]])+kleuren["ResetAll"],
+          ("{:<%d}" % maxlen).format(menuCJ["0,1,8"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][0])+" >< "+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][1]),
+          ("{:<%d}" % maxlen).format(menuCJ["0,1,9"]), coljanee(rekening,header,header[nieuwheaderlijst[8]])+vertaalv(header[nieuwheaderlijst[8]])+kleuren["ResetAll"],
+          ("{:<%d}" % maxlen).format(menuCJ["0,1,10"]), vertaalv(header[nieuwheaderlijst[9]]+" (%s)" % opmaakdatum(int(nustr))),
+          ("{:<%d}" % maxlen).format(menuCJ["0,1,11"]), vertaalv(header[nieuwheaderlijst[10]]),
+          ("{:<%d}" % maxlen).format(menuCJ["0,1,12"]), header[nieuwheaderlijst[11]],
+          ("{:<%d}" % maxlen).format(menuCJ["0,1,13"]), header[nieuwheaderlijst[12]],
+          ("{:<%d}" % maxlen).format(menuCJ["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
+          ("{:<%d}" % maxlen).format(menuCJ["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
+          ("{:<%d}" % maxlen).format(menuCJ["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]]+kleuren["ResetAll"])
           )
     )
                     else:
@@ -5261,7 +5349,8 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok):
  12 : %s %s
  13 : %s %s
  14 : %s %s
- 15 : %s %s""" % (
+ 15 : %s %s
+ 16 : %s %s""" % (
           menu["0,1,0"],
           ("{:<%d}" % maxlen).format(menu["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
           ("{:<%d}" % maxlen).format(menu["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
@@ -5275,9 +5364,10 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok):
           ("{:<%d}" % maxlen).format(menu["0,1,10"]), vertaalv(header[nieuwheaderlijst[9]]+" (%s)" % opmaakdatum(int(nustr))),
           ("{:<%d}" % maxlen).format(menu["0,1,11"]), vertaalv(header[nieuwheaderlijst[10]]),
           ("{:<%d}" % maxlen).format(menu["0,1,12"]), header[nieuwheaderlijst[11]],
-          ("{:<%d}" % maxlen).format(menu["0,1,13"]), coljanee(rekening,header,header[nieuwheaderlijst[12]])+vertaalv(header[nieuwheaderlijst[12]])+kleuren["ResetAll"],
+          ("{:<%d}" % maxlen).format(menu["0,1,13"]), header[nieuwheaderlijst[12]],
           ("{:<%d}" % maxlen).format(menu["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menu["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]]+kleuren["ResetAll"])
+          ("{:<%d}" % maxlen).format(menu["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
+          ("{:<%d}" % maxlen).format(menu["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]]+kleuren["ResetAll"])
           )
     )
                     keuze3 = input(col+inputindent)
@@ -5330,12 +5420,15 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok):
                     header = wijzigmenuniveau(rekening,header)
                     del keuze3
                 elif keuze3 == "13":
-                    header = wijziganalyse2txt(rekening,header)
+                    header = wijzigtoonstop(rekening,header)
                     del keuze3
                 elif keuze3 == "14":
-                    header = wijzigexport2csv(rekening,header)
+                    header = wijziganalyse2txt(rekening,header)
                     del keuze3
                 elif keuze3 == "15":
+                    header = wijzigexport2csv(rekening,header)
+                    del keuze3
+                elif keuze3 == "16":
                     header = wijzigtipvandedag(rekening,header)
                     del keuze3
                 else:
@@ -6490,20 +6583,26 @@ def okstringlijn(rekening,header,ok):
     maxleni = len(max(keuzemaxi, key = len))
     maxlenj = len(max(keuzemaxj, key = len))
     okstring = ""
+    meer = False
     if len(ok) > 0:
         for i in ok:
-            okstring += i+" "
+            okstring += i+">"
         okstringslice = okstring[:maxleni+2+maxlenj]
-        if len(okstring) > len(okstringslice):
-            okstringslice = okstringslice[:-2]+" >"
-        for i in okstringslice.strip().split(" "):
-            if i == ">":
-                print(kleuren["coltoon"]+">"+kleuren["ResetAll"], end = "")
-            elif i == "":
-                print(kleuren["coltoon"]+">"+kleuren["ResetAll"], end = "")
-            else:
-                print(catcol[i[0]], end = "")
-                print(i+kleuren["ResetAll"], end = " ")
+        if len(okstringslice) < len(okstring):
+            meer = True
+            okstringslice = okstringslice[:-1]
+        while len(okstringslice) > 0:
+            if ">" in okstringslice:
+                print(catcol[okstringslice[0]]+okstringslice[:okstringslice.index(">")]+kleuren["ResetAll"], end = "")
+                okstringslice = okstringslice[okstringslice.index(">")+1:]
+                if len(okstringslice) > 0:
+                    if okstringslice[0] in lijst:
+                        print(" ", end = "")
+            else: 
+                print(catcol[okstringslice[0]]+okstringslice+kleuren["ResetAll"], end = "")
+                okstringslice = ""
+        if meer == True:
+            print(kleuren["coltoon"]+">"+kleuren["ResetAll"], end = "")
         print()
 
 def keuze1menu(rekening):
