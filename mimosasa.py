@@ -3,7 +3,7 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.50"
+versie = "0.0.51"
 versiedatum = "20240518"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
@@ -82,15 +82,15 @@ oepsCJ = "ma huwaxüo"
 oeps = "Oeps, daar ging wat mis"
 woordcategorieEN = "Category"
 woordcategorieIT = "Categoria"
-woordcategorieCJ = "hupa"
+woordcategorieCJ = "hupaʃesemesüi"
 woordcategorie = "Categorie"
 woordtransactieEN = "Transaction"
 woordtransactieIT = "Transazione"
-woordtransactieCJ = "huʃese"
+woordtransactieCJ = "huʃesemesüi"
 woordtransactie = "Transactie"
 geenspaarpottenEN = "There are no savings pots (yet)"
 geenspaarpottenIT = "Non ci sono (ancora) salvadanai"
-geenspaarpottenCJ = "ma huʃeselüu (hiqi)"
+geenspaarpottenCJ = "ma huwaŋoli (hiqi)"
 geenspaarpotten = "Er zijn (nog) geen spaarpotten"
 
 lijn = "|"+78*"-"+"|"
@@ -168,22 +168,22 @@ nieuwheaderlijstIT = [
         "Consiglio del giorno"
         ]
 nieuwheaderlijstCJ = [
-        "huhuʒi",
-        "huhuʒihe",
-        "huhuʒiʃa",
-        "hucopa",
-        "huhuwa",
-        "hupuzi",
-        "haca hupupu hiʒi hucazi",
-        "huca hoñüo >< hoño",
-        "haca huʃese hupañi",
-        "huca huqi",
-        "huca'apa",
-        "hupecame",
-        "hupewoca hiqeseʃi",
-        "haŋo hucaqipabobi",
-        "haŋo hupu hise huCSV",
-        "haca hudareqi"
+        "huhiʒi",
+        "huhiheʒi",
+        "huʒiʃa",
+        "hucoʒi",
+        "huhiwa",
+        "hubizi",
+        "haca hubipu hiŋa hucazi",
+        "hucañüo >< hucaño",
+        "haca hupaʃesemesüiñi",
+        "hucaqi",
+        "huca'aʃesemesüipa",
+        "hupecamepa",
+        "hubi huʃesemesüi hoca hiqeseʃi",
+        "haŋo hucaʃesemesüipaŋaqi",
+        "haŋo huʃesemesüipu hiseCSV",
+        "haca be hudaŋaʒi hiʃazi"
         ]
 nieuwheaderlijst = [
         "Rekeningnaam",                      # 0
@@ -222,11 +222,11 @@ lijnlijstIT = [
         ]
 lijnlijstCJ = [
         "hubi",
-        "huhu",
-        "hupuwazu",
-        "huwaŋo",
-        "huwasepuwazu",
-        "hupuwazuli"
+        "huhi",
+        "hubizu",
+        "hubiŋo",
+        "hubisebizu",
+        "hubisebizuli"
         ]
 lijnlijst = [
         "ID",       # 0
@@ -395,14 +395,14 @@ menuEN = {
         "0,5": "Transfer settings to another account",
     "1": " > Show < ",
         "1,0": "Collect and sort transactions",
-            "1,0,1": " Sort by %s 1231 > 0101" % elementenEN[0].upper(),
-            "1,0,2": " Sort by %s 0101 < 1231" % elementenEN[0].upper(),
-            "1,0,3": " Sort by %s + > -" % elementenEN[1].upper(),
-            "1,0,4": " Sort by %s - < +" % elementenEN[1].upper(),
-            "1,0,5": " Sort by %s Z > A" % elementenEN[2].upper(),
-            "1,0,6": " Sort by %s A < Z" % elementenEN[2].upper(),
-            "1,0,7": " Sort by %s Z > A" % elementenEN[3].upper(),
-            "1,0,8": " Sort by %s A < Z" % elementenEN[3].upper(),
+            "1,0,1": " Sort by %s 1231 > 0101" % elementenEN[0],
+            "1,0,2": " Sort by %s 0101 < 1231" % elementenEN[0],
+            "1,0,3": " Sort by %s + > -" % elementenEN[1],
+            "1,0,4": " Sort by %s - < +" % elementenEN[1],
+            "1,0,5": " Sort by %s Z > A" % elementenEN[2],
+            "1,0,6": " Sort by %s A < Z" % elementenEN[2],
+            "1,0,7": " Sort by %s Z > A" % elementenEN[3],
+            "1,0,8": " Sort by %s A < Z" % elementenEN[3],
         "1,1": "Collect transactions and display table",
         "1,2": "Show monthly total",
         "1,3": "View %ss in collection" % woordtransactieEN.lower(),
@@ -461,14 +461,14 @@ menuIT = {
         "0,5": "Trasferire le impostazioni a un altro account",
     "1": " > Visualizzare < ",
         "1,0": "Collezionare e ordinare transazioni",
-            "1,0,1": " Ordina per %s 1231 > 0101" % elementenIT[0].upper(),
-            "1,0,2": " Ordina per %s 0101 < 1231" % elementenIT[0].upper(),
-            "1,0,3": " Ordina per %s + > -" % elementenIT[1].upper(),
-            "1,0,4": " Ordina per %s - < +" % elementenIT[1].upper(),
-            "1,0,5": " Ordina per %s Z > A" % elementenIT[2].upper(),
-            "1,0,6": " Ordina per %s A < Z" % elementenIT[2].upper(),
-            "1,0,7": " Ordina per %s Z > A" % elementenIT[3].upper(),
-            "1,0,8": " Ordina per %s A < Z" % elementenIT[3].upper(),
+            "1,0,1": " Ordina per %s 1231 > 0101" % elementenIT[0],
+            "1,0,2": " Ordina per %s 0101 < 1231" % elementenIT[0],
+            "1,0,3": " Ordina per %s + > -" % elementenIT[1],
+            "1,0,4": " Ordina per %s - < +" % elementenIT[1],
+            "1,0,5": " Ordina per %s Z > A" % elementenIT[2],
+            "1,0,6": " Ordina per %s A < Z" % elementenIT[2],
+            "1,0,7": " Ordina per %s Z > A" % elementenIT[3],
+            "1,0,8": " Ordina per %s A < Z" % elementenIT[3],
         "1,1": "Collezionare transazioni e visualizzare la tabella",
         "1,2": "Visualizzare totale mensile",
         "1,3": "Visualizzare transazioni in collezione",
@@ -495,31 +495,31 @@ menuIT = {
     "Q": "Uscire"
         }
 menuCJ = {
-    "0": "",
-        "0,0": "",
-        "0,1": "",
-            "0,1,0": " ",
-            "0,1,1": " "+ nieuwheaderlijstCJ[0],
-            "0,1,2": " "+nieuwheaderlijstCJ[1],
-            "0,1,3": " "+nieuwheaderlijstCJ[2],
-            "0,1,4": " "+nieuwheaderlijstCJ[3],
-            "0,1,5": " "+nieuwheaderlijstCJ[4],
-            "0,1,6": " "+nieuwheaderlijstCJ[5],
-            "0,1,7": " "+nieuwheaderlijstCJ[6],
-            "0,1,8": " "+nieuwheaderlijstCJ[7],
-            "0,1,9": " "+nieuwheaderlijstCJ[8],
-            "0,1,10": " "+nieuwheaderlijstCJ[9],
-            "0,1,11": " "+nieuwheaderlijstCJ[10],
-            "0,1,12": " "+nieuwheaderlijstCJ[11],
-            "0,1,13": " "+nieuwheaderlijstCJ[12],
-            "0,1,14": " "+nieuwheaderlijstCJ[13],
-            "0,1,15": " "+nieuwheaderlijstCJ[14],
-            "0,1,16": " "+nieuwheaderlijstCJ[15],
-        "0,2": " %s" % woordcategorieCJ.lower(),
-            "0,2,1": "  %s" % woordcategorieCJ.lower(),
-            "0,2,2": "  %s" % woordcategorieCJ.lower(),
-            "0,2,3": " ",
-            "0,2,4": "  %s" % woordcategorieCJ.lower(),
+    "0": "huʃasexa hiŋa hudaŋeʃa",
+        "0,0": "hudaŋeʃa",
+        "0,1": "huʃasexa",
+            "0,1,0": " haʒixa hozi",
+            "0,1,1": " hazüi "+ nieuwheaderlijstCJ[0],
+            "0,1,2": " hazüi "+nieuwheaderlijstCJ[1],
+            "0,1,3": " hazüi "+nieuwheaderlijstCJ[2],
+            "0,1,4": " hazüi "+nieuwheaderlijstCJ[3],
+            "0,1,5": " hazüi "+nieuwheaderlijstCJ[4],
+            "0,1,6": " hazüi "+nieuwheaderlijstCJ[5],
+            "0,1,7": " hazüi "+nieuwheaderlijstCJ[6],
+            "0,1,8": " hazüi "+nieuwheaderlijstCJ[7],
+            "0,1,9": " hazüi "+nieuwheaderlijstCJ[8],
+            "0,1,10": " hazüi "+nieuwheaderlijstCJ[9],
+            "0,1,11": " hazüi "+nieuwheaderlijstCJ[10],
+            "0,1,12": " hazüi "+nieuwheaderlijstCJ[11],
+            "0,1,13": " hazüi "+nieuwheaderlijstCJ[12],
+            "0,1,14": " hazüi "+nieuwheaderlijstCJ[13],
+            "0,1,15": " hazüi "+nieuwheaderlijstCJ[14],
+            "0,1,16": " hazüi "+nieuwheaderlijstCJ[15],
+        "0,2": "haxa %s" % woordcategorieCJ.lower(),
+            "0,2,1": "hazi %s" % woordcategorieCJ.lower(),
+            "0,2,2": "hazüi huhi %s" % woordcategorieCJ.lower(),
+            "0,2,3": "hazüi hubiŋo",
+            "0,2,4": "hazüu %s" % woordcategorieCJ.lower(),
             "0,2,5": " ",
             "0,2,6": " ",
         "0,3": "",
@@ -527,14 +527,14 @@ menuCJ = {
         "0,5": "",
     "1": " >  < ",
         "1,0": "",
-            "1,0,1": "  %s 1231 > 0101" % elementenCJ[0].upper(),
-            "1,0,2": "  %s 0101 < 1231" % elementenCJ[0].upper(),
-            "1,0,3": "  %s + > -" % elementenCJ[1].upper(),
-            "1,0,4": "  %s - < +" % elementenCJ[1].upper(),
-            "1,0,5": "  %s Z > A" % elementenCJ[2].upper(),
-            "1,0,6": "  %s A < Z" % elementenCJ[2].upper(),
-            "1,0,7": "  %s Z > A" % elementenCJ[3].upper(),
-            "1,0,8": "  %s A < Z" % elementenCJ[3].upper(),
+            "1,0,1": "  %s 1231 > 0101" % elementenCJ[0],
+            "1,0,2": "  %s 0101 < 1231" % elementenCJ[0],
+            "1,0,3": "  %s + > -" % elementenCJ[1],
+            "1,0,4": "  %s - < +" % elementenCJ[1],
+            "1,0,5": "  %s Z > A" % elementenCJ[2],
+            "1,0,6": "  %s A < Z" % elementenCJ[2],
+            "1,0,7": "  %s Z > A" % elementenCJ[3],
+            "1,0,8": "  %s A < Z" % elementenCJ[3],
         "1,1": "",
         "1,2": "",
         "1,3": "",
@@ -548,15 +548,15 @@ menuCJ = {
         "3,4": " %s %s" % (woordtransactieCJ.lower(),elementenCJ[3]),
         "3,5": " %s %s" % (woordtransactieCJ.lower(),woordcategorieCJ),
     "4": " %s" % woordtransactieCJ.lower(),
-    "5": "",
-        "5,1": "",
-        "5,2": "",
-        "5,3": "",
-            "5,3,1": " ",
-            "5,3,2": " ",
-            "5,3,3": " ",
-            "5,3,4": " ",
-        "5,4": "",
+    "5": "huwaŋo",
+        "5,1": "haca huwaŋo",
+        "5,2": "haze huwaŋo",
+        "5,3": "hazüi huwaŋo",
+            "5,3,1": "hazüi huhi",
+            "5,3,2": "hazüi hubizu",
+            "5,3,3": "hazüi hubiŋo",
+            "5,3,4": "hazüi hubiseqüo",
+        "5,4": "haʒüu huwaŋo",
     "<": "",
     "Q": ""
         }
@@ -943,11 +943,11 @@ kleurenschemalijst = [
     "Regenboog"
     ]
 
-def toonkleurenschemaopties():
+def toonkleurenschemaopties(): # geen H
     for i in range(len(kleurenschemalijst)):
         print(forr3(i)+" : "+vertaalv(kleurenschemalijst[i]))
 
-def updatekleuren(rekening):
+def updatekleuren(rekening): # geen H
     header = haalheader(rekening)
     if header[nieuwheaderlijst[10]] == kleurenschemalijst[1]:
         kleuren = {
@@ -1231,7 +1231,7 @@ def updatekleuren(rekening):
                 }
     return kleuren,catcol
 
-def coljanee(rekening,header,item):
+def coljanee(rekening,header,item): # geen H
     kleuren,catcol = updatekleuren(rekening)
     if item == ">":
         coljn = kleuren["colgoed"]
@@ -1274,17 +1274,17 @@ for i in logo:
     sleep(0.00125)
 print()
 
-def printdatum(nustr):
+def printdatum(nustr): # geen H
     kleuren,catcol = updatekleuren(rekening)
     datum = opmaakdatum(nustr)
     print(kleuren["coltoon"]+forcw(("%s = " % nustr)+datum)+kleuren["ResetAll"])
 
-def printdatumlinks(datum):
+def printdatumlinks(datum): # geen H
     kleuren,catcol = updatekleuren(rekening)
     dat = opmaakdatum(datum)
     print(col+("%s = " % datum)+dat+ResetAll)
 
-def doei():
+def doei(): # geen H
     try:
         with open("laatstgekozen","r") as l:
             rekening = l.read()
@@ -1310,7 +1310,7 @@ def doei():
     print()
     exit()
 
-def exportcsv(rekening):
+def exportcsv(rekening): # geen H
     ok = {}
     ok = haaltransacties(rekening,ok)
     rekeningtotaal = rekeningsom(rekening)
@@ -1335,28 +1335,28 @@ def exportcsv(rekening):
                     print("", file = e)
                 geprint = False
 
-def checkfloat(floattest):
+def checkfloat(floattest): # geen H
     try:
         floa = float(floattest)
         return True
     except:
         return False
 
-def checkint(inttest):
+def checkint(inttest): # geen H
     try:
         integ = int(inttest)
         return True
     except:
         return False
 
-def checkdatum(YYYYMMDD):
+def checkdatum(YYYYMMDD): # geen H
     try:
         datum = datetime.strftime(datetime.strptime(YYYYMMDD,"%Y%m%d"),"%Y%m%d")
         return True
     except:
         return False
 
-def grootgetal(getal,forsom,K):
+def grootgetal(getal,forsom,K): # geen H
     if getal <= -1000000:
         getal = "-----"
         forsom = "{:>5}".format
@@ -1378,7 +1378,7 @@ def grootgetal(getal,forsom,K):
         K = ""
         return round(getal,2),forsom,K
 
-def rekeningsom(rekening):
+def rekeningsom(rekening): # geen H
     header = haalheader(rekening)
     som = header[nieuwheaderlijst[5]]
     for i in lijst:
@@ -1391,14 +1391,14 @@ def rekeningsom(rekening):
             #print(f)
     return round(som,2)
 
-def haalheader(rekening):
+def haalheader(rekening): # geen H
     if rekening.upper() in (neelijst+afsluitlijst):
         doei()
     with open(os.path.join(rekening,"header"),"r") as h:
         header = ast.literal_eval(h.read())
     return header
 
-def rekeningenoverzicht():
+def rekeningenoverzicht(): # geen H
     rekeningenlijst = []
     for i in os.listdir():
         if "#" in i:
@@ -1406,7 +1406,7 @@ def rekeningenoverzicht():
     rekeningenlijst = sorted(rekeningenlijst)
     return rekeningenlijst
 
-def haallaatstgekozen():
+def haallaatstgekozen(): # geen H
     try:
         with open("laatstgekozen","r") as l:
             laatstgekozen = l.read()
@@ -1418,7 +1418,7 @@ def haallaatstgekozen():
             print(laatstgekozen, file = l, end = "")
     return laatstgekozen
 
-def toonrekeningsaldo(rekeningenlijst):
+def toonrekeningsaldo(rekeningenlijst): # geen H
     laatstgekozen = haallaatstgekozen()
     maxreklen = len(max(rekeningenlijst, key = len))
     totaalalles = 0.0
@@ -1469,7 +1469,7 @@ def toonrekeningsaldo(rekeningenlijst):
             print(int((w-lenprtstfzw)/2)*" "+" "+forl3(" ")+" "+("{:^%s}" % maxreklen).format(" ")+" "+"_"+"_"*8)
             print(int((w-lenprtstfzw)/2)*" "+" "+forl3(" ")+" "+("{:^%s}" % maxreklen).format(" ")+" "+grotegetalkleuren("","",totaalalles)+valuta+forsom(totaalallesK)+K+ResetAll)
 
-def toonrekeningenactief(rekeningenlijst):
+def toonrekeningenactief(rekeningenlijst): # geen H
     laatstgekozen = haallaatstgekozen()
     maxreklen = len(max(rekeningenlijst, key = len))
     totaalalles = 0.0
@@ -2501,7 +2501,7 @@ def geefsneltoets(rekening,header,col,ok): # H
     categoriekeuzelijst = lijst
     return sneltoets,ok,datumlijst,bedraglijst,wederpartij,onderwerp,categoriekeuzelijst
 
-def printselectie(rekening,header,col,ok):
+def printselectie(rekening,header,col,ok): # H
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -2655,30 +2655,51 @@ def printselectie(rekening,header,col,ok):
           menu["1,0,8"]
           )
     )
-    sorteren = input(col+inputindent)
-    print(ResetAll, end = "")
-    if sorteren.upper() in afsluitlijst:
-        doei()
-    elif sorteren.upper() in neelijst:
-        return rekening,header,col,keuze1lijst,ok
-    elif sorteren == "1":
-        ok = sortokdatumreverse(rekening,ok)
-    elif sorteren == "2":
-        ok = sortokdatum(rekening,ok)
-    elif sorteren == "3":
-        ok = sortokbedragreverse(rekening,ok)
-    elif sorteren == "4":
-        ok = sortokbedrag(rekening,ok)
-    elif sorteren == "5":
-        ok = sortokwederpartijreverse(rekening,ok)
-    elif sorteren == "6":
-        ok = sortokwederpartij(rekening,ok)
-    elif sorteren == "7":
-        ok = sortokonderwerpreverse(rekening,ok)
-    elif sorteren == "8":
-        ok = sortokonderwerp(rekening,ok)
-    else:
-        pass
+    loop = True
+    while loop == True:
+        sorteren = input(col+inputindent)
+        print(ResetAll, end = "")
+        if sorteren.upper() in afsluitlijst:
+            doei()
+        elif sorteren.upper() in neelijst:
+            return rekening,header,col,keuze1lijst,ok
+        elif sorteren.upper () == "H":
+            if Taal == "EN":
+                wraptekst = textwrap.wrap("If desired, sort the collection by a chosen element. If no choice is made, the table will display the transactions sorted in ascending order on %s - %s - %s - %s, grouped per %s." % (elementenEN[0],elementenEN[1],elementenEN[2],elementenEN[3],woordcategorieEN),w)
+            elif Taal == "IT":
+                wraptekst = textwrap.wrap("Se lo desideri, ordina la collezione su un elemento a tua scelta. Se non fai una scelta, la tabella mostrerà le transazioni ordinate in modo crescente su %s - %s - %s - %s, raggruppate per %s." % (elementenIT[0],elementenIT[1],elementenIT[2],elementenIT[3],woordcategorieIT),w)
+            elif Taal == "CJ":
+                wraptekst = textwrap.wrap("me hea hakexa hupaʃesemesüi m huŋe. mo hea hamexali hupaʃesemesüi m hupaʃesemesüi haxa %s - %s - %s - %s hiŋüi %s" % (elementenCJ[0],elementenCJ[1],elementenCJ[2],elementenCJ[3],woordcategorieCJ),w)
+            else:
+                wraptekst = textwrap.wrap("Sorteer indien gewenst de collectie op een element naar keuze. Maakt u geen keuze, dan geeft de tabel de transacties oplopend gesorteerd weer op %s - %s - %s - %s, gegroepeerd per %s." % (elementen[0],elementen[1],elementen[2],elementen[3],woordcategorie),w)
+            for i in wraptekst:
+                print(i)
+        elif sorteren == "1":
+            ok = sortokdatumreverse(rekening,ok)
+            loop = False
+        elif sorteren == "2":
+            ok = sortokdatum(rekening,ok)
+            loop = False
+        elif sorteren == "3":
+            ok = sortokbedragreverse(rekening,ok)
+            loop = False
+        elif sorteren == "4":
+            ok = sortokbedrag(rekening,ok)
+            loop = False
+        elif sorteren == "5":
+            ok = sortokwederpartijreverse(rekening,ok)
+            loop = False
+        elif sorteren == "6":
+            ok = sortokwederpartij(rekening,ok)
+            loop = False
+        elif sorteren == "7":
+            ok = sortokonderwerpreverse(rekening,ok)
+            loop = False
+        elif sorteren == "8":
+            ok = sortokonderwerp(rekening,ok)
+            loop = False
+        else:
+            loop = False
     ########## print naar scherm start ##########
     print(kleuren["coltoon"]+toplijn+kleuren["ResetAll"])
     print(kleuren["coltoon"]+"|"+kleuren["ResetAll"], end = "")
@@ -2762,7 +2783,7 @@ def samenvattingcategorie(rekening,cat,datumlijst):
     elif Taal == "IT":
         woorden = ["Totale","Budget","Percentuale","Media","Numero"]
     elif Taal == "CJ":
-        woorden = ["hupu","huŋo","hubüipu","hupubüipo","hubi"]
+        woorden = ["hubipu","hubiŋo","hubüipu","hubipubüipo","hubi"]
     else:
         woorden = ["Totaal","Budget","Procent","Gemiddeld","Aantal"]
     maxlen = len(max(woorden, key = len))
@@ -4017,7 +4038,7 @@ def resetalt(rekening,header):
     elif Taal == "IT":
         zekervraag = textwrap.wrap("Sei sicuro di voler ripristinare i nomi delle categorie ai valori predefiniti? I dati delle transazioni rimarranno invariati",w)
     elif Taal == "CJ":
-        zekervraag = textwrap.wrap("mi hea hakezüi huhuzipa huŋe huʒipapu. huʃesepu hozüili",w)
+        zekervraag = textwrap.wrap("mi hea hakezüi huhizipa huŋe huʒipapu. huʃepu hozüili",w)
     else:
         zekervraag = textwrap.wrap("Weet u zeker dat u de categorienamen wilt terugzetten naar de standaardnamen? Transactiedata blijven ongewijzigd",w)
     for i in zekervraag:
@@ -6457,6 +6478,18 @@ def spaarpotkeuze(keuze1lijst,rekening,ok):
           menuIT["5,4"]
           )
       )
+            elif Taal == "CJ":
+                print(
+          """ >1 : %s
+  2 : %s
+  3 : %s
+  4 : %s""" % (
+          menuCJ["5,1"],
+          menuCJ["5,2"],
+          menuCJ["5,3"],
+          menuCJ["5,4"]
+          )
+      )
             else:
                 print(
           """ >1 : %s
@@ -6511,6 +6544,17 @@ def spaarpotkeuze(keuze1lijst,rekening,ok):
           menuIT["5,3,2"],
           menuIT["5,3,3"],
           menuIT["5,3,4"]
+              )
+          )
+                        elif Taal == "CJ":
+                            print("""  1 : %s
+  2 : %s
+  3 : %s
+  4 : %s""" % (
+          menuCJ["5,3,1"],
+          menuCJ["5,3,2"],
+          menuCJ["5,3,3"],
+          menuCJ["5,3,4"]
               )
           )
                         else:
@@ -6669,16 +6713,45 @@ if header[nieuwheaderlijst[14]] == ">":
     tipvandedag(rekening,header,col)
 loop = True
 while loop == True:
-    rekening,header,col,keuze1lijst,ok = keuze1menu(rekening)
-    if keuze1lijst[0] == "0":
-        rekening,header,col,keuze1lijst,ok = beheerkeuze(rekening,header,col,keuze1lijst,ok)
-    if keuze1lijst[0] == "1":
-        rekening,header,col,keuze1lijst,ok = toonkeuze(rekening,header,col,keuze1lijst,ok)
-    if keuze1lijst[0] == "2":
-        rekening,header,col,keuze1lijst,ok = nieuwkeuze(keuze1lijst,rekening,ok)
-    if keuze1lijst[0] == "3":
-        rekening,header,col,keuze1lijst,ok = wijzigkeuze(keuze1lijst,rekening,ok)
-    if keuze1lijst[0] == "4":
-        rekening,header,col,keuze1lijst,ok = verwijderkeuze(rekening,header,col,keuze1lijst,ok)
-    if keuze1lijst[0] == "5":
-        rekening,header,col,keuze1lijst,ok = spaarpotkeuze(keuze1lijst,rekening,ok)
+    try:
+        rekening,header,col,keuze1lijst,ok = keuze1menu(rekening)
+        if keuze1lijst[0] == "0":
+            rekening,header,col,keuze1lijst,ok = beheerkeuze(rekening,header,col,keuze1lijst,ok)
+        if keuze1lijst[0] == "1":
+            rekening,header,col,keuze1lijst,ok = toonkeuze(rekening,header,col,keuze1lijst,ok)
+        if keuze1lijst[0] == "2":
+            rekening,header,col,keuze1lijst,ok = nieuwkeuze(keuze1lijst,rekening,ok)
+        if keuze1lijst[0] == "3":
+            rekening,header,col,keuze1lijst,ok = wijzigkeuze(keuze1lijst,rekening,ok)
+        if keuze1lijst[0] == "4":
+            rekening,header,col,keuze1lijst,ok = verwijderkeuze(rekening,header,col,keuze1lijst,ok)
+        if keuze1lijst[0] == "5":
+            rekening,header,col,keuze1lijst,ok = spaarpotkeuze(keuze1lijst,rekening,ok)
+    except(Exception) as f:
+        #print(f)
+        kleuren,catcol = updatekleuren(rekening)
+        Taal = header[nieuwheaderlijst[3]]
+        if Taal == "EN":
+            print(kleuren["colslecht"]+kleuren["Omkeren"]+"Solve this error with \"0,1,0\":"+menuEN["0,1,0"]+kleuren["ResetAll"])
+            print(kleuren["colslecht"], end = "")
+            for i in helpmenuEN["0,1,0"]:
+                print(i)
+            print(kleuren["ResetAll"], end = "")
+        elif Taal == "IT":
+            print(kleuren["colslecht"]+kleuren["Omkeren"]+"Risolvere questo problema con \"0,1,0\":"+menuIT["0,1,0"]+kleuren["ResetAll"])
+            print(kleuren["colslecht"], end = "")
+            for i in helpmenuIT["0,1,0"]:
+                print(i)
+            print(kleuren["ResetAll"], end = "")
+        elif Taal == "CJ":
+            print(kleuren["colslecht"]+kleuren["Omkeren"]+"Risolvere questo problema con \"0,1,0\":"+menuIT["0,1,0"]+kleuren["ResetAll"])
+            print(kleuren["colslecht"], end = "")
+            for i in helpmenuCJ["0,1,0"]:
+                print(i)
+            print(kleuren["ResetAll"], end = "")
+        else:
+            print(kleuren["colslecht"]+kleuren["Omkeren"]+"Los dit probleem op met \"0,1,0\":"+menu["0,1,0"]+kleuren["ResetAll"])
+            print(kleuren["colslecht"], end = "")
+            for i in helpmenu["0,1,0"]:
+                print(i)
+            print(kleuren["ResetAll"], end = "")
