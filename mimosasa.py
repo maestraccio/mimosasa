@@ -3,12 +3,12 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.52"
-versiedatum = "20240520"
+versie = "0.0.53"
+versiedatum = "20240522"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
-hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
-nonasciiletters = "ʃ ʒ ŋ"
+#hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
+#nonasciiletters = "ʃ ʒ ŋ"
 w = 80
 K = ""
 fornum = "{0:>8.2f}".format
@@ -179,7 +179,7 @@ nieuwheaderlijstCJ = [
         "haca hubipu hiŋa hucazi",
         "hucañüo >< hucaño",
         "haca hupaʃesemesüiñi",
-        "hucaqi",
+        "huhuhiqi",
         "huca'aʃesemesüipa",
         "hupecamepa",
         "hubi huʃesemesüi hoca hiqeseʃi",
@@ -1721,7 +1721,7 @@ def vertaalv(v): # geen H
         .replace(woordcategorie,woordcategorieCJ)\
         .replace(kleurenschemalijst[1],"pu")\
         .replace(kleurenschemalijst[2],"be")\
-        .replace(kleurenschemalijst[3],"hupaweca'apa")\
+        .replace(kleurenschemalijst[3],"hupaca'axa")\
         .replace(">","la")\
         .replace("<","li")
         for i in nieuwalternatievenamendict:
@@ -2756,6 +2756,8 @@ def printselectie(rekening,header,col,ok): # H
             ########## print naar file stop ##########
     if datumlijst[0] == datumlijst[1]:
         dagtotaal(rekening,header,col,datumlijst[0])
+    if onderwerp == "#":
+        toonspaarpotten(rekening,header)
     if len(categoriekeuzelijst) == 1:
         samenvattingcategorie(rekening,categoriekeuzelijst[0],datumlijst)
     return rekening,header,col,keuze1lijst,ok
@@ -5868,6 +5870,11 @@ def inspaarpotten(rekening,header): # geen H
             totaalinspaarpotten = "There is %s put aside in %s%s savings pots%s" % (grotegetalkleuren(rekening,header,spaarpottegoed)+valuta+forsom(tegoed)+K+kleuren["ResetAll"],kleuren["5"],len(spaarpotten),kleuren["ResetAll"])
         elif Taal == "IT":
             totaalinspaarpotten = "Messo da parte %s in %s%s salvadanai%s" % (grotegetalkleuren(rekening,header,spaarpottegoed)+valuta+forsom(tegoed)+K+kleuren["ResetAll"],kleuren["5"],len(spaarpotten),kleuren["ResetAll"])
+        elif Taal == "CJ":
+            totaalinspaarpotten = "ma %s hoŋo hiŋüi %s%s hubiŋewaŋopa%s" % (grotegetalkleuren(rekening,header,spaarpottegoed)+valuta+forsom(tegoed)+K+kleuren["ResetAll"],kleuren["5"],len(spaarpotten),kleuren["ResetAll"])
+#hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
+#nonasciiletters = "ʃ ʒ ŋ"
+
         else:
             totaalinspaarpotten = "Er is %s opzij gezet in %s%s spaarpotten%s" % (grotegetalkleuren(rekening,header,spaarpottegoed)+valuta+forsom(tegoed)+K+kleuren["ResetAll"],kleuren["5"],len(spaarpotten),kleuren["ResetAll"])
         print(totaalinspaarpotten)
@@ -5892,6 +5899,8 @@ def vrijbesteedbaar(rekening,header): # geen H
         vrijtegoed = "There is %s discretionary" % (grotegetalkleuren(rekening,header,besteedbaar)+valuta+forsom(vrij)+K+kleuren["ResetAll"])
     elif Taal == "IT":
         vrijtegoed = "È disponibile %s da spendere liberamente" % (grotegetalkleuren(rekening,header,besteedbaar)+valuta+forsom(vrij)+K+kleuren["ResetAll"])
+    elif Taal == "CJ":
+        vrijtegoed = "ma %s hoŋi" % (grotegetalkleuren(rekening,header,besteedbaar)+valuta+forsom(vrij)+K+kleuren["ResetAll"])
     else:
         vrijtegoed = "Er is %s vrij te besteden" % (grotegetalkleuren(rekening,header,besteedbaar)+valuta+forsom(vrij)+K+kleuren["ResetAll"])
     print(vrijtegoed)
@@ -5909,16 +5918,27 @@ def toonspaarpotten(rekening,header): # geen H
     elif Taal == "IT":
         geenspaarpot = geenspaarpottenIT
         lijnst = lijnlijstIT
+    elif Taal == "CJ":
+        geenspaarpot = geenspaarpottenCJ
+        lijnst = ["~"+lijnlijstCJ[0][-2:]]
+        for i in lijnlijstCJ[1:]:
+            if len(i) > 11:
+                lijnst.append("~"+i[-10:])
+            else:
+                lijnst.append(i)
     else:
         geenspaarpot = geenspaarpotten
         lijnst = lijnlijst
     if len(spaarpotten) == 0:
         print(geenspaarpot)
-    spaarpottentoplijn = col+"+"+"-"*3+"+"+"-"*20+"+"+"-"*(len(lijnst[2])+2)+"+"+"-"*11+"+"+"-"*11+"+"+"-"*11+"+"+kleuren["ResetAll"]
+    if len(lijnst[2]) < 9:
+        lenlijnst2 = 9
+    lennaamveld = w - (lenlijnst2+2) -43
+    spaarpottentoplijn = col+"+"+"-"*3+"+"+"-"*lennaamveld+"+"+"-"*(lenlijnst2+2)+"+"+"-"*11+"+"+"-"*11+"+"+"-"*11+"+"+kleuren["ResetAll"]
     lijnlijstlijn = col+"|"+kleuren["ResetAll"]\
     +forc3(lijnst[0])+" "\
-    +forc20(lijnst[1])+" "\
-    +("{:^%d}" % (len(lijnst[2])+2)).format(lijnst[2])+" "\
+    +("{:^%d}" % (lennaamveld)).format(lijnst[1])+" "\
+    +("{:^%d}" % (lenlijnst2+2)).format(lijnst[2])+" "\
     +forc11(lijnst[3])+" "\
     +forc11(lijnst[4])+" "\
     +forc11(lijnst[5])\
@@ -5931,7 +5951,7 @@ def toonspaarpotten(rekening,header): # geen H
         tegaan = (spaarpotten[i][0] + spaarpotten[i][2]) * -1
         print(col+"|"+kleuren["ResetAll"]\
             +forc3(tel)+":"\
-            +kleuren["5"]+forl20(i[:20])+":"\
+            +kleuren["5"]+("{:<%d}" % (lennaamveld)).format(i[:lennaamveld])+":"\
             +kleuren["Vaag"]+("{:^%d}" % len(lijnst[2])).format(forc11(valuta+grootgetal(spaarpotten[i][0],fornum,"")[1](grootgetal(spaarpotten[i][0],fornum,"")[0])+grootgetal(spaarpotten[i][0],fornum,"")[2]))+kleuren["ResetAll"]+":"\
             +grotegetalkleuren(rekening,header,spaarpotten[i][1])+forc11(valuta+grootgetal(spaarpotten[i][1],fornum,"")[1](grootgetal(spaarpotten[i][1],fornum,"")[0])+grootgetal(spaarpotten[i][1],fornum,"")[2])+kleuren["ResetAll"]+":"\
             +grotegetalkleuren(rekening,header,spaarpotten[i][2])+forc11(valuta+grootgetal(spaarpotten[i][2],fornum,"")[1](grootgetal(spaarpotten[i][2],fornum,"")[0])+grootgetal(spaarpotten[i][2],fornum,"")[2])+kleuren["ResetAll"]+":"\
