@@ -3,7 +3,7 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.55"
+versie = "0.0.56"
 versiedatum = "20240526"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
@@ -2526,26 +2526,31 @@ def printselectie(rekening,header,col,ok): # H
             ok = noodok
             return rekening,header,col,keuze1lijst,ok
         ok = filterdatumlijst(datumlijst,ok)
+        print(col+kleuren["Vaag"]+inputindent+str(len(ok))+kleuren["ResetAll"])
         bedraglijst = geefbedragbereik(rekening,header,col,ok,0.0)
         if bedraglijst == "<":
             ok = noodok
             return rekening,header,col,keuze1lijst,ok
         ok = filterbedraglijst(bedraglijst,ok)
+        print(col+kleuren["Vaag"]+inputindent+str(len(ok))+kleuren["ResetAll"])
         wederpartij = geefwederpartij(rekening,header,col,ok)
         if wederpartij == "<":
             ok = noodok
             return rekening,header,col,keuze1lijst,ok
         ok = filterwederpartij(wederpartij,ok)
+        print(col+kleuren["Vaag"]+inputindent+str(len(ok))+kleuren["ResetAll"])
         onderwerp = geefonderwerp(rekening,header,col,ok)
         if onderwerp == "<":
             ok = noodok
             return rekening,header,col,keuze1lijst,ok
         ok = filteronderwerp(onderwerp,ok)
+        print(col+kleuren["Vaag"]+inputindent+str(len(ok))+kleuren["ResetAll"])
         categoriekeuzelijst = geefcategorie(rekening,header,col,ok)
         if categoriekeuzelijst == "<":
             ok = noodok
             return rekening,header,col,keuze1lijst,ok
         ok = filtercategorie(categoriekeuzelijst,ok)
+        print(col+kleuren["Vaag"]+inputindent+str(len(ok))+kleuren["ResetAll"])
     elif sneltoets == "<":
         return rekening,header,col,keuze1lijst,{}
     else:
@@ -2554,6 +2559,7 @@ def printselectie(rekening,header,col,ok): # H
         ok = filterwederpartij(wederpartij,ok)
         ok = filteronderwerp(onderwerp,ok)
         ok = filtercategorie(categoriekeuzelijst,ok)
+        print(col+kleuren["Vaag"]+inputindent+str(len(ok))+kleuren["ResetAll"])
     scheidingslijn = "+"+"-"*6+"+"+"-"*10+"+"+"-"*10+"+"+"-"*14+"+"+"-"*34+"+"
     forni = "{0:>.2f}".format
     forno = "{0:>.2f}".format
