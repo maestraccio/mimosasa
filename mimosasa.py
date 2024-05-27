@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.56"
-versiedatum = "20240526"
+versie = "0.0.57"
+versiedatum = "20240527"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -84,11 +84,11 @@ oepsCJ = "ma huwaxüo"
 oeps = "Oeps, daar ging wat mis"
 woordcategorieEN = "Category"
 woordcategorieIT = "Categoria"
-woordcategorieCJ = "hupaʃesemesüi"
+woordcategorieCJ = "hupabiwasemesüi"
 woordcategorie = "Categorie"
 woordtransactieEN = "Transaction"
 woordtransactieIT = "Transazione"
-woordtransactieCJ = "huʃesemesüi"
+woordtransactieCJ = "hubiwasemesüi"
 woordtransactie = "Transactie"
 woordspaarpotEN = "Savings pot"
 woordspaarpotIT = "Salvadanaio"
@@ -181,7 +181,7 @@ nieuwheaderlijstCJ = [
         "huhiwa",
         "hubiwazi",
         "haca hubiwapu hiŋa hucazi",
-        "hucañüo >< hucaño",
+        "hucabiwañüo >< hucabiwaño",
         "haca hupaʃesemesüiñi",
         "huhuhiqi",
         "huca'aʃesemesüipa",
@@ -329,11 +329,11 @@ nieuwalternatievenamendictCJ = {
         "8":"8000",
         "9":"9000",
         "A":"~süi&hubiwaŋo",
-        "B":"hubiwaseŋo",
+        "B":"hubiwaseroxa",
         "C":"~sevavosüiŋüi",
         "D":"~biwasehaʒoʒi",
         "E":"hubiwasefuxüo",
-        "F":"hubiwasesüi",
+        "F":"hubiwasüisesüi",
         "G":"",
         "H":"",
         "I":"",
@@ -530,7 +530,7 @@ menuCJ = {
             "0,2,3": " hazüi hubiŋo",
             "0,2,4": " hazüu %s" % woordcategorieCJ.lower(),
             "0,2,5": " me %sʒiʃepa m ~ʒiʃopa / hazüisezipu" % woordcategorieCJ.lower(),
-            "0,2,6": " hazüisezi huhipaʃesemesüipa",
+            "0,2,6": " hazüisezi huhipabiwasemesüipu",
         "0,3": "hazi huʒi",
         "0,4": "hazüu huʒi",
         "0,5": "haseʒiʒili huxapaŋeʒi",
@@ -544,18 +544,18 @@ menuCJ = {
             "1,0,6": " haxa %s A < Z" % elementenCJ[2],
             "1,0,7": " haxa %s Z > A" % elementenCJ[3],
             "1,0,8": " haxa %s A < Z" % elementenCJ[3],
-        "1,1": "hucaxa huʃesemesüipa",
+        "1,1": "hucaxa hubiwasemesüipa",
         "1,2": "hucaxa huzaqipabobi",
-        "1,3": "haca huʃesemesüipa hizaberebe",
+        "1,3": "haca hubiwasemesüipa hizaberebe",
     "2": "hazi %s" % woordtransactieCJ.lower(),
         "2,1": "hazi %szi" % woordtransactieCJ.lower(),
         "2,2": "hazi %sxiba" % woordtransactieCJ.lower(),
     "3": "hazüi %s" % woordtransactieCJ.lower(),
-        "3,1": "hazüi %s %s" % (elementenCJ[0],woordtransactieCJ.lower()),
-        "3,2": "hazüi %s %s" % (elementenCJ[1],woordtransactieCJ.lower()),
-        "3,3": "hazüi %s %s" % (elementenCJ[2],woordtransactieCJ.lower()),
-        "3,4": "hazüi %s %s" % (elementenCJ[3],woordtransactieCJ.lower()),
-        "3,5": "hazüi %s %s" % (woordcategorieCJ,woordtransactieCJ.lower()),
+        "3,1": "hazüi %s hiŋe %s" % (elementenCJ[0],woordtransactieCJ.lower()),
+        "3,2": "hazüi %s hiŋe %s" % (elementenCJ[1],woordtransactieCJ.lower()),
+        "3,3": "hazüi %s hiŋe %s" % (elementenCJ[2],woordtransactieCJ.lower()),
+        "3,4": "hazüi %s hiŋe %s" % (elementenCJ[3],woordtransactieCJ.lower()),
+        "3,5": "hazüi %s hiŋe %s" % (woordcategorieCJ,woordtransactieCJ.lower()),
     "4": "hazüu %s" % woordtransactieCJ.lower(),
     "5": "%spa" % woordspaarpotCJ.lower(),
         "5,1": "haca %spa" % woordspaarpotCJ.lower(),
@@ -1251,21 +1251,21 @@ def coljanee(rekening,header,item): # geen H
     return coljn
 
 #____     __   \/   ____     __  ____   __   __ 
-# ||\    /|    ||    ||\    /|  /   \\ / '' 6_\\
-# ||\\  /||  / ||\\  ||\\  /|| || \/ ||'-\\// ||
+# ||\    /|    ||    ||\    /|  /   \\ /  " 6_\\
+# ||\\  /||  / ||\\  ||\\  /|| || \/ ||`-\\// ||
 # || \\/ || || || || || \\/ || || || ||\\_/\\/|\
 # ||  \  || || || || ||  \  || || || || __   __ 
-#_/\_   _/\_|| \/ ||_/\_   _/\_ \ || / / '' 6_\\
-# Money In   \\___/  Money Out    ||   '-\\// ||
+#_/\_   _/\_|| \/ ||_/\_   _/\_ \ || / /  " 6_\\
+# Money In   \\___/  Money Out    ||   `-\\// ||
 #  spendings and savings aid      \/   \\_/\\/|\
 logo =  """
 %s                ____     __   \\/%s   ____     __  ____%s   __%s   __ 
-%s                 ||\\    /|    ||%s    ||\\    /|  /   \\\\%s / ''%s 6_\\\\
-%s                 ||\\\\  /||%s  /%s ||%s\\\\%s  ||\\\\  /|| ||%s \\/%s ||%s'-\\\\%s// ||
+%s                 ||\\    /|    ||%s    ||\\    /|  /   \\\\%s /  "%s 6_\\\\
+%s                 ||\\\\  /||%s  /%s ||%s\\\\%s  ||\\\\  /|| ||%s \\/%s ||%s`-\\\\%s// ||
 %s                 || \\\\/ ||%s ||%s ||%s ||%s || \\\\/ || ||%s ||%s ||%s\\\\_/%s\\\\/|\\
 %s                 ||  \\  ||%s ||%s ||%s ||%s ||  \\  || ||%s ||%s ||%s __%s   __ 
-%s                _/\\_   _/\\_%s||%s \\/%s ||%s_/\\_   _/\\_ \\%s ||%s /%s / ''%s 6_\\\\
-%s                 Money In%s   \\\\___/%s  Money Out%s    ||%s   '-\\\\%s// ||
+%s                _/\\_   _/\\_%s||%s \\/%s ||%s_/\\_   _/\\_ \\%s ||%s /%s /  "%s 6_\\\\
+%s                 Money In%s   \\\\___/%s  Money Out%s    ||%s   `-\\\\%s// ||
 %s                  spendings%s and savings%s aid%s      \\/%s   \\\\_/%s\\\\/|\\%s
 """ % (
           colgoed, colslecht, coltoon, Geel,
@@ -2021,7 +2021,7 @@ def geefdatumbereik(rekening,header,col,ok,datum): # geen H
     elif Taal == "IT":
         print("Inizio")
     elif Taal == "CJ":
-        print("huqizi")
+        print("huqizüu")
     else:
         print("Start")
     startdatum = geefeendatum(rekening,header,col,ok,datum)
@@ -2127,7 +2127,7 @@ def geefbedragbereik(rekening,header,col,ok,bedrag): # geen H
     elif Taal == "IT":
         print("Inferiore")
     elif Taal == "CJ":
-        print("hubiñüu")
+        print("hubiwañüu")
     else:
         print("Bodem")
     bodembedrag = geefeenbedrag(rekening,header,col,ok,bedrag)
@@ -2154,7 +2154,7 @@ def geefbedragbereik(rekening,header,col,ok,bedrag): # geen H
         elif Taal == "IT":
             print("Superiore")
         elif Taal == "CJ":
-            print("hubiñu")
+            print("hubiwañu")
         else:
             print("Top")
         topbedrag = geefeenbedrag(rekening,header,col,ok,bodembedrag)
@@ -4723,36 +4723,33 @@ def tipvandedag(rekening,header,col): # geen H
     kleuren,catcol = updatekleuren(rekening)
     keuzelijst = []
     if Taal == "EN":
-        print(col+kleuren["Vaag"]+kleuren["Omkeren"]+forcw(menuEN["0,1,15"])+kleuren["ResetAll"])
         for i in helpmenuEN:
-            keuzelijst.append(helpmenuEN[i])
+            keuzelijst.append(i)
         keuze = random.choice(keuzelijst)
-        index = list(helpmenuEN.keys())[list(helpmenuEN.values()).index(keuze)]
-        keuzemenu = menuEN
+        print(col+kleuren["Vaag"]+kleuren["Omkeren"]+forcw(keuze+" : "+menuEN[keuze])+kleuren["ResetAll"])
+        for i in helpmenuEN[keuze]:
+            print(col+kleuren["Vaag"]+i+kleuren["ResetAll"])
     elif Taal == "IT":
-        print(col+kleuren["Vaag"]+kleuren["Omkeren"]+forcw(menuIT["0,1,15"])+kleuren["ResetAll"])
         for i in helpmenuIT:
-            keuzelijst.append(helpmenuIT[i])
+            keuzelijst.append(i)
         keuze = random.choice(keuzelijst)
-        index = list(helpmenuIT.keys())[list(helpmenuIT.values()).index(keuze)]
-        keuzemenu = menuIT
+        print(col+kleuren["Vaag"]+kleuren["Omkeren"]+forcw(keuze+" : "+menuIT[keuze])+kleuren["ResetAll"])
+        for i in helpmenuIT[keuze]:
+            print(col+kleuren["Vaag"]+i+kleuren["ResetAll"])
     elif Taal == "CJ":
-        print(col+kleuren["Vaag"]+kleuren["Omkeren"]+forcw(menuCJ["0,1,15"])+kleuren["ResetAll"])
         for i in helpmenuCJ:
-            keuzelijst.append(helpmenuCJ[i])
+            keuzelijst.append(i)
         keuze = random.choice(keuzelijst)
-        index = list(helpmenuCJ.keys())[list(helpmenuCJ.values()).index(keuze)]
-        keuzemenu = menuCJ
+        print(col+kleuren["Vaag"]+kleuren["Omkeren"]+forcw(keuze+" : "+menuCJ[keuze])+kleuren["ResetAll"])
+        for i in helpmenuCJ[keuze]:
+            print(col+kleuren["Vaag"]+i+kleuren["ResetAll"])
     else:
-        print(col+kleuren["Vaag"]+kleuren["Omkeren"]+forcw(menu["0,1,15"])+kleuren["ResetAll"])
         for i in helpmenu:
-            keuzelijst.append(helpmenu[i])
+            keuzelijst.append(i)
         keuze = random.choice(keuzelijst)
-        index = list(helpmenu.keys())[list(helpmenu.values()).index(keuze)]
-        keuzemenu = menu
-    print(col+index+kleuren["ResetAll"]+" : "+keuzemenu[index])
-    for i in keuze:
-        print(col+kleuren["Vaag"]+i+kleuren["ResetAll"])
+        print(col+kleuren["Vaag"]+kleuren["Omkeren"]+forcw(keuze+" : "+menu[keuze])+kleuren["ResetAll"])
+        for i in helpmenu[keuze]:
+            print(col+kleuren["Vaag"]+i+kleuren["ResetAll"])
 
 def dithelp(rekening,header,col,item): # geen H
     Taal = header[nieuwheaderlijst[3]]
@@ -5216,6 +5213,22 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
           menuIT["0,5"]
           )
       )
+        elif Taal == "CJ":
+            print(
+                    """  0 : %s
+ >1 : %s
+  2 : %s
+  3 : %s
+  4 : %s
+  5 : %s""" % (
+          menuCJ["0,0"],
+          menuCJ["0,1"],
+          menuCJ["0,2"],
+          menuCJ["0,3"],
+          menuCJ["0,4"],
+          menuCJ["0,5"]
+          )
+      )
         else:
             print(
                     """  0 : %s
@@ -5293,6 +5306,22 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
           menuIT["0,2,4"],
           menuIT["0,2,5"],
           menuIT["0,2,6"]
+          )
+    )
+                    elif Taal == "CJ":
+                        maxlen = len(max(nieuwheaderlijstCJ, key = len))
+                        print("""  1 : %s
+  2 : %s
+  3 : %s
+  4 : %s
+  5 : %s
+  6 : %s""" % (
+          menuCJ["0,2,1"],
+          menuCJ["0,2,2"],
+          menuCJ["0,2,3"],
+          menuCJ["0,2,4"],
+          menuCJ["0,2,5"],
+          menuCJ["0,2,6"]
           )
     )
                     else:
@@ -5639,6 +5668,18 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
           menuIT["1,3"]
           )
       )
+        elif Taal == "CJ":
+            print(
+                    """  0 : %s
+ >1 : %s
+  2 : %s
+  3 : %s""" % (
+          menuCJ["1,0"],
+          menuCJ["1,1"],
+          menuCJ["1,2"],
+          menuCJ["1,3"]
+          )
+      )
         else:
             print(
                     """  0 : %s
@@ -5709,6 +5750,25 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
           menuIT["1,0,6"],
           menuIT["1,0,7"],
           menuIT["1,0,8"]
+          )
+    )
+                    elif Taal == "CJ":
+                        print("""  1 : %s
+  2 : %s
+  3 : %s
+  4 : %s
+  5 : %s
+  6 : %s
+  7 : %s
+  8 : %s""" % (
+          menuCJ["1,0,1"],
+          menuCJ["1,0,2"],
+          menuCJ["1,0,3"],
+          menuCJ["1,0,4"],
+          menuCJ["1,0,5"],
+          menuCJ["1,0,6"],
+          menuCJ["1,0,7"],
+          menuCJ["1,0,8"]
           )
     )
                     else:
@@ -5813,6 +5873,14 @@ def nieuwkeuze(keuze1lijst,rekening,ok): # H
           menuIT["2,2"],
           )
       )
+        elif Taal == "CJ":
+            print(
+                    """ >1 : %s
+  2 : %s""" % (
+          menuCJ["2,1"],
+          menuCJ["2,2"],
+          )
+      )
         else:
             print(
                     """ >1 : %s
@@ -5896,6 +5964,20 @@ def wijzigkeuze(keuze1lijst,rekening,ok): # H
           menuIT["3,3"],
           menuIT["3,4"],
           menuIT["3,5"]
+          )
+      )
+        elif Taal == "CJ":
+            print(
+                    """  1 : %s
+ >2 : %s
+  3 : %s
+  4 : %s
+  5 : %s""" % (
+          menuCJ["3,1"],
+          menuCJ["3,2"],
+          menuCJ["3,3"],
+          menuCJ["3,4"],
+          menuCJ["3,5"]
           )
       )
         else:
@@ -5992,7 +6074,7 @@ def inspaarpotten(rekening,header): # geen H
         elif Taal == "IT":
             totaalinspaarpotten = "Messo da parte %s in %s%s salvadanai%s" % (grotegetalkleuren(rekening,header,spaarpottegoed)+valuta+forsom(tegoed)+K+kleuren["ResetAll"],kleuren["5"],len(spaarpotten),kleuren["ResetAll"])
         elif Taal == "CJ":
-            totaalinspaarpotten = "ma %s hoŋo hiŋüi %s%s %spa%s" % (grotegetalkleuren(rekening,header,spaarpottegoed)+valuta+forsom(tegoed)+K+kleuren["ResetAll"],kleuren["5"],len(spaarpotten),woordspaarpotCJ.lower(),kleuren["ResetAll"])
+            totaalinspaarpotten = "ma %s hobiwaŋo hiŋe %s%s %spa%s" % (grotegetalkleuren(rekening,header,spaarpottegoed)+valuta+forsom(tegoed)+K+kleuren["ResetAll"],kleuren["5"],len(spaarpotten),woordspaarpotCJ.lower(),kleuren["ResetAll"])
         else:
             totaalinspaarpotten = "Er is %s opzij gezet in %s%s %sten%s" % (grotegetalkleuren(rekening,header,spaarpottegoed)+valuta+forsom(tegoed)+K+kleuren["ResetAll"],kleuren["5"],len(spaarpotten),woordspaarpot.lower(),kleuren["ResetAll"])
         print(totaalinspaarpotten)
@@ -6018,7 +6100,7 @@ def vrijbesteedbaar(rekening,header): # geen H
     elif Taal == "IT":
         vrijtegoed = "È disponibile %s da spendere liberamente" % (grotegetalkleuren(rekening,header,besteedbaar)+valuta+forsom(vrij)+K+kleuren["ResetAll"])
     elif Taal == "CJ":
-        vrijtegoed = "ma %s hoŋi" % (grotegetalkleuren(rekening,header,besteedbaar)+valuta+forsom(vrij)+K+kleuren["ResetAll"])
+        vrijtegoed = "ma %s hobiwaŋi" % (grotegetalkleuren(rekening,header,besteedbaar)+valuta+forsom(vrij)+K+kleuren["ResetAll"])
     else:
         vrijtegoed = "Er is %s vrij te besteden" % (grotegetalkleuren(rekening,header,besteedbaar)+valuta+forsom(vrij)+K+kleuren["ResetAll"])
     print(vrijtegoed)
@@ -6091,6 +6173,8 @@ def tooneenspaarpot(rekening,header,spaarpotten,spaarpot): # geen H
         lijnst = lijnlijstEN
     elif Taal == "IT":
         lijnst = lijnlijstIT
+    elif Taal == "CJ":
+        lijnst = lijnlijstCJ
     else:
         lijnst = lijnlijst
     lijnst.append(spaarpot)
@@ -6129,7 +6213,7 @@ def nieuwespaarpot(rekening,header): # geen H
         elif Taal == "CJ":
             print(menuCJ["5,2"])
             vragenlijst = ["huhi",lijnlijstCJ[0]]
-            bestaatal = "%sʒi holaqüoqi" % woordspaarpotCJ.lower()
+            bestaatal = "%sʒi hoqüoqila" % woordspaarpotCJ.lower()
         else:
             print(menu["5,2"])
             vragenlijst = ["Naam",lijnlijst[0]]
@@ -6218,13 +6302,16 @@ def verwijderspaarpot(rekening,header): # geen H
         toonspaarpotten(rekening,header)
         if Taal == "EN":
             wraptekst1 = textwrap.wrap(kleuren["colslecht"]+menuEN["5,4"]+kleuren["ResetAll"],w)
-            wraptekst2 = textwrap.wrap("Choose a savings pot",w)
+            wraptekst2 = textwrap.wrap("Choose a %s" % woordspaarpotEN,w)
         elif Taal == "IT":
             wraptekst1 = textwrap.wrap(kleuren["colslecht"]+menuIT["5,4"]+kleuren["ResetAll"],w)
-            wraptekst2 = textwrap.wrap("Scegli un salvadanaio",w)
+            wraptekst2 = textwrap.wrap("Scegli un %s" % woordspaarpotIT,w)
+        elif Taal == "CJ":
+            wraptekst1 = textwrap.wrap(kleuren["colslecht"]+menuCJ["5,4"]+kleuren["ResetAll"],w)
+            wraptekst2 = textwrap.wrap("hame %s" % woordspaarpotCJ,w)
         else:
             wraptekst1 = textwrap.wrap(kleuren["colslecht"]+menu["5,4"]+kleuren["ResetAll"],w)
-            wraptekst2 = textwrap.wrap("Kies een spaarpot",w)
+            wraptekst2 = textwrap.wrap("Kies een %s" % woordspaarpot,w)
         loop = True
         while loop == True:
             for i in wraptekst1:
@@ -6270,15 +6357,19 @@ def wijzigspaarpotnaam(rekening,header): # H
         spaarpottenlijst.append(i)
     if Taal == "EN":
         wraptekst1 = textwrap.wrap(col+menuEN["5,3,1"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Choose a savings pot",w)
+        wraptekst2 = textwrap.wrap("Choose a %s" % woordspaarpotEN,w)
         geenspaarpot = geenspaarpottenEN
     elif Taal == "IT":
         wraptekst1 = textwrap.wrap(col+menuIT["5,3,1"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Scegli un salvadanaio",w)
+        wraptekst2 = textwrap.wrap("Scegli un %s" % woordspaarpotIT,w)
         geenspaarpot = geenspaarpottenIT
+    elif Taal == "CJ":
+        wraptekst1 = textwrap.wrap(col+menuCJ["5,3,1"]+kleuren["ResetAll"],w)
+        wraptekst2 = textwrap.wrap("hame %s" % woordspaarpotCJ,w)
+        geenspaarpot = geenspaarpottenCJ
     else:
         wraptekst1 = textwrap.wrap(col+menu["5,3,1"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Kies een spaarpot",w)
+        wraptekst2 = textwrap.wrap("Kies een %s" % woordspaarpot,w)
         geenspaarpot = geenspaarpotten
     if len(spaarpotten) > 0:
         toonspaarpotten(rekening,header)
@@ -6298,8 +6389,11 @@ def wijzigspaarpotnaam(rekening,header): # H
                 if Taal == "EN":
                     for i in helpmenuEN["5,3,1"]:
                         print(i)
-                if Taal == "IT":
+                elif Taal == "IT":
                     for i in helpmenuIT["5,3,1"]:
+                        print(i)
+                elif Taal == "CJ":
+                    for i in helpmenuCJ["5,3,1"]:
                         print(i)
                 else:
                     for i in helpmenu["5,3,1"]:
@@ -6310,13 +6404,16 @@ def wijzigspaarpotnaam(rekening,header): # H
                     if int(spaarpotkeuze)-1 in range(len(spaarpotten)):
                         tooneenspaarpot(rekening,header,spaarpotten,spaarpottenlijst[int(spaarpotkeuze)-1])
                         if Taal == "EN":
-                            wraptekst3 = textwrap.wrap("Rename %ssavings pot %s%s to" % (col,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
+                            wraptekst3 = textwrap.wrap("Rename %s%s %s%s to" % (col,woordspaarpotEN,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
                             bestaatal = "This savings pot exists already"
                         elif Taal == "IT":
-                            wraptekst3 = textwrap.wrap("Rinomina %ssalvadanaio %s%s in" % (col,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
+                            wraptekst3 = textwrap.wrap("Rinomina %s%s %s%s in" % (col,woordspaarpotIT,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
                             bestaatal = "Questo salvadanaio esiste già"
+                        elif Taal == "CJ":
+                            wraptekst3 = textwrap.wrap("hazüi huhi %s%s %s%s" % (col,woordspaarpotCJ,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
+                            bestaatal = "%sʒi hoqüoqila" % woordspaarpotCJ
                         else:
-                            wraptekst3 = textwrap.wrap("De nieuwe naam voor %sspaarpot %s%s is" % (col,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
+                            wraptekst3 = textwrap.wrap("De nieuwe naam voor %s%s %s%s is" % (col,woordspaarpot,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
                             bestaatal = "Deze spaarpot bestaat al"
                         for i in wraptekst3:
                             print(i)
@@ -6356,15 +6453,19 @@ def wijzigspaarpotdoelsaldo(rekening,header): # H
         spaarpottenlijst.append(i)
     if Taal == "EN":
         wraptekst1 = textwrap.wrap(col+menuEN["5,3,2"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Choose a savings pot",w)
+        wraptekst2 = textwrap.wrap("Choose a %s" % woordspaarpotEN,w)
         geenspaarpot = geenspaarpottenEN
     elif Taal == "IT":
         wraptekst1 = textwrap.wrap(col+menuIT["5,3,2"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Scegli un salvadanaio",w)
+        wraptekst2 = textwrap.wrap("Scegli un %s" % woordspaarpotIT,w)
         geenspaarpot = geenspaarpottenIT
+    elif Taal == "CJ":
+        wraptekst1 = textwrap.wrap(col+menuCJ["5,3,2"]+kleuren["ResetAll"],w)
+        wraptekst2 = textwrap.wrap("hame %s" % woordspaarpotCJ,w)
+        geenspaarpot = geenspaarpottenCJ
     else:
         wraptekst1 = textwrap.wrap(col+menu["5,3,2"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Kies een spaarpot",w)
+        wraptekst2 = textwrap.wrap("Kies een %s" % woordspaarpot,w)
         geenspaarpot = geenspaarpotten
     if len(spaarpotten) > 0:
         toonspaarpotten(rekening,header)
@@ -6384,8 +6485,11 @@ def wijzigspaarpotdoelsaldo(rekening,header): # H
                 if Taal == "EN":
                     for i in helpmenuEN["5,3,2"]:
                         print(i)
-                if Taal == "IT":
+                elif Taal == "IT":
                     for i in helpmenuIT["5,3,2"]:
+                        print(i)
+                elif Taal == "CJ":
+                    for i in helpmenuCJ["5,3,2"]:
                         print(i)
                 else:
                     for i in helpmenu["5,3,2"]:
@@ -6396,11 +6500,13 @@ def wijzigspaarpotdoelsaldo(rekening,header): # H
                     if int(spaarpotkeuze)-1 in range(len(spaarpotten)):
                         tooneenspaarpot(rekening,header,spaarpotten,spaarpottenlijst[int(spaarpotkeuze)-1])
                         if Taal == "EN":
-                            wraptekst3 = textwrap.wrap("Set %ssavings pot %s%s target value at" % (col,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
+                            wraptekst3 = textwrap.wrap("Set %s%s %s%s target value at" % (col,woordspaarpotEN,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
                         elif Taal == "IT":
-                            wraptekst3 = textwrap.wrap("Il nuovo saldo obiettivo per %ssalvadanaio %s%s è" % (col,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
+                            wraptekst3 = textwrap.wrap("Il nuovo saldo obiettivo per %s%s %s%s è" % (col,woordspaarpotIT,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
+                        elif Taal == "CJ":
+                            wraptekst3 = textwrap.wrap("hubiwazu hoqe %s%s %s%s" % (col,woordspaarpotCJ,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
                         else:
-                            wraptekst3 = textwrap.wrap("Het nieuwe doelsaldo voor %sspaarpot %s%s is" % (col,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
+                            wraptekst3 = textwrap.wrap("Het nieuwe doelsaldo voor %s%s %s%s is" % (col,woordspaarpot,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
                         for i in wraptekst3:
                             print(i)
                         nieuwsaldo = input(col+inputindent)
@@ -6435,15 +6541,19 @@ def wijzigspaarpottegoed(rekening,header): # H
         spaarpottenlijst.append(i)
     if Taal == "EN":
         wraptekst1 = textwrap.wrap(col+menuEN["5,3,3"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Choose a savings pot",w)
+        wraptekst2 = textwrap.wrap("Choose a %s" % woordspaarpotEN,w)
         geenspaarpot = geenspaarpottenEN
     elif Taal == "IT":
         wraptekst1 = textwrap.wrap(col+menuIT["5,3,3"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Scegli un salvadanaio",w)
+        wraptekst2 = textwrap.wrap("Scegli un %s" % woordspaarpotIT,w)
         geenspaarpot = geenspaarpottenIT
+    elif Taal == "CJ":
+        wraptekst1 = textwrap.wrap(col+menuCJ["5,3,3"]+kleuren["ResetAll"],w)
+        wraptekst2 = textwrap.wrap("hame %s" % woordspaarpotCJ,w)
+        geenspaarpot = geenspaarpottenCJ
     else:
         wraptekst1 = textwrap.wrap(col+menu["5,3,3"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Kies een spaarpot",w)
+        wraptekst2 = textwrap.wrap("Kies een %s" % woordspaarpot,w)
         geenspaarpot = geenspaarpotten
     if len(spaarpotten) > 0:
         toonspaarpotten(rekening,header)
@@ -6463,8 +6573,11 @@ def wijzigspaarpottegoed(rekening,header): # H
                 if Taal == "EN":
                     for i in helpmenuEN["5,3,3"]:
                         print(i)
-                if Taal == "IT":
+                elif Taal == "IT":
                     for i in helpmenuIT["5,3,3"]:
+                        print(i)
+                elif Taal == "CJ":
+                    for i in helpmenuCJ["5,3,3"]:
                         print(i)
                 else:
                     for i in helpmenu["5,3,3"]:
@@ -6475,11 +6588,13 @@ def wijzigspaarpottegoed(rekening,header): # H
                     if int(spaarpotkeuze)-1 in range(len(spaarpotten)):
                         tooneenspaarpot(rekening,header,spaarpotten,spaarpottenlijst[int(spaarpotkeuze)-1])
                         if Taal == "EN":
-                            wraptekst3 = textwrap.wrap("Set %ssavings pot %s%s credit at" % (col,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
+                            wraptekst3 = textwrap.wrap("Set %s%s %s%s credit at" % (col,woordspaarpotEN,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
                         elif Taal == "IT":
-                            wraptekst3 = textwrap.wrap("Il nuovo credito in %ssalvadanaio %s%s è" % (col,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
+                            wraptekst3 = textwrap.wrap("Il nuovo credito in %s%s %s%s è" % (col,woordspaarpotIT,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
+                        elif Taal == "CJ":
+                            wraptekst3 = textwrap.wrap("hubiwaŋo hoqe %s%s %s%s" % (col,woordspaarpotCJ,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
                         else:
-                            wraptekst3 = textwrap.wrap("Het nieuwe tegoed in %sspaarpot %s%s is" % (col,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
+                            wraptekst3 = textwrap.wrap("Het nieuwe tegoed in %s%s %s%s is" % (col,woordspaarpot,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
                         for i in wraptekst3:
                             print(i)
                         nieuwtegoed = input(col+inputindent)
@@ -6514,15 +6629,19 @@ def wijzigspaarpotbetaald(rekening,header): # H
         spaarpottenlijst.append(i)
     if Taal == "EN":
         wraptekst1 = textwrap.wrap(col+menuEN["5,3,4"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Choose a savings pot",w)
+        wraptekst2 = textwrap.wrap("Choose a %s" % woordspaarpotEN,w)
         geenspaarpot = geenspaarpottenEN
     elif Taal == "IT":
         wraptekst1 = textwrap.wrap(col+menuIT["5,3,4"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Scegli un salvadanaio",w)
+        wraptekst2 = textwrap.wrap("Scegli un %s" % woordspaarpotIT,w)
         geenspaarpot = geenspaarpottenIT
+    elif Taal == "CJ":
+        wraptekst1 = textwrap.wrap(col+menuCJ["5,3,4"]+kleuren["ResetAll"],w)
+        wraptekst2 = textwrap.wrap("hame %s" % woordspaarpotCJ,w)
+        geenspaarpot = geenspaarpottenCJ
     else:
         wraptekst1 = textwrap.wrap(col+menu["5,3,4"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Kies een spaarpot",w)
+        wraptekst2 = textwrap.wrap("Kies een %s" % woordspaarpot,w)
         geenspaarpot = geenspaarpotten
     if len(spaarpotten) > 0:
         toonspaarpotten(rekening,header)
@@ -6542,8 +6661,11 @@ def wijzigspaarpotbetaald(rekening,header): # H
                 if Taal == "EN":
                     for i in helpmenuEN["5,3,4"]:
                         print(i)
-                if Taal == "IT":
+                elif Taal == "IT":
                     for i in helpmenuIT["5,3,4"]:
+                        print(i)
+                elif Taal == "CJ":
+                    for i in helpmenuCJ["5,3,4"]:
                         print(i)
                 else:
                     for i in helpmenu["5,3,4"]:
@@ -6554,11 +6676,13 @@ def wijzigspaarpotbetaald(rekening,header): # H
                     if int(spaarpotkeuze)-1 in range(len(spaarpotten)):
                         tooneenspaarpot(rekening,header,spaarpotten,spaarpottenlijst[int(spaarpotkeuze)-1])
                         if Taal == "EN":
-                            wraptekst3 = textwrap.wrap("From this %ssavings pot %s%s is paid" % (col,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
+                            wraptekst3 = textwrap.wrap("From this %s%s %s%s is paid" % (col,woordspaarpotEN,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
                         elif Taal == "IT":
-                            wraptekst3 = textwrap.wrap("Da questo %ssalvadanaio %s%s è pagato" % (col,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
+                            wraptekst3 = textwrap.wrap("Da questo %s%s %s%s è pagato" % (col,woordspaarpotIT,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
+                        elif Taal == "CJ":
+                            wraptekst3 = textwrap.wrap("%s%s %s%s habiwasepüu" % (col,woordspaarpotCJ,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
                         else:
-                            wraptekst3 = textwrap.wrap("Uit deze %sspaarpot %s%s is betaald" % (col,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
+                            wraptekst3 = textwrap.wrap("Uit deze %s%s %s%s is betaald" % (col,woordspaarpot,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
                         for i in wraptekst3:
                             print(i)
                         nieuwbetaald = input(col+inputindent)
@@ -6906,7 +7030,7 @@ while loop == True:
                 print(i)
             print(kleuren["ResetAll"], end = "")
         elif Taal == "CJ":
-            print(kleuren["colslecht"]+kleuren["Omkeren"]+"\"0,1,0\":"+menuIT["0,1,0"]+kleuren["ResetAll"])
+            print(kleuren["colslecht"]+kleuren["Omkeren"]+"mo \"0,1,0\" m huxüozüixo:"+menuCJ["0,1,0"]+kleuren["ResetAll"])
             print(kleuren["colslecht"], end = "")
             for i in helpmenuCJ["0,1,0"]:
                 print(i)
