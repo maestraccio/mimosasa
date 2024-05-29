@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.57"
-versiedatum = "20240527"
+versie = "0.0.58"
+versiedatum = "20240529"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -314,9 +314,6 @@ nieuwalternatievenamendictIT = {
         "N":"",
         "O":"altro"
         }
-#hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
-#nonasciiletters = "ʃ ʒ ŋ"
-
 nieuwalternatievenamendictCJ = {
         "0":"0000",
         "1":"1000",
@@ -767,8 +764,10 @@ helpmenuIT = {
     "<": textwrap.wrap("Ritorna al menu principale",w),
     "Q": textwrap.wrap("Esci dali'app",w)
         }
+#hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
+#nonasciiletters = "ʃ ʒ ŋ"
 helpmenuCJ = {
-    "0": textwrap.wrap("Versione: %s, Data: %s \\\\ \"mimosasa\"" % (versie,versiedatum),w),
+    "0": textwrap.wrap("huza: %s, huqi: %s \\\\ ma heu haʃa haxa %spa pa %spa huAPPʒi \"MIMOSASA\". ma hufuMAESTRACCIO haŋoPYTHON huAPP. ma heu haʃa hasüiŋo pa haʃaʃa huAPP hobiwabi. ma huhi \"MIMOSASA\" xi \"MONEY IN, MONEY OUT: SPENDINGS AND SAVINGS AID\" hoqe hizüi huAPP \"MIMO\"süu. mo heu hame \"H\" hiʒipaño m heu haʃadasepu hoseʒi. mo hakesezi m hame \"<\" (me \"OPENING BRACKETS\"pu \"(\" m \"[\" m ...), mo hakesüu m hame \"Q\"." % (versie,versiedatum,woordtransactieCJ,woordspaarpotCJ),w),
         "0,0": textwrap.wrap("",w),
         "0,1": textwrap.wrap("",w),
             "0,1,0": textwrap.wrap("",w),
@@ -1255,18 +1254,18 @@ def coljanee(rekening,header,item): # geen H
 # ||\\  /||  / ||\\  ||\\  /|| || \/ ||`-\\// ||
 # || \\/ || || || || || \\/ || || || ||\\_/\\/|\
 # ||  \  || || || || ||  \  || || || || __   __ 
-#_/\_   _/\_|| \/ ||_/\_   _/\_ \ || / /  " 6_\\
+#_/\_   _/\_|| \/ ||_/\_   _/\_ \\|| / /  " 6_\\
 # Money In   \\___/  Money Out    ||   `-\\// ||
-#  spendings and savings aid      \/   \\_/\\/|\
+#       spendings and savings aid \/   \\_/\\/|\
 logo =  """
-%s                ____     __   \\/%s   ____     __  ____%s   __%s   __ 
-%s                 ||\\    /|    ||%s    ||\\    /|  /   \\\\%s /  "%s 6_\\\\
-%s                 ||\\\\  /||%s  /%s ||%s\\\\%s  ||\\\\  /|| ||%s \\/%s ||%s`-\\\\%s// ||
-%s                 || \\\\/ ||%s ||%s ||%s ||%s || \\\\/ || ||%s ||%s ||%s\\\\_/%s\\\\/|\\
-%s                 ||  \\  ||%s ||%s ||%s ||%s ||  \\  || ||%s ||%s ||%s __%s   __ 
-%s                _/\\_   _/\\_%s||%s \\/%s ||%s_/\\_   _/\\_ \\%s ||%s /%s /  "%s 6_\\\\
-%s                 Money In%s   \\\\___/%s  Money Out%s    ||%s   `-\\\\%s// ||
-%s                  spendings%s and savings%s aid%s      \\/%s   \\\\_/%s\\\\/|\\%s
+                %s____     __   \\/%s   ____     __  ____%s   __%s   __ 
+                %s ||\\    /|    ||%s    ||\\    /|  /   \\\\%s /  "%s 6_\\\\
+                %s ||\\\\  /||%s  /%s ||%s\\\\%s  ||\\\\  /|| ||%s \\/%s ||%s`-\\\\%s// ||
+                %s || \\\\/ ||%s ||%s ||%s ||%s || \\\\/ || ||%s ||%s ||%s\\\\_/%s\\\\/|\\
+                %s ||  \\  ||%s ||%s ||%s ||%s ||  \\  || ||%s ||%s ||%s __%s   __ 
+                %s_/\\_   _/\\_%s||%s \\/%s ||%s_/\\_   _/\\_ \\\\%s||%s /%s /  "%s 6_\\\\
+                %s Money In%s   \\\\___/%s  Money Out%s    ||%s   `-\\\\%s// ||
+                %s       spendings%s and savings%s aid%s \\/%s   \\\\_/%s\\\\/|\\%s
 """ % (
           colgoed, colslecht, coltoon, Geel,
           colgoed, colslecht, coltoon, Geel,
@@ -1313,7 +1312,7 @@ def doei(): # geen H
     elif Taal == "IT":
         print(coltekst+forcw("Grazie per usare mimosasa e buona giornata")+ResetAll)
     elif Taal == "CJ":
-        print(coltekst+forcw("mu he'ega m hea haʃa'mimosasa. mo heagaqe m he'ega")+ResetAll)
+        print(coltekst+forcw("mu he'ega m hea haʃamimosasa. mo heagaqe m he'ega")+ResetAll)
     else:
         print(coltekst+forcw("Bedankt voor het gebruiken van mimosasa en nog een fijne dag")+ResetAll)
     print()
@@ -4842,9 +4841,6 @@ def kieshelp(rekening,header,col,keuze1lijst): # geen H
             for i in helpkeuzemenu[helpkeuze]:
                 print(i)
     return keuze1lijst
-
-#hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
-#nonasciiletters = "ʃ ʒ ŋ"
 
 def toevoegencategorie(rekening,header,col): # geen H
     kleuren,catcol = updatekleuren(rekening)
