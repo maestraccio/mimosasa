@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.58"
-versiedatum = "20240529"
+versie = "0.0.59"
+versiedatum = "20240530"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -764,10 +764,133 @@ helpmenuIT = {
     "<": textwrap.wrap("Ritorna al menu principale",w),
     "Q": textwrap.wrap("Esci dali'app",w)
         }
+helpmenuCJ = {
+#STI:PHRASE(                            #               # ma
+#   WTI:PERSON4(                        # anyone        # heu
+#   )
+#   WTI:VERB(                           #               # ha
+#      Activity2(                       # active        # ʃa
+#         State2(                       # arrange       # xa
+#   )   )   )
+#   WTI:SCALING3(                       # many          # po
+#   )
+#   WTI:NOUN((woordtransactie)          # transaction   # %s
+#       Scaling2(                       # s             # pa
+#   )   )
+#   WTI:SCALING2(                       # and           # pa
+#   )
+#   WTI:NOUN((woordspaarpot)            # savings pot   # %s
+#       Scaling2(                       # s             # pa
+#   )   )
+#   WTI:ATTRIBUTE(                      #               # hi
+#       Connection2(                    # with          # ŋa
+#   )   )
+#   WTI:NOUN(                           #               # hu
+#       (                               # APP           # APP
+#           Distance0(                  # here          # ʒi
+#               ?(                      # "MIMOSASA"    # "MIMOSASA"
+#   )   )   )   )
+#   WTI:VERB(                           #               # ha
+#       Direction-0(                    # from ...      # süi
+#           Connection3(                # fix           # ŋo
+#              Counting0(               # number        # bi
+#                  Matter2(             # stuff         # wa
+#                      Counting0(       # zero          # bi
+#   )   )   )   )   )   )
+#   WTI:VERB(                           #               # ha
+#       Activity3(                      # energy        # ʃo
+#           Counting0(                  # number        # bi
+#               Matter2(                # stuff         # wa
+#                   Counting0(          # zero          # bi
+#   )   )   )   )   )
+#   WTI:NOUN(                           #               # hu
+#       Nature4(                        # person        # fu
+#           ?(                          # MAESTRACCIO   # MAESTRACCIO
+#   )   )   )
+#   WTI:VERB(                           #               # ha
+#       Progression2(                   # develop       # za
+#           Connection2(                # with          # ŋa
+#               ?(                      # PYTHON        # PYTHON
+#   )   )   )   )
+#)
+#STI:PHRASE(                            #               # ma
+#   WTI:NOUN(                           #               # hu
+#       Attribute(                      # label/name    # hi
+#           ?(                          # "MIMOSASA"    # "MIMOSASA"
+#   )   )   )
+#   WTI:VERB(                           #               # ha
+#       State0(                         # even          # xi
+#           ?(                          # "MIMOSASA"    # "MONEY IN, MONEY OUT: SPENDINGS AND SAVINGS AID"
+#   )   )   )
+#   WTI:VERB(                           #               # ha
+#       Progression-0(                  # turn around   # züi
+#           Time1(                      # from now      # qe
+#   )   )   )
+#   WTI:NOUN(                           #               # hu
+#       ?(                              # APP           # APP
+#           ?(                          # "MIMO"        # "MIMO"
+#               Direction-4(            # away          # süu
+#   )   )   )   )
+#)
+#STI:CONDITIONAL(                       # if            # mo
+#   WTI:VERB(                           #               # ha
+#       Choice(                         # choose        # me
+#           ?(                          # "H"           # "H"
+#   )   )   )
+#   WTI:ATTRIBUTE(                      #               # hi
+#       Distance0(                      # here          # ʒi
+#           Scaling3(                   # many          # po
+#   )   )   )
+#   WTI:Separator(                      # then          # m
+#   )
+#   WTI:VERB(                           #               # ha
+#       Registration2(                  # see           # ca
+#           Knowledge2(                 # know(-ledge)  # da
+#               Connection1(            # associated    # ŋe
+#                   Distance0(          # here          # ʒi
+#   )   )   )   )   )
+#)
+#STI:CONDITIONAL(                       # if            # mo
+#   WTI:VERB(                           #               # ha
+#       Desire1(                        # want          # ke
+#           Direction1(                 # towards       # se
+#               Progression0(           # start         # zi
+#   )   )   )   )
+#   WTI:Separator(                      # then          # m
+#   )
+#   WTI:VERB(                           #               # ha
+#       Choice(                         # choose        # me
+#           ?(                          # "<"           # "<"
+#   WTI:Choice(                         # choose        # me
+#       ?(                              # "OB"          # "OPENING BRACKETS"
+#           Scaling4(                   # all           # pu
+#   )   )   )
+#   WTI:Separator(                      #               # m
+#   )
+#   ?(                                  # \"(\", \"[\", # \"(\", \"[\"
+#   )
+#   WTI:ATTRIBUTE(                      #               # hi
+#       Progression2(                   # progress      # za
+#   )   )
+#   WTI:CONDITIONAL(                    # if            # mo
+#   )
+#   WTI:VERB(                           #               # ha
+#       Desire1(                        # want          # ke
+#           Direction-4(                # away          # süu
+#   )   )   )
+#   WTI:Separator(                      # then          # m
+#   )
+#   WTI:VERB(                           #               # ha
+#       Choice(                         # choose        # me
+#           ?(                          # "Q"           # "Q"
+#   )   )   )
+#)
+
+
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
 #nonasciiletters = "ʃ ʒ ŋ"
-helpmenuCJ = {
-    "0": textwrap.wrap("huza: %s, huqi: %s \\\\ ma heu haʃa haxa %spa pa %spa huAPPʒi \"MIMOSASA\". ma hufuMAESTRACCIO haŋoPYTHON huAPP. ma heu haʃa hasüiŋo pa haʃaʃa huAPP hobiwabi. ma huhi \"MIMOSASA\" xi \"MONEY IN, MONEY OUT: SPENDINGS AND SAVINGS AID\" hoqe hizüi huAPP \"MIMO\"süu. mo heu hame \"H\" hiʒipaño m heu haʃadasepu hoseʒi. mo hakesezi m hame \"<\" (me \"OPENING BRACKETS\"pu \"(\" m \"[\" m ...), mo hakesüu m hame \"Q\"." % (versie,versiedatum,woordtransactieCJ,woordspaarpotCJ),w),
+
+    "0": textwrap.wrap("huza: %s, huqi: %s \\\\ ma heu haʃaxa po %spa pa %spa huAPPʒi\"MIMOSASA\" hasüiŋobiwabi haʃobiwabi hufuMAESTRACCIO hazaŋaPYTHON. ma huhi\"MIMOSASA\" haxi \"MONEY IN, MONEY OUT: SPENDINGS AND SAVINGS AID\" hozüiqe huAPP\"MIMO\"süu. mo hame\"H\" hiʒipo m hacadaŋeʒi. mo hakesezi m hame\"<\" (me\"OPENING BRACKETS\"pu m \"(\", \"[\", hiza), mo hakesüu m hame\"Q\"." % (versie,versiedatum,woordtransactieCJ,woordspaarpotCJ),w),
         "0,0": textwrap.wrap("",w),
         "0,1": textwrap.wrap("",w),
             "0,1,0": textwrap.wrap("",w),
