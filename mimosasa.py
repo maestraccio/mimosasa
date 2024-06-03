@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.59"
-versiedatum = "20240530"
+versie = "0.0.60"
+versiedatum = "20240603"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -80,23 +80,62 @@ standaardtopbedrag = 9999999.99
 budgetnul = 0.0001
 oepsEN = "Oops, something went wrong"
 oepsIT = "Ups, qualcosa è andato storto"
-oepsCJ = "ma huwaxüo"
+#STI:CAUSAL(                                #               # mu
+#   WTI:PERSON1(                            # I             # he'e
+#       Feeling-2(                          # sad           # güa
+#   )   )
+#   WTI:Separator(                          # because       # m
+#   )
+#   WTI:NOUN(                               #               # hu
+#       Matter2(                            # something     # wa
+#           State-3(                        # damaged       # xüo
+#   )   )   )
+#)
+oepsCJ = "mu he'egüa m huwaxüo"
 oeps = "Oeps, daar ging wat mis"
-woordcategorieEN = "Category"
-woordcategorieIT = "Categoria"
-woordcategorieCJ = "hupabiwasemesüi"
-woordcategorie = "Categorie"
 woordtransactieEN = "Transaction"
 woordtransactieIT = "Transazione"
-woordtransactieCJ = "hubiwasemesüi"
+#WTI:NOUN(                                  #               # hu
+#   Counting0(                              # zero          # bi
+#       Matter2(                            # something     # wa
+#           Choice(                         # choice        # me
+#               Direction1(                 # forward       # se
+#                   Separator(              # or            # m
+#                       Direction-0(        # from direction# süi
+#)  )   )   )   )   )   )
+woordtransactieCJ = "hubiwamesemsüi"
 woordtransactie = "Transactie"
+woordcategorieEN = "Category"
+woordcategorieIT = "Categoria"
+#WTI:NOUN(                                  #               # hu
+#   Scaling2(                               # group         # pa
+#       Counting0(                          # zero          # bi
+#           Matter2(                        # something     # wa
+#               Choice(                     # choice        # me
+#                   Direction1(             # forward       # se
+#                       Separator(          # or            # m
+#                           Direction-0(    # from direction# süi
+#)  )   )   )   )   )   )   )
+woordcategorieCJ = "hupabiwamesemsüi"
+woordcategorie = "Categorie"
 woordspaarpotEN = "Savings pot"
 woordspaarpotIT = "Salvadanaio"
+#WTI:NOUN(                                  #               # hu
+#   Counting0(                              # zero          # bi
+#       Matter2(                            # something     # wa
+#           Connection3(                    # fixed         # ŋo
+#)  )   )   )
 woordspaarpotCJ = "hubiwaŋo"
 woordspaarpot = "Spaarpot"
 geenspaarpottenEN = "There are no %ss (yet)" % woordspaarpotEN.lower()
 geenspaarpottenIT = "Non ci sono (ancora) salvadanai"
-geenspaarpottenCJ = "ma %sli (hiqi)" % woordspaarpotCJ.lower()
+#STI:PHRASE(                                #               # ma
+#   WTI:(woordspaarpot)(                    # woordspaarpot # %s
+#       Truth0(                             # not           # li
+#           Time0(                          # now           # qi
+#   )   )   )
+#)
+geenspaarpottenCJ = "ma %sliqi" % woordspaarpotCJ.lower()
 geenspaarpotten = "Er zijn (nog) geen %sten" % woordspaarpot.lower()
 
 lijn = "|"+78*"-"+"|"
@@ -125,10 +164,23 @@ elementenIT = [
         "Controparte",
         "Riferimento"
         ]
+#WTI:NOUN(                                  #               # hu
+#   Time0(                                  # now           # qi
+#)  )
+#WTI:NOUN(                                  #               # hu
+#   Counting0(                              # zero          # bi
+#       Matter2(                            # something     # wa
+#)  )   )
+#WTI:NOUN(                                  #               # hu
+#   Person3(                                # 3rd person    # heo
+#)  )
+#WTI:NOUN(                                  #               # hu
+#   Matter3(                                # thing         # wo
+#)  )
 elementenCJ = [
         "huqi",
         "hubiwa",
-        "huhe",
+        "huheo",
         "huwo"
         ]
 elementen = [
@@ -774,12 +826,12 @@ helpmenuCJ = {
 #   )   )   )
 #   WTI:SCALING3(                       # many          # po
 #   )
-#   WTI:NOUN((woordtransactie)          # transaction   # %s
+#   WTI:(woordtransactie)(              # transaction   # %s
 #       Scaling2(                       # s             # pa
 #   )   )
 #   WTI:SCALING2(                       # and           # pa
 #   )
-#   WTI:NOUN((woordspaarpot)            # savings pot   # %s
+#   WTI:(woordspaarpot)(                # savings pot   # %s
 #       Scaling2(                       # s             # pa
 #   )   )
 #   WTI:ATTRIBUTE(                      #               # hi
@@ -791,18 +843,19 @@ helpmenuCJ = {
 #               ?(                      # "MIMOSASA"    # "MIMOSASA"
 #   )   )   )   )
 #   WTI:VERB(                           #               # ha
-#       Direction-0(                    # from ...      # süi
+#       Direction-0(                    # incoming      # süi
 #           Connection3(                # fix           # ŋo
-#              Counting0(               # number        # bi
-#                  Matter2(             # stuff         # wa
-#                      Counting0(       # zero          # bi
+#               Counting0(              # number        # bi
+#                   Matter2(            # stuff         # wa
+#                       Counting0(      # zero          # bi
 #   )   )   )   )   )   )
 #   WTI:VERB(                           #               # ha
-#       Activity3(                      # energy        # ʃo
-#           Counting0(                  # number        # bi
-#               Matter2(                # stuff         # wa
-#                   Counting0(          # zero          # bi
-#   )   )   )   )   )
+#       Connection2(                    # together      # ŋa
+#           Activity3(                  # energy        # ʃo
+#               Counting0(              # number        # bi
+#                   Matter2(            # stuff         # wa
+#                       Counting0(      # zero          # bi
+#   )   )   )   )   )   )
 #   WTI:NOUN(                           #               # hu
 #       Nature4(                        # person        # fu
 #           ?(                          # MAESTRACCIO   # MAESTRACCIO
@@ -813,6 +866,7 @@ helpmenuCJ = {
 #               ?(                      # PYTHON        # PYTHON
 #   )   )   )   )
 #)
+# ma heu haʃaxa po %spa pa %spa hiŋa huAPPʒi"MIMOSASA" hasüiŋobiwabi haŋaʃobiwabi hufuMAESTRACCIO hazaŋaPYTHON.
 #STI:PHRASE(                            #               # ma
 #   WTI:NOUN(                           #               # hu
 #       Attribute(                      # label/name    # hi
@@ -832,6 +886,7 @@ helpmenuCJ = {
 #               Direction-4(            # away          # süu
 #   )   )   )   )
 #)
+# ma huhi"MIMOSASA" haxi "MONEY IN, MONEY OUT: SPENDINGS AND SAVINGS AID" hozüiqe huAPP"MIMO"süu.
 #STI:CONDITIONAL(                       # if            # mo
 #   WTI:VERB(                           #               # ha
 #       Choice(                         # choose        # me
@@ -850,6 +905,7 @@ helpmenuCJ = {
 #                   Distance0(          # here          # ʒi
 #   )   )   )   )   )
 #)
+# mo hame"H" hiʒipo m hacadaŋeʒi.
 #STI:CONDITIONAL(                       # if            # mo
 #   WTI:VERB(                           #               # ha
 #       Desire1(                        # want          # ke
@@ -862,12 +918,13 @@ helpmenuCJ = {
 #       Choice(                         # choose        # me
 #           ?(                          # "<"           # "<"
 #   WTI:Choice(                         # choose        # me
-#       ?(                              # "OB"          # "OPENING BRACKETS"
-#           Scaling4(                   # all           # pu
-#   )   )   )
+#   )
+#   ?(                                  # "OB"          # "OPENING BRACKETS"
+#       Scaling4(                       # all           # pu
+#   )   )
 #   WTI:Separator(                      #               # m
 #   )
-#   ?(                                  # \"(\", \"[\", # \"(\", \"[\"
+#   ?(                                  # \"(\", \"[\", # \"(\", \"[\",
 #   )
 #   WTI:ATTRIBUTE(                      #               # hi
 #       Progression2(                   # progress      # za
@@ -885,14 +942,174 @@ helpmenuCJ = {
 #           ?(                          # "Q"           # "Q"
 #   )   )   )
 #)
+# mo hakesezi m hame"<" (me "OPENING BRACKETS"pu m "(", "[", hiza), mo hakesüu m hame"Q".
+    "0": textwrap.wrap("huza: %s, huqi: %s \\\\ ma heu haʃaxa po %spa pa %spa hiŋa huAPPʒi\"MIMOSASA\" hasüiŋobiwabi haŋaʃobiwabi hufuMAESTRACCIO hazaŋaPYTHON. ma huhi\"MIMOSASA\" haxi \"MONEY IN, MONEY OUT: SPENDINGS AND SAVINGS AID\" hozüiqe huAPP\"MIMO\"süu. mo hame\"H\" hiʒipo m hacadaŋeʒi. mo hakesezi m hame\"<\" (me \"OPENING BRACKETS\"pu m \"(\", \"[\", hiza), mo hakesüu m hame\"Q\"." % (versie,versiedatum,woordtransactieCJ,woordspaarpotCJ),w),
+#STI:PHRASE(                            #               # ma
+#   WTI:NOUN(                           #               # hu
+#       Distance0(                      # here          # ʒi
+#           Connection-0(               # inside        # ŋüi
+#               Distance0(              # here          # ʒi
+#                   ?(                  # APP           # APP
+#   )   )   )   )   )
+#   WTI:(woordcategorie)(               # woordcategorie# %s
+#       Scaling2(                       # s             # pa
+#           Connection-0(               # inside        # ŋüi
+#               Distance0(              # here          # ʒi
+#   )   )   )   )
+#)
+# ma huʒiŋüiʒiAPP %spaŋüiʒi. 
+#STI:CAUSAL(                            # because       # mu
+#   WTI:(woordtransactie)(              # woordtransacti# %s
+#       Connection3(                    # fixed         # ŋo
+#           ?(                          # "ID"          # "ID"
+#   )   )   )
+#   WTI:Separator(                      # is why        # m
+#   )
+#   WTI:NOUN(                           #               # hu
+#       ?(                              # APP           # APP
+#           ?(                          # "MIMOSASA"    # "MIMOSASA"
+#   )   )   )
+#   WTI:VERB(                           #               # ha
+#       Knowledge2(                     # know          # da
+#           ?(                          # woordtransacti# %s
+#   )   )   )
+#)
+# mu %sŋo"ID" m huAPP"MIMOSASA" hada%s.
+#STI:PHRASE(                            #               # ma
+#   WTI:PERSON4(                        # anybody       # heu
+#   )
+#   WTI:VERB(                           #               # ha
+#       Activity2(                      # does          # ʃa
+#           Choice(                     # choose        # me
+#   )   )   )
+#   WTI:VERB(                           #               # ha
+#       Registration2(                  # see           # ca
+#   )   )
+#   WTI:Separator(                      # or            # m
+#   )
+#   WTI:VERB(                           #               # ha
+#       Progression-0(                  # turn around   # züi
+#   )   )
+#   WTI:Separator(                      # or            # m
+#   )
+#   WTI:VERB(                           #               # ha
+#       Direction-4(                    # away          # süu
+#   )   )
+#   WTI:Separator(                      # or            # m
+#   )
+#   WTI:ATTRIBUTE(                      #               # hi
+#       Progression2(                   # progress      # za
+#   )   )
+#   WTI:(woordtransactie)(              # woordtransacti# %s
+#       Scaling2(                       # s             # pa
+#   )   )
+#)
+# ma heu haʃame haca m hazüi m hasüu m hiza %spa.
+#STI:CONDITIONAL(                       # if            # mo
+#   WTI:PERSON4(                        # anybody       # heu
+#   )
+#   WTI:VERB(                           #               # ha
+#       Desire1(                        # want          # ke
+#           WTI:VERB(                   #               # ha
+#               Scaling2(               # group         # pa
+#                   ?(                  # "ID"          # "ID"
+#   )   )   )   )   )
+#   WTI:Separator(                      # then          # m
+#   )
+#   WTI:VERB(                           #               # ha
+#       Connection3(                    # fix           # ŋo
+#           ?(                          # "CSV"         # "CSV"
+#   )   )   )
+#   WTI:NOUN(                           #               # hu
+#       separator(                      # separator     # m
+#   )   )
+#   WTI:VERB(                           #               # ha
+#       STI:Choice(                     # choose        # me
+#   )   )
+#   WTI:NOUN(                           #               # hu
+#       Matter0(                        # point         # wi
+#           Active1(                    # moving        # ʃe
+#   )   )   )
+#   separator(                          # separator     # m
+#   )
+#   WTI:NOUN(                           #               # hu
+#       Matter0(                        # point         # wi
+#           Phase0(                     # vacuum        # vi
+#   )   )   )
+#)
+# mo heu hakehapa"ID" m haŋo"CSV" (hum hame huwiʃe m huwivi).
+#STI:PHRASE(                            #               # ma
+#   WTI:NOUN(                           #               # hu
+#       Counting0(                      # number        # bi
+#           Distance0(                  # here          # ʒi
+#               Scaling4(               # all           # pu
+#   )   )   )
+#   WTI:VERB(                           #               # ha
+#       State0(                         # even          # xi
+#           Scaling2(                   # group         # pa
+#   )   )   )
+#   WTI:(woordcategorie)(               # woordcategorie# %s
+#       Size-2(                         # negative      # ñüa
+#           Scaling4(                   # all           # pu
+#   )   )   )
+#   WTI:SCALING2(                       # group         # pa
+#   )
+#   WTI:NOUN(                           #               # hu
+#       Counting0(                      # number        # bi
+#           Matter2(                    # stuff         # wa
+#               Connection3(            # fixed         # ŋo
+#                   Connection1(        # associated    # ŋe
+#                       (woordspaarpot) # woordspaarpot # %s
+#                           Scaling4(   # all           # pu
+#   )   )   )   )   )   )
+#   WTI:SCALING2(                       # group         # pa
+#   )
+#   WTI:NOUN(                           #               # hu
+#       Counting0(                      # number        # bi
+#           Matter2(                    # stuff         # wa
+#               Connection0(            # independent   # ŋi
+#   )   )   )   )
+#)
+# ma hubiʒipu haxipa %sñüapu pa hubiwaŋoŋe%spu pa hubiwaŋi.
 
-
+        "0,0": textwrap.wrap("ma huʒiŋüiʒiAPP %spaŋüiʒi. mu %sŋo\"ID\" m huAPP\"MIMOSASA\" hada%s. ma heu haʃame haca m hazüi m hasüu m hiza %spa. mo heu hakehapa\"ID\" m haŋo\"CSV\" (hum hame huwiʃe m huwivi). ma hubiʒipu haxipa %sñüapu pa hubiwaŋoŋe%spu pa hubiwaŋi." % (woordcategorieCJ,woordtransactieCJ,woordtransactieCJ,woordtransactieCJ,woordcategorieCJ,woordspaarpotCJ),w),
+#STI:PHRASE(                            #               # ma
+#   WTI:PERSON4(                        # anybody       # heu
+#   )
+#   WTI:VERB(                           #               # ha
+#       Activity2(                      # do            # ʃa
+#           Choice(                     # choose        # me
+#               Energy-0(               # turn around   # züi
+#                   Separator(          # or            # m
+#                       State2(         # ordened       # xa
+#   )   )   )   )   )   )
+#   WTI:NOUN(                           #               # hu
+#       State2(                         # ordened       # xa
+#           Scaling2(                   # group         # pa
+#               Distance0(              # here          # ʒi
+#   )   )   )   )
+#   WTI:ATTRIBUTE(                      #               # hi
+#       Distance0(                      # here          # ʒi
+#   )   )
+#)
+# me heu haʃamezüimxa huxapaʒi hiʒi.
+#STI:PHRASE(                            #               # ma
+#   WTI:VERB(                           #               # ha
+#       Progression-0(                  # turn around   # züi
+#   )   )
+#   WTI:NOUN(                           #               # hu
+#       State2(                         # ordened       # xa
+#           Distance0(                  # here          # ʒi
+#   )   )   )
+#   WTI:ATTRIBUTE(                      #               # hi
+#       Direction-0(                    # from direction# süi
+#           Nature4(                    # person        # fu
+#   )   )   )
+#)
+# ma hazüi huxaʒi hisüifu.
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
 #nonasciiletters = "ʃ ʒ ŋ"
-
-    "0": textwrap.wrap("huza: %s, huqi: %s \\\\ ma heu haʃaxa po %spa pa %spa huAPPʒi\"MIMOSASA\" hasüiŋobiwabi haʃobiwabi hufuMAESTRACCIO hazaŋaPYTHON. ma huhi\"MIMOSASA\" haxi \"MONEY IN, MONEY OUT: SPENDINGS AND SAVINGS AID\" hozüiqe huAPP\"MIMO\"süu. mo hame\"H\" hiʒipo m hacadaŋeʒi. mo hakesezi m hame\"<\" (me\"OPENING BRACKETS\"pu m \"(\", \"[\", hiza), mo hakesüu m hame\"Q\"." % (versie,versiedatum,woordtransactieCJ,woordspaarpotCJ),w),
-        "0,0": textwrap.wrap("",w),
-        "0,1": textwrap.wrap("",w),
+        "0,1": textwrap.wrap("me heu haʃamezüimxa huxapaʒi hiʒi. ma hazüi huxaʒi hisüifu.",w),
             "0,1,0": textwrap.wrap("",w),
             "0,1,1": textwrap.wrap("",w),
             "0,1,2": textwrap.wrap("",w),
