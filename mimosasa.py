@@ -2902,7 +2902,7 @@ def geefeendatum(rekening,header,col,ok,datum): # H
                 elif datumkeuze == "+":
                     transactiedatum = standaardeinddatum
                 elif datumkeuze.upper() == "M" and datum == int(nustr):
-                    transactiedatum = int(str(nustr[:6])+"01")
+                    transactiedatum = int(nustr[:6]+"01")
                 elif datumkeuze.upper() == "W" and datum == int(nustr):
                     transactiedatum = int(datetime.strftime(datetime.strptime(str(datum),"%Y%m%d") - timedelta(weeks = 1),"%Y%m%d"))
                 elif len(datumkeuze) > 1 and datumkeuze[0].upper() in ["M","W"]:
@@ -4319,14 +4319,17 @@ def nieuwnieuw(rekening,ok): # H
             for i in wraptekst1:
                 print(i)
         elif len(nieuwetransactieinputlijst) == 5:
-            if nieuwetransactieinputlijst[0] == "-":
+            print(nieuwetransactieinputlijst)
+            if nieuwetransactieinputlijst[0] == "":
+                transactiedatum = int(nustr) 
+            elif nieuwetransactieinputlijst[0] == "-":
                 transactiedatum = standaardstartdatum
             elif nieuwetransactieinputlijst[0] == "+":
                 transactiedatum = standaardeinddatum
             elif nieuwetransactieinputlijst[0].upper() == "M":
-                transactiedatum = int(str(nustr[:6])+"01")
+                transactiedatum = int(nustr[:6]+"01")
             elif nieuwetransactieinputlijst[0].upper() == "W":
-                transactiedatum = int(datetime.strftime(datetime.strptime(str(nustr),"%Y%m%d") - timedelta(weeks = 1),"%Y%m%d"))
+                transactiedatum = int(datetime.strftime(datetime.strptime(nustr,"%Y%m%d") - timedelta(weeks = 1),"%Y%m%d"))
             elif len(nieuwetransactieinputlijst[0]) > 1 and nieuwetransactieinputlijst[0][0].upper() in ["M","W"]:
                 test = checkint(nieuwetransactieinputlijst[0][1:])
                 if test == True:
@@ -4342,22 +4345,22 @@ def nieuwnieuw(rekening,ok): # H
                             maandverschil -= 1
                         transactiedatum = int("{:0>4}".format(jaar)+"{:0>2}".format(maand)+"01")
                     else:
-                        transactiedatum = int(datetime.strftime(datetime.strptime(str(nustr),"%Y%m%d") - timedelta(weeks = int(nieuwetransactieinputlijst[0][1:])+1),"%Y%m%d"))
+                        transactiedatum = int(datetime.strftime(datetime.strptime(nustr,"%Y%m%d") - timedelta(weeks = int(nieuwetransactieinputlijst[0][1:])+1),"%Y%m%d"))
             elif len(nieuwetransactieinputlijst[0]) > 1 and nieuwetransactieinputlijst[0][0] in ["-","+"]:
                 test = checkint(nieuwetransactieinputlijst[0][1:])
                 if test == True:
                     if nieuwetransactieinputlijst[0][0] == "-":
-                        transactiedatum = int(datetime.strftime(datetime.strptime(str(nustr),"%Y%m%d") - timedelta(days = int(nieuwetransactieinputlijst[0][1:])),"%Y%m%d"))
+                        transactiedatum = int(datetime.strftime(datetime.strptime(nustr,"%Y%m%d") - timedelta(days = int(nieuwetransactieinputlijst[0][1:])),"%Y%m%d"))
                     else:
-                        transactiedatum = int(datetime.strftime(datetime.strptime(str(nustr),"%Y%m%d") + timedelta(days = int(nieuwetransactieinputlijst[0][1:])),"%Y%m%d"))
+                        transactiedatum = int(datetime.strftime(datetime.strptime(nustr,"%Y%m%d") + timedelta(days = int(nieuwetransactieinputlijst[0][1:])),"%Y%m%d"))
                 else:
-                   transactiedatum = nustr
+                   transactiedatum = int(nustr)
             else:
                 test = checkint(nieuwetransactieinputlijst[0])
                 if test == True:
-                    transactiedatum = int(datetime.strftime(datetime.strptime(str(nustr),"%Y%m%d") - timedelta(days = int(nieuwetransactieinputlijst[0])),"%Y%m%d"))
+                    transactiedatum = int(datetime.strftime(datetime.strptime(nustr,"%Y%m%d") - timedelta(days = int(nieuwetransactieinputlijst[0])),"%Y%m%d"))
                 else:
-                    transactiedatum = nustr 
+                    transactiedatum = int(nustr)
             if checkfloat(nieuwetransactieinputlijst[1]) == True:
                 transactiebedrag = round(float(nieuwetransactieinputlijst[1]),2)
             else:
