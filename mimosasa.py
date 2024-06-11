@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.60"
-versiedatum = "20240603"
+versie = "0.0.62"
+versiedatum = "20240611"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -233,10 +233,11 @@ nieuwheaderlijstCJ = [
         "huhiʒi",
 #WTI:NOUN(                                  #               # hu
 #   Attribute(                              # name          # hi
-#       Person3(                            # 3rd person    # heo
-#           Distance0(                      # here          # ʒi
-#)  )   )   )
-        "huhiheoʒi",
+#       Nature4(                            # person        # fu
+#           Connection1(                    # associated    # ŋe
+#               Distance0(                  # here          # ʒi
+#)  )   )   )   )
+        "huhifuŋeʒi",
 #STI:QUESTION(                              #               # mi
 #   WTI:NOUN(                               #               # hu
 #       Distance0(                          # here          # ʒi
@@ -1576,13 +1577,132 @@ helpmenuCJ = {
 #   )
 #)
 #mu heu hadaŋo hubiñopa hoʃi m mo melala m heu haʃada huʒila hili huʒili.
-#Voer hier de naam van de rekening in. U kunt zo onderscheid maken tussen meerdere rekeningen die u in dezelfde app beheert, zonder de lange rekeningnummers uit het hoofd te hoeven leren.
+            "0,1,1": textwrap.wrap("ma haŋo huhi hiŋe huʒi. mu heu hadaŋo hubiñopa hoʃi m mo melala m heu haʃada huʒila hili huʒili.",w),
+#STI:PHRASE(                            #               # ma
+#   WTI:VERB(                           #               # ha
+#       Connection3(                    # fixed         # ŋo
+#   )   )
+#   WTI:NOUN(                           #               # hu
+#       Attribute(                      # name          # hi
+#   )   )
+#   WTI:ATTRIBUTE(                      #               # hi
+#       Connection1(                    # associated    # ŋe
+#   )   )
+#   WTI:NOUN(                           #               # hu
+#       Nature4(                        # person        # fu
+#           Connection1(                # associated    # ŋe
+#               Distance0(              # here          # ʒi
+#   )   )   )   )
+#)
+#ma haŋo huhi hiŋe hufuŋeʒi.
+            "0,1,2": textwrap.wrap("ma haŋo huhi hiŋe hufuŋeʒi.",w),
+
+#STI:PHRASE(                            #               # ma
+#   WTI:PERSON4(                        # anybody       # heu
+#   )
+#   WTI:VERB(                           #               # ha
+#       Activity2(                      # active        # ʃa
+#           Progression-0(              # turn around   # züi
+#   )   )   )
+#   WTI:NOUN(                           #               # hu
+#       Distance0(                      # here          # ʒi
+#           Truth0(                     # not           # li
+#   )   )   )
+#   STI:CHOICE(                         # choose        # me   
+#       WTI:ADJECTIVE(                  #               # ho
+#           Activity(                   # active        # ʃa
+#               Truth2(                 # true          # la
+#       )   )   )
+#       WTI:Separator(                  # or            # m
+#       )
+#       WTI:ADJECTIVE(                  #               # ho
+#           Activity(                   # active        # ʃa
+#               Truth0(                 # not           # li
+#       )   )   )
+#   )
+#)
+#ma heu haʃazüi huʒili me hoʃala m hoʃali.
+#STI:CAUSAL(                            # result        # mu
+#   WTI:Person4(                        # anybody       # heu
+#   )
+#   WTI:VERB(                           #               # ha
+#       Activity(                       # active        # ʃa
+#           Truth0(                     # not           # li
+#               Progression-0(          # turn around   # züi
+#   )   )   )   )
+#   WTI:NOUN(                           #               # hu
+#       Distance0(                      # here          # ʒi
+#           Direction1(                 # forward       # se
+#               Activity(               # active        # ʃa
+#                   Truth0(             # not           # li
+#   )   )   )   )   )
+#   WTI:Separator(                      # because       # m
+#   )
+#   WTI:NOUN(                           #               # hu
+#       Distance0(                      # here          # ʒi
+#           Activity(                   # active        # ʃa
+#               Time0(                  # now           # qi
+#   )   )   )   )
+#)
+#mu heu haʃalizüi huʒiseʃali m huʒiʃaqi.
+#STI:PHRASE(                            #               # ma
+#   WTI:VERB(                           #               # ha
+#       Progression-0(                  # turn around   # züi
+#   )   )
+#   WTI:ADJECTIVE(                      #               # ho
+#       Activity2(                      # active        # ʃa
+#           Choice(                     # choose        # me
+#               Truth2(                 # true          # la
+#                   Separator(          # or            # m
+#                       Truth0(         # not           # li
+#   )   )   )   )   )   )
+#   WTI:ATTRIBUTE(                      #               # hi
+#       Connection1(                    # associated    # ŋe
+#   )   )
+#   WTI:NOUN(                           #               # hu
+#       Distance0(                      # here          # ʒi
+#           Truth0(                     # not           # li
+#   )   )   )
+#)
+#ma hazüi hoʃamelamli hiŋe huʒili.
+#STI:PHRASE(                            #               # ma
+#   WTI:NOUN(                           #               # hu
+#       Distance0(                      # here          # ʒi
+#           Activity2(                  # active        # ʃa
+#               Truth0(                 # not           # li
+#   )   )   )   )
+#   WTI:ATTRIBUTE(                      #               # hi
+#       State0(                         # even          # xi
+#   )   )
+#   WTI:ADJECTIVE(                      #               # ho
+#       Choice(                         # choice        # me
+#           Activity2(                  # active        # ʃa
+#               Time3(                  # in the past   # qüo
+#                   Separator(          # or            # m
+#                       Progression(    # beginning phas# ze
+#                           Time3(      # later         # qo
+#   )   )   )   )   )   )   )
+#)
+#ma huʒiʃali hixi homecalimzeqo.
+#STI:PHRASE(                            #               # ma
+#   WTI:PERSON4(                        # anybody       # heu
+#   )
+#   WTI:VERB(                           #               # ha
+#       Registration2(                  # visual        # ca
+#           Truth0(                     # not           # li
+#   )   )   )
+#   WTI:NOUN(                           #               # hu
+#       Distance0(                      # here          # ʒi
+#           Activity2(                  # active        # ʃa
+#               Truth0(                 # not           # li
+#   )   )   )   )
+#)
+#ma heu hacali huʒiʃali.
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
 #nonasciiletters = "ʃ ʒ ŋ"
 
-            "0,1,1": textwrap.wrap("ma haŋo huhi hiŋe huʒi. mu heu hadaŋo hubiñopa hoʃi m mo melala m heu haʃada huʒila hili huʒili.",w),
-            "0,1,2": textwrap.wrap("",w),
-            "0,1,3": textwrap.wrap("",w),
+#Hier kunt u alleen de status van ANDERE rekeningen aanpassen. Het is niet mogelijk om de - vanzelfsprekend actieve - rekening die nu in gebruik is te deactiveren. Kies een andere rekening en geef aan of het een \"actieve\" of een \"niet-actieve\" rekening betreft. Niet-actieve rekeningen zijn bijvoorbeeld gearchiveerde of voorbereide rekeningen, die niet in de overzichten worden getoond.
+            "0,1,3": textwrap.wrap("ma heu haʃazüi huʒili me hoʃala m hoʃali. mu heu haʃalizüi huʒiseʃali m huʒiʃaqi. ma hazüi hoʃamelamli hiŋe huʒili. ma huʒiʃali hixi homecalimzeqo. ma heu hacali huʒiʃali.",w),
             "0,1,4": textwrap.wrap("",w),
             "0,1,5": textwrap.wrap("",w),
             "0,1,6": textwrap.wrap("",w),
@@ -4199,10 +4319,45 @@ def nieuwnieuw(rekening,ok): # H
             for i in wraptekst1:
                 print(i)
         elif len(nieuwetransactieinputlijst) == 5:
-            if checkdatum(nieuwetransactieinputlijst[0]) == True:
-                transactiedatum = int(nieuwetransactieinputlijst[0])
+            if nieuwetransactieinputlijst[0] == "-":
+                transactiedatum = standaardstartdatum
+            elif nieuwetransactieinputlijst[0] == "+":
+                transactiedatum = standaardeinddatum
+            elif nieuwetransactieinputlijst[0].upper() == "M":
+                transactiedatum = int(str(nustr[:6])+"01")
+            elif nieuwetransactieinputlijst[0].upper() == "W":
+                transactiedatum = int(datetime.strftime(datetime.strptime(str(nustr),"%Y%m%d") - timedelta(weeks = 1),"%Y%m%d"))
+            elif len(nieuwetransactieinputlijst[0]) > 1 and nieuwetransactieinputlijst[0][0].upper() in ["M","W"]:
+                test = checkint(nieuwetransactieinputlijst[0][1:])
+                if test == True:
+                    if nieuwetransactieinputlijst[0][0].upper() == "M":
+                        maandverschil = int(nieuwetransactieinputlijst[0][1:])
+                        maand = int(nustr[4:6])
+                        jaar = int(nustr[:4])
+                        while maandverschil > 0:
+                            maand -= 1
+                            if maand == 0:
+                                maand = 12
+                                jaar -= 1
+                            maandverschil -= 1
+                        transactiedatum = int("{:0>4}".format(jaar)+"{:0>2}".format(maand)+"01")
+                    else:
+                        transactiedatum = int(datetime.strftime(datetime.strptime(str(nustr),"%Y%m%d") - timedelta(weeks = int(nieuwetransactieinputlijst[0][1:])+1),"%Y%m%d"))
+            elif len(nieuwetransactieinputlijst[0]) > 1 and nieuwetransactieinputlijst[0][0] in ["-","+"]:
+                test = checkint(nieuwetransactieinputlijst[0][1:])
+                if test == True:
+                    if nieuwetransactieinputlijst[0][0] == "-":
+                        transactiedatum = int(datetime.strftime(datetime.strptime(str(nustr),"%Y%m%d") - timedelta(days = int(nieuwetransactieinputlijst[0][1:])),"%Y%m%d"))
+                    else:
+                        transactiedatum = int(datetime.strftime(datetime.strptime(str(nustr),"%Y%m%d") + timedelta(days = int(nieuwetransactieinputlijst[0][1:])),"%Y%m%d"))
+                else:
+                   transactiedatum = nustr
             else:
-                transactiedatum = int(nustr)
+                test = checkint(nieuwetransactieinputlijst[0])
+                if test == True:
+                    transactiedatum = int(datetime.strftime(datetime.strptime(str(nustr),"%Y%m%d") - timedelta(days = int(nieuwetransactieinputlijst[0])),"%Y%m%d"))
+                else:
+                    transactiedatum = nustr 
             if checkfloat(nieuwetransactieinputlijst[1]) == True:
                 transactiebedrag = round(float(nieuwetransactieinputlijst[1]),2)
             else:
@@ -7009,19 +7164,19 @@ def nieuwespaarpot(rekening,header): # geen H
         toonspaarpotten(rekening,header)
         if Taal == "EN":
             print(menuEN["5,2"])
-            vragenlijst = ["Name",lijnlijstEN[0]]
+            vragenlijst = ["Name",lijnlijstEN[2]]
             bestaatal = "This %s exists already" % woordspaarpotEN.lower()
         elif Taal == "IT":
             print(menuIT["5,2"])
-            vragenlijst = ["Nome",lijnlijstIT[0]]
+            vragenlijst = ["Nome",lijnlijstIT[2]]
             bestaatal = "Questo %s esiste già" % woordspaarpotIT.lower()
         elif Taal == "CJ":
             print(menuCJ["5,2"])
-            vragenlijst = ["huhi",lijnlijstCJ[0]]
+            vragenlijst = ["huhi",lijnlijstCJ[2]]
             bestaatal = "%sʒi hoqüoqila" % woordspaarpotCJ.lower()
         else:
             print(menu["5,2"])
-            vragenlijst = ["Naam",lijnlijst[0]]
+            vragenlijst = ["Naam",lijnlijst[2]]
             bestaatal = "Deze %s bestaat al" % woordspaarpot.lower()
         maxlen = len(max(vragenlijst, key = len))
         loop = True
