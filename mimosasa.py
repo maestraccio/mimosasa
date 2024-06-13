@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.62"
-versiedatum = "20240611"
+versie = "0.0.65"
+versiedatum = "20240613"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -707,6 +707,7 @@ menuEN = {
             "1,0,6": " Sort by %s A < Z" % elementenEN[2],
             "1,0,7": " Sort by %s Z > A" % elementenEN[3],
             "1,0,8": " Sort by %s A < Z" % elementenEN[3],
+            "1,0,9": " Combine %s pairs" % elementenEN[1],
         "1,1": "Collect transactions and display table",
         "1,2": "Show monthly total",
         "1,3": "View %ss in collection" % woordtransactieEN.lower(),
@@ -773,6 +774,7 @@ menuIT = {
             "1,0,6": " Ordina per %s A < Z" % elementenIT[2],
             "1,0,7": " Ordina per %s Z > A" % elementenIT[3],
             "1,0,8": " Ordina per %s A < Z" % elementenIT[3],
+            "1,0,9": " Combina coppie di %s" % elementenIT[1],
         "1,1": "Collezionare transazioni e visualizzare la tabella",
         "1,2": "Visualizzare totale mensile",
         "1,3": "Visualizzare transazioni in collezione",
@@ -957,6 +959,7 @@ menuCJ = {
             "1,0,6": " haxa %s A < Z" % elementenCJ[2],
             "1,0,7": " haxa %s Z > A" % elementenCJ[3],
             "1,0,8": " haxa %s A < Z" % elementenCJ[3],
+            "1,0,9": " haŋa %spaba" % elementenCJ[1],
         "1,1": "hucaxa hubiwasemesüipa",
         "1,2": "hucaxa huzaqipabobi",
         "1,3": "haca hubiwasemesüipa hizaberebe",
@@ -1023,6 +1026,7 @@ menu = {
             "1,0,6": " Sorteer op %s A < Z" % elementen[2],
             "1,0,7": " Sorteer op %s Z > A" % elementen[3],
             "1,0,8": " Sorteer op %s A < Z" % elementen[3],
+            "1,0,9": " Combineer %sparen" % elementen[1],
         "1,1": "Verzamel transacties en toon tabel",
         "1,2": "Maandtotaal weergeven",
         "1,3": "Bekijk %ss in collectie" % woordtransactie.lower(),
@@ -1089,6 +1093,7 @@ helpmenuEN = {
             "1,0,6": textwrap.wrap("The collection is sorted alphabetically from A to Z based on %s." % elementenEN[2].lower(),w),
             "1,0,7": textwrap.wrap("The collection is sorted alphabetically from Z to A based on %s." % elementenEN[3].lower(),w),
             "1,0,8": textwrap.wrap("The collection is sorted alphabetically from A to Z based on %s." % elementenEN[3].lower(),w),
+            "1,0,9": textwrap.wrap("Transactions with a negative %s and the same positive %s are paired together, the rest is filtered out." % (elementenEN[1],elementenEN[1]),w),
         "1,1": textwrap.wrap("Select transactions based on various criteria (%s, %s, %s, %s and %s) and generate a clear table. You can use \"keyboard shortcuts\", or specify each element individually. The possible \"keyboard shortcuts\" are displayed; it is possible to add a number to \"M\" (month) or \"W\" (week): \"0\" includes today. All selected transactions are also collected in the collection, which is always displayed above the selection menu. If the selection covers one day, the daily total for that day is shown." % (elementenEN[0].lower(),elementenEN[1].lower(),elementenEN[2].lower(),elementenEN[3].lower(),woordcategorieEN.lower()),w),
         "1,2": textwrap.wrap("Show the budget analysis of one month. By default, the current month is displayed. You will see the progress of each category compared to the assigned budget, and the monthly performance.",w),
         "1,3": textwrap.wrap("Show the details of individual transactions in the collection. The number of characters in \"%s\" and \"%s\" is unlimited but is truncated in the table. All additional information is expanded here." % (elementenEN[2].lower(),elementenEN[3].lower()),w),
@@ -1155,6 +1160,7 @@ helpmenuIT = {
             "1,0,6": textwrap.wrap("La collezione viene ordinata in ordine alfabetico da A ad Z per %s." % elementenIT[2].lower(),w),
             "1,0,7": textwrap.wrap("La collezione viene ordinata in ordine alfabetico da Z ad A per %s." % elementenIT[3].lower(),w),
             "1,0,8": textwrap.wrap("La collezione viene ordinata in ordine alfabetico da A ad Z per %s." % elementenIT[3].lower(),w),
+            "1,0,9": textwrap.wrap("Le transazioni con un %s negativo e lo stesso %s positivo vengono accoppiate, il resto viene filtrato." % (elementenIT[1],elementenIT[1]),w),
         "1,1": textwrap.wrap("Seleziona transazioni basate su diversi criteri (%s, %s, %s, %s e %s) e genera una tabella ben organizzata. Puoi utilizzare \"scorciatoie da tastiera\", oppure specificare singolarmente tutti gli elementi. Le possibili \"scorciatoie da tastiera\" vengono mostrate; è possibile aggiungere un numero a \"M\" (mese) o \"W\" (settimana): \"0\" include oggi. Tutte le transazioni selezionate vengono anche raccolte nella collezione, che viene mostrata sempre sopra il menu a discesa. Se la selezione comprende un solo giorno, verrà mostrato il totale di quel giorno." % (elementenIT[0].lower(),elementenIT[1].lower(),elementenIT[2].lower(),elementenIT[3].lower(),woordcategorieIT.lower()),w),
         "1,2": textwrap.wrap("Mostra l'analisi del bilancio di un mese. Di default viene mostrato il mese corrente. Vedrai il progresso di ogni categoria rispetto al budget assegnato e le prestazioni mensili.",w),
         "1,3": textwrap.wrap("Mostra i dettagli delle singole transazioni nella collezione. Il numero di caratteri consentito in \"%s\" e \"%s\" è illimitato, ma nella tabella (\"1,1\") verranno tagliati e mostrati solo parzialmente. Tutte le informazioni in quei caratteri extra verranno comunque espansi qui." % (elementenIT[2].lower(),elementenIT[3].lower()),w),
@@ -1728,14 +1734,15 @@ helpmenuCJ = {
         "0,5": textwrap.wrap("",w),
     "1": textwrap.wrap("",w),
         "1,0": textwrap.wrap("",w),
-            "1,0,1": textwrap.wrap("%s" % elementenCJ[0].lower(),w),
-            "1,0,2": textwrap.wrap("%s" % elementenCJ[0].lower(),w),
-            "1,0,3": textwrap.wrap("%s" % elementenCJ[1].lower(),w),
-            "1,0,4": textwrap.wrap("%s" % elementenCJ[1].lower(),w),
-            "1,0,5": textwrap.wrap("%s" % elementenCJ[2].lower(),w),
-            "1,0,6": textwrap.wrap("%s" % elementenCJ[2].lower(),w),
-            "1,0,7": textwrap.wrap("%s" % elementenCJ[3].lower(),w),
-            "1,0,8": textwrap.wrap("%s" % elementenCJ[3].lower(),w),
+            "1,0,1": textwrap.wrap("%s" % elementenCJ[0],w),
+            "1,0,2": textwrap.wrap("%s" % elementenCJ[0],w),
+            "1,0,3": textwrap.wrap("%s" % elementenCJ[1],w),
+            "1,0,4": textwrap.wrap("%s" % elementenCJ[1],w),
+            "1,0,5": textwrap.wrap("%s" % elementenCJ[2],w),
+            "1,0,6": textwrap.wrap("%s" % elementenCJ[2],w),
+            "1,0,7": textwrap.wrap("%s" % elementenCJ[3],w),
+            "1,0,8": textwrap.wrap("%s" % elementenCJ[3],w),
+            "1,0,9": textwrap.wrap("%s" % elementenCJ[1],w),
         "1,1": textwrap.wrap("(%s, %s, %s, %s e %s)" % (elementenCJ[0].lower(),elementenCJ[1].lower(),elementenCJ[2].lower(),elementenCJ[3].lower(),woordcategorieCJ.lower()),w),
         "1,2": textwrap.wrap("",w),
         "1,3": textwrap.wrap("\"%s\"  \"%s\" (\"1,1\") " % (elementenCJ[2].lower(),elementenCJ[3].lower()),w),
@@ -1799,6 +1806,7 @@ helpmenu = {
             "1,0,6": textwrap.wrap("De collectie wordt gestorteerd op %s, van A naar Z" % (elementen[2].lower()),w),
             "1,0,7": textwrap.wrap("De collectie wordt gestorteerd op %s, van Z naar A" % (elementen[3].lower()),w),
             "1,0,8": textwrap.wrap("De collectie wordt gestorteerd op %s, van A naar Z" % (elementen[3].lower()),w),
+            "1,0,9": textwrap.wrap("Transacties met een negatief %s en hetzelfde positieve %s worden bij elkaar gezet, de rest wordt weggefilterd." % (elementen[1],elementen[1]),w),
         "1,1": textwrap.wrap("Selecteer transacties op basis van verschillende criteria (%s, %s, %s, %s en %s) en genereer een overzichtelijke tabel. Er kan gebruik worden gemaakt van \"sneltoetsen\", of u kunt alle elementen afzonderlijk opgeven. De mogelijke \"sneltoetsen\" worden getoond; het is mogelijk \"M\" (maand) of \"W\" (week) te voorzien van een getal; \"0\" is inclusief vandaag. Alle geselecteerde transacties worden ook verzameld in de collectie, die steeds getoond wordt boven het keuzemenu. Omvat de selectie één dag, dan wordt het dagtotaal op die dag getoond." % (elementen[0].lower(),elementen[1].lower(),elementen[2].lower(),elementen[3].lower(),woordcategorie.lower()),w),
         "1,2": textwrap.wrap("Toon de budgetanalyse van één maand. Standaard wordt de huidige maand getoond. U ziet de voortgang van iedere categorie ten opzichte van het daaraan toegekende budget, en de maandprestatie.",w),
         "1,3": textwrap.wrap("Toon de details van individuele transacties in de collectie. Het toegestaan aantal karakters in \"%s\" en \"%s\" is onbeperkt, maar in de tabel (\"1,1\") worden die afgekapt en slechts ten dele getoond. Alle informatie in die extra karakters wordt hier wel uitgevouwen." % (elementen[2].lower(),elementen[3].lower()),w),
@@ -3530,7 +3538,8 @@ def printselectie(rekening,header,col,ok): # H
   5 : %s
   6 : %s
   7 : %s
-  8 : %s""" % (
+  8 : %s
+  9 : %s""" % (
           menuEN["1,0,1"],
           menuEN["1,0,2"],
           menuEN["1,0,3"],
@@ -3538,7 +3547,8 @@ def printselectie(rekening,header,col,ok): # H
           menuEN["1,0,5"],
           menuEN["1,0,6"],
           menuEN["1,0,7"],
-          menuEN["1,0,8"]
+          menuEN["1,0,8"],
+          menuEN["1,0,9"]
           )
     )
     elif Taal == "IT":
@@ -3549,7 +3559,8 @@ def printselectie(rekening,header,col,ok): # H
   5 : %s
   6 : %s
   7 : %s
-  8 : %s""" % (
+  8 : %s
+  9 : %s""" % (
           menuIT["1,0,1"],
           menuIT["1,0,2"],
           menuIT["1,0,3"],
@@ -3557,7 +3568,8 @@ def printselectie(rekening,header,col,ok): # H
           menuIT["1,0,5"],
           menuIT["1,0,6"],
           menuIT["1,0,7"],
-          menuIT["1,0,8"]
+          menuIT["1,0,8"],
+          menuIT["1,0,9"]
           )
     )
     elif Taal == "CJ":
@@ -3568,7 +3580,8 @@ def printselectie(rekening,header,col,ok): # H
   5 : %s
   6 : %s
   7 : %s
-  8 : %s""" % (
+  8 : %s
+  9 : %s""" % (
           menuCJ["1,0,1"],
           menuCJ["1,0,2"],
           menuCJ["1,0,3"],
@@ -3576,7 +3589,8 @@ def printselectie(rekening,header,col,ok): # H
           menuCJ["1,0,5"],
           menuCJ["1,0,6"],
           menuCJ["1,0,7"],
-          menuCJ["1,0,8"]
+          menuCJ["1,0,8"],
+          menuCJ["1,0,9"]
           )
     )
     else:
@@ -3587,7 +3601,8 @@ def printselectie(rekening,header,col,ok): # H
   5 : %s
   6 : %s
   7 : %s
-  8 : %s""" % (
+  8 : %s
+  9 : %s""" % (
           menu["1,0,1"],
           menu["1,0,2"],
           menu["1,0,3"],
@@ -3595,7 +3610,8 @@ def printselectie(rekening,header,col,ok): # H
           menu["1,0,5"],
           menu["1,0,6"],
           menu["1,0,7"],
-          menu["1,0,8"]
+          menu["1,0,8"],
+          menu["1,0,9"]
           )
     )
     loop = True
@@ -3640,6 +3656,9 @@ def printselectie(rekening,header,col,ok): # H
             loop = False
         elif sorteren == "8":
             ok = sortokonderwerp(rekening,ok)
+            loop = False
+        elif sorteren == "9":
+            ok = sortokplusminpaar(rekening,ok)
             loop = False
         else:
             loop = False
@@ -5079,6 +5098,21 @@ def sortokonderwerp(rekening,ok): # geen H
     for i in revoki:
         ok[i[-1]] = [i[3],i[1],i[2],i[0]]
     return ok
+
+def sortokplusminpaar(rekening,ok): # geen H
+    okkeylijst = []
+    okvallijst = []
+    okbedraglijst = []
+    for i in ok:
+        okkeylijst.append(i)
+        okvallijst.append(ok[i])
+        okbedraglijst.append(ok[i][1])
+    okd = {}
+    for i in okvallijst:
+        if i[1] * -1 in okbedraglijst:
+            okd[okkeylijst[okvallijst.index(okvallijst[okbedraglijst.index(i[1] * 1)])]] = i
+            okd[okkeylijst[okvallijst.index(okvallijst[okbedraglijst.index(i[1] * -1)])]] = okvallijst[okvallijst.index(okvallijst[okbedraglijst.index(i[1] * -1)])]
+    return okd
 
 def geefjaofnee(rekening,header): # geen H
     kleuren,catcol = updatekleuren(rekening)
@@ -6685,7 +6719,8 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
   5 : %s
   6 : %s
   7 : %s
-  8 : %s""" % (
+  8 : %s
+  9 : %s""" % (
           menuEN["1,0,1"],
           menuEN["1,0,2"],
           menuEN["1,0,3"],
@@ -6693,7 +6728,8 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
           menuEN["1,0,5"],
           menuEN["1,0,6"],
           menuEN["1,0,7"],
-          menuEN["1,0,8"]
+          menuEN["1,0,8"],
+          menuEN["1,0,9"]
           )
     )
                     elif Taal == "IT":
@@ -6704,7 +6740,8 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
   5 : %s
   6 : %s
   7 : %s
-  8 : %s""" % (
+  8 : %s
+  9 : %s""" % (
           menuIT["1,0,1"],
           menuIT["1,0,2"],
           menuIT["1,0,3"],
@@ -6712,7 +6749,8 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
           menuIT["1,0,5"],
           menuIT["1,0,6"],
           menuIT["1,0,7"],
-          menuIT["1,0,8"]
+          menuIT["1,0,8"],
+          menuIT["1,0,9"]
           )
     )
                     elif Taal == "CJ":
@@ -6723,7 +6761,8 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
   5 : %s
   6 : %s
   7 : %s
-  8 : %s""" % (
+  8 : %s
+  9 : %s""" % (
           menuCJ["1,0,1"],
           menuCJ["1,0,2"],
           menuCJ["1,0,3"],
@@ -6731,7 +6770,8 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
           menuCJ["1,0,5"],
           menuCJ["1,0,6"],
           menuCJ["1,0,7"],
-          menuCJ["1,0,8"]
+          menuCJ["1,0,8"],
+          menuCJ["1,0,9"]
           )
     )
                     else:
@@ -6742,7 +6782,8 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
   5 : %s
   6 : %s
   7 : %s
-  8 : %s""" % (
+  8 : %s
+  9 : %s""" % (
           menu["1,0,1"],
           menu["1,0,2"],
           menu["1,0,3"],
@@ -6750,7 +6791,8 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
           menu["1,0,5"],
           menu["1,0,6"],
           menu["1,0,7"],
-          menu["1,0,8"]
+          menu["1,0,8"],
+          menu["1,0,9"]
           )
     )
                     keuze3 = input(col+inputindent)
@@ -6775,6 +6817,8 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
                     ok = sortokonderwerpreverse(rekening,ok)
                 elif keuze3 == "8":
                     ok = sortokonderwerp(rekening,ok)
+                elif keuze3 == "9":
+                    ok = sortokplusminpaar(rekening,ok)
                 else:
                     ok = collectie(rekening,ok)
                 return rekening,header,col,keuze1lijst,ok
