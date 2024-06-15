@@ -127,7 +127,7 @@ woordspaarpotIT = "Salvadanaio"
 #)  )   )   )
 woordspaarpotCJ = "hubiwaŋo"
 woordspaarpot = "Spaarpot"
-geenspaarpottenEN = "There are no %ss (yet)" % woordspaarpotEN.lower()
+geenspaarpottenEN = "There are no %ss (yet)" % (woordspaarpotEN)
 geenspaarpottenIT = "Non ci sono (ancora) salvadanai"
 #STI:PHRASE(                                #               # ma
 #   WTI:(woordspaarpot)(                    # woordspaarpot # %s
@@ -135,8 +135,8 @@ geenspaarpottenIT = "Non ci sono (ancora) salvadanai"
 #           Time0(                          # now           # qi
 #   )   )   )
 #)
-geenspaarpottenCJ = "ma %sliqi" % woordspaarpotCJ.lower()
-geenspaarpotten = "Er zijn (nog) geen %sten" % woordspaarpot.lower()
+geenspaarpottenCJ = "ma %sliqi" % (woordspaarpotCJ)
+geenspaarpotten = "Er zijn (nog) geen %sten" % (woordspaarpot)
 
 lijn = "|"+78*"-"+"|"
 toplijn = "+"+78*"-"+"+"
@@ -202,7 +202,7 @@ nieuwheaderlijstEN = [
         "Date format",
         "Color scheme",
         "Level of menu expansion",
-        "Number of transactions until stop",
+        "Number of %ss until stop" % (woordtransactieEN),
         "Print monthly overview to file",
         "Export everything to CSV file",
         "Tip of the day"
@@ -220,7 +220,7 @@ nieuwheaderlijstIT = [
         "Formato data",
         "Schema di colori",
         "Livello di espansione del menu",
-        "Numero di transazioni fino all'arresto",
+        "Numero di Transazioni fino all'arresto",
         "Stampa riepilogo mensile su file",
         "Esporta tutto in file CSV",
         "Consiglio del giorno"
@@ -318,7 +318,7 @@ nieuwheaderlijstCJ = [
 #               Truth0(                     # not           # li
 #   )   )   )   )
 #)
-        "mi hakeca %svipa melamli" % woordcategorieCJ,
+        "mi hakeca %svipa melamli" % (woordcategorieCJ),
 #STI:CHOICE(                                # choice        # me
 #   WTI:NOUN(                               #               # hu
 #       Registration2(                      # visual        # ca
@@ -355,7 +355,7 @@ nieuwheaderlijstCJ = [
 #       Scaling2(                           # groep         # pa
 #           Registration2(                  # visual        # ca
 #)  )   )
-        "hubiseʃi %spaca" % woordtransactieCJ,
+        "hubiseʃi %spaca" % (woordtransactieCJ),
 #STI:QUESTION(                              #               # mi
 #   WTI:VERB(                               #               # ha
 #       Desire1(                            # want          # ke
@@ -374,7 +374,7 @@ nieuwheaderlijstCJ = [
 #               Truth0(                     # not           # li
 #   )   )   )   )
 #)
-        "mi hakeŋo hucaza %spa melamli" % woordcategorieCJ,
+        "mi hakeŋo hucaza %spa melamli" % (woordcategorieCJ),
 #STI:QUESTION(                              #               # mi
 #   WTI:VERB(                               #               # ha
 #       Desire1(                            # want          # ke
@@ -389,7 +389,7 @@ nieuwheaderlijstCJ = [
 #               Truth0(                     # not           # li
 #   )   )   )   )
 #)
-        "mi hakeŋo %spu melamli" % woordtransactieCJ,
+        "mi hakeŋo %spu melamli" % (woordtransactieCJ),
 #STI:QUESTION(                              #               # mi
 #   WTI:VERB(                               #               # ha
 #       Desire1(                            # want          # ke
@@ -404,22 +404,22 @@ nieuwheaderlijstCJ = [
         "mi hakeca hudasepuŋeʃaʒibe melamli",
         ]
 nieuwheaderlijst = [
-        "Rekeningnaam",                      # 0
-        "Rekeninghouder",                    # 1
-        "Actieve rekening",                  # 2
-        "Taal",                              # 3
-        "Valuta",                            # 4
-        "Startsaldo",                        # 5
-        "Toon totaalsaldo op startscherm",   # 6
-        "Markering Lager >< Hoger",          # 7
-        "Nulregels bij totalen",             # 8
-        "Datumformaat",                      # 9
-        "Kleurenschema",                     # 10
-        "Niveau van uitvouwen menu",         # 11
-        "Aantal transacties tot stop",       # 12
-        "Print maandoverzicht naar bestand", # 13
-        "Exporteer alles naar csv-bestand",  # 14
-        "Tip van de dag"                     # 15
+        "Rekeningnaam",                            # 0
+        "Rekeninghouder",                          # 1
+        "Actieve rekening",                        # 2
+        "Taal",                                    # 3
+        "Valuta",                                  # 4
+        "Startsaldo",                              # 5
+        "Toon totaalsaldo op startscherm",         # 6
+        "Markering Lager >< Hoger",                # 7
+        "Nulregels bij totalen",                   # 8
+        "Datumformaat",                            # 9
+        "Kleurenschema",                           # 10
+        "Niveau van uitvouwen menu",               # 11
+        "Aantal %ss tot stop" % (woordtransactie), # 12
+        "Print maandoverzicht naar bestand",       # 13
+        "Exporteer alles naar csv-bestand",        # 14
+        "Tip van de dag"                           # 15
         ]
 
 lijnlijstEN = [
@@ -687,49 +687,49 @@ menuEN = {
             "0,1,14": " "+nieuwheaderlijstEN[13],
             "0,1,15": " "+nieuwheaderlijstEN[14],
             "0,1,16": " "+nieuwheaderlijstEN[15],
-        "0,2": "%s management" % woordcategorieEN,
-            "0,2,1": " Add new %s" % woordcategorieEN.lower(),
-            "0,2,2": " Modify %s name" % woordcategorieEN.lower(),
+        "0,2": "%s management" % (woordcategorieEN),
+            "0,2,1": " Add new %s" % (woordcategorieEN),
+            "0,2,2": " Modify %s name" % (woordcategorieEN),
             "0,2,3": " Modify monthly budget",
-            "0,2,4": " Delete %s" % woordcategorieEN.lower(),
+            "0,2,4": " Delete %s" % (woordcategorieEN),
             "0,2,5": " Household <> Business account / Reset",
-            "0,2,6": " Reset standard category names",
+            "0,2,6": " Reset standard %s names" % (woordcategorieEN),
         "0,3": "Add new account",
         "0,4": "Delete account",
         "0,5": "Transfer settings to another account",
-    "1": " > Show %ss < " % woordtransactieEN.lower(),
-        "1,0": "Collect and sort transactions",
-            "1,0,1": " Sort by %s 1231 > 0101" % elementenEN[0],
-            "1,0,2": " Sort by %s 0101 < 1231" % elementenEN[0],
-            "1,0,3": " Sort by %s + > -" % elementenEN[1],
-            "1,0,4": " Sort by %s - < +" % elementenEN[1],
-            "1,0,5": " Sort by %s Z > A" % elementenEN[2],
-            "1,0,6": " Sort by %s A < Z" % elementenEN[2],
-            "1,0,7": " Sort by %s Z > A" % elementenEN[3],
-            "1,0,8": " Sort by %s A < Z" % elementenEN[3],
-            "1,0,9": " Combine %s pairs" % elementenEN[1],
-        "1,1": "Collect transactions and display table",
+    "1": " > Show %ss < " % (woordtransactieEN),
+        "1,0": "Collect and sort %ss" % (woordtransactieEN),
+            "1,0,1": " Sort by %s 1231 > 0101" % (elementenEN[0]),
+            "1,0,2": " Sort by %s 0101 < 1231" % (elementenEN[0]),
+            "1,0,3": " Sort by %s + > -" % (elementenEN[1]),
+            "1,0,4": " Sort by %s - < +" % (elementenEN[1]),
+            "1,0,5": " Sort by %s Z > A" % (elementenEN[2]),
+            "1,0,6": " Sort by %s A < Z" % (elementenEN[2]),
+            "1,0,7": " Sort by %s Z > A" % (elementenEN[3]),
+            "1,0,8": " Sort by %s A < Z" % (elementenEN[3]),
+            "1,0,9": " Combine %s pairs" % (elementenEN[1]),
+        "1,1": "Collect %ss and display table" % (woordtransactieEN),
         "1,2": "Show monthly total",
-        "1,3": "View %ss in collection" % woordtransactieEN.lower(),
-    "2": "Add %s" % woordtransactieEN.lower(),
-        "2,1": "Add a new transaction to the account",
-        "2,2": "Copy an existing transaction to today",
-    "3": "Modify %s" % woordtransactieEN.lower(),
-        "3,1": "Modify %s %s" % (woordtransactieEN.lower(),elementenEN[0]),
-        "3,2": "Modify %s %s" % (woordtransactieEN.lower(),elementenEN[1]),
-        "3,3": "Modify %s %s" % (woordtransactieEN.lower(),elementenEN[2]),
-        "3,4": "Modify %s %s" % (woordtransactieEN.lower(),elementenEN[3]),
-        "3,5": "Modify %s %s" % (woordtransactieEN.lower(),woordcategorieEN),
-    "4": "Delete %s" % woordtransactieEN.lower(),
-    "5": "%ss" % woordspaarpotEN,
-        "5,1": "View %ss" % woordspaarpotEN.lower(),
-        "5,2": "Add new %s" % woordspaarpotEN.lower(),
-        "5,3": "Modify %s" % woordspaarpotEN.lower(),
-            "5,3,1": " Change %s #%s" % (woordspaarpotEN.lower(),lijnlijstEN[1].lower()),
-            "5,3,2": " Change %s %s" % (woordspaarpotEN.lower(),lijnlijstEN[2].lower()),
-            "5,3,3": " Change %s %s" % (woordspaarpotEN.lower(),lijnlijstEN[3].lower()),
-            "5,3,4": " Change %s %s" % (woordspaarpotEN.lower(),lijnlijstEN[4].lower()),
-        "5,4": "Delete %s" % woordspaarpotEN.lower(),
+        "1,3": "View %ss in collection" % (woordtransactieEN),
+    "2": "Add %s" % (woordtransactieEN),
+        "2,1": "Add a new %s to the account" % (woordtransactieEN),
+        "2,2": "Copy an existing %s to today" % (woordtransactieEN),
+    "3": "Modify %s" % (woordtransactieEN),
+        "3,1": "Modify %s %s" % (woordtransactieEN,elementenEN[0]),
+        "3,2": "Modify %s %s" % (woordtransactieEN,elementenEN[1]),
+        "3,3": "Modify %s %s" % (woordtransactieEN,elementenEN[2]),
+        "3,4": "Modify %s %s" % (woordtransactieEN,elementenEN[3]),
+        "3,5": "Modify %s %s" % (woordtransactieEN,woordcategorieEN),
+    "4": "Delete %s" % (woordtransactieEN),
+    "5": "%ss" % (woordspaarpotEN),
+        "5,1": "View %ss" % (woordspaarpotEN),
+        "5,2": "Add new %s" % (woordspaarpotEN),
+        "5,3": "Modify %s" % (woordspaarpotEN),
+            "5,3,1": " Change %s #%s" % (woordspaarpotEN,lijnlijstEN[1]),
+            "5,3,2": " Change %s %s" % (woordspaarpotEN,lijnlijstEN[2]),
+            "5,3,3": " Change %s %s" % (woordspaarpotEN,lijnlijstEN[3]),
+            "5,3,4": " Change %s %s" % (woordspaarpotEN,lijnlijstEN[4]),
+        "5,4": "Delete %s" % (woordspaarpotEN),
     "<": "Back",
     "Q": "Quit"
         }
@@ -754,49 +754,49 @@ menuIT = {
             "0,1,14": " "+nieuwheaderlijstIT[13],
             "0,1,15": " "+nieuwheaderlijstIT[14],
             "0,1,16": " "+nieuwheaderlijstIT[15],
-        "0,2": "Gestione %s" % woordcategorieIT.lower(),
-            "0,2,1": " Aggiundere nuova %s" % woordcategorieIT.lower(),
-            "0,2,2": " Modificare nome %s" % woordcategorieIT.lower(),
+        "0,2": "Gestione %s" % (woordcategorieIT),
+            "0,2,1": " Aggiundere nuova %s" % (woordcategorieIT),
+            "0,2,2": " Modificare nome %s" % (woordcategorieIT),
             "0,2,3": " Modificare budget mensile",
-            "0,2,4": " Eliminare %s" % woordcategorieIT.lower(),
+            "0,2,4": " Eliminare %s" % (woordcategorieIT),
             "0,2,5": " Conto domestico <> aziendale / Ripristina",
-            "0,2,6": " Ripristina i nomi delle categorie standard",
+            "0,2,6": " Ripristina i nomi delle Categorie standard",
         "0,3": "Aggiungere nuovo account",
         "0,4": "Eliminare account",
         "0,5": "Trasferire le impostazioni a un altro account",
-    "1": " > Visualizzare transazioni < ",
-        "1,0": "Collezionare e ordinare transazioni",
-            "1,0,1": " Ordina per %s 1231 > 0101" % elementenIT[0],
-            "1,0,2": " Ordina per %s 0101 < 1231" % elementenIT[0],
-            "1,0,3": " Ordina per %s + > -" % elementenIT[1],
-            "1,0,4": " Ordina per %s - < +" % elementenIT[1],
-            "1,0,5": " Ordina per %s Z > A" % elementenIT[2],
-            "1,0,6": " Ordina per %s A < Z" % elementenIT[2],
-            "1,0,7": " Ordina per %s Z > A" % elementenIT[3],
-            "1,0,8": " Ordina per %s A < Z" % elementenIT[3],
-            "1,0,9": " Combina coppie di %s" % elementenIT[1],
-        "1,1": "Collezionare transazioni e visualizzare la tabella",
+    "1": " > Visualizzare Transazioni < ",
+        "1,0": "Collezionare e ordinare Transazioni",
+            "1,0,1": " Ordina per %s 1231 > 0101" % (elementenIT[0]),
+            "1,0,2": " Ordina per %s 0101 < 1231" % (elementenIT[0]),
+            "1,0,3": " Ordina per %s + > -" % (elementenIT[1]),
+            "1,0,4": " Ordina per %s - < +" % (elementenIT[1]),
+            "1,0,5": " Ordina per %s Z > A" % (elementenIT[2]),
+            "1,0,6": " Ordina per %s A < Z" % (elementenIT[2]),
+            "1,0,7": " Ordina per %s Z > A" % (elementenIT[3]),
+            "1,0,8": " Ordina per %s A < Z" % (elementenIT[3]),
+            "1,0,9": " Combina coppie di %s" % (elementenIT[1]),
+        "1,1": "Collezionare Transazioni e visualizzare la tabella",
         "1,2": "Visualizzare totale mensile",
-        "1,3": "Visualizzare transazioni in collezione",
-    "2": "Aggiungere %s" % woordtransactieIT.lower(),
-        "2,1": "Aggiungere una nuova transazione al conto",
-        "2,2": "Copiare una transazione esistente su oggi",
-    "3": "Modificare %s" % woordtransactieIT.lower(),
-        "3,1": "Modificare %s %s" % (woordtransactieIT.lower(),elementenIT[0]),
-        "3,2": "Modificare %s %s" % (woordtransactieIT.lower(),elementenIT[1]),
-        "3,3": "Modificare %s %s" % (woordtransactieIT.lower(),elementenIT[2]),
-        "3,4": "Modificare %s %s" % (woordtransactieIT.lower(),elementenIT[3]),
-        "3,5": "Modificare %s %s" % (woordtransactieIT.lower(),woordcategorieIT),
-    "4": "Eliminare %s" % woordtransactieIT.lower(),
+        "1,3": "Visualizzare Transazioni in collezione",
+    "2": "Aggiungere %s" % (woordtransactieIT),
+        "2,1": "Aggiungere una nuova %s al conto" % (woordtransactieIT),
+        "2,2": "Copiare una %s esistente su oggi" % (woordtransactieIT),
+    "3": "Modificare %s" % (woordtransactieIT),
+        "3,1": "Modificare %s %s" % (woordtransactieIT,elementenIT[0]),
+        "3,2": "Modificare %s %s" % (woordtransactieIT,elementenIT[1]),
+        "3,3": "Modificare %s %s" % (woordtransactieIT,elementenIT[2]),
+        "3,4": "Modificare %s %s" % (woordtransactieIT,elementenIT[3]),
+        "3,5": "Modificare %s %s" % (woordtransactieIT,woordcategorieIT),
+    "4": "Eliminare %s" % (woordtransactieIT),
     "5": "Salvadanai",
-        "5,1": "Visualizzare salvadanai",
-        "5,2": "Aggiungere nuovo %s" % woordspaarpotIT.lower(),
-        "5,3": "Modificare %s" % woordspaarpotIT.lower(),
-            "5,3,1": " Cambia %s #%s" % (woordspaarpotIT.lower(),lijnlijstIT[1].lower()),
-            "5,3,2": " Cambia %s %s" % (woordspaarpotIT.lower(),lijnlijstIT[2].lower()),
-            "5,3,3": " Cambia %s %s" % (woordspaarpotIT.lower(),lijnlijstIT[3].lower()),
-            "5,3,4": " Cambia %s %s" % (woordspaarpotIT.lower(),lijnlijstIT[4].lower()),
-        "5,4": "Eliminare %s" % (woordspaarpotIT.lower()),
+        "5,1": "Visualizzare Salvadanai",
+        "5,2": "Aggiungere nuovo %s" % (woordspaarpotIT),
+        "5,3": "Modificare %s" % (woordspaarpotIT),
+            "5,3,1": " Cambia %s #%s" % (woordspaarpotIT,lijnlijstIT[1]),
+            "5,3,2": " Cambia %s %s" % (woordspaarpotIT,lijnlijstIT[2]),
+            "5,3,3": " Cambia %s %s" % (woordspaarpotIT,lijnlijstIT[3]),
+            "5,3,4": " Cambia %s %s" % (woordspaarpotIT,lijnlijstIT[4]),
+        "5,4": "Eliminare %s" % (woordspaarpotIT),
     "<": "Tornare",
     "Q": "Uscire"
         }
@@ -861,18 +861,18 @@ menuCJ = {
 #WTI:VERB(                                  #               # ha
 #   State2(                                 # ordened       # xa
 #)  )
-        "0,2": "haxa %s" % woordcategorieCJ,
+        "0,2": "haxa %s" % (woordcategorieCJ),
 #WTI:VERB(                                  #               # ha
 #   Progression0(                           # start         # zi
 #)  )
-            "0,2,1": " hazi %s" % woordcategorieCJ,
+            "0,2,1": " hazi %s" % (woordcategorieCJ),
 #WTI:VERB(                                  #               # ha
 #   Progression-0(                          # turn around   # züi
 #)  )
 #WTI:NOUN(                                  #               # hu
 #   Attribute(                              # name          # hi
 #)  )
-            "0,2,2": " hazüi huhi %s" % woordcategorieCJ,
+            "0,2,2": " hazüi huhi %s" % (woordcategorieCJ),
 #WTI:VERB(                                  #               # ha
 #   Progression-0(                          # turn around   # züi
 #)  )
@@ -882,13 +882,13 @@ menuCJ = {
 #           Connection1(                    # associated    # ŋe
 #               (woordcategorie)(           # woordcategorie# %s
 #)  )   )   )
-            "0,2,3": " hazüi hubiwaŋe%s" % woordcategorieCJ,
+            "0,2,3": " hazüi hubiwaŋe%s" % (woordcategorieCJ),
 #WTI:VERB(                                  #               # ha
 #   Progression-4(                          # away          # züu
 #)  )
 #(woordcategorie)(                          # woordcategorie# %s
 #)
-            "0,2,4": " hazüu %s" % woordcategorieCJ,
+            "0,2,4": " hazüu %s" % (woordcategorieCJ),
 #STI:CHOICE(                                # choice        # me
 #   WTI:(woordcategorie)(                   # woordcategorie# %s
 #       Distance0(                          # here          # ʒi
@@ -910,7 +910,7 @@ menuCJ = {
 #   WTI:SCALING4(                           # all           # pu
 #   )
 #)
-            "0,2,5": " me %sʒiʃepa m ~ʒiʃopa / hazüisezi ~pu" % woordcategorieCJ,
+            "0,2,5": " me %sʒiʃepa m ~ʒiʃopa / hazüisezi ~pu" % (woordcategorieCJ),
 #WTI:VERB(                                  #               # ha
 #   Progression-0(                          # turn around   # züi
 #       Direction1(                         # forward       # se
@@ -921,7 +921,7 @@ menuCJ = {
 #       (woordcategorie)(                   # woordcategorie# %s
 #           Scaling4(                       # all           # pu
 #)  )   )   )
-            "0,2,6": " hazüisezi huhi%spu" % woordcategorieCJ,
+            "0,2,6": " hazüisezi huhi%spu" % (woordcategorieCJ),
 #WTI:VERB(                                  #               # ha
 #   Progression0(                           # start         # zi
 #)  )
@@ -949,39 +949,39 @@ menuCJ = {
 #               Distance0(                  # here          # ʒi
 #)  )   )   )   )
         "0,5": "haseʒiʒili huxapaŋeʒi",
-    "1": " > haca %spa < " % woordtransactieCJ,
+    "1": " > haca %spa < " % (woordtransactieCJ),
         "1,0": "hapa haxa",
-            "1,0,1": " haxa %s 1231 > 0101" % elementenCJ[0],
-            "1,0,2": " haxa %s 0101 < 1231" % elementenCJ[0],
-            "1,0,3": " haxa %s + > -" % elementenCJ[1],
-            "1,0,4": " haxa %s - < +" % elementenCJ[1],
-            "1,0,5": " haxa %s Z > A" % elementenCJ[2],
-            "1,0,6": " haxa %s A < Z" % elementenCJ[2],
-            "1,0,7": " haxa %s Z > A" % elementenCJ[3],
-            "1,0,8": " haxa %s A < Z" % elementenCJ[3],
-            "1,0,9": " haŋa %spaba" % elementenCJ[1],
+            "1,0,1": " haxa %s 1231 > 0101" % (elementenCJ[0]),
+            "1,0,2": " haxa %s 0101 < 1231" % (elementenCJ[0]),
+            "1,0,3": " haxa %s + > -" % (elementenCJ[1]),
+            "1,0,4": " haxa %s - < +" % (elementenCJ[1]),
+            "1,0,5": " haxa %s Z > A" % (elementenCJ[2]),
+            "1,0,6": " haxa %s A < Z" % (elementenCJ[2]),
+            "1,0,7": " haxa %s Z > A" % (elementenCJ[3]),
+            "1,0,8": " haxa %s A < Z" % (elementenCJ[3]),
+            "1,0,9": " haŋa %spaba" % (elementenCJ[1]),
         "1,1": "hucaxa hubiwasemesüipa",
         "1,2": "hucaxa huzaqipabobi",
         "1,3": "haca hubiwasemesüipa hizaberebe",
-    "2": "hazi %s" % woordtransactieCJ,
-        "2,1": "hazi %szi" % woordtransactieCJ,
-        "2,2": "hazi %sxiba" % woordtransactieCJ,
+    "2": "hazi %s" % (woordtransactieCJ),
+        "2,1": "hazi %szi" % (woordtransactieCJ),
+        "2,2": "hazi %sxiba" % (woordtransactieCJ),
     "3": "hazüi %s" % woordtransactieCJ,
         "3,1": "hazüi %s hiŋe %s" % (elementenCJ[0],woordtransactieCJ),
         "3,2": "hazüi %s hiŋe %s" % (elementenCJ[1],woordtransactieCJ),
         "3,3": "hazüi %s hiŋe %s" % (elementenCJ[2],woordtransactieCJ),
         "3,4": "hazüi %s hiŋe %s" % (elementenCJ[3],woordtransactieCJ),
         "3,5": "hazüi %s hiŋe %s" % (woordcategorieCJ,woordtransactieCJ),
-    "4": "hazüu %s" % woordtransactieCJ,
-    "5": "%spa" % woordspaarpotCJ,
-        "5,1": "haca %spa" % woordspaarpotCJ,
-        "5,2": "haze %s" % woordspaarpotCJ,
-        "5,3": "hazüi %s" % woordspaarpotCJ,
+    "4": "hazüu %s" % (woordtransactieCJ),
+    "5": "%spa" % (woordspaarpotCJ),
+        "5,1": "haca %spa" % (woordspaarpotCJ),
+        "5,2": "haze %s" % (woordspaarpotCJ),
+        "5,3": "hazüi %s" % (woordspaarpotCJ),
             "5,3,1": " hazüi #%s %s" % (lijnlijstCJ[1],woordspaarpotCJ),
             "5,3,2": " hazüi %s %s" % (lijnlijstCJ[2],woordspaarpotCJ),
             "5,3,3": " hazüi %s %s" % (lijnlijstCJ[3],woordspaarpotCJ),
             "5,3,4": " hazüi %s %s" % (lijnlijstCJ[4],woordspaarpotCJ),
-        "5,4": "haʒüu %s" % woordspaarpotCJ,
+        "5,4": "haʒüu %s" % (woordspaarpotCJ),
     "<": "hasezi",
     "Q": "hasüu"
         }
@@ -1006,175 +1006,175 @@ menu = {
             "0,1,14": " "+nieuwheaderlijst[13],
             "0,1,15": " "+nieuwheaderlijst[14],
             "0,1,16": " "+nieuwheaderlijst[15],
-        "0,2": "%sbeheer" % woordcategorie,
-            "0,2,1": " Voeg nieuwe %s toe" % woordcategorie.lower(),
-            "0,2,2": " %snaam wijzigen" % woordcategorie,
+        "0,2": "%sbeheer" % (woordcategorie),
+            "0,2,1": " Voeg nieuwe %s toe" % (woordcategorie),
+            "0,2,2": " %snaam wijzigen" % (woordcategorie),
             "0,2,3": " Maandbudget wijzigen",
-            "0,2,4": " %s verwijderen" % woordcategorie,
+            "0,2,4": " %s verwijderen" % (woordcategorie),
             "0,2,5": " Huishoudelijke <> Zakelijke rekening / Reset",
-            "0,2,6": " Reset standaard categorienamen",
+            "0,2,6": " Reset standaard %snamen" % (woordcategorie),
         "0,3": "Nieuwe rekening toevoegen",
         "0,4": "Rekening verwijderen",
         "0,5": "Instellingen overzetten naar andere rekening",
-    "1": " > %ss weergeven < " % woordtransactie,
-        "1,0": "Verzamel en sorteer transacties",
-            "1,0,1": " Sorteer op %s 1231 > 0101" % elementen[0],
-            "1,0,2": " Sorteer op %s 0101 < 1231" % elementen[0],
-            "1,0,3": " Sorteer op %s + > -" % elementen[1],
-            "1,0,4": " Sorteer op %s - < +" % elementen[1],
-            "1,0,5": " Sorteer op %s Z > A" % elementen[2],
-            "1,0,6": " Sorteer op %s A < Z" % elementen[2],
-            "1,0,7": " Sorteer op %s Z > A" % elementen[3],
-            "1,0,8": " Sorteer op %s A < Z" % elementen[3],
-            "1,0,9": " Combineer %sparen" % elementen[1],
-        "1,1": "Verzamel transacties en toon tabel",
+    "1": " > %ss weergeven < " % (woordtransactie),
+        "1,0": "Verzamel en sorteer %ss" % (woordtransactie),
+            "1,0,1": " Sorteer op %s 1231 > 0101" % (elementen[0]),
+            "1,0,2": " Sorteer op %s 0101 < 1231" % (elementen[0]),
+            "1,0,3": " Sorteer op %s + > -" % (elementen[1]),
+            "1,0,4": " Sorteer op %s - < +" % (elementen[1]),
+            "1,0,5": " Sorteer op %s Z > A" % (elementen[2]),
+            "1,0,6": " Sorteer op %s A < Z" % (elementen[2]),
+            "1,0,7": " Sorteer op %s Z > A" % (elementen[3]),
+            "1,0,8": " Sorteer op %s A < Z" % (elementen[3]),
+            "1,0,9": " Combineer %sparen" % (elementen[1]),
+        "1,1": "Verzamel %ss en toon tabel" % (woordtransactie),
         "1,2": "Maandtotaal weergeven",
-        "1,3": "Bekijk %ss in collectie" % woordtransactie.lower(),
-    "2": "%s toevoegen" % woordtransactie,
-        "2,1": "Voeg een nieuwe transactie aan de rekening toe",
-        "2,2": "Kopieer een bestaande transactie naar vandaag",
-    "3": "%s wijzigen" % woordtransactie,
-        "3,1": "Wijzig %s%s" % (woordtransactie.lower(),elementen[0]),
-        "3,2": "Wijzig %s%s" % (woordtransactie.lower(),elementen[1]),
-        "3,3": "Wijzig %s%s" % (woordtransactie.lower(),elementen[2]),
-        "3,4": "Wijzig %s%s" % (woordtransactie.lower(),elementen[3]),
-        "3,5": "Wijzig %s%s" % (woordtransactie.lower(),woordcategorie),
-    "4": "%s verwijderen" % woordtransactie,
-    "5": "%sten" % woordspaarpot,
-        "5,1": "Bekijk %sen" % woordspaarpot.lower(),
-        "5,2": "Voeg nieuwe %s toe" % woordspaarpot.lower(),
-        "5,3": "Wijzig %s" % woordspaarpot.lower(),
-            "5,3,1": " Wijzig %s #%s" % (woordspaarpot.lower(),lijnlijst[1].lower()),
-            "5,3,2": " Wijzig %s %s" % (woordspaarpot.lower(),lijnlijst[2].lower()),
-            "5,3,3": " Wijzig %s %s" % (woordspaarpot.lower(),lijnlijst[3].lower()),
-            "5,3,4": " Wijzig %s %s" % (woordspaarpot.lower(),lijnlijst[4].lower()),
-        "5,4": "Verwijder %s" % woordspaarpot.lower(),
+        "1,3": "Bekijk %ss in collectie" % (woordtransactie),
+    "2": "%s toevoegen" % (woordtransactie),
+        "2,1": "Voeg een nieuwe %s aan de rekening toe" % (woordtransactie),
+        "2,2": "Kopieer een bestaande %s naar vandaag" % (woordtransactie),
+    "3": "%s wijzigen" % (woordtransactie),
+        "3,1": "Wijzig %s%s" % (woordtransactie,elementen[0]),
+        "3,2": "Wijzig %s%s" % (woordtransactie,elementen[1]),
+        "3,3": "Wijzig %s%s" % (woordtransactie,elementen[2]),
+        "3,4": "Wijzig %s%s" % (woordtransactie,elementen[3]),
+        "3,5": "Wijzig %s%s" % (woordtransactie,woordcategorie),
+    "4": "%s verwijderen" % (woordtransactie),
+    "5": "%sten" % (woordspaarpot),
+        "5,1": "Bekijk %sten" % (woordspaarpot),
+        "5,2": "Voeg nieuwe %s toe" % (woordspaarpot),
+        "5,3": "Wijzig %s" % (woordspaarpot),
+            "5,3,1": " Wijzig %s #%s" % (woordspaarpot,lijnlijst[1]),
+            "5,3,2": " Wijzig %s %s" % (woordspaarpot,lijnlijst[2]),
+            "5,3,3": " Wijzig %s %s" % (woordspaarpot,lijnlijst[3]),
+            "5,3,4": " Wijzig %s %s" % (woordspaarpot,lijnlijst[4]),
+        "5,4": "Verwijder %s" % (woordspaarpot),
     "<": "Terug",
     "Q": "Afsluiten"
         }
 helpmenuEN = {
     "0": textwrap.wrap("Version: %s, Date: %s \\\\ \"mimosasa\" is an app in which you can manage your expenses and savings in various bank accounts. It is written in Python by Maestraccio and is available for free download and use. \"mimosasa\" stands for \"Money In, Money Out: Spendings And Savings Aid\" and is the successor of \"mimo\". You can call up the relevant help article for many functions with \"H\". Choose \"<\" (or any other \"opening bracket\" like \"(\" or \"[\") to return to the main menu, or \"Q\" to exit the program entirely." % (versie,versiedatum),w),
-        "0,0": textwrap.wrap("For each account, an \"account folder\" is created in the \"app folder\" where the various category files and a settings file are placed. The \"mimosasa\" app uses \"ID's\" to identify individual transactions. These transactions can then be displayed, modified, deleted, and so on. You can provide these \"ID's\" in CSV format (comma- or space-separated, for example \"A0,B1\") when requested. The account balance is divided into a \"buffer\" determined by the budgeting of the categories, \"credit\" allocated to the savings pots, and the remaining discretionary balance.",w),
+        "0,0": textwrap.wrap("For each account, an \"account folder\" is created in the \"app folder\" where the various %s files and a settings file are placed. The \"mimosasa\" app uses \"ID's\" to identify individual %ss. These %ss can then be displayed, modified, deleted, and so on. You can provide these \"ID's\" in CSV format (comma- or space-separated, for example \"A0,B1\") when requested. The account balance is divided into a \"buffer\" determined by the budgeting of the Categories, \"credit\" allocated to the %ss, and the remaining discretionary balance." % (woordcategorieEN,woordtransactieEN,woordtransactieEN,woordspaarpotEN),w),
         "0,1": textwrap.wrap("Here the account environment settings can be adjusted. Personalize the display to your own taste, and visually distinguish multiple accounts you manage to prevent mistakes. Set what you do and do not want to show, and whether you want to save overviews to your computer. Always enter amounts using a period \".\" as the decimal separator.",w),
             "0,1,0": textwrap.wrap("Reset the account settings to the default settings. This will place a new settings file in both the \"account folder\" and the \"app folder\".",w),
             "0,1,1": textwrap.wrap("Enter the name of the account here. This way, you can differentiate between multiple accounts you manage in the same app without having to memorize the long account numbers.",w),
             "0,1,2": textwrap.wrap("Enter the name of the account holder here.",w),
             "0,1,3": textwrap.wrap("Here you can only adjust the status of OTHER accounts. It is not possible to deactivate the - obviously active - account currently in use. Choose another account and indicate whether it is an \"active\" or an \"inactive\" account. Inactive accounts are, for example, archived or prepared accounts that are not shown in the overviews.",w),
-            "0,1,4": textwrap.wrap("You can adjust the language of the app here. The transactions themselves are not translated, and personalized category names are not either, but all menus and commands are. At the moment, you can choose between \"NL\" (Dutch, default), \"EN\" (English), and \"IT\" (Italian).",w),
+            "0,1,4": textwrap.wrap("You can adjust the language of the app here. The %ss themselves are not translated, and personalized category names are not either, but all menus and commands are. At the moment, you can choose between \"NL\" (Dutch, default), \"EN\" (English), \"IT\" (Italian) and \"CJ\" (Hucoji)." % (woordtransactieEN),w),
             "0,1,5": textwrap.wrap("You can assign the currency symbol here. You can choose any character, but make sure it is exactly one position wide on the screen.",w),
-            "0,1,6": textwrap.wrap("Enter the initial balance of the account here from the moment before the first transaction took place. The app is essentially designed to open a new \"account\" in the app each year - although it is possible to continue through multiple years.",w),
+            "0,1,6": textwrap.wrap("Enter the initial balance of the account here from the moment before the first %s took place. The app is essentially designed to open a new \"account\" in the app each year - although it is possible to continue through multiple years." % (woordtransactieEN),w),
             "0,1,7": textwrap.wrap("It is now possible to hide the account balance on the start screen - the default setting is now: \"%s : No\". If the setting is \"Yes\", the sum of multiple accounts - with matching currencies - is also displayed." % (nieuwheaderlijstEN[6]),w),
-            "0,1,8": textwrap.wrap("In transactions, the currency symbol is emphasized below and above a threshold that you can determine yourself. By default, these thresholds are set to \"less than -100.00\" and \"greater than 100.00\". These amounts are also used as default values.",w),
-            "0,1,9": textwrap.wrap("In the monthly overview, transactions are displayed per category. You can choose to show or hide unused categories in this overview.",w),
+            "0,1,8": textwrap.wrap("In %ss, the currency symbol is emphasized below and above a threshold that you can determine yourself. By default, these thresholds are set to \"less than -100.00\" and \"greater than 100.00\". These amounts can also be used as default values when creating, filtering or modifying %ss." % (woordtransactieEN,woordtransactieEN),w),
+            "0,1,9": textwrap.wrap("In the monthly overview, %ss are displayed per %s. You can choose to show or hide unused Categories in this overview." % (woordtransactieEN,woordcategorieEN),w),
             "0,1,10": textwrap.wrap("The default date formatting is \"YYYYMMDD\" but not everyone finds that clear. Therefore, multiple display options have been added to make the date readable for you as well.",w),
             "0,1,11": textwrap.wrap("There are multiple color schemes available. Apart from being more pleasant to look at, this can be very useful if you work with multiple accounts and want to make a clear visual distinction.",w),
             "0,1,12": textwrap.wrap("You can choose the level at which the menu is displayed to you. The higher the value, the more menu options are expanded.",w),
-            "0,1,13": textwrap.wrap("You can choose the number of transactions that are shown to you per stopover in \"1,3\". The higher the value, the more transactions will be displayed on your screen. The default number is \"10\". You can choose a lower value on smaller screens or with a larger font size.",w),
-            "0,1,14": textwrap.wrap("The displayed monthly totals can also be saved as a plain text file. To avoid having to choose every time, you can set this as the default here or turn it off. You will find these files in the \"account folder\" with the \"year+month\" (\"YYYYMM\") for the transactions, and as \"year+month+a\" (\"YYYYMMa\") for the budget analysis, without a file extension. These files are created if they do not exist yet, and otherwise overwritten each time. If necessary, you can manually add the file extension \".txt\", but then it will not be updated.",w),
-            "0,1,15": textwrap.wrap("You can choose to save a csv file with all transactions from that account each time you close the app. You will find this csv file in the \"account folder\" as \"export.csv\". This file is created if it does not exist yet, and otherwise overwritten with fresh data.",w),
+            "0,1,13": textwrap.wrap("You can choose the number of %ss that are shown to you per stopover in \"1,3\". The higher the value, the more %ss will be displayed on your screen. The default number is \"10\". You can choose a lower value on smaller screens or with a larger font size." % (woordtransactieEN,woordtransactieEN),w),
+            "0,1,14": textwrap.wrap("The displayed monthly totals can also be saved as a plain text file. To avoid having to choose every time, you can set this as the default here or turn it off. You will find these files in the \"account folder\" with the \"year+month\" (\"YYYYMM\") for the %ss, and as \"year+month+a\" (\"YYYYMMa\") for the budget analysis, without a file extension. These files are created if they do not exist yet, and otherwise overwritten each time. If necessary, you can manually add the file extension \".txt\", but then it will not be updated." % (woordtransactieEN),w),
+            "0,1,15": textwrap.wrap("You can choose to save a csv file with all %ss from that account each time you close the app. You will find this csv file in the \"account folder\" as \"export.csv\". This file is created if it does not exist yet, and otherwise overwritten with fresh data." % (woordtransactieEN),w),
             "0,1,16": textwrap.wrap("At the start of the app, a random help article can be shown as the \"Tip of the day\". This can be useful, especially in the beginning, to familiarize yourself with the functionalities. This can be turned on or off here.",w),
-        "0,2": textwrap.wrap("Here you can adjust the names of different categories, allocate budgets, and more. Categories where money comes in (monthly) are assigned a negative budget, which is used as a buffer at the beginning of a new month. In the monthly analysis, the balance booked on those categories is ignored until the buffer is reached.",w),
-            "0,2,1": textwrap.wrap("Add a new category. Business accounts contain standard ledgers \"%s\" through \"%s\", household accounts the categories \"%s\" through \"%s\" and \"%s\", but all intermediate letters can be used, and all those letters and numbers can also be exchanged between business and household accounts." % (zakelijkelijst[0],zakelijkelijst[-1],huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
-            "0,2,2": textwrap.wrap("Initially, standard names are assigned to the categories, but you can adjust them here as desired. The default categories for business accounts are: 0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s, 9: %s, and for household accounts (standard): A: %s, B: %s, C: %s, D: %s, E: %s, F: %s, O: %s. All these standard category names are automatically translated from Dutch (the default language) to other languages when you switch languages, but not if you have adjusted a category name yourself." % (nieuwalternatievenamendictEN[zakelijkelijst[0]],nieuwalternatievenamendictEN[zakelijkelijst[1]],nieuwalternatievenamendictEN[zakelijkelijst[2]],nieuwalternatievenamendictEN[zakelijkelijst[3]],nieuwalternatievenamendictEN[zakelijkelijst[4]],nieuwalternatievenamendictEN[zakelijkelijst[5]],nieuwalternatievenamendictEN[zakelijkelijst[6]],nieuwalternatievenamendictEN[zakelijkelijst[7]],nieuwalternatievenamendictEN[zakelijkelijst[8]],nieuwalternatievenamendictEN[zakelijkelijst[9]],nieuwalternatievenamendictEN[huishoudelijkelijst[0]],nieuwalternatievenamendictEN[huishoudelijkelijst[1]],nieuwalternatievenamendictEN[huishoudelijkelijst[2]],nieuwalternatievenamendictEN[huishoudelijkelijst[3]],nieuwalternatievenamendictEN[huishoudelijkelijst[4]],nieuwalternatievenamendictEN[huishoudelijkelijst[5]],nieuwalternatievenamendictEN[huishoudelijkelijst[6]]),w),
-            "0,2,3": textwrap.wrap("Each expenditure category contains a positive disposable budget, and the categories where the money comes in a negative one (which is used as a buffer). Ensure that the overall balance is always exactly zero (\"0.0\").",w),
-            "0,2,4": textwrap.wrap("Keep in mind that by removing a category, you will also delete all transactions assigned to this category! Make sure the category is empty (use function \"3,5\" if necessary) before using this function. In many cases, this is not necessary; you can optionally hide unused categories with option \"0,1,9\".",w),
-            "0,2,5": textwrap.wrap("You can delete all transactions by resetting the categories, replacing household categories (%s to %s) with business ones (%s to %s), or vice versa." % (huishoudelijkelijst[0],huishoudelijkelijst[-1],zakelijkelijst[0],zakelijkelijst[-1]),w),
-            "0,2,6": textwrap.wrap("You can reset any personalized category names back to the standard category names here.",w),
+        "0,2": textwrap.wrap("Here you can adjust the names of different Categories, allocate budgets, and more. Categories where money comes in (monthly) are assigned a negative budget, which is used as a buffer at the beginning of a new month. In the monthly analysis, the balance booked on those Categories is ignored until the buffer is reached.",w),
+            "0,2,1": textwrap.wrap("Add a new %s. Business accounts contain standard ledgers \"%s\" through \"%s\", household accounts the Categories \"%s\" through \"%s\" and \"%s\", but all intermediate letters can be used, and all those letters and numbers can also be exchanged between business and household accounts." % (woordcategorieEN,zakelijkelijst[0],zakelijkelijst[-1],huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
+            "0,2,2": textwrap.wrap("Initially, standard names are assigned to the Categories, but you can adjust them here as desired. The default Categories for business accounts are: 0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s, 9: %s, and for household accounts (standard): A: %s, B: %s, C: %s, D: %s, E: %s, F: %s, O: %s. All these standard %s names are automatically translated from Dutch (the default language) to other languages when you switch languages, but not if you have adjusted a %s name yourself." % (nieuwalternatievenamendictEN[zakelijkelijst[0]],nieuwalternatievenamendictEN[zakelijkelijst[1]],nieuwalternatievenamendictEN[zakelijkelijst[2]],nieuwalternatievenamendictEN[zakelijkelijst[3]],nieuwalternatievenamendictEN[zakelijkelijst[4]],nieuwalternatievenamendictEN[zakelijkelijst[5]],nieuwalternatievenamendictEN[zakelijkelijst[6]],nieuwalternatievenamendictEN[zakelijkelijst[7]],nieuwalternatievenamendictEN[zakelijkelijst[8]],nieuwalternatievenamendictEN[zakelijkelijst[9]],nieuwalternatievenamendictEN[huishoudelijkelijst[0]],nieuwalternatievenamendictEN[huishoudelijkelijst[1]],nieuwalternatievenamendictEN[huishoudelijkelijst[2]],nieuwalternatievenamendictEN[huishoudelijkelijst[3]],nieuwalternatievenamendictEN[huishoudelijkelijst[4]],nieuwalternatievenamendictEN[huishoudelijkelijst[5]],nieuwalternatievenamendictEN[huishoudelijkelijst[6]],woordcategorieEN,woordcategorieEN),w),
+            "0,2,3": textwrap.wrap("Each expenditure %s contains a positive disposable budget, and the Categories where the money comes in a negative one (which is used as a buffer). Ensure that the overall balance is always exactly zero (\"0.0\")." % (woordcategorieEN),w),
+            "0,2,4": textwrap.wrap("Keep in mind that by removing a %s, you will also delete all %ss assigned to this %s! Make sure the %s is empty (use function \"3,5\" if necessary) before using this function. In many cases, this is not necessary; you can optionally hide unused Categories with option \"0,1,9\"." % (woordcategorieEN,woordtransactieEN,woordcategorieEN,woordcategorieEN),w),
+            "0,2,5": textwrap.wrap("You can delete all %ss by resetting the Categories, replacing household Categories (%s to %s) with business ones (%s to %s), or vice versa." % (woordtransactieEN,huishoudelijkelijst[0],huishoudelijkelijst[-1],zakelijkelijst[0],zakelijkelijst[-1]),w),
+            "0,2,6": textwrap.wrap("You can reset any personalized %s names back to the standard category names here." % (woordcategorieEN),w),
         "0,3": textwrap.wrap("In \"mimosasa\" you can manage multiple accounts. Add a new account here.",w),
         "0,4": textwrap.wrap("You can delete accounts completely. Note: this is irreversible: once it's gone, it's gone!",w),
         "0,5": textwrap.wrap("You can transfer the account settings from one account to another. This is particularly useful when creating a \"new account\" for a new year and wanting to retain the old settings.",w),
-    "1": textwrap.wrap("View individual transactions in detail, create filtered overviews, analyze your income and expenses. To start, the daily balance is displayed, along with the monthly score per category.",w),
-        "1,0": textwrap.wrap("Gather multiple transactions per \"ID\" or delete the previously created collection without showing the transactions. The selected transactions can then be sorted in ascending or descending order on each element. By default, no sorting is applied; the transactions are initially invoked in the order in which the \"ID's\" are specified. For efficient use, it is advised to keep the list short and clear.",w),
-            "1,0,1": textwrap.wrap("The collection is sorted by %s, with the latest transaction at the front." % elementenEN[0].lower(),w),
-            "1,0,2": textwrap.wrap("The collection is sorted by %s, with the first transaction at the front." % elementenEN[0].lower(),w),
-            "1,0,3": textwrap.wrap("The collection is sorted by %s, with the transaction with the highest amount at the front." % elementenEN[1].lower(),w),
-            "1,0,4": textwrap.wrap("The collection is sorted by %s, with the transaction with the lowest amount at the front." % elementenEN[1].lower(),w),
-            "1,0,5": textwrap.wrap("The collection is sorted alphabetically from Z to A based on %s." % elementenEN[2].lower(),w),
-            "1,0,6": textwrap.wrap("The collection is sorted alphabetically from A to Z based on %s." % elementenEN[2].lower(),w),
-            "1,0,7": textwrap.wrap("The collection is sorted alphabetically from Z to A based on %s." % elementenEN[3].lower(),w),
-            "1,0,8": textwrap.wrap("The collection is sorted alphabetically from A to Z based on %s." % elementenEN[3].lower(),w),
-            "1,0,9": textwrap.wrap("Transactions with a negative %s and the same positive %s are paired together, the rest is filtered out." % (elementenEN[1],elementenEN[1]),w),
-        "1,1": textwrap.wrap("Select transactions based on various criteria (%s, %s, %s, %s and %s) and generate a clear table. You can use \"keyboard shortcuts\", or specify each element individually. The possible \"keyboard shortcuts\" are displayed; it is possible to add a number to \"M\" (month) or \"W\" (week): \"0\" includes today. All selected transactions are also collected in the collection, which is always displayed above the selection menu. If the selection covers one day, the daily total for that day is shown." % (elementenEN[0].lower(),elementenEN[1].lower(),elementenEN[2].lower(),elementenEN[3].lower(),woordcategorieEN.lower()),w),
-        "1,2": textwrap.wrap("Show the budget analysis of one month. By default, the current month is displayed. You will see the progress of each category compared to the assigned budget, and the monthly performance.",w),
-        "1,3": textwrap.wrap("Show the details of individual transactions in the collection. The number of characters in \"%s\" and \"%s\" is unlimited but is truncated in the table. All additional information is expanded here." % (elementenEN[2].lower(),elementenEN[3].lower()),w),
-    "2": textwrap.wrap("You can add new transactions to your account, and assign each one to a category. You can enter a new transaction per element or consecutively on one line in CSV style, or you can make a copy of a previous transaction and later adjust the details using the options under \"3\". New transactions are immediately added to the collection, so you can view or modify them right away.",w),
-        "2,1": textwrap.wrap("Add a new transaction to your account here. You can enter the elements step by step, or - for the more experienced user - consecutively on one line in CSV style: \"%s, %s, %s, %s, %s\". Therefore, you cannot use a comma (\",\") in any element. Always use a period (\".\") as the decimal separator. If the CSV input contains invalid data, the step-by-step input takes over." % (elementenEN[0].lower(),elementenEN[1].lower(),elementenEN[2].lower(),elementenEN[3].lower(),woordcategorieEN.lower()),w),
-        "2,2": textwrap.wrap("Make a copy of a previously entered transaction here and automatically replace the original date with today's date. You can use any transaction as a template to later adjust details with the options in menu \"3\". If a collection already exists, those transactions are offered one by one; otherwise, you will be asked to provide an \"ID\" - or more precisely: a list of \"ID's\" in the form of a CSV list. This is the recommended method for adding recurring transactions. Note: if you make an identical copy of a transaction earlier today, it will not be automatically added to the collection.",w),
-    "3": textwrap.wrap("All elements of an existing transaction can be adjusted here. If a collection already exists, those transactions are offered one by one; otherwise, you will be asked to provide an \"ID\" - or more precisely: a list of \"ID's\" in the form of a CSV list.",w),
-        "3,1": textwrap.wrap("Adjust the %s of the transaction. Enter the new date as \"YYYYMMDD\". The default date, for example if an invalid or incomplete date is entered, is today's date. Set the date format displayed in the table (\"1,1\") or the transaction display (\"1,3\") at \"0,1,10\"." % elementenEN[0],w),
-        "3,2": textwrap.wrap("Adjust the %s of the transaction. Enter the amount without currency and with a period (\".\") as decimal separator. Set the currency symbol at \"0,1,5\"." % elementenEN[1],w),
-        "3,3": textwrap.wrap("Adjust the %s of the transaction. This can be a debtor or a creditor, a customer or a supplier (store). The number of characters to use is free, but will be truncated in the table display (\"1,1\"). It is therefore wise to always start with a recognizable fragment, especially with longer descriptions. A list of previously used Counterparties is displayed for you to choose from, you can type a new one, or choose not to." % (elementenEN[2]),w),
-        "3,4": textwrap.wrap("Adjust the %s of the transaction. Here you provide a description of the content of this transaction, such as a billed service or a number of items purchased. You can also include payment references or invoice numbers here. The number of characters to use is free, but will be truncated in the table display (\"1,1\"). It is therefore wise to always start with a recognizable fragment, especially with longer descriptions. A list of previously used %ss is displayed for you to choose from, you can type a new one, or choose not to." % (elementenEN[3],elementenEN[3]),w),
-        "3,5": textwrap.wrap("Place a transaction in another category. Each transaction is assigned to a category to which a budget is allocated. These budgets are distributed in \"0,2,3\" and the progress can be seen per month in \"1,2\".",w),
-    "4": textwrap.wrap("",w),
-    "5": textwrap.wrap("You can set money aside in multiple %ss. These %ss can be manually topped up from the discretionary balance or directly in a new %s. If a specific %s is mentioned in the %s with a \"#\", you can reconcile that %s with that %s. Incoming amounts can be added in full or in part to the %s %s, and negative amounts can be deducted in full from the %s balance. Using the shortcut \"#\", you can collect all previous %ss containing a \"#\" in the %s with \"1,1\". It is advisable to only use this character in the %s for %ss related to a %s. The displayed \"Discretionary balance\" is the account total from which the buffer in the categories (needed for monthly expenses) and the %ss in the different %ss are deducted." % (woordspaarpotEN,woordspaarpotEN,woordtransactieEN,woordspaarpotEN,elementenEN[3],woordtransactieEN,woordspaarpotEN,woordspaarpotEN,lijnlijstEN[3],lijnlijstEN[4],woordtransactieEN,elementenEN[3],elementenEN[3],woordtransactieEN,woordspaarpotEN,lijnlijstEN[3],woordspaarpotEN),w),
-        "5,1": textwrap.wrap("View all %ss in a simple and clear table" % woordspaarpotEN.lower(),w),
-        "5,2": textwrap.wrap("Add a new empty %s. You can already give it a %s and a %s. As long as no credit is added to it, it will remain empty and will not affect your discretionary balance. The %s always starts with a \"#\", which you can refer to in new %ss or in \"1,1\"." % (woordspaarpotEN.lower(),lijnlijstEN[1].lower(),lijnlijstEN[2].lower(),lijnlijstEN[0].lower(),woordtransactieEN.lower()),w),
-        "5,3": textwrap.wrap("Manually change the properties of a %s: %s, %s, %s, and/or %s" % (woordspaarpotEN.lower(),lijnlijstEN[1].lower(),lijnlijstEN[2].lower(),lijnlijstEN[3].lower(),lijnlijstEN[4].lower()),w),
-            "5,3,1": textwrap.wrap("Change the %s of a %s" % (lijnlijstEN[1].lower(),woordspaarpotEN.lower()),w),
-            "5,3,2": textwrap.wrap("Change the %s of a %s" % (lijnlijstEN[2].lower(),woordspaarpotEN.lower()),w),
-            "5,3,3": textwrap.wrap("Change the %s of a %s" % (lijnlijstEN[3].lower(),woordspaarpotEN.lower()),w),
-            "5,3,4": textwrap.wrap("Change the %s amount of a %s" % (lijnlijstEN[4].lower(),woordspaarpotEN.lower()),w),
-        "5,4": textwrap.wrap("Remove a %s from the account. Any saved credit will go back to the discretionary balance" % woordspaarpotEN.lower(),w),
+    "1": textwrap.wrap("View individual %ss in detail, create filtered overviews, analyze your income and expenses. To start, the daily balance is displayed, along with the monthly score per %s." % (woordtransactieEN,woordcategorieEN),w),
+        "1,0": textwrap.wrap("Gather multiple %ss per \"ID\" or delete the previously created collection without showing the %ss. The selected %ss can then be sorted in ascending or descending order on each element. By default, no sorting is applied; the %ss are initially invoked in the order in which the \"ID's\" are specified. For efficient use, it is advised to keep the list short and clear." % (woordtransactieEN,woordtransactieEN,woordtransactieEN,woordtransactieEN),w),
+            "1,0,1": textwrap.wrap("The collection is sorted by %s, with the latest %s at the front." % (elementenEN[0],woordtransactieEN),w),
+            "1,0,2": textwrap.wrap("The collection is sorted by %s, with the first %s at the front." % (elementenEN[0],woordtransactieEN),w),
+            "1,0,3": textwrap.wrap("The collection is sorted by %s, with the %s with the highest amount at the front." % (elementenEN[1],woordtransactieEN),w),
+            "1,0,4": textwrap.wrap("The collection is sorted by %s, with the %s with the lowest amount at the front." % (elementenEN[1],woordtransactieEN),w),
+            "1,0,5": textwrap.wrap("The collection is sorted alphabetically from Z to A based on %s." % (elementenEN[2]),w),
+            "1,0,6": textwrap.wrap("The collection is sorted alphabetically from A to Z based on %s." % (elementenEN[2]),w),
+            "1,0,7": textwrap.wrap("The collection is sorted alphabetically from Z to A based on %s." % (elementenEN[3]),w),
+            "1,0,8": textwrap.wrap("The collection is sorted alphabetically from A to Z based on %s." % (elementenEN[3]),w),
+            "1,0,9": textwrap.wrap("%ss with a negative %s and the same positive %s are paired together, the rest is filtered out." % (woordtransactieEN,elementenEN[1],elementenEN[1]),w),
+        "1,1": textwrap.wrap("Select %ss based on various criteria (%s, %s, %s, %s and %s) and generate a clear table. You can use \"keyboard shortcuts\", or specify each element individually. The possible \"keyboard shortcuts\" are displayed; it is possible to add a number to \"M\" (month) or \"W\" (week): \"0\" includes today. All selected %ss are also collected in the collection, which is always displayed above the selection menu. If the selection covers one day, the daily total for that day is shown." % (woordtransactieEN,elementenEN[0],elementenEN[1],elementenEN[2],elementenEN[3],woordcategorieEN,woordtransactieEN),w),
+        "1,2": textwrap.wrap("Show the budget analysis of one month. By default, the current month is displayed. You will see the progress of each %s compared to the assigned budget, and the monthly performance." % (woordcategorieEN),w),
+        "1,3": textwrap.wrap("Show the details of individual %ss in the collection. The number of characters in \"%s\" and \"%s\" is unlimited but is truncated in the table \"1,1\". All additional information is expanded here. In \"0,1,13\", you can set after how many displayed %ss you need to press \"Enter\" to continue, or \"<\" to exit the display." % (woordtransactieEN,elementenEN[2],elementenEN[3],woordtransactieEN),w),
+    "2": textwrap.wrap("You can add new %ss to your account, and assign each one to a %s. You can enter a new %s per element or consecutively on one line in CSV style, or you can make a copy of a previous %s and later adjust the details using the options under \"3\". New %ss are immediately added to the collection, so you can view or modify them right away." % (woordtransactieEN,woordcategorieEN,woordtransactieEN,woordtransactieEN,woordtransactieEN),w),
+        "2,1": textwrap.wrap("Add a new %s to your account here. You can enter the elements step by step, or - for the more experienced user - consecutively on one line in CSV style: \"%s, %s, %s, %s, %s\". Therefore, you cannot use a comma (\",\") in any element. Always use a period (\".\") as the decimal separator. If the CSV input contains invalid data, the step-by-step input takes over." % (woordtransactieEN,elementenEN[0],elementenEN[1],elementenEN[2],elementenEN[3],woordcategorieEN),w),
+        "2,2": textwrap.wrap("Make a copy of a previously entered %s here and automatically replace the original %s with today's %s. You can use any transaction as a template to later adjust details with the options in menu \"3\". If a collection already exists, those %ss are offered one by one; otherwise, you will be asked to provide an \"ID\" - or more precisely: a list of \"ID's\" in the form of a CSV list. This is the recommended method for adding recurring %ss. Note: if you make an identical copy of a %s earlier today, it will not be automatically added to the collection." % (woordtransactieEN,elementenEN[0],elementen[0],woordtransactieEN,woordtransactieEN,woordtransactieEN),w),
+    "3": textwrap.wrap("All elements of an existing %s can be adjusted here. If a collection already exists, those %ss are offered one by one; otherwise, you will be asked to provide an \"ID\" - or more precisely: a list of \"ID's\" in the form of a CSV list." % (woordtransactieEN,woordtransactieEN),w),
+        "3,1": textwrap.wrap("Adjust the %s of the %s. Enter the new %s as \"YYYYMMDD\". The default %s, for example if an invalid or incomplete %s is entered, is today's %s. Set the %s format displayed for example in the table (\"1,1\") or the %s display (\"1,3\") at \"0,1,10\"." % (elementenEN[0],woordtransactieEN,elementenEN[0],elementenEN[0],elementenEN[0],elementenEN[0],elementenEN[0],woordtransactieEN),w),
+        "3,2": textwrap.wrap("Adjust the %s of the %s. Enter the %s without currency and with a period (\".\") as decimal separator. Set the currency symbol at \"0,1,5\"." % (elementenEN[1],woordtransactieEN,elementenEN[1]),w),
+        "3,3": textwrap.wrap("Adjust the %s of the %s. This can be a debtor or a creditor, a customer or a supplier (store). The number of characters to use is free, but will be truncated in the table display (\"1,1\"). It is therefore wise to always start with a recognizable fragment, especially with longer descriptions. A list of previously used Counterparties in this %s is displayed for you to choose from, you can type a new one, or choose not to." % (elementenEN[2],woordtransactieEN,woordcategorieEN),w),
+        "3,4": textwrap.wrap("Adjust the %s of the %s. Here you provide a description of the content of this %s, such as a billed service or a number of items purchased. You can also include payment references or invoice numbers here. The number of characters to use is free, but will be truncated in the table display (\"1,1\"). It is therefore wise to always start with a recognizable fragment, especially with longer descriptions. A list of previously used %ss in this %s is displayed for you to choose from, you can type a new one, or choose not to." % (elementenEN[3],woordtransactieEN,woordtransactieEN,elementenEN[3],woordcategorieEN),w),
+        "3,5": textwrap.wrap("Assign a %s to another %s. Each %s is assigned to a %s to which a budget is allocated. These budgets are distributed in \"0,2,3\" and the progress can be seen per month in \"1,2\"." % (woordtransactieEN,woordcategorieEN,woordtransactieEN,woordcategorieEN),w),
+    "4": textwrap.wrap("You can permanently delete individual %s here. If a collection already exists, those %ss will be presented one by one; otherwise, you will be asked to provide an 'ID' - or better: a list of 'IDs' in the form of a CSV list." % (woordtransactieEN,woordtransactieEN),w),
+    "5": textwrap.wrap("You can set money aside in multiple %ss. These %ss can be manually topped up from the discretionary balance or directly in a new %s. If a specific %s is mentioned in the %s with a \"#\", you can reconcile that %s with that %s. Incoming %ss can be added in full or in part to the %s %s, and negative %ss can be deducted in full from the %s balance. Using the shortcut \"#\", you can collect all previous %ss containing a \"#\" in the %s with \"1,1\". It is advisable to only use this character in the %s for %ss related to a %s. The displayed \"Discretionary balance\" is the account total from which the buffer in the Categories (needed for monthly expenses) and the %ss in the different %ss are deducted." % (woordspaarpotEN,woordspaarpotEN,woordtransactieEN,woordspaarpotEN,elementenEN[3],woordtransactieEN,woordspaarpotEN,elementenEN[1],woordspaarpotEN,elementenEN[1],lijnlijstEN[3],lijnlijstEN[4],woordtransactieEN,elementenEN[3],elementenEN[3],woordtransactieEN,woordspaarpotEN,lijnlijstEN[3],woordspaarpotEN),w),
+        "5,1": textwrap.wrap("View all %ss in a simple and clear table" % (woordspaarpotEN),w),
+        "5,2": textwrap.wrap("Add a new empty %s. You can already give it a %s and a %s. As long as no credit is added to it, it will remain empty and will not affect your discretionary balance. The %s always starts with a \"#\", which you can refer to in new %ss or in \"1,1\"." % (woordspaarpotEN,lijnlijstEN[1],lijnlijstEN[2],lijnlijstEN[0],woordtransactieEN),w),
+        "5,3": textwrap.wrap("Manually change the properties of a %s: %s, %s, %s, and/or %s" % (woordspaarpotEN,lijnlijstEN[1],lijnlijstEN[2],lijnlijstEN[3],lijnlijstEN[4]),w),
+            "5,3,1": textwrap.wrap("Change the %s of a %s" % (lijnlijstEN[1],woordspaarpotEN),w),
+            "5,3,2": textwrap.wrap("Change the %s of a %s" % (lijnlijstEN[2],woordspaarpotEN),w),
+            "5,3,3": textwrap.wrap("Change the %s of a %s" % (lijnlijstEN[3],woordspaarpotEN),w),
+            "5,3,4": textwrap.wrap("Change the %s %s of a %s" % (lijnlijstEN[4],elementenEN[1],woordspaarpotEN),w),
+        "5,4": textwrap.wrap("Remove a %s from the account. Any saved credit will go back to the discretionary balance" % (woordspaarpotEN),w),
     "<": textwrap.wrap("Back to main menu",w), # Wordt nooit aangesproken
     "Q": textwrap.wrap("Quit app",w) # Wordt nooit aangesproken
         }
 helpmenuIT = {
     "0": textwrap.wrap("Versione: %s, Data: %s \\\\ \"mimosasa\" è un'applicazione in cui è possibile gestire le spese e i salvadanai in vari conti bancari. È scritta in Python da Maestraccio ed è gratuita da scaricare e utilizzare. \"mimosasa\" sta per \"Money In, Money Out: Spendings And Savings Aid\" ed è il successore di \"mimo\". È possibile richiamare l'articolo di aiuto relativo a molte funzioni con \"H\". Scegli \"<\" (O qualsiasi altra \"parentesi aperta\" come \"(\" o \"[\") per tornare al menu principale, o \"Q\" per uscire completamente dal programma." % (versie,versiedatum),w),
-        "0,0": textwrap.wrap("Per ogni conto viene creata una \"cartella conto\" nella \"cartella dell'app\" in cui vengono inseriti i vari file di categoria e un file con gli impostazioni del conto. L'app \"mimosasa\" utilizza gli \"ID\" per identificare le singole transazioni. Queste transazioni possono poi essere visualizzate, modificate, eliminate, ecc. È possibile fornire questi \"ID\" in formato CSV (separato da virgole o spazi, ad esempio \"A0, B1\") quando richiesto. Il saldo del conto viene suddiviso in un \"buffer\" determinato dalla pianificazione del bilancio delle categorie, \"credito\" assegnato ai salvadanai e il saldo residuo disponibile per la spesa libera.",w),
+        "0,0": textwrap.wrap("Per ogni conto viene creata una \"cartella conto\" nella \"cartella dell'app\" in cui vengono inseriti i vari file di %s e un file con gli impostazioni del conto. L'app \"mimosasa\" utilizza gli \"ID\" per identificare le singole Transazioni. Queste Transazioni possono poi essere visualizzate, modificate, eliminate, ecc. È possibile fornire questi \"ID\" in formato CSV (separato da virgole o spazi, ad esempio \"A0, B1\") quando richiesto. Il saldo del conto viene suddiviso in un \"buffer\" determinato dalla pianificazione del bilancio delle Categorie, \"credito\" assegnato ai Salvadanai e il saldo residuo disponibile per la spesa libera." % (woordcategorieIT),w),
         "0,1": textwrap.wrap("In questa sezione è possibile modificare le impostazioni dell'ambiente conto. Personalizza la visualizzazione secondo i tuoi gusti e distingui visivamente più conti gestiti da te per evitare errori. Imposta cosa desideri visualizzare e come, e se desideri salvare riepiloghi sul tuo computer. Inserisci sempre gli importi con un punto \".\" come separatore decimale.",w),
             "0,1,0": textwrap.wrap("Ripristina le impostazioni del conto ai valori predefiniti. Verrà creato un nuovo file di impostazioni sia nella \"cartella conto\" che nella \"cartella dell'app\".",w),
             "0,1,1": textwrap.wrap("Inserisci qui il nome del conto. In questo modo puoi distinguere tra più conti gestiti nella stessa app senza dover imparare a memoria i lunghi numeri di conto.",w),
             "0,1,2": textwrap.wrap("Inserisci qui il nome del titolare del conto.",w),
             "0,1,3": textwrap.wrap("Qui puoi solo modificare lo stato di ALTRE conti. Non è possibile disattivare il conto attualmente in uso, che è ovviamente attivo. Seleziona un altro conto e specifica se si tratta di un conto \"attivo\" o \"non attivo\". I conti non attivi sono ad esempio conti archiviati o preparati che non vengono visualizzati negli elenchi.",w),
-            "0,1,4": textwrap.wrap("Qui puoi modificare la lingua dell'app. Le transazioni stesse non vengono tradotte, così come i nomi personalizzati delle categorie, ma tutti i menu e i comandi sì. Al momento puoi scegliere tra \"NL\" (olandese, predefinito), \"EN\" (inglese) e \"IT\" (italiano).",w),
+            "0,1,4": textwrap.wrap("Qui puoi modificare la lingua dell'app. Le Transazioni stesse non vengono tradotte, così come i nomi personalizzati delle Categorie, ma tutti i menu e i comandi sì. Al momento puoi scegliere tra \"NL\" (olandese, predefinito), \"EN\" (inglese), \"IT\" (italiano) e \"CJ\" (hucoji).",w),
             "0,1,5": textwrap.wrap("Qui puoi assegnare il simbolo di valuta. Puoi scegliere qualsiasi carattere, ma assicurati che abbia una larghezza di esattamente una posizione nella visualizzazione dello schermo.",w),
-            "0,1,6": textwrap.wrap("Inserisci qui il saldo iniziale sul conto dal momento prima che si verificasse la prima transazione. L'app è fondamentalmente progettata per aprire un nuovo \"conto\" ogni anno nell'app, anche se è possibile continuare per diversi anni.",w),
+            "0,1,6": textwrap.wrap("Inserisci qui il saldo iniziale sul conto dal momento prima che si verificasse la prima %s. L'app è fondamentalmente progettata per aprire un nuovo \"conto\" ogni anno nell'app, anche se è possibile continuare per diversi anni." % (woordtransactieIT),w),
             "0,1,7": textwrap.wrap("È ora possibile nascondere il saldo del conto nella schermata iniziale: l'impostazione predefinita ora è: \"%s: No\". Se l'impostazione è \"Sì\", viene visualizzata anche la somma di più conti - con valute corrispondenti." % nieuwheaderlijstIT[6],w),
-            "0,1,8": textwrap.wrap("Nelle transazioni, il simbolo della valuta viene enfatizzato ulteriormente sopra e sotto una soglia da voi stessi determinata. Di default, queste soglie sono impostate su \"inferiore a -100,00\" e \"superiore a 100,00\". Queste cifre vengono anche utilizzate come cifre standard.",w),
-            "0,1,9": textwrap.wrap("Nella panoramica mensile vengono visualizzate le transazioni per categoria. È possibile scegliere di mostrare o nascondere le categorie non utilizzate in questa panoramica.",w),
-            "0,1,10": textwrap.wrap("La visualizzazione predefinita della data è \"AAAAMMGG\" ma non tutti la trovano chiara. Sono state quindi aggiunte diverse opzioni di visualizzazione per rendere la data più facilmente leggibile anche per voi.",w),
+            "0,1,8": textwrap.wrap("Nelle Transazioni, il simbolo della valuta viene enfatizzato ulteriormente sopra e sotto una soglia da voi stessi determinata. Di default, queste soglie sono impostate su \"inferiore a -100,00\" e \"superiore a 100,00\". Queste cifre possono anche essere utilizzate come cifre standard creando, filtrando o modificando Transazioni.",w),
+            "0,1,9": textwrap.wrap("Nella panoramica mensile vengono visualizzate le Transazioni per %s. È possibile scegliere di mostrare o nascondere le Categorie non utilizzate in questa panoramica." % (woordcategorieIT),w),
+            "0,1,10": textwrap.wrap("La visualizzazione predefinita della %s è \"AAAAMMGG\" ma non tutti la trovano chiara. Sono state quindi aggiunte diverse opzioni di visualizzazione per rendere la %s più facilmente leggibile anche per voi." % (elementenIT[0],elementenIT[0]),w),
             "0,1,11": textwrap.wrap("Sono disponibili diversi schemi di colori. Oltre a rendere più piacevole la vista, questo può essere molto utile se lavori su più conti e desideri fare una chiara distinzione visiva.",w),
-            "0,1,12": textwrap.wrap("È possibile scegliere il livello in cui viene visualizzato il menu a tendina. Più alta è la valore, più opzioni di menu vengono espandete.",w),
-            "0,1,13": textwrap.wrap("È possibile selezionare il numero di transazioni visualizzate in \"1,3\" per ogni fermata. Più alto è il valore, più transazioni verranno mostrate sullo schermo. Il valore predefinito è \"10\". È possibile scegliere un valore inferiore su schermi più piccoli o con una dimensione del carattere più grande.",w),
-            "0,1,14": textwrap.wrap("I totali mensili mostrati possono essere salvati anche come file di testo semplice. Per evitare di dover scegliere ogni volta, è possibile impostarlo o disattivarlo qui per impostazione predefinita. Troverete questi nella \"cartella del conto\" con l'anno e il mese (\"AAAAMM\") per le transazioni, e come \"anno+mese+a\" (\"AAAAMMa\") per l'analisi del budget, senza estensione del file. Questi file vengono creati se non esistono ancora, altrimenti vengono sovrascritti continuamente. Se necessario, è possibile aggiungere manualmente l'estensione del file \".txt\", ma in tal caso non verrà aggiornato.",w),
-            "0,1,15": textwrap.wrap("È possibile scegliere di salvare sempre un file csv con tutte le transazioni di quel conto quando si chiude l'applicazione. Troverete questo file csv nella \"cartella del conto\" come \"export.csv\". Questo viene creato se non esiste ancora, altrimenti sovrascritto con nuovi dati.",w),
+            "0,1,12": textwrap.wrap("È possibile scegliere il livello in cui viene visualizzato il menu a tendina. Più alta è la valore, più opzioni di menu vengono espanse.",w),
+            "0,1,13": textwrap.wrap("È possibile selezionare il numero di Transazioni visualizzate in \"1,3\" prima di ogni fermata. Più alto è il valore, più Transazioni verranno mostrate sullo schermo. Il valore predefinito è \"10\". È possibile scegliere un valore inferiore su schermi più piccoli o con una dimensione del carattere più grande.",w),
+            "0,1,14": textwrap.wrap("I totali mensili mostrati possono essere salvati anche come file di testo semplice. Per evitare di dover scegliere ogni volta, è possibile impostarlo o disattivarlo qui per impostazione predefinita. Troverete questi file nella \"cartella del conto\" con l'anno e il mese (\"AAAAMM\") per le Transazioni, e come \"anno+mese+a\" (\"AAAAMMa\") per l'analisi del budget, senza estensione del file. Questi file vengono creati se non esistono ancora, altrimenti vengono sovrascritti continuamente. Se necessario, è possibile aggiungere manualmente l'estensione del file \".txt\", ma in tal caso non verrà aggiornato.",w),
+            "0,1,15": textwrap.wrap("È possibile scegliere di salvare sempre un file csv con tutte le Transazioni di quel conto quando si chiude l'applicazione. Troverete questo file csv nella \"cartella del conto\" come \"export.csv\". Questo file viene creato se non esiste ancora, altrimenti sovrascritto con nuovi dati.",w),
             "0,1,16": textwrap.wrap("All'avvio dell'app, può essere visualizzato un articolo casuale di aiuto come \"Suggerimento del giorno\". Questo può essere utile soprattutto all'inizio per familiarizzare con le funzionalità. È possibile attivarlo o disattivarlo qui.",w),
-        "0,2": textwrap.wrap("Qui è possibile modificare il nome delle varie categorie, distribuire i budget, eccetera. Le categorie su cui entra denaro (mensilmente) ricevono un budget negativo, che viene utilizzato come buffer all'inizio di un nuovo mese. Nell'analisi mensile il saldo registrato su tali categorie viene ignorato fino a quando il buffer non è raggiunto.",w),
-            "0,2,1": textwrap.wrap("Aggiungi una nuova categoria. I conti aziendali contengono di default i conti \"%s\" a \"%s\", i conti domestici le categorie \"%s\" a \"%s\" e \"%s\", ma tutte le lettere intermedie possono essere utilizzate, e tutte quelle lettere e numeri possono anche essere scambiati tra conti aziendali e domestici." % (zakelijkelijst[0],zakelijkelijst[-1],huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
-            "0,2,2": textwrap.wrap("Di base vengono assegnati nomi standard alle categorie, ma qui puoi modificarli a tuo piacimento. Le categorie standard per i conti aziendali sono: 0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s, 9: %s, e per i conti domestici (standard): A: %s, B: %s, C: %s, D: %s, E: %s, F: %s, O: %s. Tutti questi nomi (standard olandesi) vengono tradotti quando si cambia lingua, ma non se hai personalizzato il nome di una categoria." % (nieuwalternatievenamendictIT[zakelijkelijst[0]],nieuwalternatievenamendictIT[zakelijkelijst[1]],nieuwalternatievenamendictIT[zakelijkelijst[2]],nieuwalternatievenamendictIT[zakelijkelijst[3]],nieuwalternatievenamendictIT[zakelijkelijst[4]],nieuwalternatievenamendictIT[zakelijkelijst[5]],nieuwalternatievenamendictIT[zakelijkelijst[6]],nieuwalternatievenamendictIT[zakelijkelijst[7]],nieuwalternatievenamendictIT[zakelijkelijst[8]],nieuwalternatievenamendictIT[zakelijkelijst[9]],nieuwalternatievenamendictIT[huishoudelijkelijst[0]],nieuwalternatievenamendictIT[huishoudelijkelijst[1]],nieuwalternatievenamendictIT[huishoudelijkelijst[2]],nieuwalternatievenamendictIT[huishoudelijkelijst[3]],nieuwalternatievenamendictIT[huishoudelijkelijst[4]],nieuwalternatievenamendictIT[huishoudelijkelijst[5]],nieuwalternatievenamendictIT[huishoudelijkelijst[6]]),w),
-            "0,2,3": textwrap.wrap("Ogni categoria di spesa contiene un budget spendibile positivo, mentre le categorie in cui entra denaro hanno un budget negativo (utilizzato come buffer). Assicurati che il saldo complessivo sia sempre esattamente zero (\"0.0\").",w),
-            "0,2,4": textwrap.wrap("Ricordati che eliminando una categoria elimini anche tutte le transazioni al suo interno! Assicurati che la categoria sia vuota (utilizza la funzione \"3,5\" se necessario) prima di utilizzare questa funzione. Spesso questo non è necessario; eventualmente puoi nascondere le categorie non utilizzate con l'opzione \"0,1,9\".",w),
-            "0,2,5": textwrap.wrap("È possibile cancellare tutte le transazioni reimpostando le categorie, sostituendo le categorie domestiche (da %s a %s) con quelle aziendali (da %s a %s), o viceversa. In questo modo, anche i nomi delle categorie personalizzati vengono sostituiti con quelli standard." % (huishoudelijkelijst[0],huishoudelijkelijst[-1],zakelijkelijst[0],zakelijkelijst[-1]),w),
-            "0,2,6": textwrap.wrap("Qui è possibile ripristinare i nomi delle categorie eventualmente personalizzati ai nomi delle categorie predefiniti.",w),
+        "0,2": textwrap.wrap("Qui è possibile modificare il nome delle varie Categorie, distribuire i budget, eccetera. Le Categorie su cui entra denaro (mensilmente) ricevono un budget negativo, che viene utilizzato come buffer all'inizio di un nuovo mese. Nell'analisi mensile il saldo registrato su tali categorie viene ignorato fino a quando il buffer non è raggiunto.",w),
+            "0,2,1": textwrap.wrap("Aggiungi una nuova %s. I conti aziendali contengono di default i conti \"%s\" a \"%s\", i conti domestici le Categorie \"%s\" a \"%s\" e \"%s\", ma tutte le lettere intermedie possono essere utilizzate, e tutte quelle lettere e numeri possono anche essere scambiati tra conti aziendali e domestici." % (woordcategorieIT,zakelijkelijst[0],zakelijkelijst[-1],huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
+            "0,2,2": textwrap.wrap("Di base vengono assegnati nomi standard alle Categorie, ma qui puoi modificarli a tuo piacimento. Le Categorie standard per i conti aziendali sono: 0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s, 9: %s, e per i conti domestici (standard): A: %s, B: %s, C: %s, D: %s, E: %s, F: %s, O: %s. Tutti questi nomi (standard olandesi) vengono tradotti quando si cambia lingua, ma non se hai personalizzato il nome di una %s." % (nieuwalternatievenamendictIT[zakelijkelijst[0]],nieuwalternatievenamendictIT[zakelijkelijst[1]],nieuwalternatievenamendictIT[zakelijkelijst[2]],nieuwalternatievenamendictIT[zakelijkelijst[3]],nieuwalternatievenamendictIT[zakelijkelijst[4]],nieuwalternatievenamendictIT[zakelijkelijst[5]],nieuwalternatievenamendictIT[zakelijkelijst[6]],nieuwalternatievenamendictIT[zakelijkelijst[7]],nieuwalternatievenamendictIT[zakelijkelijst[8]],nieuwalternatievenamendictIT[zakelijkelijst[9]],nieuwalternatievenamendictIT[huishoudelijkelijst[0]],nieuwalternatievenamendictIT[huishoudelijkelijst[1]],nieuwalternatievenamendictIT[huishoudelijkelijst[2]],nieuwalternatievenamendictIT[huishoudelijkelijst[3]],nieuwalternatievenamendictIT[huishoudelijkelijst[4]],nieuwalternatievenamendictIT[huishoudelijkelijst[5]],nieuwalternatievenamendictIT[huishoudelijkelijst[6]],woordcategorieIT),w),
+            "0,2,3": textwrap.wrap("Ogni %s di spesa contiene un budget spendibile positivo, mentre le Categorie in cui entra denaro hanno un budget negativo (utilizzato come buffer). Assicurati che il saldo complessivo sia sempre esattamente zero (\"0.0\")." % (woordcategorieIT),w),
+            "0,2,4": textwrap.wrap("Ricordati che eliminando una %s elimini anche tutte le Transazioni associate con questa %s! Assicurati che la %s sia vuota (utilizza la funzione \"3,5\" se necessario) prima di utilizzare questa funzione. Spesso questo non è necessario; eventualmente puoi nascondere le Categorie non utilizzate con l'opzione \"0,1,9\"." % (woordcategorieIT,woordcategorieIT,woordcategorieIT),w),
+            "0,2,5": textwrap.wrap("È possibile cancellare tutte le Transazioni reimpostando le Categorie, sostituendo le Categorie domestiche (da %s a %s) con quelle aziendali (da %s a %s), o viceversa. In questo modo, anche i nomi delle Categorie personalizzati vengono sostituiti con quelli standard." % (huishoudelijkelijst[0],huishoudelijkelijst[-1],zakelijkelijst[0],zakelijkelijst[-1]),w),
+            "0,2,6": textwrap.wrap("Qui è possibile ripristinare i nomi delle Categorie eventualmente personalizzati ai nomi delle Categorie predefiniti.",w),
         "0,3": textwrap.wrap("In \"mimosasa\" è possibile gestire più account. Aggiungi qui un nuovo account.",w),
-        "0,4": textwrap.wrap("È possibile eliminare completamente gli account. Attenzione: questo è irreversibile: via è via!",w),
+        "0,4": textwrap.wrap("È possibile eliminare completamente altri account. Attenzione: questo è irreversibile: via è via!",w),
         "0,5": textwrap.wrap("È possibile trasferire le impostazioni dell'account da un account all'altro. Questo è particolarmente utile quando si crea un \"nuovo account\" per un nuovo anno e si desidera mantenere le vecchie impostazioni.",w),
-    "1": textwrap.wrap("Visualizza le singole transazioni in dettaglio, crea riepiloghi filtrati, analizza i tuoi guadagni e le tue spese. Per iniziare verrà mostrato il saldo giornaliero e il punteggio mensile per categoria.",w),
-        "1,0": textwrap.wrap("Raccogli più transazioni per \"ID\" o cancella la raccolta creata in precedenza, senza mostrare le transazioni. Le transazioni selezionate possono poi essere ordinate in ordine crescente o decrescente su ciascun elemento. Per impostazione predefinita, non viene applicato alcun ordinamento; le transazioni vengono inizialmente richiamate nell'ordine in cui vengono specificati gli \"ID\". Per un uso efficiente, si consiglia di mantenere l'elenco breve e ordinato.",w),
-            "1,0,1": textwrap.wrap("La collezione viene ordinata per %s, con l'ultima transazione in testa." % elementenIT[0].lower(),w),
-            "1,0,2": textwrap.wrap("La collezione viene ordinata per %s, con la prima transazione in testa." % elementenIT[0].lower(),w),
-            "1,0,3": textwrap.wrap("La collezione viene ordinata per %s, con la transazione di importo più alto in testa." % elementenIT[1].lower(),w),
-            "1,0,4": textwrap.wrap("La collezione viene ordinata per %s, con la transazione di importo più basso in testa." % elementenIT[1].lower(),w),
-            "1,0,5": textwrap.wrap("La collezione viene ordinata in ordine alfabetico da Z ad A per %s." % elementenIT[2].lower(),w),
-            "1,0,6": textwrap.wrap("La collezione viene ordinata in ordine alfabetico da A ad Z per %s." % elementenIT[2].lower(),w),
-            "1,0,7": textwrap.wrap("La collezione viene ordinata in ordine alfabetico da Z ad A per %s." % elementenIT[3].lower(),w),
-            "1,0,8": textwrap.wrap("La collezione viene ordinata in ordine alfabetico da A ad Z per %s." % elementenIT[3].lower(),w),
+    "1": textwrap.wrap("Visualizza le singole Transazioni in dettaglio, crea riepiloghi filtrati, analizza i tuoi guadagni e le tue spese. Per iniziare verrà mostrato il saldo giornaliero e il punteggio mensile per %s." % (woordcategorieIT),w),
+        "1,0": textwrap.wrap("Raccogli più Transazioni per \"ID\" o cancella la raccolta creata in precedenza, senza mostrare le Transazioni. Le Transazioni selezionate possono poi essere ordinate in ordine crescente o decrescente su ciascun elemento. Per impostazione predefinita, non viene applicato alcun ordinamento; le Transazioni vengono inizialmente richiamate nell'ordine in cui vengono specificati gli \"ID\". Per un uso efficiente, si consiglia di mantenere l'elenco breve e ordinato.",w),
+            "1,0,1": textwrap.wrap("La collezione viene ordinata per %s, con l'ultima %s in testa." % (elementenIT[0],woordtransactieIT),w),
+            "1,0,2": textwrap.wrap("La collezione viene ordinata per %s, con la prima %s in testa." % (elementenIT[0],woordtransactieIT),w),
+            "1,0,3": textwrap.wrap("La collezione viene ordinata per %s, con la %s di %s più alto in testa." % (elementenIT[1],woordtransactieIT,elementenIT[1]),w),
+            "1,0,4": textwrap.wrap("La collezione viene ordinata per %s, con la %s di %s più basso in testa." % (elementenIT[1],woordtransactieIT,elementenIT[1]),w),
+            "1,0,5": textwrap.wrap("La collezione viene ordinata in ordine alfabetico da Z ad A per %s." % (elementenIT[2]),w),
+            "1,0,6": textwrap.wrap("La collezione viene ordinata in ordine alfabetico da A ad Z per %s." % (elementenIT[2]),w),
+            "1,0,7": textwrap.wrap("La collezione viene ordinata in ordine alfabetico da Z ad A per %s." % (elementenIT[3]),w),
+            "1,0,8": textwrap.wrap("La collezione viene ordinata in ordine alfabetico da A ad Z per %s." % (elementenIT[3]),w),
             "1,0,9": textwrap.wrap("Le transazioni con un %s negativo e lo stesso %s positivo vengono accoppiate, il resto viene filtrato." % (elementenIT[1],elementenIT[1]),w),
-        "1,1": textwrap.wrap("Seleziona transazioni basate su diversi criteri (%s, %s, %s, %s e %s) e genera una tabella ben organizzata. Puoi utilizzare \"scorciatoie da tastiera\", oppure specificare singolarmente tutti gli elementi. Le possibili \"scorciatoie da tastiera\" vengono mostrate; è possibile aggiungere un numero a \"M\" (mese) o \"W\" (settimana): \"0\" include oggi. Tutte le transazioni selezionate vengono anche raccolte nella collezione, che viene mostrata sempre sopra il menu a discesa. Se la selezione comprende un solo giorno, verrà mostrato il totale di quel giorno." % (elementenIT[0].lower(),elementenIT[1].lower(),elementenIT[2].lower(),elementenIT[3].lower(),woordcategorieIT.lower()),w),
-        "1,2": textwrap.wrap("Mostra l'analisi del bilancio di un mese. Di default viene mostrato il mese corrente. Vedrai il progresso di ogni categoria rispetto al budget assegnato e le prestazioni mensili.",w),
-        "1,3": textwrap.wrap("Mostra i dettagli delle singole transazioni nella collezione. Il numero di caratteri consentito in \"%s\" e \"%s\" è illimitato, ma nella tabella (\"1,1\") verranno tagliati e mostrati solo parzialmente. Tutte le informazioni in quei caratteri extra verranno comunque espansi qui." % (elementenIT[2].lower(),elementenIT[3].lower()),w),
-    "2": textwrap.wrap("È possibile aggiungere nuove transazioni al proprio conto, assegnandole ciascuna a una categoria. Una nuova transazione può essere inserita per elemento o in successione su una singola riga in stile CSV, oppure è possibile creare una copia di una transazione precedente e modificare i dettagli successivamente con le opzioni sotto \"3\". Le nuove transazioni vengono aggiunte direttamente alla collezione, in modo da poterle visualizzare o modificare immediatamente.",w),
-        "2,1": textwrap.wrap("Aggiungi qui una nuova transazione al tuo conto. Puoi inserire gli elementi passo dopo passo, o - per l'utente più esperto - uno di seguito all'altro su una riga in stile CSV: \"%s, %s, %s, %s, %s\". Pertanto, non è possibile utilizzare una virgola (\",\") in nessun elemento. Usa sempre un punto (\".\") come separatore decimale. Se l'input CSV contiene dati non validi, il metodo passo dopo passo prenderà il sopravvento." % (elementenIT[0].lower(),elementenIT[1].lower(),elementenIT[2].lower(),elementenIT[3].lower(),woordcategorieIT.lower()),w),
-        "2,2": textwrap.wrap("Fai qui una copia di una transazione inserita in precedenza e sostituisci automaticamente la data originale con quella di oggi. Puoi usare ogni transazione come modello per modificarla in dettaglio più tardi con le opzioni nel menu \"3\". Se esiste già una collezione, tali transazioni verranno offerte una per una, altrimenti ti verrà chiesto di specificare un \"ID\" - o meglio: un elenco di \"ID\" nel formato di un elenco CSV. Questo è il metodo consigliato per aggiungere transazioni ricorrenti. Nota: se fai una copia identica di una transazione già oggi, questa non verrà aggiunta automaticamente alla collezione.",w),
-    "3": textwrap.wrap("Tutti gli elementi di una transazione esistente possono essere modificati qui. Se esiste già una collezione, tali transazioni verranno offerte una per una, altrimenti ti verrà chiesto di specificare un \"ID\" - o meglio: una lista di \"ID\" sotto forma di lista CSV.",w),
-        "3,1": textwrap.wrap("Modifica la data della transazione. Inserisci la nuova data come \"AAAAMMGG\". La data predefinita, ad esempio se viene inserita una data non valida o incompleta, è la data odierna. Puoi impostare il formato della data nella tabella (\"1,1\") o nella visualizzazione della transazione (\"1,3\") con \"0,1,10\".",w),
-        "3,2": textwrap.wrap("Modifica l'importo della transazione. Inserisci l'importo senza valuta e utilizza un punto (\".\") come separatore decimale. Puoi impostare la valuta con \"0,1,5\".",w),
-        "3,3": textwrap.wrap("Modifica la %s della transazione. Può essere un debitore o un creditore, un cliente o un fornitore (negozio). Il numero di caratteri da utilizzare è libero, ma verrà abbreviato nella visualizzazione tabellare (\"1,1\"). È quindi consigliabile iniziare sempre con un frammento riconoscibile, specialmente per descrizioni più lunghe. Viene mostrato un elenco di Controparti utilizzate in precedenza tra cui puoi scegliere, puoi digitare una nuova, o rinunciare." % (elementenIT[2]),w),
-        "3,4": textwrap.wrap("Modifica il %s della transazione. Qui fornisci una descrizione del contenuto di questa transazione, come ad esempio un servizio fatturato o un insieme di articoli acquistati. Puoi includere anche informazioni di pagamento o numeri di fattura. Il numero di caratteri da utilizzare è libero, ma verrà abbreviato nella visualizzazione tabellare (\"1,1\"). È quindi consigliabile iniziare sempre con un frammento riconoscibile, specialmente per descrizioni più lunghe. Viene mostrato un elenco di Riferimenti utilizzati in precedenza tra cui puoi scegliere, puoi digitare uno nuovo, o rinunciare." % (elementenIT[3]),w),
-        "3,5": textwrap.wrap("Sposta una transazione in un'altra categoria. Ogni transazione viene assegnata a una categoria a cui è associato un budget. Questi budget sono distribuiti in \"0,2,3\" e il progresso è visibile mensilmente in \"1,2\".",w),
-    "4": textwrap.wrap("Qui puoi eliminare definitivamente singole transazioni. Se esiste già una collezione, queste transazioni vengono offerte una per volta; in caso contrario, ti verrà chiesto di specificare un \"ID\" - o meglio: una lista di \"ID\" sotto forma di un elenco CSV.",w),
-    "5": textwrap.wrap("È possibile mettere da parte denaro in più Salvadanai. Questi Salvadanai possono essere ricaricati manualmente dal saldo disponibile o direttamente da una nuova %s. Se nel %s viene specificato un %s con un \"#\", è possibile addebitare quella %s su quel %s. Le somme in entrata possono essere interamente o parzialmente aggiunte al %s del %s e le somme negative sottratte interamente dal saldo %s. Usando il tasto rapido \"#\" in \"1,1\", si raccolgono tutte le Transazioni precedenti che contengono un \"#\" nel %s. È pertanto consigliabile utilizzare questo carattere nel %s solo per le Transazioni relative a un %s. Il \"Saldo disponibile\" mostrato è il totale del conto da cui sono stati sottratti il buffer nei Categorie (necessario per le spese mensili) e i Crediti nei vari Salvadanai." % (woordtransactieIT,elementenIT[3],woordspaarpotIT,woordtransactieIT,woordspaarpotIT,lijnlijstIT[3],woordspaarpotIT,lijnlijstIT[4],elementenIT[3],elementenIT[3],woordspaarpotIT),w),
+        "1,1": textwrap.wrap("Seleziona Transazioni basate su diversi criteri (%s, %s, %s, %s e %s) e genera una tabella ben organizzata. Puoi utilizzare \"scorciatoie da tastiera\", oppure specificare singolarmente tutti gli elementi. Le possibili \"scorciatoie da tastiera\" vengono mostrate; è possibile aggiungere un numero a \"M\" (mese) o \"W\" (settimana): \"0\" include oggi. Tutte le Transazioni selezionate vengono anche raccolte nella collezione, che viene mostrata sempre sopra il menu a discesa. Se la selezione comprende un solo giorno, verrà mostrato il totale di quel giorno." % (elementenIT[0],elementenIT[1],elementenIT[2],elementenIT[3],woordcategorieIT),w),
+        "1,2": textwrap.wrap("Mostra l'analisi del bilancio di un mese. Di default viene mostrato il mese corrente. Vedrai il progresso di ogni %s rispetto al budget assegnato e le prestazioni mensili." % (woordcategorieIT),w),
+        "1,3": textwrap.wrap("Mostra i dettagli delle singole Transazioni nella collezione. Il numero di caratteri consentito in \"%s\" e \"%s\" è illimitato, ma nella tabella (\"1,1\") verranno tagliati e mostrati solo parzialmente. Tutte le informazioni in quei caratteri extra verranno comunque espanse qui. In \"0,1,13\" puoi impostare dopo quante Transazioni visualizzate devi premere \"Invio\" per continuare, oppure \"<\" per uscire dalla visualizzazione." % (elementenIT[2],elementenIT[3]),w),
+    "2": textwrap.wrap("È possibile aggiungere nuove Transazioni al proprio conto, assegnandole ciascuna a una %s. Una nuova %s può essere inserita per elemento o in successione su una singola riga in stile CSV, oppure è possibile creare una copia di una %s precedente e modificare i dettagli successivamente con le opzioni sotto \"3\". Le nuove Transazioni vengono aggiunte direttamente alla collezione, in modo da poterle visualizzare o modificare immediatamente." % (woordcategorieIT,woordtransactieIT,woordtransactieIT),w),
+        "2,1": textwrap.wrap("Aggiungi qui una nuova %s al tuo conto. Puoi inserire gli elementi passo dopo passo, o - per l'utente più esperto - uno di seguito all'altro su una riga in stile CSV: \"%s, %s, %s, %s, %s\". Pertanto, non è possibile utilizzare una virgola (\",\") in nessun elemento. Usa sempre un punto (\".\") come separatore decimale. Se l'input CSV contiene dati non validi, il metodo passo dopo passo prenderà il sopravvento." % (woordtransactieIT,elementenIT[0],elementenIT[1],elementenIT[2],elementenIT[3],woordcategorieIT),w),
+        "2,2": textwrap.wrap("Fai qui una copia di una %s inserita in precedenza e sostituisci automaticamente la data originale con quella di oggi. Puoi usare ogni %s come modello per modificarla in dettaglio più tardi con le opzioni nel menu \"3\". Se esiste già una collezione, tali Transazioni verranno offerte una per una, altrimenti ti verrà chiesto di specificare un \"ID\" - o meglio: un elenco di \"ID\" nel formato di un elenco CSV. Questo è il metodo consigliato per aggiungere Transazioni ricorrenti. Nota: se fai una copia identica di una %s già oggi, questa non verrà aggiunta automaticamente alla collezione." % (woordtransactieIT,woordtransactieIT,woordtransactieIT),w),
+    "3": textwrap.wrap("Tutti gli elementi di una %s esistente possono essere modificati qui. Se esiste già una collezione, tali Transazioni verranno offerte una per una, altrimenti ti verrà chiesto di specificare un \"ID\" - o meglio: una lista di \"ID\" sotto forma di lista CSV." % (woordtransactieIT),w),
+        "3,1": textwrap.wrap("Modifica la %s della %s. Inserisci la nuova %s come \"AAAAMMGG\". La %s predefinita, ad esempio se viene inserita una %s non valida o incompleta, è la %s odierna. Puoi impostare il formato della %s per esempio nella tabella (\"1,1\") o nella visualizzazione della %s (\"1,3\") con \"0,1,10\"." % (elementenIT[0],woordtransactieIT,elementenIT[0],elementenIT[0],elementenIT[0],elementenIT[0],elementenIT[0],woordtransactie),w),
+        "3,2": textwrap.wrap("Modifica l'%s della %s. Inserisci l'%s senza valuta e utilizza un punto (\".\") come separatore decimale. Puoi impostare la valuta con \"0,1,5\"." % (elementenIT[1],woordtransactieIT,elementenIT[1]),w),
+        "3,3": textwrap.wrap("Modifica la %s della %s. Può essere un debitore o un creditore, un cliente o un fornitore (negozio). Il numero di caratteri da utilizzare è libero, ma verrà abbreviato nella visualizzazione tabellare (\"1,1\"). È quindi consigliabile iniziare sempre con un frammento riconoscibile, specialmente per descrizioni più lunghe. Viene mostrato un elenco di Controparti utilizzate in precedenza tra cui puoi scegliere, puoi digitare una nuova, o rinunciare." % (elementenIT[2],woordtransactieIT),w),
+        "3,4": textwrap.wrap("Modifica il %s della %s. Qui fornisci una descrizione del contenuto di questa %s, come ad esempio un servizio fatturato o un insieme di articoli acquistati. Puoi includere anche informazioni di pagamento o numeri di fattura. Il numero di caratteri da utilizzare è libero, ma verrà abbreviato nella visualizzazione tabellare (\"1,1\"). È quindi consigliabile iniziare sempre con un frammento riconoscibile, specialmente per descrizioni più lunghe. Viene mostrato un elenco di Riferimenti utilizzati in precedenza tra cui puoi scegliere, puoi digitare uno nuovo, o rinunciare." % (elementenIT[3],woordtransactieIT,woordtransactieIT),w),
+        "3,5": textwrap.wrap("Sposta una %s in un'altra %s. Ogni %s viene assegnata a una %s a cui è associato un budget. Questi budget sono distribuiti in \"0,2,3\" e il progresso mensile è visibile in \"1,2\"." % (woordtransactieIT,woordcategorieIT,woordtransactieIT,woordcategorieIT),w),
+    "4": textwrap.wrap("Qui puoi eliminare definitivamente singole Transazioni. Se esiste già una collezione, queste Transazioni vengono offerte una per volta; in caso contrario, ti verrà chiesto di specificare un \"ID\" - o meglio: una lista di \"ID\" sotto forma di un elenco CSV.",w),
+    "5": textwrap.wrap("È possibile mettere da parte denaro in più Salvadanai. Questi Salvadanai possono essere ricaricati manualmente dal saldo disponibile o direttamente da una nuova %s. Se nel %s viene specificato un %s con un \"#\", è possibile addebitare quella %s su quel %s. Gli Importi in entrata possono essere interamente o parzialmente aggiunte al %s del %s e gli Importi negativi sottratte interamente dal saldo %s. Usando il tasto rapido \"#\" in \"1,1\", si raccolgono tutte le Transazioni precedenti che contengono un \"#\" nel %s. È pertanto consigliabile utilizzare questo carattere nel %s solo per le Transazioni relative a un %s. Il \"Saldo disponibile\" mostrato è il totale del conto da cui sono stati sottratti il buffer nei Categorie (necessario per le spese mensili) e i Crediti nei vari Salvadanai." % (woordtransactieIT,elementenIT[3],woordspaarpotIT,woordtransactieIT,woordspaarpotIT,lijnlijstIT[3],woordspaarpotIT,lijnlijstIT[4],elementenIT[3],elementenIT[3],woordspaarpotIT),w),
         "5,1": textwrap.wrap("Visualizza tutti i Salvadanai in una tabella semplice e chiara.",w),
         "5,2": textwrap.wrap("Aggiungi un nuovo %s vuoto. Puoi dargli un %s e un %s. Finché non viene aggiunto alcun %s, rimarrà vuoto e non influenzerà il tuo saldo disponibile. Il %s inizia sempre con un \"#\", a cui puoi fare riferimento in nuove Transazioni o in \"1,1\"." % (woordspaarpotIT,lijnlijstIT[1],lijnlijstIT[2],lijnlijstIT[3],lijnlijstIT[1]),w),
         "5,3": textwrap.wrap("Modifica manualmente le proprietà di un %s: %s, %s, %s e/o %s." % (woordspaarpotIT,lijnlijstIT[1],lijnlijstIT[2],lijnlijstIT[3],lijnlijstIT[4],),w),
@@ -1182,7 +1182,7 @@ helpmenuIT = {
             "5,3,2": textwrap.wrap("Modifica il %s di un %s" % (lijnlijstIT[2],woordspaarpotIT),w),
             "5,3,3": textwrap.wrap("Modifica il %s di un %s" % (lijnlijstIT[3],woordspaarpotIT),w),
             "5,3,4": textwrap.wrap("Modifica il saldo %s di un %s" % (lijnlijstIT[4],woordspaarpotIT),w),
-        "5,4": textwrap.wrap("Rimuovi un %s dal conto. Eventuali Crediti tornano al totale disponibile" % woordspaarpotIT,w),
+        "5,4": textwrap.wrap("Rimuovi un %s dal conto. Eventuali Crediti tornano al totale disponibile" % (woordspaarpotIT),w),
     "<": textwrap.wrap("Ritorna al menu principale",w),
     "Q": textwrap.wrap("Esci dali'app",w)
         }
@@ -1743,11 +1743,11 @@ helpmenuCJ = {
             "1,0,7": textwrap.wrap("%s" % elementenCJ[3],w),
             "1,0,8": textwrap.wrap("%s" % elementenCJ[3],w),
             "1,0,9": textwrap.wrap("%s" % elementenCJ[1],w),
-        "1,1": textwrap.wrap("(%s, %s, %s, %s e %s)" % (elementenCJ[0].lower(),elementenCJ[1].lower(),elementenCJ[2].lower(),elementenCJ[3].lower(),woordcategorieCJ.lower()),w),
+        "1,1": textwrap.wrap("(%s, %s, %s, %s e %s)" % (elementenCJ[0],elementenCJ[1],elementenCJ[2],elementenCJ[3],woordcategorieCJ),w),
         "1,2": textwrap.wrap("",w),
-        "1,3": textwrap.wrap("\"%s\"  \"%s\" (\"1,1\") " % (elementenCJ[2].lower(),elementenCJ[3].lower()),w),
+        "1,3": textwrap.wrap("\"%s\"  \"%s\" (\"1,1\") " % (elementenCJ[2],elementenCJ[3]),w),
     "2": textwrap.wrap("",w),
-        "2,1": textwrap.wrap("CSV: \"%s, %s, %s, %s, %s\"" % (elementenCJ[0].lower(),elementenCJ[1].lower(),elementenCJ[2].lower(),elementenCJ[3].lower(),woordcategorieCJ.lower()),w),
+        "2,1": textwrap.wrap("CSV: \"%s, %s, %s, %s, %s\"" % (elementenCJ[0],elementenCJ[1],elementenCJ[2],elementenCJ[3],woordcategorieCJ),w),
         "2,2": textwrap.wrap("",w),
     "3": textwrap.wrap("CSV",w),
         "3,1": textwrap.wrap("(\"1,1\") (\"1,3\") \"0,1,10\"",w),
@@ -1769,58 +1769,58 @@ helpmenuCJ = {
     "Q": textwrap.wrap("",w)
         }
 helpmenu = {
-    "0": textwrap.wrap("Versie: %s, Datum: %s \\\\ \"mimosasa\" is een app waarin u in verschillende bankrekeningen uw uitgaven en spaarpotten kunt beheren. Het is geschreven in Python door Maestraccio en is gratis te downloaden en gebruiken. \"mimosasa\" staat voor \"Money In, Money Out: Spendings And Savings Aid\" en is de opvolger van \"mimo\". U kunt bij veel functies het betreffende helpartikel aanroepen met \"H\". Kies \"<\" (of ieder ander \"haakje-openen\" zoals \"(\" of \"[\") om terug te keren naar het hoofdmenu, of \"Q\" om het programma helemaal te verlaten." % (versie,versiedatum),w),
-        "0,0": textwrap.wrap("Voor iedere rekening wordt in de \"appmap\" een \"rekeningmap\" aangemaakt waarin de verschillende categoriebestanden worden geplaatst. De app \"mimosasa\" gebruikt \"ID's\" om individuele transacties te identificeren. Deze transacties kunnen vervolgens worden weergegeven, gewijzigd, verwijderd, enzovoorts. U kunt deze \"ID's\" in CSV-formaat (komma- of spatiegescheiden, bijvoorbeeld \"A0,B1\") opgeven wanneer daarom gevraagd wordt. Het rekeningsaldo wordt verdeeld in een \"buffer\" die wordt bepaald door de budgettering van de categorieën, \"tegoed\" dat is toegewezen aan de spaarpotten, en het resterende vrij besteedbare saldo.",w),
+    "0": textwrap.wrap("Versie: %s, Datum: %s \\\\ \"mimosasa\" is een app waarin u in verschillende bankrekeningen uw uitgaven en %sten kunt beheren. Het is geschreven in Python door Maestraccio en is gratis te downloaden en gebruiken. \"mimosasa\" staat voor \"Money In, Money Out: Spendings And Savings Aid\" en is de opvolger van \"mimo\". U kunt bij veel functies het betreffende helpartikel aanroepen met \"H\". Kies \"<\" (of ieder ander \"haakje-openen\" zoals \"(\" of \"[\") om terug te keren naar het hoofdmenu, of \"Q\" om het programma helemaal te verlaten." % (versie,versiedatum,woordspaarpot),w),
+        "0,0": textwrap.wrap("Voor iedere rekening wordt in de \"appmap\" een \"rekeningmap\" aangemaakt waarin de verschillende %sbestanden worden geplaatst. De app \"mimosasa\" gebruikt \"ID's\" om individuele %ss te identificeren. Deze %ss kunnen vervolgens worden weergegeven, gewijzigd, verwijderd, enzovoorts. U kunt deze \"ID's\" in CSV-formaat (komma- of spatiegescheiden, bijvoorbeeld \"A0,B1\") opgeven wanneer daarom gevraagd wordt. Het rekeningsaldo wordt verdeeld in een \"buffer\" die wordt bepaald door de budgettering van de %sën, \"tegoed\" dat is toegewezen aan de %sten, en het resterende vrij besteedbare saldo." % (woordcategorie,woordtransactie,woordtransactie,woordcategorie,woordspaarpot),w),
         "0,1": textwrap.wrap("Hier kunnen de rekeningomgevingsinstellingen worden aangepast. Personaliseer de weergave naar eigen smaak, en onderscheid visueel meerdere door u beheerde rekeningen om vergissingen te voorkomen. Stel in wat u wel en hoe of niet wil tonen, en of u overzichten naar uw computer wilt opslaan. Geef bedragen altijd in met een punt \".\" als decimaalscheidingsteken.",w),
             "0,1,0": textwrap.wrap("Zet de rekeninginstellingen terug naar de standaardinstellingen. Hierbij wordt zowel een nieuw instellingenbestand in de \"rekeningmap\" als in de \"appmap\" geplaatst.",w),
             "0,1,1": textwrap.wrap("Voer hier de naam van de rekening in. U kunt zo onderscheid maken tussen meerdere rekeningen die u in dezelfde app beheert, zonder de lange rekeningnummers uit het hoofd te hoeven leren.",w),
             "0,1,2": textwrap.wrap("Voer hier de naam van de rekeninghouder in.",w),
             "0,1,3": textwrap.wrap("Hier kunt u alleen de status van ANDERE rekeningen aanpassen. Het is niet mogelijk om de - vanzelfsprekend actieve - rekening die nu in gebruik is te deactiveren. Kies een andere rekening en geef aan of het een \"actieve\" of een \"niet-actieve\" rekening betreft. Niet-actieve rekeningen zijn bijvoorbeeld gearchiveerde of voorbereide rekeningen, die niet in de overzichten worden getoond.",w),
-            "0,1,4": textwrap.wrap("Hier kunt u de taal van de app aanpassen. De transacties zelf worden niet vertaald, en gepersonaliseerde namen van categorieën ook niet, maar alle menu's en opdrachten wel. Op dit moment kunt u kiezen tussen \"NL\" (Nederlands, standaard), \"EN\" (Engels) en \"IT\" (Italiaans).",w),
+            "0,1,4": textwrap.wrap("Hier kunt u de taal van de app aanpassen. De %ss zelf worden niet vertaald, en gepersonaliseerde namen van %sën ook niet, maar alle menu's en opdrachten wel. Op dit moment kunt u kiezen tussen \"NL\" (Nederlands, standaard), \"EN\" (Engels), \"IT\" (Italiaans) en \"CJ\" (Hucoji)." % (woordtransactie,woordcategorie),w),
             "0,1,5": textwrap.wrap("Hier kunt u het valutasymbool toewijzen. U kunt ieder karakter kiezen, maar zorg ervoor dat het in de weergave op het scherm precies één positie breed is.",w),
-            "0,1,6": textwrap.wrap("Voer hier het startsaldo op de rekening in van het moment vóórdat de eerste transactie plaatsvond. De app is in principe geschreven om ieder jaar in de app een nieuwe \"rekening\" te openen - hoewel het mogelijk is om meerdere jaren dóór te schrijven.",w),
+            "0,1,6": textwrap.wrap("Voer hier het startsaldo op de rekening in van het moment vóórdat de eerste %s plaatsvond. De app is in principe geschreven om ieder jaar in de app een nieuwe \"rekening\" te openen - hoewel het mogelijk is om meerdere jaren dóór te schrijven." % (woordtransactie),w),
             "0,1,7": textwrap.wrap("Het is nu mogelijk om het rekeningsaldo op het startscherm te verbergen - de standaardinstelling is nu :\"%s : Nee\". Als de instelling \"Ja\" is wordt van meerdere rekeningen - bij overeenkomstige valuta - ook de optelling weergegeven." % (nieuwheaderlijst[6]),w),
-            "0,1,8": textwrap.wrap("In de transacties wordt het valutateken extra geaccentueerd onder en boven een door u zelf te bepalen grens. Standaard staan deze op \"lager dan -100.00\" en \"hoger dan 100.00\". Deze bedragen worden ook als standaarbedragen gebruikt bij het aanmaken o.",w),
-            "0,1,9": textwrap.wrap("In het maandoverzicht worden de transacties per categorie weergegeven. U kunt ervoor kiezen niet-gebruikte categorieën niet in dit overzicht te tonen of te verbergen.",w),
-            "0,1,10": textwrap.wrap("De standaard-datumweergave is \"JJJJMMDD\" maar niet iedereen vindt dat duidelijk. Er zijn daarom meerdere weergave-opties toegevoegd om de datum ook voor u duidelijk leesbaar te maken.",w),
+            "0,1,8": textwrap.wrap("In de %ss wordt het valutateken extra geaccentueerd onder en boven een door u zelf te bepalen grens. Standaard staan deze op \"lager dan -100.00\" en \"hoger dan 100.00\". Deze bedragen kunnen ook als standaardbedragen worden gebruikt bij het aanmaken, filteren of wijzigen van %ss." % (woordtransactie,woordtransactie),w),
+            "0,1,9": textwrap.wrap("In het maandoverzicht worden de %ss per %s weergegeven. U kunt ervoor kiezen niet-gebruikte %sën niet in dit overzicht te tonen of te verbergen." % (woordtransactie,woordcategorie,woordcategorie),w),
+            "0,1,10": textwrap.wrap("De standaard-%sweergave is \"JJJJMMDD\" maar niet iedereen vindt dat duidelijk. Er zijn daarom meerdere weergave-opties toegevoegd om de %s ook voor u duidelijk leesbaar te maken." % (elementen[0],elementen[0]),w),
             "0,1,11": textwrap.wrap("Er zijn meerdere kleurenschema's beschikbaar. Behalve aangenamer om naar te kijken kan dit goed van pas komen als u in meerdere rekeningen werkt en duidelijk visueel onderscheid wilt maken.",w),
             "0,1,12": textwrap.wrap("U kunt het niveau kiezen waarin het keuzemenu aan u wordt getoond. Hoe hoger de waarde, hoe meer menu-opties er worden uitgevouwd.",w),
-            "0,1,13": textwrap.wrap("U kunt het aantal transacties kiezen dat per tussenstop in \"1,3\" aan u wordt getoond. Hoe hoger de waarde, hoe meer transacties er op uw scherm worden getoond. Het standaardaantal staat op \"10\". U kunt op kleinere schermen of bij een groter letterformaat voor een lagere waarde kiezen.",w),
-            "0,1,14": textwrap.wrap("De getoonde maandtotalen kunt u ook als platte-tekstbestand opslaan. Om niet iedere keer te hoeven kiezen kunt u dat hier standaard instellen of uitzetten. U vindt deze dan in de \"rekeningmap\" met het \"jaartal+maand\" (\"JJJJMM\") voor de transacties, en als \"jaartal+maand+a\" (\"JJJJMMa\") voor de budgetanalyse, zonder bestandsextensie. Deze bestanden worden aangemaakt als ze nog niet bestaan, en anders steeds overschreven. U kunt hier zelf, indien nodig, handmatig de bestandsextensie \".txt\" achter zetten, maar dan zal het niet worden ververst.",w),
-            "0,1,15": textwrap.wrap("U kunt ervoor kiezen om bij het afsluiten van de app steeds een csv-bestand op te slaan met alle transacties van die rekening erin. U vindt dit csv-bestand dan in de \"rekeningmap\" als \"export.csv\". Dit wordt aangemaakt als het nog niet bestaat, en anders overschreven met verse data.",w),
+            "0,1,13": textwrap.wrap("U kunt het aantal %ss kiezen dat per tussenstop in \"1,3\" aan u wordt getoond. Hoe hoger de waarde, hoe meer %ss er op uw scherm worden getoond. Het standaardaantal staat op \"10\". U kunt op kleinere schermen of bij een groter letterformaat voor een lagere waarde kiezen." % (woordtransactie,woordtransactie),w),
+            "0,1,14": textwrap.wrap("De getoonde maandtotalen kunt u ook als platte-tekstbestand opslaan. Om niet iedere keer te hoeven kiezen kunt u dat hier standaard instellen of uitzetten. U vindt deze tekstbestanden dan in de \"rekeningmap\" met het \"jaartal+maand\" (\"JJJJMM\") voor de %ss, en als \"jaartal+maand+a\" (\"JJJJMMa\") voor de budgetanalyse, zonder enige bestandsextensie. Deze bestanden worden aangemaakt als ze nog niet bestaan, en anders steeds opnieuw overschreven. U kunt hier zelf, indien nodig, handmatig de bestandsextensie \".txt\" achter zetten, maar dat bestand zal dan niet worden ververst." % (woordtransactie),w),
+            "0,1,15": textwrap.wrap("U kunt ervoor kiezen om bij het afsluiten van de app steeds automatisch een csv-bestand op te slaan met alle %ss van die rekening erin. U vindt dit csv-bestand dan in de \"rekeningmap\" als \"export.csv\". Dit wordt aangemaakt als het nog niet bestaat, en anders overschreven met verse data." % (woordtransactie),w),
             "0,1,16": textwrap.wrap("Bij aanvang van de app kan steeds een willekeurig helpartikel als \"Tip van de dag\" worden getoond. Dat kan zeker in het begin handig zijn om kennis te maken met de functionaliteiten. Dit kan hier worden aan- of uitgezet.",w),
-        "0,2": textwrap.wrap("Hier kunt u de naam van de verschillende categorieën aanpassen, budgetten verdelen, enzovoorts. De categorieën waarop (maandelijks) geld binnenkomt krijgen een negatief budget, dat als buffer wordt gebruikt bij aanvang van een nieuwe maand. In de maandanalyse wordt het saldo dat op die categorieën wordt ingeboekt genegeerd totdat de buffer is bereikt.",w),
-            "0,2,1": textwrap.wrap("Voeg een nieuwe categorie toe. Zakelijke rekeningen bevatten standaard de grootboeken \"%s\" t/m \"%s\", huishoudelijke rekeningen de categorieën \"%s\" t/m \"%s\" en \"%s\", maar alle tussenliggende letters kunnen worden gebruikt, en al die letters en cijfers kunnen ook tussen zakelijke en huishoudelijke rekeningen worden uitgewisseld." % (zakelijkelijst[0],zakelijkelijst[-1],huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
-            "0,2,2": textwrap.wrap("Aan de categorieën worden in beginsel standaardnamen toegekend, maar u kunt die hier zelf naar wens aanpassen. De standaardcategorieën zijn voor zakelijke rekeningen: 0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s, 9: %s, en voor huishoudelijke rekeningen (standaard): A: %s, B: %s, C: %s, D: %s, E: %s, F: %s, O: %s. Al deze (standaard Nederlandse) namen worden vertaald als u van taal wisselt, maar niet als u zelf een categorienaam heeft aangepast." % (nieuwalternatievenamendict[zakelijkelijst[0]],nieuwalternatievenamendict[zakelijkelijst[1]],nieuwalternatievenamendict[zakelijkelijst[2]],nieuwalternatievenamendict[zakelijkelijst[3]],nieuwalternatievenamendict[zakelijkelijst[4]],nieuwalternatievenamendict[zakelijkelijst[5]],nieuwalternatievenamendict[zakelijkelijst[6]],nieuwalternatievenamendict[zakelijkelijst[7]],nieuwalternatievenamendict[zakelijkelijst[8]],nieuwalternatievenamendict[zakelijkelijst[9]],nieuwalternatievenamendict[huishoudelijkelijst[0]],nieuwalternatievenamendict[huishoudelijkelijst[1]],nieuwalternatievenamendict[huishoudelijkelijst[2]],nieuwalternatievenamendict[huishoudelijkelijst[3]],nieuwalternatievenamendict[huishoudelijkelijst[4]],nieuwalternatievenamendict[huishoudelijkelijst[5]],nieuwalternatievenamendict[huishoudelijkelijst[6]]),w),
-            "0,2,3": textwrap.wrap("Iedere uitgavencategorie bevat een positief besteedbaar budget, en de categorieën waar het geld binnenkomt een negatief (dat wordt gebruikt als buffer). Zorg ervoor dat de gehele balans altijd precies nul (\"0.0\") is.",w),
-            "0,2,4": textwrap.wrap("Denk eraan dat u met het verwijderen van een categorie ook alle transacties erin verwijdert! Verzeker u ervan dat de categorie leeg is (gebruik de functie \"3,5\" indien nodig) voordat u deze functie gebruikt. In veel gevallen hoeft dit niet; u kunt eventueel niet-gebruikte categorieën verbergen met optie \"0,1,9\".",w),
-            "0,2,5": textwrap.wrap("U kunt alle transacties wissen door de categorieën te resetten, huishoudelijke categorieën (%s t/m %s) vervangen door zakelijke (%s t/m %s), of vice versa. Hierbij worden ook de eventueel gepersonaliseerde categorienamen vervangen door de standaardnamen." % (huishoudelijkelijst[0],huishoudelijkelijst[-1],zakelijkelijst[0],zakelijkelijst[-1]),w),
-            "0,2,6": textwrap.wrap("U kunt hier de eventueel gepersonaliseerde categorienamen terugzetten naar de standaard categorienamen.",w),
-    "1": textwrap.wrap("Toon individuele transacties in detail, maak gefilterde samenvattingen, analyseer je inkomsten en uitgaven. Als eerste wordt het dagsaldo en de maandelijkse score per categorie getoond.",w),
-        "1,0": textwrap.wrap("Verzamel transacties per \"ID\" of verwijder de eerder gemaakte verzameling, zonder die transacties weer te geven. De geselecteerde transacties kunnen vervolgens op elk element in oplopende of aflopende volgorde worden gesorteerd. Standaard wordt er geen sortering toegepast; de transacties worden in eerste instantie opgeroepen in de volgorde waarin de \"ID's\" zijn gespecificeerd. Voor efficiënt gebruik wordt aanbevolen om de lijst kort en overzichtelijk te houden.",w),
-            "1,0,1": textwrap.wrap("De collectie wordt gestorteerd op %s, met de laatste %s vooraan" % (elementen[0].lower(),elementen[0].lower()),w),
-            "1,0,2": textwrap.wrap("De collectie wordt gestorteerd op %s, met de eerste %s vooraan" % (elementen[0].lower(),elementen[0].lower()),w),
-            "1,0,3": textwrap.wrap("De collectie wordt gestorteerd op %s, met het hoogste %s vooraan" % (elementen[1].lower(),elementen[1].lower()),w),
-            "1,0,4": textwrap.wrap("De collectie wordt gestorteerd op %s, met het laagste %s vooraan" % (elementen[1].lower(),elementen[1].lower()),w),
-            "1,0,5": textwrap.wrap("De collectie wordt gestorteerd op %s, van Z naar A" % (elementen[2].lower()),w),
-            "1,0,6": textwrap.wrap("De collectie wordt gestorteerd op %s, van A naar Z" % (elementen[2].lower()),w),
-            "1,0,7": textwrap.wrap("De collectie wordt gestorteerd op %s, van Z naar A" % (elementen[3].lower()),w),
-            "1,0,8": textwrap.wrap("De collectie wordt gestorteerd op %s, van A naar Z" % (elementen[3].lower()),w),
-            "1,0,9": textwrap.wrap("Transacties met een negatief %s en hetzelfde positieve %s worden bij elkaar gezet, de rest wordt weggefilterd." % (elementen[1],elementen[1]),w),
-        "1,1": textwrap.wrap("Selecteer transacties op basis van verschillende criteria (%s, %s, %s, %s en %s) en genereer een overzichtelijke tabel. Er kan gebruik worden gemaakt van \"sneltoetsen\", of u kunt alle elementen afzonderlijk opgeven. De mogelijke \"sneltoetsen\" worden getoond; het is mogelijk \"M\" (maand) of \"W\" (week) te voorzien van een getal; \"0\" is inclusief vandaag. Alle geselecteerde transacties worden ook verzameld in de collectie, die steeds getoond wordt boven het keuzemenu. Omvat de selectie één dag, dan wordt het dagtotaal op die dag getoond." % (elementen[0].lower(),elementen[1].lower(),elementen[2].lower(),elementen[3].lower(),woordcategorie.lower()),w),
-        "1,2": textwrap.wrap("Toon de budgetanalyse van één maand. Standaard wordt de huidige maand getoond. U ziet de voortgang van iedere categorie ten opzichte van het daaraan toegekende budget, en de maandprestatie.",w),
-        "1,3": textwrap.wrap("Toon de details van individuele transacties in de collectie. Het toegestaan aantal karakters in \"%s\" en \"%s\" is onbeperkt, maar in de tabel (\"1,1\") worden die afgekapt en slechts ten dele getoond. Alle informatie in die extra karakters wordt hier wel uitgevouwen." % (elementen[2].lower(),elementen[3].lower()),w),
-    "2": textwrap.wrap("U kunt nieuwe transacties aan uw rekening toevoegen, die elk aan een categorie worden toegekend. Een nieuwe transactie kunt u per element invoeren of achter elkaar op één regel in CSV-stijl, of u kunt een kopie maken van een eerdere transactie en de details later aanpassen met de opties onder \"3\". Nieuwe transacties worden direct aan de collectie toegevoegd, zodat u die meteen kunt inzien of aanpassen.",w),
-        "2,1": textwrap.wrap("Voeg hier een nieuwe transactie aan uw rekening toe. U kunt de elementen stap-voor-stap ingeven, of - voor de meer ervaren gebruiker - achter elkaar op één lijn in CSV-stijl: \"%s, %s, %s, %s, %s\". U kunt daarom in geen enkel element een komma (\",\") gebruiken. Gebruik als decimaalscheidingsteken altijd een punt (\".\"). Mocht de CSV-ingave ongeldige data bevatten, dan neemt de stap-voor-stap-ingave het over." % (elementen[0].lower(),elementen[1].lower(),elementen[2].lower(),elementen[3].lower(),woordcategorie.lower()),w),
-        "2,2": textwrap.wrap("Maak hier een kopie van een eerder ingevoerde transactie en vervang automatisch de oorspronkelijke datum met die van vandaag. U kunt iedere transactie als sjabloon gebruiken om later op details aan te passen met de opties in menu \"3\". Als er al een collectie bestaat worden die transacties één voor één aangeboden, anders wordt u gevraagd een \"ID\" - of beter: een lijst van \"ID's\" in de vorm van een CSV-lijst - op te geven. Dit is de aanbevolen methode voor het toevoegen van terugkerende transacties. Let op: als u een identieke kopie maakt van een transactie eerder vandaag, dan wordt die niet automatisch aan de collectie toegevoegd.",w),
-    "3": textwrap.wrap("Alle elementen van een bestaande transactie kunnen hier worden aangepast. Als er al een collectie bestaat worden die transacties één voor één aangeboden, anders wordt u gevraagd een \"ID\" - of beter: een lijst van \"ID's\" in de vorm van een CSV-lijst - op te geven.",w),
-        "3,1": textwrap.wrap("Pas de %s van de transactie aan. Voer de nieuwe datum in als \"JJJJMMDD\". De standaarddatum, bijvoorbeeld als er een ongeldige of onvolledige datum wordt ingevoerd, is de datum van vandaag. De datumopmaak in de tabel (\"1,1\") of de transactieweergave (\"1,3\") stelt u in bij \"0,1,10\"." % (elementen[0].lower()),w),
-        "3,2": textwrap.wrap("Pas het %s van de transactie aan. Voer het bedrag in zonder valuta en met een punt (\".\") als decimaalscheidingsteken. De valuta stelt u in bij \"0,1,5\"." % (elementen[1].lower()),w),
-        "3,3": textwrap.wrap("Pas de %s van de transactie aan. Dit kan een debiteur of een crediteur zijn, een klant of een leverancier (winkel). Het aantal karakers om te gebruiken is vrij, maar wordt in de tabelweergave (\"1,1\") wel afgekort. Het is daarom verstandig om zeker bij langere beschrijvingen altijd te beginnen met een herkenbaar fragment. Er wordt een lijst getoond van eerder gebruikte %sen waar u uit kunt kiezen, u kunt een nieuwe typen, of er toch van afzien." % (elementen[2],elementen[2]),w),
-        "3,4": textwrap.wrap("Pas het %s van de transactie aan. Hierin geeft u een beschrijving van de inhoud van deze transactie op, zoals een dienst die is gefactureerd of een aantal artikelen dat werd aangeschaft. Ook betalingskenmerken of factuurnummers kunt u hier kwijt. Het aantal karakers om te gebruiken is vrij, maar wordt in de tabelweergave (\"1,1\") wel afgekort. Het is daarom verstandig om zeker bij langere beschrijvingen altijd te beginnen met een herkenbaar fragment. Er wordt een lijst getoond van eerder gebruikte %sen waar u uit kunt kiezen, u kunt een nieuwe typen, of er toch van afzien." % (elementen[3],elementen[3]),w),
-        "3,5": textwrap.wrap("Plaats een transactie in een andere %s. Iedere transactie wordt toegekend aan een categorie waaraan een budget is toegekend. Deze budgetten worden verdeeld in \"0,2,3\" en de voortgang is per maand te zien in \"1,2\"." % (woordcategorie.lower()),w),
-    "4": textwrap.wrap("Hier kunt u individuele transacties definitief verwijderen. Als er al een collectie bestaat worden die transacties één voor één aangeboden, anders wordt u gevraagd een \"ID\" - of beter: een lijst van \"ID's\" in de vorm van een CSV-lijst - op te geven.",w),
-    "5": textwrap.wrap("U kunt geld opzij zetten in meerdere %sten. Deze %sten kunnen handmatig worden aangevuld vanuit het vrij besteedbaar saldo of direct bij een nieuwe %s. Als er in het %s met een \"#\" een specifieke %s wordt vermeld kunt u die %s met die %s verrekenen. Binnenkomende bedragen kunnen geheel of gedeeltelijk aan het %s%s worden toegevoegd en negatieve bedragen in hun geheel van het %se saldo afgetrokken. Met de sneltoets \"#\" verzamelt u bij \"1,1\" alle eerdere %ss die een \"#\" in het %s bevatten. Het is daarom raadzaam dat karakter in het %s alleen te gebruiken bij %ss die op een %s betrekking hebben. Het getoonde \"Vrij besteedbaar saldo\" is het rekeningtotaal waarvan de buffer in de %sën (nodig voor de maandelijkse uitgaven) en de tegoeden in de verschillende %sten is afgetrokken." % (woordspaarpot,woordspaarpot,woordtransactie,elementen[3],woordspaarpot,woordtransactie,woordspaarpot,woordspaarpot,lijnlijst[3],lijnlijst[4],woordtransactie,elementen[3],elementen[3],woordtransactie,woordspaarpot,woordcategorie,woordspaarpot),w),
+        "0,2": textwrap.wrap("Hier kunt u de naam van de verschillende %sën aanpassen, budgetten verdelen, enzovoorts. De %sën waarop (maandelijks) geld binnenkomt krijgen een negatief budget, dat als buffer wordt gebruikt bij aanvang van een nieuwe maand. In de maandanalyse wordt het saldo dat op die %sën wordt ingeboekt genegeerd totdat de buffer is bereikt." % (woordcategorie,woordcategorie,woordcategorie),w),
+            "0,2,1": textwrap.wrap("Voeg een nieuwe %s toe. Zakelijke rekeningen bevatten standaard de grootboeken \"%s\" t/m \"%s\", huishoudelijke rekeningen de %sën \"%s\" t/m \"%s\" en \"%s\", maar alle tussenliggende letters kunnen worden gebruikt, en al die letters en cijfers kunnen ook tussen zakelijke en huishoudelijke rekeningen worden uitgewisseld." % (woordcategorie,zakelijkelijst[0],zakelijkelijst[-1],woordcategorie,huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
+            "0,2,2": textwrap.wrap("Aan de %sën worden in beginsel standaardnamen toegekend, maar u kunt die hier zelf naar wens aanpassen. De standaard%sën zijn voor zakelijke rekeningen: 0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s, 9: %s, en voor huishoudelijke rekeningen (standaard): A: %s, B: %s, C: %s, D: %s, E: %s, F: %s, O: %s. Al deze (standaard Nederlandse) namen worden vertaald als u van taal wisselt, maar niet als u zelf een %snaam heeft aangepast." % (woordcategorie,woordcategorie,nieuwalternatievenamendict[zakelijkelijst[0]],nieuwalternatievenamendict[zakelijkelijst[1]],nieuwalternatievenamendict[zakelijkelijst[2]],nieuwalternatievenamendict[zakelijkelijst[3]],nieuwalternatievenamendict[zakelijkelijst[4]],nieuwalternatievenamendict[zakelijkelijst[5]],nieuwalternatievenamendict[zakelijkelijst[6]],nieuwalternatievenamendict[zakelijkelijst[7]],nieuwalternatievenamendict[zakelijkelijst[8]],nieuwalternatievenamendict[zakelijkelijst[9]],nieuwalternatievenamendict[huishoudelijkelijst[0]],nieuwalternatievenamendict[huishoudelijkelijst[1]],nieuwalternatievenamendict[huishoudelijkelijst[2]],nieuwalternatievenamendict[huishoudelijkelijst[3]],nieuwalternatievenamendict[huishoudelijkelijst[4]],nieuwalternatievenamendict[huishoudelijkelijst[5]],nieuwalternatievenamendict[huishoudelijkelijst[6]],woordcategorie),w),
+            "0,2,3": textwrap.wrap("Iedere uitgaven%s bevat een positief besteedbaar budget, en de %sën waar het geld binnenkomt een negatief (dat wordt gebruikt als buffer). Zorg ervoor dat de gehele balans altijd precies nul (\"0.0\") is." % (woordcategorie,woordcategorie),w),
+            "0,2,4": textwrap.wrap("Denk eraan dat u met het verwijderen van een %s ook alle %ss daarin verwijdert! Verzeker u ervan dat de %s leeg is (gebruik de functie \"3,5\" indien nodig) voordat u deze functie gebruikt. In veel gevallen hoeft dit niet; u kunt eventueel niet-gebruikte %sën verbergen met optie \"0,1,9\"." % (woordcategorie,woordtransactie,woordcategorie,woordcategorie),w),
+            "0,2,5": textwrap.wrap("U kunt alle %ss wissen door de %sën te resetten, huishoudelijke %sën (%s t/m %s) vervangen door zakelijke (%s t/m %s), of vice versa. Hierbij worden ook de eventueel gepersonaliseerde %snamen vervangen door de standaardnamen." % (woordtransactie,woordcategorie,woordcategorie,huishoudelijkelijst[0],huishoudelijkelijst[-1],zakelijkelijst[0],zakelijkelijst[-1],woordcategorie),w),
+            "0,2,6": textwrap.wrap("U kunt hier de eventueel gepersonaliseerde %snamen terugzetten naar de standaard %snamen." % (woordcategorie,woordcategorie),w),
+    "1": textwrap.wrap("Toon individuele %ss in detail, maak gefilterde samenvattingen, analyseer je inkomsten en uitgaven. Als eerste wordt het dagsaldo en de maandelijkse score per categorie getoond." % (woordtransactie),w),
+        "1,0": textwrap.wrap("Verzamel %ss per \"ID\" of verwijder de eerder gemaakte verzameling, zonder die %ss weer te geven. De geselecteerde %ss kunnen vervolgens op elk element in oplopende of aflopende volgorde worden gesorteerd. Standaard wordt er geen sortering toegepast; de %ss worden in eerste instantie opgeroepen in de volgorde waarin de \"ID's\" zijn gespecificeerd. Voor efficiënt gebruik wordt aanbevolen om de lijst kort en overzichtelijk te houden." % (woordtransactie,woordtransactie,woordtransactie,woordtransactie),w),
+            "1,0,1": textwrap.wrap("De collectie wordt gesorteerd op %s, de %s met de laatste %s vooraan" % (elementen[0],woordtransactie,elementen[0]),w),
+            "1,0,2": textwrap.wrap("De collectie wordt gesorteerd op %s, de %s met de eerste %s vooraan" % (elementen[0],woordtransactie,elementen[0]),w),
+            "1,0,3": textwrap.wrap("De collectie wordt gesorteerd op %s, de %s met het hoogste %s vooraan" % (elementen[1],woordtransactie,elementen[1]),w),
+            "1,0,4": textwrap.wrap("De collectie wordt gesorteerd op %s, de %s met het laagste %s vooraan" % (elementen[1],woordtransactie,elementen[1]),w),
+            "1,0,5": textwrap.wrap("De collectie wordt gesorteerd op %s, van Z naar A" % (elementen[2]),w),
+            "1,0,6": textwrap.wrap("De collectie wordt gesorteerd op %s, van A naar Z" % (elementen[2]),w),
+            "1,0,7": textwrap.wrap("De collectie wordt gesorteerd op %s, van Z naar A" % (elementen[3]),w),
+            "1,0,8": textwrap.wrap("De collectie wordt gesorteerd op %s, van A naar Z" % (elementen[3]),w),
+            "1,0,9": textwrap.wrap("%ss met een negatief %s en hetzelfde positieve %s worden bij elkaar gezet, de rest wordt weggefilterd." % (woordtransactie,elementen[1],elementen[1]),w),
+        "1,1": textwrap.wrap("Selecteer %ss op basis van verschillende criteria (%s, %s, %s, %s en %s) en genereer een overzichtelijke tabel. Er kan gebruik worden gemaakt van \"sneltoetsen\", of u kunt alle elementen afzonderlijk opgeven. De mogelijke \"sneltoetsen\" worden vooraf getoond; \"M\" (maand) of \"W\" (week) moeten worden voorzien van een getal; \"0\" is inclusief vandaag. Alle geselecteerde %ss worden ook verzameld in de collectie, die steeds getoond wordt boven het keuzemenu. Omvat de selectie één dag, dan wordt het dagtotaal op die dag getoond." % (woordtransactie,elementen[0],elementen[1],elementen[2],elementen[3],woordcategorie,woordtransactie),w),
+        "1,2": textwrap.wrap("Toon de budgetanalyse van één maand. Standaard wordt de huidige maand getoond. U ziet de voortgang van iedere %s ten opzichte van het daaraan toegekende budget, en de maandprestatie." % (woordcategorie),w),
+        "1,3": textwrap.wrap("Toon de details van individuele %ss in de collectie. Het toegestaan aantal karakters in \"%s\" en \"%s\" is onbeperkt, maar in de tabel (\"1,1\") worden die afgekapt en slechts ten dele getoond. Alle informatie in die extra karakters wordt hier wel uitgevouwen. In \"0,1,13\" kunt u instellen na hoeveel weergegeven %ss u op \"Enter\" moet drukken om door te gaan, of \"<\" om de weergave te verlaten." % (woordtransactie,elementen[2],elementen[3],woordtransactie),w),
+    "2": textwrap.wrap("U kunt nieuwe %ss aan uw rekening toevoegen, die elk aan een %s worden toegekend. Een nieuwe %s kunt u per element invoeren of achter elkaar op één regel in CSV-stijl, of u kunt een kopie maken van een eerdere %s en de details later aanpassen met de opties onder \"3\". Nieuwe %ss worden direct aan de collectie toegevoegd, zodat u die meteen kunt inzien of aanpassen." % (woordtransactie,woordcategorie,woordtransactie,woordtransactie,woordtransactie),w),
+        "2,1": textwrap.wrap("Voeg hier een nieuwe %s aan uw rekening toe. U kunt de elementen stap-voor-stap ingeven, of - voor de meer ervaren gebruiker - achter elkaar op één lijn in CSV-stijl: \"%s, %s, %s, %s, %s\". U kunt daarom in geen enkel element een komma (\",\") gebruiken. Gebruik als decimaalscheidingsteken altijd een punt (\".\"). Mocht de CSV-ingave ongeldige data bevatten, dan neemt de stap-voor-stap-ingave het over." % (woordtransactie,elementen[0],elementen[1],elementen[2],elementen[3],woordcategorie),w),
+        "2,2": textwrap.wrap("Maak hier een kopie van een eerder ingevoerde %s en vervang automatisch de oorspronkelijke %s met die van vandaag. U kunt iedere %s als sjabloon gebruiken om later op details aan te passen met de opties in menu \"3\". Als er al een collectie bestaat worden die %ss één voor één aangeboden, anders wordt u gevraagd een \"ID\" - of beter: een lijst van \"ID's\" in de vorm van een CSV-lijst - op te geven. Dit is de aanbevolen methode voor het toevoegen van terugkerende %ss. Let op: als u een identieke kopie maakt van een %s eerder vandaag, dan wordt die niet automatisch aan de collectie toegevoegd." % (woordtransactie,elementen[0],woordtransactie,woordtransactie,woordtransactie,woordtransactie),w),
+    "3": textwrap.wrap("Alle elementen van een bestaande %s kunnen hier worden aangepast. Als er al een collectie bestaat worden die %ss één voor één aangeboden, anders wordt u gevraagd een \"ID\" - of beter: een lijst van \"ID's\" in de vorm van een CSV-lijst - op te geven." % (woordtransactie,woordtransactie),w),
+        "3,1": textwrap.wrap("Pas de %s van de %s aan. Voer de nieuwe %s in als \"JJJJMMDD\". De standaard%s, bijvoorbeeld als er een ongeldige of onvolledige %s wordt ingevoerd, is de %s van vandaag. De %sopmaak bijvoorbeeld in de tabel (\"1,1\") of de %sweergave (\"1,3\") stelt u in bij \"0,1,10\"." % (elementen[0],woordtransactie,elementen[0],elementen[0],elementen[0],elementen[0],elementen[0],woordtransactie),w),
+        "3,2": textwrap.wrap("Pas het %s van de %s aan. Voer het bedrag in zonder valuta en met een punt (\".\") als decimaalscheidingsteken. De valuta stelt u in bij \"0,1,5\"." % (elementen[1],woordtransactie),w),
+        "3,3": textwrap.wrap("Pas de %s van de %s aan. Dit kan een debiteur of een crediteur zijn, een klant of een leverancier (winkel). Het aantal karakers om te gebruiken is vrij, maar wordt in de tabelweergave (\"1,1\") wel afgekort. Het is daarom verstandig om zeker bij langere beschrijvingen altijd te beginnen met een herkenbaar fragment. Er wordt een lijst getoond van eerder gebruikte %sen waar u uit kunt kiezen, u kunt een nieuwe typen, of er toch van afzien." % (elementen[2],woordtransactie,elementen[2]),w),
+        "3,4": textwrap.wrap("Pas het %s van de %s aan. Hierin geeft u een beschrijving van de inhoud van deze %s op, zoals een dienst die is gefactureerd of een aantal artikelen dat werd aangeschaft. Ook betalingskenmerken of factuurnummers kunt u hier kwijt. Het aantal karakers om te gebruiken is vrij, maar wordt in de tabelweergave (\"1,1\") wel afgekort. Het is daarom verstandig om zeker bij langere beschrijvingen altijd te beginnen met een herkenbaar fragment. Er wordt een lijst getoond van eerder gebruikte %sen waar u uit kunt kiezen, u kunt een nieuwe typen, of er toch van afzien." % (elementen[3],woordtransactie,woordtransactie,elementen[3]),w),
+        "3,5": textwrap.wrap("Plaats een %s in een andere %s. Iedere %s wordt toegekend aan een %s waaraan een budget is toegekend. Deze budgetten worden verdeeld in \"0,2,3\" en de voortgang is per maand te zien in \"1,2\"." % (woordtransactie,woordcategorie,woordtransactie,woordcategorie),w),
+    "4": textwrap.wrap("Hier kunt u individuele %ss definitief verwijderen. Als er al een collectie bestaat worden die %ss één voor één aangeboden, anders wordt u gevraagd een \"ID\" - of beter: een lijst van \"ID's\" in de vorm van een CSV-lijst - op te geven." % (woordtransactie,woordtransactie),w),
+    "5": textwrap.wrap("U kunt geld opzij zetten in meerdere %sten. Deze %sten kunnen handmatig worden aangevuld vanuit het vrij besteedbaar saldo of direct bij een nieuwe %s. Als er in het %s met een \"#\" een specifieke %s wordt vermeld kunt u die %s met die %s verrekenen. Binnenkomende %sen kunnen geheel of gedeeltelijk aan het %s%s worden toegevoegd en negatieve %sen in hun geheel van het %se saldo afgetrokken. Met de sneltoets \"#\" verzamelt u bij \"1,1\" alle eerdere %ss die een \"#\" in het %s bevatten. Het is daarom raadzaam dat karakter in het %s alleen te gebruiken bij %ss die op een %s betrekking hebben. Het getoonde \"Vrij besteedbaar saldo\" is het rekeningtotaal waarvan de buffer in de %sën (nodig voor de maandelijkse uitgaven) en de tegoeden in de verschillende %sten is afgetrokken." % (woordspaarpot,woordspaarpot,woordtransactie,elementen[3],woordspaarpot,woordtransactie,woordspaarpot,elementen[1],woordspaarpot,lijnlijst[3],elementen[1],lijnlijst[4],woordtransactie,elementen[3],elementen[3],woordtransactie,woordspaarpot,woordcategorie,woordspaarpot),w),
         "5,1": textwrap.wrap("Bekijk alle %sten in een simpele en overzichtelijke tabel" % woordspaarpot,w),
         "5,2": textwrap.wrap("Voeg een nieuwe lege %s toe. U kunt deze alvast een %s geven en een %s. Zo lang er geen %s aan wordt toegevoegd blijft deze leeg en doet deze geen aanspraak op uw vrij besteedbaar saldo. De %s begint altijd met een \"#\", waaraan u kunt refereren bij nieuwe %ss of in \"1,1\"." % (woordspaarpot,lijnlijst[1],lijnlijst[2],lijnlijst[3],lijnlijst[1],woordtransactie),w),
         "5,3": textwrap.wrap("Wijzig handmatig de eigenschappen van een %s: %s, %s, %s en/of %s" % (woordspaarpot,lijnlijst[1],lijnlijst[2],lijnlijst[3],lijnlijst[4]),w),
@@ -2400,19 +2400,19 @@ def toonrekeningsaldo(rekeningenlijst): # geen H
                 valutalijst.append(valuta)
                 totaalalles += rekeningtotaal
                 getal,forsom,K = grootgetal(rekeningtotaal,forsom,"")
-                printstuffzw = L+forl3(rekeningenlijst.index(i)+1)+" "+("{:>%s}" % maxreklen).format(IBAN+" "+JAAR)+" "+valuta+forsom(getal)+K+forr25(rekeningnaam)
+                printstuffzw = L+forl3(rekeningenlijst.index(i)+1)+" "+("{:>%s}" % (maxreklen)).format(IBAN+" "+JAAR)+" "+valuta+forsom(getal)+K+forr25(rekeningnaam)
                 lenprtstfzw = len(printstuffzw)
-                print(int((w-lenprtstfzw)/2)*" "+kleuren["coltoe"]+L+forl3(rekeningenlijst.index(i)+1)+" "+catcol["5"]+("{:>%s}" % maxreklen).format(IBAN+" "+JAAR)+kleuren["ResetAll"]+" "+grotegetalkleuren(i,header,rekeningtotaal)+valuta+forsom(getal)+K+kleuren["ResetAll"]+kleuren["coltekst"]+forr25(rekeningnaam)+kleuren["ResetAll"])
+                print(int((w-lenprtstfzw)/2)*" "+kleuren["coltoe"]+L+forl3(rekeningenlijst.index(i)+1)+" "+catcol["5"]+("{:>%s}" % (maxreklen)).format(IBAN+" "+JAAR)+kleuren["ResetAll"]+" "+grotegetalkleuren(i,header,rekeningtotaal)+valuta+forsom(getal)+K+kleuren["ResetAll"]+kleuren["coltekst"]+forr25(rekeningnaam)+kleuren["ResetAll"])
             else:
-                printstuffzw = L+forl3(rekeningenlijst.index(i)+1)+" "+("{:>%s}" % maxreklen).format(IBAN+" "+JAAR)+" "+valuta+" "*8+forr25(rekeningnaam)
+                printstuffzw = L+forl3(rekeningenlijst.index(i)+1)+" "+("{:>%s}" % (maxreklen)).format(IBAN+" "+JAAR)+" "+valuta+" "*8+forr25(rekeningnaam)
                 lenprtstfzw = len(printstuffzw)
-                print(int((w-lenprtstfzw)/2)*" "+kleuren["coltoe"]+L+forl3(rekeningenlijst.index(i)+1)+" "+catcol["5"]+("{:>%s}" % maxreklen).format(IBAN+" "+JAAR)+kleuren["ResetAll"]+" "+grotegetalkleuren(i,header,rekeningtotaal)+kleuren["ResetAll"]+valuta+" "*8+kleuren["coltekst"]+forr25(rekeningnaam)+kleuren["ResetAll"])
+                print(int((w-lenprtstfzw)/2)*" "+kleuren["coltoe"]+L+forl3(rekeningenlijst.index(i)+1)+" "+catcol["5"]+("{:>%s}" % (maxreklen)).format(IBAN+" "+JAAR)+kleuren["ResetAll"]+" "+grotegetalkleuren(i,header,rekeningtotaal)+kleuren["ResetAll"]+valuta+" "*8+kleuren["coltekst"]+forr25(rekeningnaam)+kleuren["ResetAll"])
     valutalijst = sorted(valutalijst)
     if len(valutalijst) > 0:
         if valutalijst[0] == valutalijst[-1]:
             totaalallesK,forsom,K = grootgetal(totaalalles,forsom,K)
-            print(int((w-lenprtstfzw)/2)*" "+" "+forl3(" ")+" "+("{:^%s}" % maxreklen).format(" ")+" "+"_"+"_"*8)
-            print(int((w-lenprtstfzw)/2)*" "+" "+forl3(" ")+" "+("{:^%s}" % maxreklen).format(" ")+" "+grotegetalkleuren("","",totaalalles)+valuta+forsom(totaalallesK)+K+ResetAll)
+            print(int((w-lenprtstfzw)/2)*" "+" "+forl3(" ")+" "+("{:^%s}" % (maxreklen)).format(" ")+" "+"_"+"_"*8)
+            print(int((w-lenprtstfzw)/2)*" "+" "+forl3(" ")+" "+("{:^%s}" % (maxreklen)).format(" ")+" "+grotegetalkleuren("","",totaalalles)+valuta+forsom(totaalallesK)+K+ResetAll)
 
 def toonrekeningenactief(rekeningenlijst): # geen H
     laatstgekozen = haallaatstgekozen()
@@ -2436,24 +2436,24 @@ def toonrekeningenactief(rekeningenlijst): # geen H
         toontotaal = header[nieuwheaderlijst[6]]
         if Taal == "EN":
             if actieverekening.upper() in jalijst:
-                actief = " %s Yes" % nieuwheaderlijstEN[2]
+                actief = " %s Yes" % (nieuwheaderlijstEN[2])
             else:
-                actief = " %s: No" % nieuwheaderlijstEN[2]
+                actief = " %s: No" % (nieuwheaderlijstEN[2])
         elif Taal == "IT":
             if actieverekening.upper() in jalijst:
-                actief = " %s: Sì" % nieuwheaderlijstIT[2]
+                actief = " %s: Sì" % (nieuwheaderlijstIT[2])
             else:
-                actief = " %s: No" % nieuwheaderlijstIT[2]
+                actief = " %s: No" % (nieuwheaderlijstIT[2])
         elif Taal == "CJ":
             if actieverekening.upper() in jalijst:
-                actief = " %s: la" % nieuwheaderlijstIT[2]
+                actief = " %s: la" % (nieuwheaderlijstCJ[2])
             else:
-                actief = " %s: li" % nieuwheaderlijstIT[2]
+                actief = " %s: li" % (nieuwheaderlijstCJ[2])
         else:
             if actieverekening.upper() in jalijst:
-                actief = " %s: Ja" % nieuwheaderlijst[2]
+                actief = " %s: Ja" % (nieuwheaderlijst[2])
             else:
-                actief = " %s: Nee" % nieuwheaderlijst[2]
+                actief = " %s: Nee" % (nieuwheaderlijst[2])
         lenactief = len(actief)
         if len(rekeningnaam) > 25:
             rn1 = rekeningnaam[:19]
@@ -2471,13 +2471,13 @@ def toonrekeningenactief(rekeningenlijst): # geen H
             valutalijst.append(valuta)
             totaalalles += rekeningtotaal
             getal,forsom,K = grootgetal(rekeningtotaal,forsom,"")
-            printstuffzw = L+forl3(rekeningenlijst.index(i)+1)+" "+("{:>%s}" % maxreklen).format(IBAN+" "+JAAR)+" "+valuta+forsom(getal)+K+forl25(actief)
+            printstuffzw = L+forl3(rekeningenlijst.index(i)+1)+" "+("{:>%s}" % (maxreklen)).format(IBAN+" "+JAAR)+" "+valuta+forsom(getal)+K+forl25(actief)
             lenprtstfzw = len(printstuffzw)
-            print(int((w-lenprtstfzw)/2)*" "+kleuren["coltoe"]+L+forl3(rekeningenlijst.index(i)+1)+" "+kleuren["coltoon"]+("{:>%s}" % maxreklen).format(IBAN+" "+JAAR)+" "+grotegetalkleuren(i,header,rekeningtotaal)+valuta+forsom(getal)+K+kleuren["ResetAll"]+kleuren["coltekst"]+forl25(actief)+kleuren["ResetAll"])
+            print(int((w-lenprtstfzw)/2)*" "+kleuren["coltoe"]+L+forl3(rekeningenlijst.index(i)+1)+" "+kleuren["coltoon"]+("{:>%s}" % (maxreklen)).format(IBAN+" "+JAAR)+" "+grotegetalkleuren(i,header,rekeningtotaal)+valuta+forsom(getal)+K+kleuren["ResetAll"]+kleuren["coltekst"]+forl25(actief)+kleuren["ResetAll"])
         else:
-            printstuffzw = L+forl3(rekeningenlijst.index(i)+1)+" "+("{:>%s}" % maxreklen).format(IBAN+" "+JAAR)+" "+valuta+" "*8+forl25(actief)
+            printstuffzw = L+forl3(rekeningenlijst.index(i)+1)+" "+("{:>%s}" % (maxreklen)).format(IBAN+" "+JAAR)+" "+valuta+" "*8+forl25(actief)
             lenprtstfzw = len(printstuffzw)
-            print(int((w-lenprtstfzw)/2)*" "+kleuren["coltoe"]+L+forl3(rekeningenlijst.index(i)+1)+" "+kleuren["coltoon"]+("{:>%s}" % maxreklen).format(IBAN+" "+JAAR)+" "+grotegetalkleuren(i,header,rekeningtotaal)+kleuren["ResetAll"]+valuta+" "*8+kleuren["coltekst"]+forl25(actief)+kleuren["ResetAll"])
+            print(int((w-lenprtstfzw)/2)*" "+kleuren["coltoe"]+L+forl3(rekeningenlijst.index(i)+1)+" "+kleuren["coltoon"]+("{:>%s}" % (maxreklen)).format(IBAN+" "+JAAR)+" "+grotegetalkleuren(i,header,rekeningtotaal)+kleuren["ResetAll"]+valuta+" "*8+kleuren["coltekst"]+forl25(actief)+kleuren["ResetAll"])
 
 def kiesrekening(rekeningenlijst): # geen H
     laatstgekozen = haallaatstgekozen()
@@ -2696,21 +2696,21 @@ def printheaderall(rekening): # geen H
     else:
         menulinks = nieuwheaderlijst
     maxlen = len(max(menulinks, key = len))
-    print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[0])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+header[nieuwheaderlijst[0]][:w-maxlen-2]+ResetAll)
-    print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[1])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+header[nieuwheaderlijst[1]][:w-maxlen-2]+ResetAll)
-    print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[2])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[2]])+ResetAll)
-    print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[3])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+taaldict[header[nieuwheaderlijst[3]]]+ResetAll)
-    print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[4])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+header[nieuwheaderlijst[4]]+ResetAll)
-    print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[5])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[5]])+ResetAll)
-    print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[6])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[6]])+ResetAll)
-    print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[7])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][0])+" >< "+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][1])+ResetAll)
-    print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[8])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[8]])+ResetAll)
-    print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[9])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[9]])+ResetAll)
-    print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[10])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[10]])+ResetAll)
-    print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[11])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+str(header[nieuwheaderlijst[11]])+ResetAll)
-    print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[12])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[12]])+ResetAll)
-    print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[13])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[13]])+ResetAll)
-    print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[14])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[14]])+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[0])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+header[nieuwheaderlijst[0]][:w-maxlen-2]+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[1])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+header[nieuwheaderlijst[1]][:w-maxlen-2]+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[2])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[2]])+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[3])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+taaldict[header[nieuwheaderlijst[3]]]+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[4])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+header[nieuwheaderlijst[4]]+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[5])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[5]])+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[6])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[6]])+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[7])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][0])+" >< "+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][1])+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[8])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[8]])+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[9])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[9]])+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[10])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[10]])+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[11])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+str(header[nieuwheaderlijst[11]])+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[12])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[12]])+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[13])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[13]])+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[14])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[14]])+ResetAll)
 
 def printheader(rekening): # geen H
     kleuren,catcol = updatekleuren(rekening)
@@ -2725,8 +2725,8 @@ def printheader(rekening): # geen H
     else:
         menulinks = nieuwheaderlijst
     maxlen = len(max(menulinks[:2], key = len))
-    print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[0])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+header[nieuwheaderlijst[0]][:w-maxlen-2]+ResetAll)
-    print(kleuren["LichtRood"]+("{:<%d}" % maxlen).format(menulinks[1])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+header[nieuwheaderlijst[1]][:w-maxlen-2]+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[0])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+header[nieuwheaderlijst[0]][:w-maxlen-2]+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[1])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+header[nieuwheaderlijst[1]][:w-maxlen-2]+ResetAll)
 
 def haalalternatievenamen(rekening): # geen H
     categorieenlijst = haalcategorieen(rekening)
@@ -2879,7 +2879,7 @@ def geefeendatum(rekening,header,col,ok,datum): # H
     maxlen = len(max(elcat,key = len))
     loop = True
     while loop == True:
-        datumkeuze = input(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[0].upper())+ResetAll+inputindent)
+        datumkeuze = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(elcat[0].upper())+ResetAll+inputindent)
         if datumkeuze.upper() in afsluitlijst:
             doei()
         elif datumkeuze.upper() in neelijst:
@@ -3012,7 +3012,7 @@ def geefeenbedrag(rekening,header,col,ok,bedrag): # H
         maxlen = len(max(elcat,key = len))
         loop = True
         while loop == True:
-            bedragkeuze = input(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[1].upper())+ResetAll+inputindent)
+            bedragkeuze = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(elcat[1].upper())+ResetAll+inputindent)
             if bedragkeuze.upper() in afsluitlijst:
                 doei()
             elif bedragkeuze.upper() in neelijst:
@@ -3112,11 +3112,11 @@ def geefwederpartij(rekening,header,col,ok): # H
     if Taal == "EN":
         elcat = elementenEN
         elcat.append(woordcategorieEN)
-        wraptekst = textwrap.wrap("Here you can enter the name of the %s. This could be the name of the store where you made a purchase, a customer's or your employer's name, for example. You can enter the full name with an unlimited number of characters, but in the table \"1,1\", only the first part will be displayed, so it's wise to place a recognizable and distinctive part of the name at the beginning." % elcat[2],w)
+        wraptekst = textwrap.wrap("Here you can enter the name of the %s. This could be the name of the store where you made a purchase, a customer's or your employer's name, for example. You can enter the full name with an unlimited number of characters, but in the table \"1,1\", only the first part will be displayed, so it's wise to place a recognizable and distinctive part of the name at the beginning." % (elcat[2]),w)
     elif Taal == "IT":
         elcat = elementenIT
         elcat.append(woordcategorieIT)
-        wraptekst = textwrap.wrap("Qui puoi inserire il nome della %s. Ad esempio, il nome del negozio dove hai acquistato qualcosa, o quello di un cliente o del tuo datore di lavoro. Puoi inserire il nome completo in un numero illimitato di caratteri, ma nella tabella \"1,1\" verrà visualizzata solo la prima parte, quindi è consigliabile mettere una parte riconoscibile e distinguibile del nome all'inizio." % elcat[2],w)
+        wraptekst = textwrap.wrap("Qui puoi inserire il nome della %s. Ad esempio, il nome del negozio dove hai acquistato qualcosa, o quello di un cliente o del tuo datore di lavoro. Puoi inserire il nome completo in un numero illimitato di caratteri, ma nella tabella \"1,1\" verrà visualizzata solo la prima parte, quindi è consigliabile mettere una parte riconoscibile e distinguibile del nome all'inizio." % (elcat[2]),w)
     elif Taal == "CJ":
         elcat = elementenCJ
         elcat.append(woordcategorieCJ)
@@ -3124,11 +3124,11 @@ def geefwederpartij(rekening,header,col,ok): # H
     else:
         elcat = elementen
         elcat.append(woordcategorie)
-        wraptekst = textwrap.wrap("Hier kunt u de naam van de %s opgeven. Dat is bijvoorbeeld de naam van de winkel waar u iets gekocht heeft, of die van een klant of uw werkgever. U kunt de volledige naam in een onbeperkt aantal karakters invoeren, maar in de tabel \"1,1\" wordt alleen het eerste deel weergegeven, dus het is verstandig om een herkenbaar en onderscheidend gedeelte van de naam vooraan te plaatsen." % elcat[2],w)
+        wraptekst = textwrap.wrap("Hier kunt u de naam van de %s opgeven. Dat is bijvoorbeeld de naam van de winkel waar u iets gekocht heeft, of die van een klant of uw werkgever. U kunt de volledige naam in een onbeperkt aantal karakters invoeren, maar in de tabel \"1,1\" wordt alleen het eerste deel weergegeven, dus het is verstandig om een herkenbaar en onderscheidend gedeelte van de naam vooraan te plaatsen." % (elcat[2]),w)
     maxlen = len(max(elcat,key = len))
     loop = True
     while loop == True:
-        wederpartij = input(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[2].upper())+ResetAll+inputindent)
+        wederpartij = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(elcat[2].upper())+ResetAll+inputindent)
         if wederpartij.upper() in afsluitlijst:
             doei()
         elif wederpartij.upper() in neelijst:
@@ -3148,11 +3148,11 @@ def geefonderwerp(rekening,header,col,ok): # H
     if Taal == "EN":
         elcat = elementenEN
         elcat.append(woordcategorieEN)
-        wraptekst = textwrap.wrap("Here you can enter the %s. For example, this could be a description of something you bought, or a reference to an order or purchase. You can enter the complete text in an unlimited number of characters, but in the table \"1,1\", only the first part will be displayed, so it's wise to place a recognizable and distinctive part of the description at the beginning." % elcat[3],w)
+        wraptekst = textwrap.wrap("Here you can enter the %s. For example, this could be a description of something you bought, or a reference to an order or purchase. You can enter the complete text in an unlimited number of characters, but in the table \"1,1\", only the first part will be displayed, so it's wise to place a recognizable and distinctive part of the description at the beginning." % (elcat[3]),w)
     elif Taal == "IT":
         elcat = elementenIT
         elcat.append(woordcategorieIT)
-        wraptekst = textwrap.wrap("Qui puoi inserire il %s. Ad esempio, è una descrizione di qualcosa che hai acquistato, o un riferimento a un ordine o acquisto. Puoi inserire il testo completo in un numero illimitato di caratteri, ma nella tabella \"1,1\" verrà visualizzato solo il primo pezzo, quindi è saggio mettere una parte riconoscibile e distintiva della descrizione all'inizio." % elcat[3],w)
+        wraptekst = textwrap.wrap("Qui puoi inserire il %s. Ad esempio, è una descrizione di qualcosa che hai acquistato, o un riferimento a un ordine o acquisto. Puoi inserire il testo completo in un numero illimitato di caratteri, ma nella tabella \"1,1\" verrà visualizzato solo il primo pezzo, quindi è saggio mettere una parte riconoscibile e distintiva della descrizione all'inizio." % (elcat[3]),w)
     elif Taal == "CJ":
         elcat = elementenCJ
         elcat.append(woordcategorieCJ)
@@ -3160,11 +3160,11 @@ def geefonderwerp(rekening,header,col,ok): # H
     else:
         elcat = elementen
         elcat.append(woordcategorie)
-        wraptekst = textwrap.wrap("Hier kunt u het %s opgeven. Dat is bijvoorbeeld een beschrijving van iets dat u gekocht heeft, of een referentie aan een order of bestelling. U kunt de volledige tekst in een onbeperkt aantal karakters invoeren, maar in de tabel \"1,1\" wordt alleen het eerste deel weergegeven, dus het is verstandig om een herkenbaar en onderscheidend gedeelte van de beschrijving vooraan te plaatsen." % elcat[3],w)
+        wraptekst = textwrap.wrap("Hier kunt u het %s opgeven. Dat is bijvoorbeeld een beschrijving van iets dat u gekocht heeft, of een referentie aan een order of bestelling. U kunt de volledige tekst in een onbeperkt aantal karakters invoeren, maar in de tabel \"1,1\" wordt alleen het eerste deel weergegeven, dus het is verstandig om een herkenbaar en onderscheidend gedeelte van de beschrijving vooraan te plaatsen." % (elcat[3]),w)
     maxlen = len(max(elcat,key = len))
     loop = True
     while loop == True:
-        onderwerp = input(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[3].upper())+ResetAll+inputindent)
+        onderwerp = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(elcat[3].upper())+ResetAll+inputindent)
         if onderwerp.upper() in afsluitlijst:
             doei()
         elif onderwerp.upper() in neelijst:
@@ -3202,7 +3202,7 @@ def geefcategorie(rekening,header,col,ok): # H
     tooncategorieen(rekening,header)
     loop = True
     while loop == True:
-        categoriekeuze = input(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(elcat[4].upper())+ResetAll+inputindent)
+        categoriekeuze = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(elcat[4].upper())+ResetAll+inputindent)
         if categoriekeuze.upper() in afsluitlijst:
             doei()
         elif categoriekeuze.upper() in neelijst:
@@ -3332,20 +3332,20 @@ def geefsneltoets(rekening,header,col,ok): # H
     ok = haaltransacties(rekening,ok)
     if Taal == "EN":
         wraptekst = textwrap.wrap("Type shortkey or skip",w)
-        sneltoetstips = "*, #, MI, MO, M{number}, WI, WO, W{number}, %s" % woordcategorieEN.lower()
-        helpwrap = textwrap.wrap("There are keyboard shortcuts programmed for commonly used selections, allowing you to skip manual filters and get to the table faster. You can choose \"*\" (all transactions, this can be a very long list), \"#\" (all transactions with a \"#\" in the %s, particularly related to savings pots), \"MI\" or \"WI\" (all positive transactions of this month, respectively week), \"MO\" or \"WO\" (all negative transactions of this month, respectively week), \"M\"+\"{number}\" (all transactions in one month, \"{number}\" months ago; \"0\" is \"this month\"), \"W\"+\"{number}\" (all transactions from \"{number}\" weeks ago up to today, where \"0\" is the past week, with today as the last day), and %s for all transactions of this month within one %s, including a brief monthly overview of that %s below the table. With \"\" or another non-shortcut, you skip the shortcut and proceed to the step-by-step filtering. Just before the table, you will always be asked in which order you want to see the transactions. If the date range is exactly one day, the total for that specific day will also be shown below the table." % (elementenEN[3],woordcategorieEN.lower(),woordcategorieEN.lower(),woordcategorieEN.lower()),w)
+        sneltoetstips = "*, #, MI, MO, M{number}, WI, WO, W{number}, %s" % (woordcategorieEN)
+        helpwrap = textwrap.wrap("There are keyboard shortcuts programmed for commonly used selections, allowing you to skip manual filters and get to the table faster. You can choose \"*\" (all transactions, this can be a very long list), \"#\" (all transactions with a \"#\" in the %s, particularly related to savings pots), \"MI\" or \"WI\" (all positive transactions of this month, respectively week), \"MO\" or \"WO\" (all negative transactions of this month, respectively week), \"M\"+\"{number}\" (all transactions in one month, \"{number}\" months ago; \"0\" is \"this month\"), \"W\"+\"{number}\" (all transactions from \"{number}\" weeks ago up to today, where \"0\" is the past week, with today as the last day), and %s for all transactions of this month within one %s, including a brief monthly overview of that %s below the table. With \"\" or another non-shortcut, you skip the shortcut and proceed to the step-by-step filtering. Just before the table, you will always be asked in which order you want to see the transactions. If the date range is exactly one day, the total for that specific day will also be shown below the table." % (elementenEN[3],woordcategorieEN,woordcategorieEN,woordcategorieEN),w)
     elif Taal == "IT":
         wraptekst = textwrap.wrap("Digita tasto rapido o salta",w)
-        sneltoetstips = "*, #, MI, MO, M{numero}, WI, WO, W{numero}, %s" % woordcategorieIT.lower()
-        helpwrap = textwrap.wrap("Sono state programmate scorciatoie per selezioni frequenti, che consentono di saltare i filtri manuali e accedere più rapidamente alla tabella. Potete optare per \"*\" (tutte le transazioni, che potrebbero essere molte), \"#\" (tutte le transazioni con un \"#\" nel %s, associate principalmente ai salvadanai), \"MI\" o \"WI\" (tutte le transazioni positive di questo mese, rispettivamente settimana), \"MO\" o \"WO\" (tutte le transazioni negative di questo mese, rispettivamente settimana), \"M\"+\"{numero}\" (tutte le transazioni di un mese, \"{numero}\" mesi fa; \"0\" rappresenta \"questo mese\"), \"W\"+\"{numero}\" (tutte le transazioni di \"{numero}\" settimane fa fino a oggi, dove \"0\" indica la scorsa settimana, con oggi come ultimo giorno), e %s per tutte le transazioni di questo mese all'interno di una %s, comprendente un breve riepilogo mensile di quella %s sotto la tabella. Con \"\", o un'altro tasto non-scorciatoia, si salta la scorciatoia e si passa al filtraggio passo dopo passo. Subito prima della tabella, vi verrà sempre chiesto in quale ordine desiderate visualizzare le transazioni. Se l'intervallo di date riguarda esattamente un giorno, verrà mostrato anche il totale giornaliero di quel giorno specifico sotto la tabella." % (elementenIT[3],woordcategorieIT.lower(),woordcategorieIT.lower(),woordcategorieIT.lower()),w)
+        sneltoetstips = "*, #, MI, MO, M{numero}, WI, WO, W{numero}, %s" % (woordcategorieIT)
+        helpwrap = textwrap.wrap("Sono state programmate scorciatoie per selezioni frequenti, che consentono di saltare i filtri manuali e accedere più rapidamente alla tabella. Potete optare per \"*\" (tutte le transazioni, che potrebbero essere molte), \"#\" (tutte le transazioni con un \"#\" nel %s, associate principalmente ai salvadanai), \"MI\" o \"WI\" (tutte le transazioni positive di questo mese, rispettivamente settimana), \"MO\" o \"WO\" (tutte le transazioni negative di questo mese, rispettivamente settimana), \"M\"+\"{numero}\" (tutte le transazioni di un mese, \"{numero}\" mesi fa; \"0\" rappresenta \"questo mese\"), \"W\"+\"{numero}\" (tutte le transazioni di \"{numero}\" settimane fa fino a oggi, dove \"0\" indica la scorsa settimana, con oggi come ultimo giorno), e %s per tutte le transazioni di questo mese all'interno di una %s, comprendente un breve riepilogo mensile di quella %s sotto la tabella. Con \"\", o un'altro tasto non-scorciatoia, si salta la scorciatoia e si passa al filtraggio passo dopo passo. Subito prima della tabella, vi verrà sempre chiesto in quale ordine desiderate visualizzare le transazioni. Se l'intervallo di date riguarda esattamente un giorno, verrà mostrato anche il totale giornaliero di quel giorno specifico sotto la tabella." % (elementenIT[3],woordcategorieIT,woordcategorieIT,woordcategorieIT),w)
     elif Taal == "CJ":
         wraptekst = textwrap.wrap("me haŋo huʃano m hasepeba",w)
-        sneltoetstips = "*, #, MI, MO, M{hubi}, WI, WO, W{hubi}, %s" % woordcategorieCJ.lower()
+        sneltoetstips = "*, #, MI, MO, M{hubi}, WI, WO, W{hubi}, %s" % (woordcategorieCJ)
         helpwrap = textwrap.wrap("",w)
     else:
         wraptekst = textwrap.wrap("Typ sneltoets of sla over",w)
-        sneltoetstips = "*, #, MI, MO, M{getal}, WI, WO, W{getal}, %s" % woordcategorie.lower()
-        helpwrap = textwrap.wrap("Er zijn sneltoetsen geprogrammeerd voor veelgebruikte selecties, waardoor u de handmatige filters overslaat en sneller bij de tabel bent. U kunt kiezen voor \"*\" (alle transacties, dit kan een heel lange lijst zijn), \"#\" (alle transacties met een \"#\" in het %s, en dus met name spaarpotten), \"MI\" of \"WI\" (alle positieve transacties van deze maand, respectievelijk week), \"MO\" of \"WO\" (alle negatieve transacties van deze maand, respectievelijk week), \"M\"+\"{getal}\" (alle transacties in één maand, het \"{getal}\" aantal maanden geleden; \"0\" is \"deze maand\"), \"W\"+\"{getal}\" (alle transacties in \"{getal}\" aantal weken geleden tot en met vandaag, waarbij \"0\" de afgelopen week is, met vandaag als laatste dag), en %s voor alle transacties van deze maand binnen één %s, inclusief een kort maandoverzicht van die %s onder de tabel. Met \"\" of een andere niet-sneltoets slaat u de sneltoets over, en gaat u door naar de stap-voor-stap filteringave. Vlak vóór de tabel wordt u altijd gevraagd in welke volgorde u de transacties wilt zien. Als het datumbereik precies één dag betreft, wordt onder de tabel ook het dagtotaal op die specifieke dag getoond." % (elementen[3],woordcategorie.lower(),woordcategorie.lower(),woordcategorie.lower()),w)
+        sneltoetstips = "*, #, MI, MO, M{getal}, WI, WO, W{getal}, %s" % (woordcategorie)
+        helpwrap = textwrap.wrap("Er zijn sneltoetsen geprogrammeerd voor veelgebruikte selecties, waardoor u de handmatige filters overslaat en sneller bij de tabel bent. U kunt kiezen voor \"*\" (alle transacties, dit kan een heel lange lijst zijn), \"#\" (alle transacties met een \"#\" in het %s, en dus met name spaarpotten), \"MI\" of \"WI\" (alle positieve transacties van deze maand, respectievelijk week), \"MO\" of \"WO\" (alle negatieve transacties van deze maand, respectievelijk week), \"M\"+\"{getal}\" (alle transacties in één maand, het \"{getal}\" aantal maanden geleden; \"0\" is \"deze maand\"), \"W\"+\"{getal}\" (alle transacties in \"{getal}\" aantal weken geleden tot en met vandaag, waarbij \"0\" de afgelopen week is, met vandaag als laatste dag), en %s voor alle transacties van deze maand binnen één %s, inclusief een kort maandoverzicht van die %s onder de tabel. Met \"\" of een andere niet-sneltoets slaat u de sneltoets over, en gaat u door naar de stap-voor-stap filteringave. Vlak vóór de tabel wordt u altijd gevraagd in welke volgorde u de transacties wilt zien. Als het datumbereik precies één dag betreft, wordt onder de tabel ook het dagtotaal op die specifieke dag getoond." % (elementen[3],woordcategorie,woordcategorie,woordcategorie),w)
     print(col+kleuren["Omkeren"], end = "")
     for i in wraptekst:
         print(i)
@@ -3761,13 +3761,13 @@ def samenvattingcategorie(rekening,cat,datumlijst): # geen H
         procentkleur = kleuren["colgoed"]
     print(" "*10+col+"+-"+kleuren["Omkeren"]+catcol[cat]+cat+kleuren["ResetAll"]+col+"-"*(maxlen-(len(cat)))+"+"+"-"*10+kleuren["ResetAll"])
     print(" "*10+col+"| "+kleuren["ResetAll"]+catcol[cat]+("{:^%d}" % (maxlen+11)).format(vertaalv(categorie[0][0]))+kleuren["ResetAll"])
-    print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[0])+kleuren["ResetAll"]+": "+grotegetalkleuren(rekening,header,som)+valuta+kleuren["ResetAll"]+fornum(som))
-    print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[1])+kleuren["ResetAll"]+": "+grotegetalkleuren(rekening,header,budget)+valuta+kleuren["ResetAll"]+fornum(budget))
+    print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % (maxlen)).format(woorden[0])+kleuren["ResetAll"]+": "+grotegetalkleuren(rekening,header,som)+valuta+kleuren["ResetAll"]+fornum(som))
+    print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % (maxlen)).format(woorden[1])+kleuren["ResetAll"]+": "+grotegetalkleuren(rekening,header,budget)+valuta+kleuren["ResetAll"]+fornum(budget))
     if budget != budgetnul:
-        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[2])+kleuren["ResetAll"]+": "+procentkleur+"%"+kleuren["ResetAll"]+fornum(procent))
+        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % (maxlen)).format(woorden[2])+kleuren["ResetAll"]+": "+procentkleur+"%"+kleuren["ResetAll"]+fornum(procent))
     if tel != 0:
-        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[3])+kleuren["ResetAll"]+": "+kleinegetalkleuren(gemiddeld)+valuta+kleuren["ResetAll"]+fornum(gemiddeld))
-    print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(woorden[4])+kleuren["ResetAll"]+": "+forr6(tel))
+        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % (maxlen)).format(woorden[3])+kleuren["ResetAll"]+": "+kleinegetalkleuren(gemiddeld)+valuta+kleuren["ResetAll"]+fornum(gemiddeld))
+    print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % (maxlen)).format(woorden[4])+kleuren["ResetAll"]+": "+forr6(tel))
     print(" "*10+col+"+-"+"-"*maxlen+"+"+"-"*10+kleuren["ResetAll"])
 
 def dagtotaal(rekening,header,col,datum): # geen H
@@ -4086,20 +4086,20 @@ def toontransactie(rekening,header,col,ok): # geen H
                 datum = opmaakdatum(datum)
                 print(" "*10+col+"+-"+kleuren["Omkeren"]+catcol[ID[0]]+ID+kleuren["ResetAll"]+col+"-"*(maxlen-(len(ID)))+"+"+"-"*10+kleuren["ResetAll"])
                 print(" "*10+col+"| "+kleuren["ResetAll"]+catcol[ID[0]]+("{:^%d}" % (maxlen+11)).format(alt)+kleuren["ResetAll"])
-                print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(el[0])+kleuren["ResetAll"]+":  "+datum)
-                print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(el[1])+kleuren["ResetAll"]+": "+kleinegetalkleuren(ok[ID][1])+valuta+kleuren["ResetAll"]+fornum(ok[ID][1]))
+                print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % (maxlen)).format(el[0])+kleuren["ResetAll"]+":  "+datum)
+                print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % (maxlen)).format(el[1])+kleuren["ResetAll"]+": "+kleinegetalkleuren(ok[ID][1])+valuta+kleuren["ResetAll"]+fornum(ok[ID][1]))
                 wraptekstlijst2 = textwrap.wrap(ok[ID][2],w-maxlen-14)
                 for i in wraptekstlijst2:
                     if i == wraptekstlijst2[0]:
-                        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(el[2])+kleuren["ResetAll"]+": "+str(i))
+                        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % (maxlen)).format(el[2])+kleuren["ResetAll"]+": "+str(i))
                     else:
-                        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(" ")+kleuren["ResetAll"]+": "+str(i))
+                        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % (maxlen)).format(" ")+kleuren["ResetAll"]+": "+str(i))
                 wraptekstlijst3 = textwrap.wrap(ok[ID][3],w-maxlen-14)
                 for i in wraptekstlijst3:
                     if i == wraptekstlijst3[0]:
-                        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(el[3])+kleuren["ResetAll"]+": "+str(i))
+                        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % (maxlen)).format(el[3])+kleuren["ResetAll"]+": "+str(i))
                     else:
-                        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % maxlen).format(" ")+kleuren["ResetAll"]+": "+str(i))
+                        print(" "*10+col+"| "+kleuren["ResetAll"]+kleuren["coltoon"]+("{:<%d}" % (maxlen)).format(" ")+kleuren["ResetAll"]+": "+str(i))
                 print(" "*10+col+"+-"+"-"*maxlen+"+"+"-"*10+kleuren["ResetAll"])
             except(Exception) as f:
                 #print(f)
@@ -4229,25 +4229,25 @@ def alsspaarpot(rekening,header,spaarpotten,i,transactiebedrag): # geen H
     if Taal == "EN":
         wraptekst1 = textwrap.wrap("You can now set aside something for this savings pot: %s. Would you like to replenish this savings pot?" % (kleuren["5"]+i+kleuren["ResetAll"]),w)
         wraptekst2 = textwrap.wrap("A savings pot %s is found. Do you want to settle this complete transaction with that savings pot?" % (kleuren["5"]+i+kleuren["ResetAll"]),w)
-        nietgenoeg1 = textwrap.wrap("You can't put aside more than %s" % valuta+fornum(transactiebedrag),w)
+        nietgenoeg1 = textwrap.wrap("You can't put aside more than %s" % (valuta+fornum(transactiebedrag)),w)
         nietgenoeg2 = textwrap.wrap("Insufficient credit. You cannot pay %s from a credit of %s" % (valuta+fornum(transactiebedrag*-1),valuta+fornum(spaarpotten[i][1])),w)
         handmatig = textwrap.wrap("Try to top up your credit first and then manually correct the paid amount in this savings pot",w)
     elif Taal == "IT":
         wraptekst1 = textwrap.wrap("Ora puoi mettere da parte qualcosa per questo salvadanaio: %s. Vuoi ricaricare questo salvadanaio?" % (kleuren["5"]+i+kleuren["ResetAll"]),w)
         wraptekst2 = textwrap.wrap("È stato trovato un salvadanaio: %s. Vuoi compensare questa intera transazione con quel salvadanaio?" % (kleuren["5"]+i+kleuren["ResetAll"]),w)
-        nietgenoeg1 = textwrap.wrap("Non puoi mettere da parte più di %s" % valuta+fornum(transactiebedrag),w)
+        nietgenoeg1 = textwrap.wrap("Non puoi mettere da parte più di %s" % (valuta+fornum(transactiebedrag)),w)
         nietgenoeg2 = textwrap.wrap("Credito insufficiente. Non puoi pagare %s da un credito di %s" % (valuta+fornum(transactiebedrag*-1),valuta+fornum(spaarpotten[i][1])),w)
         handmatig = textwrap.wrap("Prova a ricaricare prima il tuo credito e poi correggi manualmente l'importo pagato da questo salvadanaio",w)
     elif Taal == "CJ":
         wraptekst1 = textwrap.wrap(": %s." % (kleuren["5"]+i+kleuren["ResetAll"]),w)
         wraptekst2 = textwrap.wrap(": %s." % (kleuren["5"]+i+kleuren["ResetAll"]),w)
-        nietgenoeg1 = textwrap.wrap("%s" % valuta+fornum(transactiebedrag),w)
+        nietgenoeg1 = textwrap.wrap("%s" % (valuta+fornum(transactiebedrag)),w)
         nietgenoeg2 = textwrap.wrap("%s %s" % (valuta+fornum(transactiebedrag*-1),valuta+fornum(spaarpotten[i][1])),w)
         handmatig = textwrap.wrap("",w)
     else:
         wraptekst1 = textwrap.wrap("U kunt nu iets opzij zetten voor deze spaarpot: %s. Wilt u deze spaarpot aanvullen?" % (kleuren["5"]+i+kleuren["ResetAll"]),w)
         wraptekst2 = textwrap.wrap("Er is een spaarpot gevonden: %s. Wilt u deze gehele transactie verrekenen met die spaarpot?" % (kleuren["5"]+i+kleuren["ResetAll"]),w)
-        nietgenoeg1 = textwrap.wrap("Je kunt niet méér apart zetten dan %s" % valuta+fornum(transactiebedrag),w)
+        nietgenoeg1 = textwrap.wrap("Je kunt niet méér apart zetten dan %s" % (valuta+fornum(transactiebedrag)),w)
         nietgenoeg2 = textwrap.wrap("Onvoldoende tegoed. Je kunt geen %s betalen uit een tegoed van %s" % (valuta+fornum(transactiebedrag*-1),valuta+fornum(spaarpotten[i][1])),w)
         handmatig = textwrap.wrap("Probeer eerst uw tegoed aan te vullen en corrigeer daarna het uit deze spaarpot betaalde bedrag handmatig",w)
     if transactiebedrag > 0 and spaarpotten[i][1] < spaarpotten[i][0]:
@@ -4325,16 +4325,16 @@ def nieuwnieuw(rekening,ok): # H
         elif nieuwetransactieinputlijst[0].upper() == "H":
             if Taal == "EN":
                 wraptekst1 = textwrap.wrap("Specify the elements in CSV style: \"%s, %s, %s, %s, %s\". The CSV input does not accept all shortcuts, so enter the date as \"YYYYMMDD\" (or \"\" for today's date) and the amount as an exact value. If the CSV input contains invalid data, the step-by-step input takes over." % (elementenEN[0].lower(),elementenEN[1].lower(),elementenEN[2].lower(),elementenEN[3].lower(),woordcategorieEN.lower()),w)
-                wraptekst2 = textwrap.wrap("",w)
+                wraptekst2 = textwrap.wrap("A %s was found. Do you want to settle this %s with %s %s?" % (woordspaarpotEN,woordtransactieEN,woordspaarpotEN,i),w)
             elif Taal == "IT":
                 wraptekst1 = textwrap.wrap("Inserisci gli elementi in stile CSV: \"%s, %s, %s, %s, %s\". L'input CSV non accetta tutte le scorciatoie, quindi inserisci la data come \"AAAAMMGG\" (o \"\" per la data di oggi) e l'importo come un valore preciso. Se l'input CSV contiene dati non validi, verrà utilizzato l'input passo dopo passo." % (elementenIT[0].lower(),elementenIT[1].lower(),elementenIT[2].lower(),elementenIT[3].lower(),woordcategorieIT.lower()),w)
-                wraptekst2 = textwrap.wrap("",w)
+                wraptekst2 = textwrap.wrap("È stato trovato un %s. Vuoi regolare questa %s con %s %s?" % (woordspaarpotIT,woordtransactieIT,woordspaarpotIT,i),w)
             elif Taal == "CJ":
                 wraptekst1 = textwrap.wrap("CSV: \"%s, %s, %s, %s, %s\"." % (elementenIT[0].lower(),elementenIT[1].lower(),elementenIT[2].lower(),elementenIT[3].lower(),woordcategorieIT.lower()),w)
                 wraptekst2 = textwrap.wrap("",w)
             else:
                 wraptekst1 = textwrap.wrap("Geef de elementen op in CSV-stijl: \"%s, %s, %s, %s, %s\". De CSV-ingave accepteert niet alle sneltoetsen, dus geef de datum als \"JJJJMMDD\" (of \"\" voor de datum van vandaag) en het bedrag als precieze waarde in. Mocht de CSV-ingave ongeldige data bevatten, dan neemt de stap-voor-stap-ingave het over." % (elementen[0].lower(),elementen[1].lower(),elementen[2].lower(),elementen[3].lower(),woordcategorie.lower()),w)
-                wraptekst2 = textwrap.wrap("Er is een spaarpot gevonden. Wil je deze transactie verrekenen met spaarpot %s?" % i,w)
+                wraptekst2 = textwrap.wrap("Er is een %s gevonden. Wil je deze %s verrekenen met %s %s?" % (woordspaarpot,woordtransactie,woordspaarpot,i),w)
             for i in wraptekst1:
                 print(i)
         elif len(nieuwetransactieinputlijst) == 5:
@@ -4701,16 +4701,16 @@ def kieswederpartijuitlijst(rekening,header,col,cat,wederpartij):
     wederpartijlijst = sorted(wederpartijlijst)
     if len(wederpartijlijst) > 0:
         if Taal == "EN":
-            wraptekst = textwrap.wrap("Choose a previously used %s from the list or type one new" % elementenEN[2].lower(),w)
+            wraptekst = textwrap.wrap("Choose a previously used %s from the list or type one new" % (elementenEN[2]),w)
             helpwrap = textwrap.wrap("A list is created from all previously used Counterparties in this %s. To correct typing errors, or for the sake of consistency, you can choose one from the list. You can also type a new %s, or leave it as it is." % (woordcategorieEN,elementenEN[2]),w)
         elif Taal == "IT":
-            wraptekst = textwrap.wrap("Scegli una %s già usata dalla lista o digita una nuova" % elementenIT[2].lower(),w)
+            wraptekst = textwrap.wrap("Scegli una %s già usata dalla lista o digita una nuova" % (elementenIT[2]),w)
             helpwrap = textwrap.wrap("Viene visualizzato un elenco di tutte le Controparti precedentemente utilizzate in questa %s. Per correggere errori di battitura o uniformare la denominazione, è possibile fare una scelta da quell'elenco. È anche possibile digitare una nuova %s o lasciare tutto così com'è." % (woordcategorieIT,elementenIT[2]),w)
         elif Taal == "CJ":
-            wraptekst = textwrap.wrap("me %s hisüipaxa m haŋosi %s hozi" % (elementenCJ[2].lower(),elementenCJ[2].lower()),w)
-            helpwrap = textwrap.wrap("%s" % woordcategorieCJ,w)
+            wraptekst = textwrap.wrap("me %s hisüipaxa m haŋosi %s hozi" % (elementenCJ[2],elementenCJ[2]),w)
+            helpwrap = textwrap.wrap("%s" % (woordcategorieCJ),w)
         else:
-            wraptekst = textwrap.wrap("Kies een eerder gebruikte %s uit de lijst of typ een nieuwe" % elementen[2].lower(),w)
+            wraptekst = textwrap.wrap("Kies een eerder gebruikte %s uit de lijst of typ een nieuwe" % (elementen[2]),w)
             helpwrap = textwrap.wrap("Er wordt een lijst getoond van alle eerder gebruikte %sen in deze %s. Om typfouten te corrigeren, of om de naamgeving gelijk te trekken, kunt u uit die lijst een keuze maken. U kunt ook een nieuwe %s typen, of het zo laten." % (elementen[2],woordcategorie,elementen[2]),w)
         for i in wraptekst:
             print(i)
@@ -4822,16 +4822,16 @@ def kiesonderwerpuitlijst(rekening,header,col,cat,onderwerp): # H
             print(col+forr3(tel+1)+kleuren["ResetAll"]+" : "+i)
             tel += 1
         if Taal == "EN":
-            wraptekst = textwrap.wrap("Choose a previously used %s from the list or type one new" % elementenEN[3].lower(),w)
+            wraptekst = textwrap.wrap("Choose a previously used %s from the list or type one new" % (elementenEN[3]),w)
             helpwrap = textwrap.wrap("A list is created from all previously used %s in this %s. To correct typing errors, or for the sake of consistency, you can choose one from the list. You can also type a new %s, or leave it as it is." % (elementenEN[3],woordcategorieEN,elementenEN[3]),w)
         elif Taal == "IT":
-            wraptekst = textwrap.wrap("Scegli un %s già usato dalla lista o digita uno nuovo" % elementenIT[3].lower(),w)
+            wraptekst = textwrap.wrap("Scegli un %s già usato dalla lista o digita uno nuovo" % (elementenIT[3]),w)
             helpwrap = textwrap.wrap("Viene visualizzato un elenco di tutti i Riferimenti precedentemente utilizzate in questa %s. Per correggere errori di battitura o uniformare la denominazione, è possibile fare una scelta da quell'elenco. È anche possibile digitare un nuovo %s o lasciare tutto così com'è." % (woordcategorieIT,elementenIT[3]),w)
         elif Taal == "CJ":
-            wraptekst = textwrap.wrap("me %s hisüipaxa m haŋosi %s hozi" % (elementenCJ[3].lower(),elementenCJ[3].lower()),w)
-            helpwrap = textwrap.wrap("%s" % woordcategorieCJ,w)
+            wraptekst = textwrap.wrap("me %s hisüipaxa m haŋosi %s hozi" % (elementenCJ[3],elementenCJ[3]),w)
+            helpwrap = textwrap.wrap("%s" % (woordcategorieCJ),w)
         else:
-            wraptekst = textwrap.wrap("Kies een eerder gebruikt %s uit de lijst of typ een nieuw" % elementen[3].lower(),w)
+            wraptekst = textwrap.wrap("Kies een eerder gebruikt %s uit de lijst of typ een nieuw" % (elementen[3]),w)
             helpwrap = textwrap.wrap("Er wordt een lijst getoond van alle eerder gebruikte %sen in deze %s. Om typfouten te corrigeren, of om de naamgeving gelijk te trekken, kunt u uit die lijst een keuze maken. U kunt ook een nieuw %s typen, of het zo laten." % (elementen[3],woordcategorie,elementen[3]),w)
         for i in wraptekst:
             print(i)
@@ -4976,13 +4976,13 @@ def wijzigcategorie(rekening,header,col,ok): # geen H
         except(Exception) as f:
             #print(f)
             if Taal == "EN":
-                wraptekst = textwrap.wrap("You can change the %s of only one %s from the same %s" % (woordcategorieEN.lower(),woordtransactieEN.lower(),woordcategorieEN.lower()),w)
+                wraptekst = textwrap.wrap("You can change the %s of only one %s from the same %s" % (woordcategorieEN,woordtransactieEN,woordcategorieEN),w)
             elif Taal == "IT":
-                wraptekst = textwrap.wrap("È possibile cambiare la %s da solo una %s nella stessa %s" % (woordcategorieIT.lower(),woordtransactieIT.lower(),woordcategorieIT.lower()),w)
+                wraptekst = textwrap.wrap("È possibile cambiare la %s da solo una %s nella stessa %s" % (woordcategorieIT,woordtransactieIT,woordcategorieIT),w)
             elif Taal == "CJ":
                 wraptekst = textwrap.wrap("mo hupaxi m hubizüiʃatüa hixibe",w)
             else:
-                wraptekst = textwrap.wrap("Je kunt de %s veranderen van slechts één %s in dezelfde %s" % (woordcategorie.lower(),woordtransactie.lower(),woordcategorie.lower()),w)
+                wraptekst = textwrap.wrap("Je kunt de %s veranderen van slechts één %s in dezelfde %s" % (woordcategorie,woordtransactie,woordcategorie),w)
             for i in wraptekst:
                 print(i)
         print(col+scheidtransactielijn+kleuren["ResetAll"])
@@ -5796,7 +5796,7 @@ def presenteerhelp(rekening,header,col,keuze1lijst): # geen H
         if len(i) == 1:
             print(kleuren["Omkeren"]+("{:^%s}" % (maxleni+2)).format(i)+": "+("{:^%s}" % maxlenj).format(j)+kleuren["ResetAll"])
         else:
-            print(("{:^%s}" % (maxleni+2)).format(i)+": "+("{:<%s}" % maxlenj).format(j))
+            print(("{:^%s}" % (maxleni+2)).format(i)+": "+("{:<%s}" % (maxlenj)).format(j))
         keuze1menulijst.append(i)
     if Taal == "EN":
         wraptekst = textwrap.wrap("Enter the index of the item - for example, as \"1,2\" or \"1 2\" - and then press \"Enter\" for help with that item",w)
@@ -5848,16 +5848,16 @@ def toevoegencategorie(rekening,header,col): # geen H
     Taal = header[nieuwheaderlijst[3]]
     if Taal == "EN":
         nieuwalternatievenamendictTaal = nieuwalternatievenamendictEN
-        wraptekst = textwrap.wrap("Choose a new %s. Named categories are standard categories (but can be renamed), highlighted options are already taken and no longer available" % woordcategorieEN.lower(),w)
+        wraptekst = textwrap.wrap("Choose a new %s. Named categories are standard categories (but can be renamed), highlighted options are already taken and no longer available" % (woordcategorieEN),w)
     elif Taal == "IT":
         nieuwalternatievenamendictTaal = nieuwalternatievenamendictIT
-        wraptekst = textwrap.wrap("Scegli una nuova %s. Le categorie denominate sono categorie standard (ma possono essere rinominate), le opzioni evidenziate sono già occupate e non più disponibili" % woordcategorieIT.lower(),w)
+        wraptekst = textwrap.wrap("Scegli una nuova %s. Le categorie denominate sono categorie standard (ma possono essere rinominate), le opzioni evidenziate sono già occupate e non più disponibili" % (woordcategorieIT),w)
     elif Taal == "CJ":
         nieuwalternatievenamendictTaal = nieuwalternatievenamendictCJ
-        wraptekst = textwrap.wrap("ma hame %szi. ma %sŋahuhipa hoxazi haʃomesehuhizi. mo %sŋacapa m hoʃa hameʃoli." % (woordcategorieCJ.lower(),woordcategorieCJ.lower(),woordcategorieCJ.lower()),w)
+        wraptekst = textwrap.wrap("ma hame %szi. ma %sŋahuhipa hoxazi haʃomesehuhizi. mo %sŋacapa m hoʃa hameʃoli." % (woordcategorieCJ,woordcategorieCJ,woordcategorieCJ),w)
     else:
         nieuwalternatievenamendictTaal = nieuwalternatievenamendict
-        wraptekst = textwrap.wrap("Kies een nieuwe %s. Benoemde categorieën zijn standaardcategorieën (maar kunnen worden hernoemd), gearceerde opties zijn al in gebruik en niet langer beschikbaar" % woordcategorie.lower(),w)
+        wraptekst = textwrap.wrap("Kies een nieuwe %s. Benoemde categorieën zijn standaardcategorieën (maar kunnen worden hernoemd), gearceerde opties zijn al in gebruik en niet langer beschikbaar" % (woordcategorie),w)
     for i in wraptekst:
         print(i)
     loop = True
@@ -5875,9 +5875,9 @@ def toevoegencategorie(rekening,header,col): # geen H
             if i in categorieenlijst:
                 kleur = kleuren["Omkeren"]+kleur
             if i in alternatievenamendict:
-                print(kleur+forr3(i)+" "+("{:^%d}" % maxlen).format(vertaalv(alternatievenamendict[i]))+kleuren["ResetAll"])
+                print(kleur+forr3(i)+" "+("{:^%d}" % (maxlen)).format(vertaalv(alternatievenamendict[i]))+kleuren["ResetAll"])
             elif i in nieuwalternatievenamendict:
-                print(kleur+forr3(i)+" "+("{:^%d}" % maxlen).format(vertaalv(nieuwalternatievenamendict[i]))+kleuren["ResetAll"])
+                print(kleur+forr3(i)+" "+("{:^%d}" % (maxlen)).format(vertaalv(nieuwalternatievenamendict[i]))+kleuren["ResetAll"])
             else: # alle categorieën staan in de dictionary, maar je weet maar nooit
                 print(kleur+forr3(i)+kleuren["ResetAll"])
         antwoord = input(col+inputindent)
@@ -5894,11 +5894,13 @@ def wijzigcategorienaam(rekening,header,col): # geen H
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     if Taal == "EN":
-        wraptekst = textwrap.wrap("Rename a %s. The maximum length is 15 characters, exceeding characters are cut off. Dutch standard %s names are automatically translated" % (woordcategorieEN.lower(),woordcategorieEN.lower()),w)
+        wraptekst = textwrap.wrap("Rename a %s. The maximum length is 15 characters, exceeding characters are cut off. Dutch standard %s names are automatically translated" % (woordcategorieEN,woordcategorieEN),w)
     elif Taal == "IT":
-        wraptekst = textwrap.wrap("Rinomina una %s. La lunghezza massima è di 15 caratteri, caratteri in eccesso vengono tagliati. I nomi delle categorie standard Olandesi vengono tradotti automaticamente" % (woordcategorieIT.lower()),w)
+        wraptekst = textwrap.wrap("Rinomina una %s. La lunghezza massima è di 15 caratteri, caratteri in eccesso vengono tagliati. I nomi delle categorie standard Olandesi vengono tradotti automaticamente" % (woordcategorieIT),w)
+    elif Taal == "CJ":
+        wraptekst = textwrap.wrap("%s %s" % (woordcategorieCJ,woordcategorieCJ),w)
     else:
-        wraptekst = textwrap.wrap("Geef een %s een andere naam. De maximale lengte is 15 tekens, overtollige tekens worden afgekapt. Nederlandse standaard%snamen worden automatisch naar andere talen vertaald" % (woordcategorie.lower(),woordcategorie.lower()),w)
+        wraptekst = textwrap.wrap("Geef een %s een andere naam. De maximale lengte is 15 tekens, overtollige tekens worden afgekapt. Nederlandse standaard%snamen worden automatisch naar andere talen vertaald" % (woordcategorie,woordcategorie),w)
     for i in wraptekst:
         print(i)
     loop = True
@@ -5911,7 +5913,7 @@ def wijzigcategorienaam(rekening,header,col): # geen H
         maxlen = len(max(lenlijst, key = len))
         for i in categorieenlijst:
             kleur = catcol[i]
-            print(kleur+forr3(i)+" "+("{:^%d}" % maxlen).format(vertaalv(alternatievenamendict[i]))+kleuren["ResetAll"])
+            print(kleur+forr3(i)+" "+("{:^%d}" % (maxlen)).format(vertaalv(alternatievenamendict[i]))+kleuren["ResetAll"])
         antwoord = input(col+inputindent)
         print(ResetAll, end = "")
         if antwoord.upper() in afsluitlijst:
@@ -5920,11 +5922,13 @@ def wijzigcategorienaam(rekening,header,col): # geen H
             return
         elif antwoord.upper() in categorieenlijst:
             if Taal == "EN":
-                wraptekst = textwrap.wrap("Rename %s %s %s to" % (woordcategorieEN.lower(),catcol[antwoord.upper()]+antwoord.upper(),vertaalv(alternatievenamendict[antwoord.upper()])+kleuren["ResetAll"]),w)
+                wraptekst = textwrap.wrap("Rename %s %s %s to" % (woordcategorieEN,catcol[antwoord.upper()]+antwoord.upper(),vertaalv(alternatievenamendict[antwoord.upper()])+kleuren["ResetAll"]),w)
             elif Taal == "IT":
-                wraptekst = textwrap.wrap("Rinomina %s %s %s in" % (woordcategorieIT.lower(),catcol[antwoord.upper()]+antwoord.upper(),vertaalv(alternatievenamendict[antwoord.upper()])+kleuren["ResetAll"]),w)
+                wraptekst = textwrap.wrap("Rinomina %s %s %s in" % (woordcategorieIT,catcol[antwoord.upper()]+antwoord.upper(),vertaalv(alternatievenamendict[antwoord.upper()])+kleuren["ResetAll"]),w)
+            elif Taal == "CJ":
+                wraptekst = textwrap.wrap("%s %s %s" % (woordcategorieCJ,catcol[antwoord.upper()]+antwoord.upper(),vertaalv(alternatievenamendict[antwoord.upper()])+kleuren["ResetAll"]),w)
             else:
-                wraptekst = textwrap.wrap("Wijzig naam %s %s %s naar" % (woordcategorie.lower(),catcol[antwoord.upper()]+antwoord.upper(),alternatievenamendict[antwoord.upper()]+kleuren["ResetAll"]),w)
+                wraptekst = textwrap.wrap("Wijzig naam %s %s %s naar" % (woordcategorie,catcol[antwoord.upper()]+antwoord.upper(),alternatievenamendict[antwoord.upper()]+kleuren["ResetAll"]),w)
             for i in wraptekst:
                 print(i)
             antwoord2 = input(col+inputindent)
@@ -5952,6 +5956,10 @@ def wijzigbudget(rekening,header,col): # geen H
         wraptekst = textwrap.wrap("Riassegna i budget. Le categorie che prevedono entrate riceveranno un budget negativo, tutte le altre un budget positivo. Assicurati che il bilancio sia sempre %s" % (grotegetalkleuren(rekening,header,budgetnul)+"%s %s" % (valuta,fornum(budgetnul))+kleuren["ResetAll"]),w)
         woordbalans = "Bilancio: "
         catwoord = woordcategorieIT
+    elif Taal == "CJ":
+        wraptekst = textwrap.wrap("%s" % (grotegetalkleuren(rekening,header,budgetnul)+"%s %s" % (valuta,fornum(budgetnul))+kleuren["ResetAll"]),w)
+        woordbalans = "humeñamñüa: "
+        catwoord = woordcategorieCJ
     else:
         wraptekst = textwrap.wrap("Herverdeel budgetten. Categorieën waarop inkomsten verwacht worden krijgen een negatief budget, alle andere een positief. Let erop dat de balans altijd %s is" % (grotegetalkleuren(rekening,header,budgetnul)+"%s %s" % (valuta,fornum(budgetnul))+kleuren["ResetAll"]),w)
         woordbalans = "Balans: "
@@ -5978,11 +5986,13 @@ def wijzigbudget(rekening,header,col): # geen H
             categorie = haalcategorie(rekening,antwoord.upper())
             oudbudget = round(categorie[0][1],2)
             if Taal == "EN":
-                wraptekst = textwrap.wrap("The new budget for %s %s %s %s %s" % (woordcategorieEN.lower(),catcol[antwoord.upper()]+antwoord.upper(),vertaalv(alternatievenamendict[antwoord.upper()])+kleuren["ResetAll"],grotegetalkleuren(rekening,header,oudbudget)+valuta,fornum(oudbudget)+kleuren["ResetAll"]),w)
+                wraptekst = textwrap.wrap("The new budget for %s %s %s %s %s" % (woordcategorieEN,catcol[antwoord.upper()]+antwoord.upper(),vertaalv(alternatievenamendict[antwoord.upper()])+kleuren["ResetAll"],grotegetalkleuren(rekening,header,oudbudget)+valuta,fornum(oudbudget)+kleuren["ResetAll"]),w)
             elif Taal == "IT":
-                wraptekst = textwrap.wrap("Il nuovo budget per %s %s %s %s %s" % (woordcategorieIT.lower(),catcol[antwoord.upper()]+antwoord.upper(),vertaalv(alternatievenamendict[antwoord.upper()])+kleuren["ResetAll"],grotegetalkleuren(rekening,header,oudbudget)+valuta,fornum(oudbudget)+kleuren["ResetAll"]),w)
+                wraptekst = textwrap.wrap("Il nuovo budget per %s %s %s %s %s" % (woordcategorieIT,catcol[antwoord.upper()]+antwoord.upper(),vertaalv(alternatievenamendict[antwoord.upper()])+kleuren["ResetAll"],grotegetalkleuren(rekening,header,oudbudget)+valuta,fornum(oudbudget)+kleuren["ResetAll"]),w)
+            elif Taal == "CJ":
+                wraptekst = textwrap.wrap("%s %s %s %s %s" % (woordcategorieCJ,catcol[antwoord.upper()]+antwoord.upper(),vertaalv(alternatievenamendict[antwoord.upper()])+kleuren["ResetAll"],grotegetalkleuren(rekening,header,oudbudget)+valuta,fornum(oudbudget)+kleuren["ResetAll"]),w)
             else:
-                wraptekst = textwrap.wrap("Het nieuwe budget voor %s %s %s %s %s" % (woordcategorie.lower(),catcol[antwoord.upper()]+antwoord.upper(),vertaalv(alternatievenamendict[antwoord.upper()])+kleuren["ResetAll"],grotegetalkleuren(rekening,header,oudbudget)+valuta,fornum(oudbudget)+kleuren["ResetAll"]),w)
+                wraptekst = textwrap.wrap("Het nieuwe budget voor %s %s %s %s %s" % (woordcategorie,catcol[antwoord.upper()]+antwoord.upper(),vertaalv(alternatievenamendict[antwoord.upper()])+kleuren["ResetAll"],grotegetalkleuren(rekening,header,oudbudget)+valuta,fornum(oudbudget)+kleuren["ResetAll"]),w)
             for i in wraptekst:
                 print(i)
             antwoord2 = input(col+inputindent)
@@ -6003,11 +6013,13 @@ def verwijdercategorie(rekening,header,col): # geen H
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     if Taal == "EN":
-        wraptekst = textwrap.wrap("Remove a %s. %sAll transactions in this %s will be cancelled%s" % (woordcategorieEN.lower(),kleuren["colslecht"],woordcategorieEN.lower(),kleuren["ResetAll"]),w)
+        wraptekst = textwrap.wrap("Remove a %s. %sAll transactions in this %s will be cancelled%s" % (woordcategorieEN,kleuren["colslecht"],woordcategorieEN.lower(),kleuren["ResetAll"]),w)
     elif Taal == "IT":
-        wraptekst = textwrap.wrap("Elimina una %s. %sTutte le transazioni in questa %s verranno cancellate%s" % (woordcategorieIT.lower(),kleuren["colslecht"],woordcategorieIT.lower(),kleuren["ResetAll"]),w)
+        wraptekst = textwrap.wrap("Elimina una %s. %sTutte le transazioni in questa %s verranno cancellate%s" % (woordcategorieIT,kleuren["colslecht"],woordcategorieIT.lower(),kleuren["ResetAll"]),w)
+    elif Taal == "CJ":
+        wraptekst = textwrap.wrap("%s. %s %s %s" % (woordcategorieCJ,kleuren["colslecht"],woordcategorieCJ.lower(),kleuren["ResetAll"]),w)
     else:
-        wraptekst = textwrap.wrap("Verwijder een %s. %sAlle transacties in deze %s worden gewist%s" % (woordcategorie.lower(),kleuren["colslecht"],woordcategorie.lower(),kleuren["ResetAll"]),w)
+        wraptekst = textwrap.wrap("Verwijder een %s. %sAlle transacties in deze %s worden gewist%s" % (woordcategorie,kleuren["colslecht"],woordcategorie.lower(),kleuren["ResetAll"]),w)
     for i in wraptekst:
         print(i)
     categorieenlijst = haalcategorieen(rekening)
@@ -6037,6 +6049,9 @@ def resetcategorie(rekening,header,col): # geen H
     elif Taal == "IT":
         hzlijst = ["Domestico","Aziendale"]
         wraptekst = textwrap.wrap("Ripristina l'intero conto. Puoi scegliere se deve essere \"%s\" o \"%s\". %sTutte le transazioni verranno cancellate%s" % (hzlijst[0],hzlijst[1],kleuren["colslecht"],kleuren["ResetAll"]),w)
+    elif Taal == "CJ":
+        hzlijst = ["",""]
+        wraptekst = textwrap.wrap("me \"%s\" m \"%s\". %s%s" % (hzlijst[0],hzlijst[1],kleuren["colslecht"],kleuren["ResetAll"]),w)
     else:
         hzlijst = ["Huishoudelijk","Zakelijk"]
         wraptekst = textwrap.wrap("Reset de volledige rekening. Je kunt kiezen voor \"%s\" of \"%s\". %sAlle transacties worden gewist%s" % (hzlijst[0],hzlijst[1],kleuren["colslecht"],kleuren["ResetAll"]),w)
@@ -6075,11 +6090,13 @@ def verwijderrekening(rekening,header,col): # geen H
     Taal = header[nieuwheaderlijst[3]]
     kleuren,catcol = updatekleuren(rekening)
     if Taal == "EN":
-        wraptekst = textwrap.wrap("Delete an account. The marked account is currently in use and cannot be deteleted in this session. %sAll transactions will be cancelled!%s" % (kleuren["colslecht"],kleuren["ResetAll"]),w)
+        wraptekst = textwrap.wrap("Delete an account. The marked account is currently in use and cannot be deteleted in this session. %sAll %ss will be cancelled!%s" % (kleuren["colslecht"],woordtransactieEN,kleuren["ResetAll"]),w)
     elif Taal == "IT":
-        wraptekst = textwrap.wrap("Rimuovere un conto. Il conto contrassegnato è in uso e non può essere eliminato in questa sessione. %sTutte le transazioni verranno cancellate!%s" % (kleuren["colslecht"],kleuren["ResetAll"]),w)
+        wraptekst = textwrap.wrap("Rimuovere un conto. Il conto contrassegnato è in uso e non può essere eliminato in questa sessione. %sTutte le Transazioni verranno cancellate!%s" % (kleuren["colslecht"],kleuren["ResetAll"]),w)
+    elif Taal == "CJ":
+        wraptekst = textwrap.wrap("%s %s %s" % (kleuren["colslecht"],woordtransactieCJ,kleuren["ResetAll"]),w)
     else:
-        wraptekst = textwrap.wrap("Verwijder een rekening. De gemarkeerde rekening is nu in gebruik en kan tijdens deze sessie niet worden verwijderd. %sAlle transacties worden gewist!%s" % (kleuren["colslecht"],kleuren["ResetAll"]),w)
+        wraptekst = textwrap.wrap("Verwijder een rekening. De gemarkeerde rekening is nu in gebruik en kan tijdens deze sessie niet worden verwijderd. %sAlle %ss worden gewist!%s" % (kleuren["colslecht"],woordtransactie,kleuren["ResetAll"]),w)
     for i in wraptekst:
         print(i)
     loop = True
@@ -6107,6 +6124,8 @@ def verwijderrekening(rekening,header,col): # geen H
                             vraag = textwrap.wrap("Remove %s %s:" % (anderekleuren["coltoe"]+andereIBAN,andereJAAR+anderekleuren["ResetAll"]),w)
                         elif Taal == "IT":
                             vraag = textwrap.wrap("Elimina %s %s:" % (anderekleuren["coltoe"]+andereIBAN,andereJAAR+anderekleuren["ResetAll"]),w)
+                        elif Taal == "CJ":
+                            vraag = textwrap.wrap("hazüu %s %s:" % (anderekleuren["coltoe"]+andereIBAN,andereJAAR+anderekleuren["ResetAll"]),w)
                         else:
                             vraag = textwrap.wrap("Verwijder %s %s:" % (anderekleuren["coltoe"]+andereIBAN,andereJAAR+anderekleuren["ResetAll"]),w)
                         for i in vraag:
@@ -6131,6 +6150,9 @@ def headeroverzetten(rekening,header,col): # geen H
     elif Taal == "IT":
         wraptekst = textwrap.wrap("Trasferire tutte le impostazioni del conto a un altro account, incluso il saldo iniziale di questo conto",w)
         headerlijst = nieuwheaderlijstIT
+    elif Taal == "CJ":
+        wraptekst = textwrap.wrap("",w)
+        headerlijst = nieuwheaderlijstCJ
     else:
         wraptekst = textwrap.wrap("Alle rekeninginstellingen overzetten naar andere rekening, inclusief het startsaldo van deze rekening",w)
         headerlijst = nieuwheaderlijst
@@ -6423,22 +6445,22 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
  15 : %s %s
  16 : %s %s""" % (
           menuEN["0,1,0"],
-          ("{:<%d}" % maxlen).format(menuEN["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
-          ("{:<%d}" % maxlen).format(menuEN["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
-          ("{:<%d}" % maxlen).format(menuEN["0,1,3"]), coljanee(rekening,header,header[nieuwheaderlijst[2]])+vertaalv(header[nieuwheaderlijst[2]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menuEN["0,1,4"]), taaldict[header[nieuwheaderlijst[3]]],
-          ("{:<%d}" % maxlen).format(menuEN["0,1,5"]), header[nieuwheaderlijst[4]],
-          ("{:<%d}" % maxlen).format(menuEN["0,1,6"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[5]]),
-          ("{:<%d}" % maxlen).format(menuEN["0,1,7"]), coljanee(rekening,header,header[nieuwheaderlijst[6]])+vertaalv(header[nieuwheaderlijst[6]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menuEN["0,1,8"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][0])+" >< "+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][1]),
-          ("{:<%d}" % maxlen).format(menuEN["0,1,9"]), coljanee(rekening,header,header[nieuwheaderlijst[8]])+vertaalv(header[nieuwheaderlijst[8]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menuEN["0,1,10"]), vertaalv(header[nieuwheaderlijst[9]]+" (%s)" % opmaakdatum(int(nustr))),
-          ("{:<%d}" % maxlen).format(menuEN["0,1,11"]), vertaalv(header[nieuwheaderlijst[10]]),
-          ("{:<%d}" % maxlen).format(menuEN["0,1,12"]), header[nieuwheaderlijst[11]],
-          ("{:<%d}" % maxlen).format(menuEN["0,1,13"]), header[nieuwheaderlijst[12]],
-          ("{:<%d}" % maxlen).format(menuEN["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menuEN["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menuEN["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]]+kleuren["ResetAll"])
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,3"]), coljanee(rekening,header,header[nieuwheaderlijst[2]])+vertaalv(header[nieuwheaderlijst[2]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,4"]), taaldict[header[nieuwheaderlijst[3]]],
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,5"]), header[nieuwheaderlijst[4]],
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,6"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[5]]),
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,7"]), coljanee(rekening,header,header[nieuwheaderlijst[6]])+vertaalv(header[nieuwheaderlijst[6]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,8"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][0])+" >< "+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][1]),
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,9"]), coljanee(rekening,header,header[nieuwheaderlijst[8]])+vertaalv(header[nieuwheaderlijst[8]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,10"]), vertaalv(header[nieuwheaderlijst[9]]+" (%s)" % opmaakdatum(int(nustr))),
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,11"]), vertaalv(header[nieuwheaderlijst[10]]),
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,12"]), header[nieuwheaderlijst[11]],
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,13"]), header[nieuwheaderlijst[12]],
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]]+kleuren["ResetAll"])
           )
     )
                     elif Taal == "IT":
@@ -6461,22 +6483,22 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
  15 : %s %s
  16 : %s %s""" % (
           menuIT["0,1,0"],
-          ("{:<%d}" % maxlen).format(menuIT["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
-          ("{:<%d}" % maxlen).format(menuIT["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
-          ("{:<%d}" % maxlen).format(menuIT["0,1,3"]), coljanee(rekening,header,header[nieuwheaderlijst[2]])+vertaalv(header[nieuwheaderlijst[2]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menuIT["0,1,4"]), taaldict[header[nieuwheaderlijst[3]]],
-          ("{:<%d}" % maxlen).format(menuIT["0,1,5"]), header[nieuwheaderlijst[4]],
-          ("{:<%d}" % maxlen).format(menuIT["0,1,6"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[5]]),
-          ("{:<%d}" % maxlen).format(menuIT["0,1,7"]), coljanee(rekening,header,header[nieuwheaderlijst[6]])+vertaalv(header[nieuwheaderlijst[6]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menuIT["0,1,8"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][0])+" >< "+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][1]),
-          ("{:<%d}" % maxlen).format(menuIT["0,1,9"]), coljanee(rekening,header,header[nieuwheaderlijst[8]])+vertaalv(header[nieuwheaderlijst[8]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menuIT["0,1,10"]), vertaalv(header[nieuwheaderlijst[9]]+" (%s)" % opmaakdatum(int(nustr))),
-          ("{:<%d}" % maxlen).format(menuIT["0,1,11"]), vertaalv(header[nieuwheaderlijst[10]]),
-          ("{:<%d}" % maxlen).format(menuIT["0,1,12"]), header[nieuwheaderlijst[11]],
-          ("{:<%d}" % maxlen).format(menuIT["0,1,13"]), header[nieuwheaderlijst[12]],
-          ("{:<%d}" % maxlen).format(menuIT["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menuIT["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menuIT["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]]+kleuren["ResetAll"])
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,3"]), coljanee(rekening,header,header[nieuwheaderlijst[2]])+vertaalv(header[nieuwheaderlijst[2]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,4"]), taaldict[header[nieuwheaderlijst[3]]],
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,5"]), header[nieuwheaderlijst[4]],
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,6"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[5]]),
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,7"]), coljanee(rekening,header,header[nieuwheaderlijst[6]])+vertaalv(header[nieuwheaderlijst[6]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,8"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][0])+" >< "+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][1]),
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,9"]), coljanee(rekening,header,header[nieuwheaderlijst[8]])+vertaalv(header[nieuwheaderlijst[8]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,10"]), vertaalv(header[nieuwheaderlijst[9]]+" (%s)" % opmaakdatum(int(nustr))),
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,11"]), vertaalv(header[nieuwheaderlijst[10]]),
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,12"]), header[nieuwheaderlijst[11]],
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,13"]), header[nieuwheaderlijst[12]],
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]]+kleuren["ResetAll"])
           )
     )
                     elif Taal == "CJ":
@@ -6499,22 +6521,22 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
  15 : %s %s
  16 : %s %s""" % (
           menuCJ["0,1,0"],
-          ("{:<%d}" % maxlen).format(menuCJ["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
-          ("{:<%d}" % maxlen).format(menuCJ["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
-          ("{:<%d}" % maxlen).format(menuCJ["0,1,3"]), coljanee(rekening,header,header[nieuwheaderlijst[2]])+vertaalv(header[nieuwheaderlijst[2]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menuCJ["0,1,4"]), taaldict[header[nieuwheaderlijst[3]]],
-          ("{:<%d}" % maxlen).format(menuCJ["0,1,5"]), header[nieuwheaderlijst[4]],
-          ("{:<%d}" % maxlen).format(menuCJ["0,1,6"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[5]]),
-          ("{:<%d}" % maxlen).format(menuCJ["0,1,7"]), coljanee(rekening,header,header[nieuwheaderlijst[6]])+vertaalv(header[nieuwheaderlijst[6]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menuCJ["0,1,8"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][0])+" >< "+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][1]),
-          ("{:<%d}" % maxlen).format(menuCJ["0,1,9"]), coljanee(rekening,header,header[nieuwheaderlijst[8]])+vertaalv(header[nieuwheaderlijst[8]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menuCJ["0,1,10"]), vertaalv(header[nieuwheaderlijst[9]]+" (%s)" % opmaakdatum(int(nustr))),
-          ("{:<%d}" % maxlen).format(menuCJ["0,1,11"]), vertaalv(header[nieuwheaderlijst[10]]),
-          ("{:<%d}" % maxlen).format(menuCJ["0,1,12"]), header[nieuwheaderlijst[11]],
-          ("{:<%d}" % maxlen).format(menuCJ["0,1,13"]), header[nieuwheaderlijst[12]],
-          ("{:<%d}" % maxlen).format(menuCJ["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menuCJ["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menuCJ["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]]+kleuren["ResetAll"])
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,3"]), coljanee(rekening,header,header[nieuwheaderlijst[2]])+vertaalv(header[nieuwheaderlijst[2]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,4"]), taaldict[header[nieuwheaderlijst[3]]],
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,5"]), header[nieuwheaderlijst[4]],
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,6"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[5]]),
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,7"]), coljanee(rekening,header,header[nieuwheaderlijst[6]])+vertaalv(header[nieuwheaderlijst[6]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,8"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][0])+" >< "+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][1]),
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,9"]), coljanee(rekening,header,header[nieuwheaderlijst[8]])+vertaalv(header[nieuwheaderlijst[8]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,10"]), vertaalv(header[nieuwheaderlijst[9]]+" (%s)" % opmaakdatum(int(nustr))),
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,11"]), vertaalv(header[nieuwheaderlijst[10]]),
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,12"]), header[nieuwheaderlijst[11]],
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,13"]), header[nieuwheaderlijst[12]],
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]]+kleuren["ResetAll"])
           )
     )
                     else:
@@ -6537,22 +6559,22 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
  15 : %s %s
  16 : %s %s""" % (
           menu["0,1,0"],
-          ("{:<%d}" % maxlen).format(menu["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
-          ("{:<%d}" % maxlen).format(menu["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
-          ("{:<%d}" % maxlen).format(menu["0,1,3"]), coljanee(rekening,header,header[nieuwheaderlijst[2]])+vertaalv(header[nieuwheaderlijst[2]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menu["0,1,4"]), taaldict[header[nieuwheaderlijst[3]]],
-          ("{:<%d}" % maxlen).format(menu["0,1,5"]), header[nieuwheaderlijst[4]],
-          ("{:<%d}" % maxlen).format(menu["0,1,6"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[5]]),
-          ("{:<%d}" % maxlen).format(menu["0,1,7"]), coljanee(rekening,header,header[nieuwheaderlijst[6]])+vertaalv(header[nieuwheaderlijst[6]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menu["0,1,8"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][0])+" >< "+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][1]),
-          ("{:<%d}" % maxlen).format(menu["0,1,9"]), coljanee(rekening,header,header[nieuwheaderlijst[8]])+vertaalv(header[nieuwheaderlijst[8]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menu["0,1,10"]), vertaalv(header[nieuwheaderlijst[9]]+" (%s)" % opmaakdatum(int(nustr))),
-          ("{:<%d}" % maxlen).format(menu["0,1,11"]), vertaalv(header[nieuwheaderlijst[10]]),
-          ("{:<%d}" % maxlen).format(menu["0,1,12"]), header[nieuwheaderlijst[11]],
-          ("{:<%d}" % maxlen).format(menu["0,1,13"]), header[nieuwheaderlijst[12]],
-          ("{:<%d}" % maxlen).format(menu["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menu["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
-          ("{:<%d}" % maxlen).format(menu["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]]+kleuren["ResetAll"])
+          ("{:<%d}" % (maxlen)).format(menu["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
+          ("{:<%d}" % (maxlen)).format(menu["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
+          ("{:<%d}" % (maxlen)).format(menu["0,1,3"]), coljanee(rekening,header,header[nieuwheaderlijst[2]])+vertaalv(header[nieuwheaderlijst[2]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menu["0,1,4"]), taaldict[header[nieuwheaderlijst[3]]],
+          ("{:<%d}" % (maxlen)).format(menu["0,1,5"]), header[nieuwheaderlijst[4]],
+          ("{:<%d}" % (maxlen)).format(menu["0,1,6"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[5]]),
+          ("{:<%d}" % (maxlen)).format(menu["0,1,7"]), coljanee(rekening,header,header[nieuwheaderlijst[6]])+vertaalv(header[nieuwheaderlijst[6]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menu["0,1,8"]), header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][0])+" >< "+header[nieuwheaderlijst[4]]+fornum(header[nieuwheaderlijst[7]][1]),
+          ("{:<%d}" % (maxlen)).format(menu["0,1,9"]), coljanee(rekening,header,header[nieuwheaderlijst[8]])+vertaalv(header[nieuwheaderlijst[8]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menu["0,1,10"]), vertaalv(header[nieuwheaderlijst[9]]+" (%s)" % opmaakdatum(int(nustr))),
+          ("{:<%d}" % (maxlen)).format(menu["0,1,11"]), vertaalv(header[nieuwheaderlijst[10]]),
+          ("{:<%d}" % (maxlen)).format(menu["0,1,12"]), header[nieuwheaderlijst[11]],
+          ("{:<%d}" % (maxlen)).format(menu["0,1,13"]), header[nieuwheaderlijst[12]],
+          ("{:<%d}" % (maxlen)).format(menu["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menu["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menu["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]]+kleuren["ResetAll"])
           )
     )
                     keuze3 = input(col+inputindent)
@@ -7191,9 +7213,9 @@ def tooneenspaarpot(rekening,header,spaarpotten,spaarpot): # geen H
             tegaan = (spaarpotten[i][0] + spaarpotten[i][2]) * -1
             try:
                 print(" "*10+col+"+-"+kleuren["Omkeren"]+spaarpot+kleuren["ResetAll"]+col+"-"*(maxlen-(len(spaarpot)))+"+"+"-"*10+kleuren["ResetAll"])
-                print(" "*10+col+"| "+kleuren["ResetAll"]+("{:<%d}" % maxlen).format(lijnst[2])+":  "+col+kleuren["Vaag"]+valuta+grootgetal(spaarpotten[i][0],fornum,"")[1](grootgetal(spaarpotten[i][0],fornum,"")[0])+grootgetal(spaarpotten[i][0],fornum,"")[2]+kleuren["ResetAll"])
-                print(" "*10+col+"| "+kleuren["ResetAll"]+("{:<%d}" % maxlen).format(lijnst[3])+":  "+grotegetalkleuren(rekening,header,spaarpotten[i][1])+valuta+grootgetal(spaarpotten[i][1],fornum,"")[1](grootgetal(spaarpotten[i][1],fornum,"")[0])+grootgetal(spaarpotten[i][1],fornum,"")[2]+kleuren["ResetAll"])
-                print(" "*10+col+"| "+kleuren["ResetAll"]+("{:<%d}" % maxlen).format(lijnst[4])+":  "+grotegetalkleuren(rekening,header,spaarpotten[i][2])+valuta+grootgetal(spaarpotten[i][2],fornum,"")[1](grootgetal(spaarpotten[i][2],fornum,"")[0])+grootgetal(spaarpotten[i][2],fornum,"")[2]+kleuren["ResetAll"])
+                print(" "*10+col+"| "+kleuren["ResetAll"]+("{:<%d}" % (maxlen)).format(lijnst[2])+":  "+col+kleuren["Vaag"]+valuta+grootgetal(spaarpotten[i][0],fornum,"")[1](grootgetal(spaarpotten[i][0],fornum,"")[0])+grootgetal(spaarpotten[i][0],fornum,"")[2]+kleuren["ResetAll"])
+                print(" "*10+col+"| "+kleuren["ResetAll"]+("{:<%d}" % (maxlen)).format(lijnst[3])+":  "+grotegetalkleuren(rekening,header,spaarpotten[i][1])+valuta+grootgetal(spaarpotten[i][1],fornum,"")[1](grootgetal(spaarpotten[i][1],fornum,"")[0])+grootgetal(spaarpotten[i][1],fornum,"")[2]+kleuren["ResetAll"])
+                print(" "*10+col+"| "+kleuren["ResetAll"]+("{:<%d}" % (maxlen)).format(lijnst[4])+":  "+grotegetalkleuren(rekening,header,spaarpotten[i][2])+valuta+grootgetal(spaarpotten[i][2],fornum,"")[1](grootgetal(spaarpotten[i][2],fornum,"")[0])+grootgetal(spaarpotten[i][2],fornum,"")[2]+kleuren["ResetAll"])
                 print(" "*10+col+"+-"+"-"*maxlen+"+"+"-"*10+kleuren["ResetAll"])
             except(Exception) as f:
                 #print(f)
@@ -7212,23 +7234,23 @@ def nieuwespaarpot(rekening,header): # geen H
         if Taal == "EN":
             print(menuEN["5,2"])
             vragenlijst = ["Name",lijnlijstEN[2]]
-            bestaatal = "This %s exists already" % woordspaarpotEN.lower()
+            bestaatal = "This %s exists already" % (woordspaarpotEN)
         elif Taal == "IT":
             print(menuIT["5,2"])
             vragenlijst = ["Nome",lijnlijstIT[2]]
-            bestaatal = "Questo %s esiste già" % woordspaarpotIT.lower()
+            bestaatal = "Questo %s esiste già" % (woordspaarpotIT)
         elif Taal == "CJ":
             print(menuCJ["5,2"])
             vragenlijst = ["huhi",lijnlijstCJ[2]]
-            bestaatal = "%sʒi hoqüoqila" % woordspaarpotCJ.lower()
+            bestaatal = "%sʒi hoqüoqila" % (woordspaarpotCJ)
         else:
             print(menu["5,2"])
             vragenlijst = ["Naam",lijnlijst[2]]
-            bestaatal = "Deze %s bestaat al" % woordspaarpot.lower()
+            bestaatal = "Deze %s bestaat al" % (woordspaarpot)
         maxlen = len(max(vragenlijst, key = len))
         loop = True
         while loop == True:
-            naam = input(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(vragenlijst[0])+kleuren["ResetAll"]+inputindent)
+            naam = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(vragenlijst[0])+kleuren["ResetAll"]+inputindent)
             if naam.upper() in afsluitlijst:
                 doei()
             elif naam.upper() in neelijst:
@@ -7242,7 +7264,7 @@ def nieuwespaarpot(rekening,header): # geen H
                 pass
             else:    
                 print(col+naam+kleuren["ResetAll"])
-                doel = input(kleuren["Omkeren"]+col+("{:^%d}" % maxlen).format(vragenlijst[1])+kleuren["ResetAll"]+inputindent)
+                doel = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(vragenlijst[1])+kleuren["ResetAll"]+inputindent)
                 if doel.upper() in afsluitlijst:
                     doei()
                 elif doel.upper() in neelijst:
@@ -7271,13 +7293,13 @@ def kiesspaarpot(rekening,header): # geen H
     if len(spaarpotten) > 0:
         toonspaarpotten(rekening,header)
         if Taal == "EN":
-            wraptekst = textwrap.wrap("Choose a %s" % woordspaarpotEN.lower(),w)
+            wraptekst = textwrap.wrap("Choose a %s" % (woordspaarpotEN),w)
         elif Taal == "IT":
-            wraptekst = textwrap.wrap("Scegliere un %s" % woordspaarpotIT.lower(),w)
+            wraptekst = textwrap.wrap("Scegliere un %s" % (woordspaarpotIT),w)
         elif Taal == "CJ":
-            wraptekst = textwrap.wrap("hame %s" % woordspaarpotCJ.lower(),w)
+            wraptekst = textwrap.wrap("hame %s" % (woordspaarpotCJ),w)
         else:
-            wraptekst = textwrap.wrap("Kies een %s" % woordspaarpot.lower(),w)
+            wraptekst = textwrap.wrap("Kies een %s" % (woordspaarpot),w)
         for i in wraptekst:
             print(i)
         loop = True
@@ -7309,16 +7331,16 @@ def verwijderspaarpot(rekening,header): # geen H
         toonspaarpotten(rekening,header)
         if Taal == "EN":
             wraptekst1 = textwrap.wrap(kleuren["colslecht"]+menuEN["5,4"]+kleuren["ResetAll"],w)
-            wraptekst2 = textwrap.wrap("Choose a %s" % woordspaarpotEN,w)
+            wraptekst2 = textwrap.wrap("Choose a %s" % (woordspaarpotEN),w)
         elif Taal == "IT":
             wraptekst1 = textwrap.wrap(kleuren["colslecht"]+menuIT["5,4"]+kleuren["ResetAll"],w)
-            wraptekst2 = textwrap.wrap("Scegli un %s" % woordspaarpotIT,w)
+            wraptekst2 = textwrap.wrap("Scegli un %s" % (woordspaarpotIT),w)
         elif Taal == "CJ":
             wraptekst1 = textwrap.wrap(kleuren["colslecht"]+menuCJ["5,4"]+kleuren["ResetAll"],w)
-            wraptekst2 = textwrap.wrap("hame %s" % woordspaarpotCJ,w)
+            wraptekst2 = textwrap.wrap("hame %s" % (woordspaarpotCJ),w)
         else:
             wraptekst1 = textwrap.wrap(kleuren["colslecht"]+menu["5,4"]+kleuren["ResetAll"],w)
-            wraptekst2 = textwrap.wrap("Kies een %s" % woordspaarpot,w)
+            wraptekst2 = textwrap.wrap("Kies een %s" % (woordspaarpot),w)
         loop = True
         while loop == True:
             for i in wraptekst1:
@@ -7364,19 +7386,19 @@ def wijzigspaarpotnaam(rekening,header): # H
         spaarpottenlijst.append(i)
     if Taal == "EN":
         wraptekst1 = textwrap.wrap(col+menuEN["5,3,1"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Choose a %s" % woordspaarpotEN,w)
+        wraptekst2 = textwrap.wrap("Choose a %s" % (woordspaarpotEN),w)
         geenspaarpot = geenspaarpottenEN
     elif Taal == "IT":
         wraptekst1 = textwrap.wrap(col+menuIT["5,3,1"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Scegli un %s" % woordspaarpotIT,w)
+        wraptekst2 = textwrap.wrap("Scegli un %s" % (woordspaarpotIT),w)
         geenspaarpot = geenspaarpottenIT
     elif Taal == "CJ":
         wraptekst1 = textwrap.wrap(col+menuCJ["5,3,1"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("hame %s" % woordspaarpotCJ,w)
+        wraptekst2 = textwrap.wrap("hame %s" % (woordspaarpotCJ),w)
         geenspaarpot = geenspaarpottenCJ
     else:
         wraptekst1 = textwrap.wrap(col+menu["5,3,1"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Kies een %s" % woordspaarpot,w)
+        wraptekst2 = textwrap.wrap("Kies een %s" % (woordspaarpot),w)
         geenspaarpot = geenspaarpotten
     if len(spaarpotten) > 0:
         toonspaarpotten(rekening,header)
@@ -7412,16 +7434,16 @@ def wijzigspaarpotnaam(rekening,header): # H
                         tooneenspaarpot(rekening,header,spaarpotten,spaarpottenlijst[int(spaarpotkeuze)-1])
                         if Taal == "EN":
                             wraptekst3 = textwrap.wrap("Rename %s%s %s%s to" % (col,woordspaarpotEN,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
-                            bestaatal = "This savings pot exists already"
+                            bestaatal = "This %s exists already" % (woordspaarpotEN)
                         elif Taal == "IT":
                             wraptekst3 = textwrap.wrap("Rinomina %s%s %s%s in" % (col,woordspaarpotIT,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
-                            bestaatal = "Questo salvadanaio esiste già"
+                            bestaatal = "Questo %s esiste già" % (woordspaarpotIT)
                         elif Taal == "CJ":
                             wraptekst3 = textwrap.wrap("hazüi huhi %s%s %s%s" % (col,woordspaarpotCJ,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
-                            bestaatal = "%sʒi hoqüoqila" % woordspaarpotCJ
+                            bestaatal = "%sʒi hoqüoqila" % (woordspaarpotCJ)
                         else:
                             wraptekst3 = textwrap.wrap("De nieuwe naam voor %s%s %s%s is" % (col,woordspaarpot,spaarpottenlijst[int(spaarpotkeuze)-1],kleuren["ResetAll"]),w)
-                            bestaatal = "Deze spaarpot bestaat al"
+                            bestaatal = "Deze %s bestaat al" % (woordspaarpot)
                         for i in wraptekst3:
                             print(i)
                         nieuwenaam = input(col+inputindent)
@@ -7460,19 +7482,19 @@ def wijzigspaarpotdoelsaldo(rekening,header): # H
         spaarpottenlijst.append(i)
     if Taal == "EN":
         wraptekst1 = textwrap.wrap(col+menuEN["5,3,2"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Choose a %s" % woordspaarpotEN,w)
+        wraptekst2 = textwrap.wrap("Choose a %s" % (woordspaarpotEN),w)
         geenspaarpot = geenspaarpottenEN
     elif Taal == "IT":
         wraptekst1 = textwrap.wrap(col+menuIT["5,3,2"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Scegli un %s" % woordspaarpotIT,w)
+        wraptekst2 = textwrap.wrap("Scegli un %s" % (woordspaarpotIT),w)
         geenspaarpot = geenspaarpottenIT
     elif Taal == "CJ":
         wraptekst1 = textwrap.wrap(col+menuCJ["5,3,2"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("hame %s" % woordspaarpotCJ,w)
+        wraptekst2 = textwrap.wrap("hame %s" % (woordspaarpotCJ),w)
         geenspaarpot = geenspaarpottenCJ
     else:
         wraptekst1 = textwrap.wrap(col+menu["5,3,2"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Kies een %s" % woordspaarpot,w)
+        wraptekst2 = textwrap.wrap("Kies een %s" % (woordspaarpot),w)
         geenspaarpot = geenspaarpotten
     if len(spaarpotten) > 0:
         toonspaarpotten(rekening,header)
@@ -7548,19 +7570,19 @@ def wijzigspaarpottegoed(rekening,header): # H
         spaarpottenlijst.append(i)
     if Taal == "EN":
         wraptekst1 = textwrap.wrap(col+menuEN["5,3,3"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Choose a %s" % woordspaarpotEN,w)
+        wraptekst2 = textwrap.wrap("Choose a %s" % (woordspaarpotEN),w)
         geenspaarpot = geenspaarpottenEN
     elif Taal == "IT":
         wraptekst1 = textwrap.wrap(col+menuIT["5,3,3"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Scegli un %s" % woordspaarpotIT,w)
+        wraptekst2 = textwrap.wrap("Scegli un %s" % (woordspaarpotIT),w)
         geenspaarpot = geenspaarpottenIT
     elif Taal == "CJ":
         wraptekst1 = textwrap.wrap(col+menuCJ["5,3,3"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("hame %s" % woordspaarpotCJ,w)
+        wraptekst2 = textwrap.wrap("hame %s" % (woordspaarpotCJ),w)
         geenspaarpot = geenspaarpottenCJ
     else:
         wraptekst1 = textwrap.wrap(col+menu["5,3,3"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Kies een %s" % woordspaarpot,w)
+        wraptekst2 = textwrap.wrap("Kies een %s" % (woordspaarpot),w)
         geenspaarpot = geenspaarpotten
     if len(spaarpotten) > 0:
         toonspaarpotten(rekening,header)
@@ -7636,19 +7658,19 @@ def wijzigspaarpotbetaald(rekening,header): # H
         spaarpottenlijst.append(i)
     if Taal == "EN":
         wraptekst1 = textwrap.wrap(col+menuEN["5,3,4"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Choose a %s" % woordspaarpotEN,w)
+        wraptekst2 = textwrap.wrap("Choose a %s" % (woordspaarpotEN),w)
         geenspaarpot = geenspaarpottenEN
     elif Taal == "IT":
         wraptekst1 = textwrap.wrap(col+menuIT["5,3,4"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Scegli un %s" % woordspaarpotIT,w)
+        wraptekst2 = textwrap.wrap("Scegli un %s" % (woordspaarpotIT),w)
         geenspaarpot = geenspaarpottenIT
     elif Taal == "CJ":
         wraptekst1 = textwrap.wrap(col+menuCJ["5,3,4"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("hame %s" % woordspaarpotCJ,w)
+        wraptekst2 = textwrap.wrap("hame %s" % (woordspaarpotCJ),w)
         geenspaarpot = geenspaarpottenCJ
     else:
         wraptekst1 = textwrap.wrap(col+menu["5,3,4"]+kleuren["ResetAll"],w)
-        wraptekst2 = textwrap.wrap("Kies een %s" % woordspaarpot,w)
+        wraptekst2 = textwrap.wrap("Kies een %s" % (woordspaarpot),w)
         geenspaarpot = geenspaarpotten
     if len(spaarpotten) > 0:
         toonspaarpotten(rekening,header)
@@ -7970,11 +7992,11 @@ def keuze1menu(rekening): # geen H
         aantalkommasini = i.count(",")
         if aantalkommasini < niveau:
             if i.count(",") == 0:
-                print(kleuren["Omkeren"]+kleuren[i[0]]+("{:^%s}" % (maxleni)).format(i)+": "+("{:^%s}" % maxlenj).format(j)+kleuren["ResetAll"])
+                print(kleuren["Omkeren"]+kleuren[i[0]]+("{:^%s}" % (maxleni)).format(i)+": "+("{:^%s}" % (maxlenj)).format(j)+kleuren["ResetAll"])
             elif i.count(",") == 1:
-                print(kleuren[i[0]]+("{:^%s}" % (maxleni)).format(i)+": "+("{:<%s}" % maxlenj).format(j)+kleuren["ResetAll"])
+                print(kleuren[i[0]]+("{:^%s}" % (maxleni)).format(i)+": "+("{:<%s}" % (maxlenj)).format(j)+kleuren["ResetAll"])
             else:
-                print(kleuren["Vaag"]+kleuren[i[0]]+("{:^%s}" % (maxleni)).format(i)+": "+("{:<%s}" % maxlenj).format(j)+kleuren["ResetAll"])
+                print(kleuren["Vaag"]+kleuren[i[0]]+("{:^%s}" % (maxleni)).format(i)+": "+("{:<%s}" % (maxlenj)).format(j)+kleuren["ResetAll"])
             keuze1menulijst.append(i)
     keuze1 = input(inputindent).strip().replace(" ",",").replace("-",",").replace("/",",").replace(".",",")
     keuze1lijst = keuze1.split(",")
@@ -8010,18 +8032,18 @@ while loop == True:
         rekening,header,col,keuze1lijst,ok = keuze1menu(rekening)
         if keuze1lijst[0] == "0":
             rekening,header,col,keuze1lijst,ok = beheerkeuze(rekening,header,col,keuze1lijst,ok)
-        if keuze1lijst[0] == "1":
+        elif keuze1lijst[0] == "1":
             rekening,header,col,keuze1lijst,ok = toonkeuze(rekening,header,col,keuze1lijst,ok)
-        if keuze1lijst[0] == "2":
+        elif keuze1lijst[0] == "2":
             rekening,header,col,keuze1lijst,ok = nieuwkeuze(keuze1lijst,rekening,ok)
-        if keuze1lijst[0] == "3":
+        elif keuze1lijst[0] == "3":
             rekening,header,col,keuze1lijst,ok = wijzigkeuze(keuze1lijst,rekening,ok)
-        if keuze1lijst[0] == "4":
+        elif keuze1lijst[0] == "4":
             rekening,header,col,keuze1lijst,ok = verwijderkeuze(rekening,header,col,keuze1lijst,ok)
-        if keuze1lijst[0] == "5":
+        elif keuze1lijst[0] == "5":
             rekening,header,col,keuze1lijst,ok = spaarpotkeuze(keuze1lijst,rekening,ok)
     except(Exception) as f:
-        #print(f)
+        print(f)
         kleuren,catcol = updatekleuren(rekening)
         Taal = header[nieuwheaderlijst[3]]
         if Taal == "EN":
