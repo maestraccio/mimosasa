@@ -3,7 +3,7 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.67"
+versie = "0.0.68"
 versiedatum = "20240616"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
@@ -3973,7 +3973,7 @@ def maandanalyse(rekening,datumlijst): # H
     analyselijn = col+"+"+"-"*3+forc9(Tot)+"<0%--"+"-"*int((honderdprocent-12)/2)+"-+"+"-"*int(((honderdprocent-12)/2))+off+"100%>"+forc9(Bud)+"-"*13+"+"+kleuren["ResetAll"]
     analyselijnzw = "+"+"-"*3+forc9(Tot)+"<0%--"+"-"*int((honderdprocent-12)/2)+"-+"+"-"*int(((honderdprocent-12)/2))+off+"100%>"+forc9(Bud)+"-"*13+"+"
     print(analyselijn)
-    if header[nieuwheaderlijst[12]] == ">" and str(datumlijst[0])[:6] == str(datumlijst[1])[:6]:
+    if header[nieuwheaderlijst[13]] == ">" and str(datumlijst[0])[:6] == str(datumlijst[1])[:6]:
         with open(os.path.join(rekening,str(datumlijst[0])[:6])+"a","w") as a:
             print(analyselijnzw, file = a)
     for i in categorieenlijst:
@@ -4048,7 +4048,7 @@ def maandanalyse(rekening,datumlijst): # H
             maandlijndezecategoriezw = ""
         if maandlijndezecategorie != "":
             print(maandlijndezecategorie)
-        if header[nieuwheaderlijst[12]] == ">" and str(datumlijst[0])[:6] == str(datumlijst[1])[:6]:
+        if header[nieuwheaderlijst[13]] == ">" and str(datumlijst[0])[:6] == str(datumlijst[1])[:6] and maandlijndezecategorie != "":
             with open(os.path.join(rekening,str(datumlijst[0])[:6])+"a","a") as a:
                 print(maandlijndezecategoriezw, file = a)
     print(analyselijn)
@@ -4082,7 +4082,7 @@ def maandanalyse(rekening,datumlijst): # H
         aantalstreepjes = 1
     print(col+"|"+kleuren["ResetAll"]+getalkleur+forl12(voortgang)+kleuren["Omkeren"]+"#"*(aantalstreepjes-1)+"|"+valuta+forsom(somal)+K+kleuren["ResetAll"]+" "*(56-aantalstreepjes)+colbinnen+binnen+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"])
     print(analyselijn)
-    if header[nieuwheaderlijst[12]] == ">" and str(datumlijst[0])[:6] == str(datumlijst[1])[:6]:
+    if header[nieuwheaderlijst[13]] == ">" and str(datumlijst[0])[:6] == str(datumlijst[1])[:6]:
         with open(os.path.join(rekening,str(datumlijst[0])[:6])+"a","a") as a:
             print(analyselijnzw, file = a)
             print("|"+forl12(voortgang)+"#"*(aantalstreepjes-1)+"|"+valuta+forsom(somal)+K+" "*(56-aantalstreepjes)+binnen+"|", file = a)
