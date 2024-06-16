@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.66"
-versiedatum = "20240615"
+versie = "0.0.67"
+versiedatum = "20240616"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -1094,7 +1094,7 @@ helpmenuEN = {
             "1,0,7": textwrap.wrap("The collection is sorted alphabetically from Z to A based on %s." % (elementenEN[3]),w),
             "1,0,8": textwrap.wrap("The collection is sorted alphabetically from A to Z based on %s." % (elementenEN[3]),w),
             "1,0,9": textwrap.wrap("%ss with a negative %s and the same positive %s are paired together, the rest is filtered out." % (woordtransactieEN,elementenEN[1],elementenEN[1]),w),
-        "1,1": textwrap.wrap("Select %ss based on various criteria (%s, %s, %s, %s and %s) and generate a clear table. You can use \"keyboard shortcuts\", or specify each element individually. The possible \"keyboard shortcuts\" are displayed; it is possible to add a number to \"M\" (month) or \"W\" (week): \"0\" includes today. All selected %ss are also collected in the collection, which is always displayed above the selection menu. If the selection covers one day, the daily total for that day is shown." % (woordtransactieEN,elementenEN[0],elementenEN[1],elementenEN[2],elementenEN[3],woordcategorieEN,woordtransactieEN),w),
+        "1,1": textwrap.wrap("Select %ss based on various criteria (%s, %s, %s, %s and %s) and generate a clear table. You can use \"keyboard shortcuts\", or specify each element individually. The possible \"keyboard shortcuts\" are displayed; it is possible to add a number to \"M\" (month) or \"W\" (week): \"0\" includes today. Before the table is displayed, you will be asked how you want to sort the collection. If you do not make a choice, the %ss will be ordered by %s and %s grouped by %s. All selected %ss are also collected in the collection, which is always displayed above the selection menu. If the selection covers one day, the daily total for that day is shown." % (woordtransactieEN,elementenEN[0],elementenEN[1],elementenEN[2],elementenEN[3],woordcategorieEN,woordtransactieEN,elementenEN[0],elementenEN[1],woordcategorieEN,woordtransactieEN),w),
         "1,2": textwrap.wrap("Show the budget analysis of one month. By default, the current month is displayed. You will see the progress of each %s compared to the assigned budget, and the monthly performance." % (woordcategorieEN),w),
         "1,3": textwrap.wrap("Show the details of individual %ss in the collection. The number of characters in \"%s\" and \"%s\" is unlimited but is truncated in the table \"1,1\". All additional information is expanded here. In \"0,1,13\", you can set after how many displayed %ss you need to press \"Enter\" to continue, or \"<\" to exit the display." % (woordtransactieEN,elementenEN[2],elementenEN[3],woordtransactieEN),w),
     "2": textwrap.wrap("You can add new %ss to your account, and assign each one to a %s. You can enter a new %s per element or consecutively on one line in CSV style, or you can make a copy of a previous %s and later adjust the details using the options under \"3\". New %ss are immediately added to the collection, so you can view or modify them right away." % (woordtransactieEN,woordcategorieEN,woordtransactieEN,woordtransactieEN,woordtransactieEN),w),
@@ -1161,7 +1161,7 @@ helpmenuIT = {
             "1,0,7": textwrap.wrap("La collezione viene ordinata in ordine alfabetico da Z ad A per %s." % (elementenIT[3]),w),
             "1,0,8": textwrap.wrap("La collezione viene ordinata in ordine alfabetico da A ad Z per %s." % (elementenIT[3]),w),
             "1,0,9": textwrap.wrap("Le transazioni con un %s negativo e lo stesso %s positivo vengono accoppiate, il resto viene filtrato." % (elementenIT[1],elementenIT[1]),w),
-        "1,1": textwrap.wrap("Seleziona Transazioni basate su diversi criteri (%s, %s, %s, %s e %s) e genera una tabella ben organizzata. Puoi utilizzare \"scorciatoie da tastiera\", oppure specificare singolarmente tutti gli elementi. Le possibili \"scorciatoie da tastiera\" vengono mostrate; è possibile aggiungere un numero a \"M\" (mese) o \"W\" (settimana): \"0\" include oggi. Tutte le Transazioni selezionate vengono anche raccolte nella collezione, che viene mostrata sempre sopra il menu a discesa. Se la selezione comprende un solo giorno, verrà mostrato il totale di quel giorno." % (elementenIT[0],elementenIT[1],elementenIT[2],elementenIT[3],woordcategorieIT),w),
+        "1,1": textwrap.wrap("Seleziona Transazioni basate su diversi criteri (%s, %s, %s, %s e %s) e genera una tabella ben organizzata. Puoi utilizzare \"scorciatoie da tastiera\", oppure specificare singolarmente tutti gli elementi. Le possibili \"scorciatoie da tastiera\" vengono mostrate; è possibile aggiungere un numero a \"M\" (mese) o \"W\" (settimana): \"0\" include oggi. Prima che venga visualizzata la tabella, ti verrà chiesto come desideri ordinare la collezione. Se non fai una scelta, le Transazioni saranno ordinate per %s e %s raggruppate per %s. Tutte le Transazioni selezionate vengono anche raccolte nella collezione, che viene mostrata sempre sopra il menu a discesa. Se la selezione comprende un solo giorno, verrà mostrato il totale di quel giorno." % (elementenIT[0],elementenIT[1],elementenIT[2],elementenIT[3],woordcategorieIT,elementenIT[0],elementenIT[1],woordcategorieIT),w),
         "1,2": textwrap.wrap("Mostra l'analisi del bilancio di un mese. Di default viene mostrato il mese corrente. Vedrai il progresso di ogni %s rispetto al budget assegnato e le prestazioni mensili." % (woordcategorieIT),w),
         "1,3": textwrap.wrap("Mostra i dettagli delle singole Transazioni nella collezione. Il numero di caratteri consentito in \"%s\" e \"%s\" è illimitato, ma nella tabella (\"1,1\") verranno tagliati e mostrati solo parzialmente. Tutte le informazioni in quei caratteri extra verranno comunque espanse qui. In \"0,1,13\" puoi impostare dopo quante Transazioni visualizzate devi premere \"Invio\" per continuare, oppure \"<\" per uscire dalla visualizzazione." % (elementenIT[2],elementenIT[3]),w),
     "2": textwrap.wrap("È possibile aggiungere nuove Transazioni al proprio conto, assegnandole ciascuna a una %s. Una nuova %s può essere inserita per elemento o in successione su una singola riga in stile CSV, oppure è possibile creare una copia di una %s precedente e modificare i dettagli successivamente con le opzioni sotto \"3\". Le nuove Transazioni vengono aggiunte direttamente alla collezione, in modo da poterle visualizzare o modificare immediatamente." % (woordcategorieIT,woordtransactieIT,woordtransactieIT),w),
@@ -1807,7 +1807,7 @@ helpmenu = {
             "1,0,7": textwrap.wrap("De collectie wordt gesorteerd op %s, van Z naar A" % (elementen[3]),w),
             "1,0,8": textwrap.wrap("De collectie wordt gesorteerd op %s, van A naar Z" % (elementen[3]),w),
             "1,0,9": textwrap.wrap("%ss met een negatief %s en hetzelfde positieve %s worden bij elkaar gezet, de rest wordt weggefilterd." % (woordtransactie,elementen[1],elementen[1]),w),
-        "1,1": textwrap.wrap("Selecteer %ss op basis van verschillende criteria (%s, %s, %s, %s en %s) en genereer een overzichtelijke tabel. Er kan gebruik worden gemaakt van \"sneltoetsen\", of u kunt alle elementen afzonderlijk opgeven. De mogelijke \"sneltoetsen\" worden vooraf getoond; \"M\" (maand) of \"W\" (week) moeten worden voorzien van een getal; \"0\" is inclusief vandaag. Alle geselecteerde %ss worden ook verzameld in de collectie, die steeds getoond wordt boven het keuzemenu. Omvat de selectie één dag, dan wordt het dagtotaal op die dag getoond." % (woordtransactie,elementen[0],elementen[1],elementen[2],elementen[3],woordcategorie,woordtransactie),w),
+        "1,1": textwrap.wrap("Selecteer %ss op basis van verschillende criteria (%s, %s, %s, %s en %s) en genereer een overzichtelijke tabel. Er kan gebruik worden gemaakt van \"sneltoetsen\", of u kunt alle elementen afzonderlijk opgeven. De mogelijke \"sneltoetsen\" worden vooraf getoond; \"M\" (maand) of \"W\" (week) moeten worden voorzien van een getal; \"0\" is inclusief vandaag. Voordat de tabel wordt getoond wordt u gevraagd op welke wijze u de collectie wilt sorteren. Maakt u geen keuze, dan staan de %ss op volgorde van %s en %s gegroepeerd per %s. Alle geselecteerde %ss worden ook verzameld in de collectie, die steeds getoond wordt boven het keuzemenu. Omvat de selectie één dag, dan wordt het dagtotaal op die dag getoond." % (woordtransactie,elementen[0],elementen[1],elementen[2],elementen[3],woordcategorie,woordtransactie,elementen[0],elementen[1],woordcategorie,woordtransactie),w),
         "1,2": textwrap.wrap("Toon de budgetanalyse van één maand. Standaard wordt de huidige maand getoond. U ziet de voortgang van iedere %s ten opzichte van het daaraan toegekende budget, en de maandprestatie." % (woordcategorie),w),
         "1,3": textwrap.wrap("Toon de details van individuele %ss in de collectie. Het toegestaan aantal karakters in \"%s\" en \"%s\" is onbeperkt, maar in de tabel (\"1,1\") worden die afgekapt en slechts ten dele getoond. Alle informatie in die extra karakters wordt hier wel uitgevouwen. In \"0,1,13\" kunt u instellen na hoeveel weergegeven %ss u op \"Enter\" moet drukken om door te gaan, of \"<\" om de weergave te verlaten." % (woordtransactie,elementen[2],elementen[3],woordtransactie),w),
     "2": textwrap.wrap("U kunt nieuwe %ss aan uw rekening toevoegen, die elk aan een %s worden toegekend. Een nieuwe %s kunt u per element invoeren of achter elkaar op één regel in CSV-stijl, of u kunt een kopie maken van een eerdere %s en de details later aanpassen met de opties onder \"3\". Nieuwe %ss worden direct aan de collectie toegevoegd, zodat u die meteen kunt inzien of aanpassen." % (woordtransactie,woordcategorie,woordtransactie,woordtransactie,woordtransactie),w),
@@ -2242,7 +2242,7 @@ def doei(): # geen H
     except(Exception) as f:
         #print(f)
         exit()
-    if header[nieuwheaderlijst[13]] == ">":
+    if header[nieuwheaderlijst[14]] == ">":
         exportcsv(rekening)
     if Taal == "EN":
         print(coltekst+forcw("Thank you for using mimosasa and have a nice day")+ResetAll)
@@ -2261,6 +2261,7 @@ def exportcsv(rekening): # geen H
     rekeningtotaal = rekeningsom(rekening)
     alternatievenamendict = haalalternatievenamen(rekening)
     with open(os.path.join(rekening,"export.csv"),"w") as e:
+        print("#", end = ",", file = e)                 # "#" geeft aan welke rekening dit betreft
         print(rekening+","+str(rekeningtotaal)+",", file = e)
         cat = {}
         for i in ok:
@@ -2268,16 +2269,21 @@ def exportcsv(rekening): # geen H
             cat[categorie] = ""
         geprint = False
         for i in cat:
+            index = 0
             categorie = haalcategorie(rekening,i)
             budget = str(categorie[0][1])
             if geprint == False:
+                print("c", end = ",", file = e)         # "c" geeft aan welke Categorie dit betreft (let op: KLEINE LETTER c)
                 print(i+","+alternatievenamendict[i]+","+budget+",", file = e)
                 geprint = True
             for j in ok:
                 if i in j:
+                    print("t", end = ",", file = e)     # "t" geeft aan welke Transactie dit betreft (let op: KLEINE LETTER t)
+                    print(index, end = ",", file = e)
                     for k in ok[j]:
                         print(k, end = ",", file = e)
                     print("", file = e)
+                    index += 1
                 geprint = False
 
 def checkfloat(floattest): # geen H
@@ -3672,21 +3678,39 @@ def printselectie(rekening,header,col,ok): # H
     print(elementenlijn, end = "")
     print(kleuren["coltoon"]+"|"+kleuren["ResetAll"])
     print(kleuren["coltoon"]+scheidingslijn+kleuren["ResetAll"])
+    oktot = 0
     for i in ok:
         K = ""
         forsom = fornum
         getal = ok[i][1]
+        oktot += getal
         keen,forsom,K = grootgetal(getal,forsom,K)
         datum = ok[i][0]
         mnd = vertaalmnd(datum)
         datum = opmaakdatum(datum)
-        #transactielijnzw = "|"+forr5(i)+" :"+forc10(datum)+" "+forl2(valuta)+forsom(keen)+K+" "+forr14(ok[i][2][:14])+" "+forl34(ok[i][3][:34])+"|" # Uncomment bij print naar file
-        #print(transactielijnzw, file = m)                                                                                                             # Uncomment bij print naar file
+        #transactielijnzw = "|"+forr5(i)+" :"+forc10(datum)+" "+forl2(valuta)+forsom(keen)+K+" "+forr14(ok[i][2][:14])+" "+forl34(ok[i][3][:34])+"|"# Uncomment bij print naar file
+        #print(transactielijnzw, file = m)                                                                                                          # Uncomment bij print naar file
         transactielijn = kleuren["coltoon"]+"|"+kleuren["ResetAll"]+catcol[i[0]]+forr5(i)+kleuren["ResetAll"]+" :"+forc10(datum)+" "+kleinegetalkleuren(getal)+forl2(valuta)+kleuren["ResetAll"]+forsom(keen)+K+" "+forr14(ok[i][2][:14])+" "+catcol[i[0]]+forl34(ok[i][3][:34])+kleuren["ResetAll"]+kleuren["coltoon"]+"|"+kleuren["ResetAll"] # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
-        print(transactielijn) # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+        print(transactielijn)                                                                       # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
     print(kleuren["coltoon"]+toplijn+kleuren["ResetAll"])
+    if Taal == "EN":                                                                                                                                                                            # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+        print("Number of %ss: %s - Total %s in this collection: %s" % (woordtransactieEN,len(ok),elementenEN[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))  # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+    elif Taal == "IT":                                                                                                                                                                          # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+        print("Numero di Transazioni: %s - Totale %s in questa collezione: %s" % (len(ok),elementenIT[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+    elif Taal == "CJ":                                                                                                                                                                          # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+        print("hubi %s: %s - %spu hopaʒi: %s" % (woordtransactieCJ,len(ok),elementenCJ[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))                        # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+    else:                                                                                                                                                                                       # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+        print("Aantal %ss: %s - Totaal %s in deze collectie: %s" % (woordtransactie,len(ok),elementen[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+    #if Taal == "EN":                                                                                                                                       # Uncomment bij print naar file
+    #    print("Number of %ss: %s - Total %s in this collection: %s" % (woordtransactieEN,len(ok),elementenEN[1],valuta+" "+str(round(oktot,2))), file = m) # uncomment bij print naar file
+    #elif Taal == "IT":                                                                                                                                     # uncomment bij print naar file
+    #    print("Numero di Transazioni: %s - Totale %s in questa collezione: %s" % (len(ok),elementenIT[1],valuta+" "+str(round(oktot,2))), file = m)        # uncomment bij print naar file
+    #elif Taal == "CJ":                                                                                                                                     # uncomment bij print naar file
+    #    print("hubi %s: %s - %spu hopaʒi: %s" % (woordtransactieCJ,len(ok),elementenCJ[1],valuta+" "+str(round(oktot,2))), file = m)                       # uncomment bij print naar file
+    #else:                                                                                                                                                  # uncomment bij print naar file
+    #    print("Aantal %ss: %s - Totaal %s in deze collectie: %s" % (woordtransactie,len(ok),elementen[1],valuta+" "+str(round(oktot,2))), file = m)        # uncomment bij print naar file
     ########## print naar scherm stop ##########
-    if header[nieuwheaderlijst[12]] == ">" and len(str(datumlijst[0])) == 8 and str(datumlijst[0])[:6] == str(datumlijst[1])[:6]:
+    if header[nieuwheaderlijst[13]] == ">" and len(str(datumlijst[0])) == 8 and str(datumlijst[0])[:6] == str(datumlijst[1])[:6]:
         kleuren,catcol,getalkleur = printkleuren() ########## deze regel haalt de kleuren weg voor "print naar file". HERHAAL DEZE LIJN DIRECT BOVEN transactielijn = !!
         col = ""
         with open(os.path.join(rekening,str(datumlijst[0])[:6]),"w") as m:
@@ -3713,6 +3737,22 @@ def printselectie(rekening,header,col,ok): # H
                 #transactielijn = kleuren["coltoon"]+"|"+kleuren["ResetAll"]+catcol[i[0]]+forr5(i)+kleuren["ResetAll"]+" :"+forc10(datum)+" "+kleinegetalkleuren(getal)+forl2(valuta)+kleuren["ResetAll"]+forsom(keen)+K+" "+forr14(ok[i][2][:14])+" "+catcol[i[0]]+forl34(ok[i][3][:34])+kleuren["ResetAll"]+kleuren["coltoon"]+"|"+kleuren["ResetAll"] # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
                 #print(transactielijn) # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
             print(kleuren["coltoon"]+toplijn+kleuren["ResetAll"], file = m)
+            #if Taal == "EN":                                                                                                                                                                            # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+            #    print("Number of %ss: %s - Total %s in this collection: %s" % (woordtransactieEN,len(ok),elementenEN[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))  # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+            #elif Taal == "IT":                                                                                                                                                                          # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+            #    print("Numero di Transazioni: %s - Totale %s in questa collezione: %s" % (len(ok),elementenIT[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+            #elif Taal == "CJ":                                                                                                                                                                          # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+            #    print("hubi %s: %s - %spu hopaʒi: %s" % (woordtransactieCJ,len(ok),elementenCJ[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))                        # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+            #else:                                                                                                                                                                                       # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+            #    print("Aantal %ss: %s - Totaal %s in deze collectie: %s" % (woordtransactie,len(ok),elementen[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+            if Taal == "EN":                                                                                                                                       # Uncomment bij print naar file
+                print("Number of %ss: %s - Total %s in this collection: %s" % (woordtransactieEN,len(ok),elementenEN[1],valuta+" "+str(round(oktot,2))), file = m) # uncomment bij print naar file
+            elif Taal == "IT":                                                                                                                                     # uncomment bij print naar file
+                print("Numero di Transazioni: %s - Totale %s in questa collezione: %s" % (len(ok),elementenIT[1],valuta+" "+str(round(oktot,2))), file = m)        # uncomment bij print naar file
+            elif Taal == "CJ":                                                                                                                                     # uncomment bij print naar file
+                print("hubi %s: %s - %spu hopaʒi: %s" % (woordtransactieCJ,len(ok),elementenCJ[1],valuta+" "+str(round(oktot,2))), file = m)                       # uncomment bij print naar file
+            else:                                                                                                                                                  # uncomment bij print naar file
+                print("Aantal %ss: %s - Totaal %s in deze collectie: %s" % (woordtransactie,len(ok),elementen[1],valuta+" "+str(round(oktot,2))), file = m)        # uncomment bij print naar file
             ########## print naar file stop ##########
     if datumlijst[0] == datumlijst[1]:
         dagtotaal(rekening,header,col,datumlijst[0])
@@ -5652,30 +5692,6 @@ def wijziganalyse2txt(rekening,header): # geen H
     IBAN = rekening[:rekening.index("#")]
     JAAR = forr4(rekening[rekening.index("#")+1:])
     if Taal == "EN":
-        vraag = textwrap.wrap("Change %s %s %s from %s to:" % (IBAN,JAAR,nieuwheaderlijstEN[12],coljanee(rekening,header,header[nieuwheaderlijst[12]])+vertaalv(header[nieuwheaderlijst[12]])+kleuren["ResetAll"]),w)
-    elif Taal == "IT":
-        vraag = textwrap.wrap("Cambia %s %s %s da %s in:" % (IBAN,JAAR,nieuwheaderlijstIT[12],coljanee(rekening,header,header[nieuwheaderlijst[12]])+vertaalv(header[nieuwheaderlijst[12]])+kleuren["ResetAll"]),w)
-    elif Taal == "CJ":
-        vraag = textwrap.wrap("hazüi %s %s %s qi %s qe:" % (IBAN,JAAR,nieuwheaderlijstCJ[12],coljanee(rekening,header,header[nieuwheaderlijst[12]])+vertaalv(header[nieuwheaderlijst[12]])+kleuren["ResetAll"]),w)
-    else:
-        vraag = textwrap.wrap("Wijzig %s %s %s van %s naar:" % (IBAN,JAAR,nieuwheaderlijst[12],coljanee(rekening,header,header[nieuwheaderlijst[12]])+vertaalv(header[nieuwheaderlijst[12]])+kleuren["ResetAll"]),w)
-    for i in vraag:
-        print(i)
-    antwoord = geefjaofnee(rekening,header)
-    if antwoord.upper() in afsluitlijst:
-        doei()
-    else:
-        header[nieuwheaderlijst[12]] = antwoord
-        with open(os.path.join(rekening,"header"),"w") as h:
-            print(header, file = h, end = "")
-    return header
-
-def wijzigexport2csv(rekening,header): # geen H
-    kleuren,catcol = updatekleuren(rekening)
-    Taal = header[nieuwheaderlijst[3]]
-    IBAN = rekening[:rekening.index("#")]
-    JAAR = forr4(rekening[rekening.index("#")+1:])
-    if Taal == "EN":
         vraag = textwrap.wrap("Change %s %s %s from %s to:" % (IBAN,JAAR,nieuwheaderlijstEN[13],coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"]),w)
     elif Taal == "IT":
         vraag = textwrap.wrap("Cambia %s %s %s da %s in:" % (IBAN,JAAR,nieuwheaderlijstIT[13],coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"]),w)
@@ -5694,7 +5710,7 @@ def wijzigexport2csv(rekening,header): # geen H
             print(header, file = h, end = "")
     return header
 
-def wijzigtipvandedag(rekening,header): # geen H
+def wijzigexport2csv(rekening,header): # geen H
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     IBAN = rekening[:rekening.index("#")]
@@ -5714,6 +5730,30 @@ def wijzigtipvandedag(rekening,header): # geen H
         doei()
     else:
         header[nieuwheaderlijst[14]] = antwoord
+        with open(os.path.join(rekening,"header"),"w") as h:
+            print(header, file = h, end = "")
+    return header
+
+def wijzigtipvandedag(rekening,header): # geen H
+    kleuren,catcol = updatekleuren(rekening)
+    Taal = header[nieuwheaderlijst[3]]
+    IBAN = rekening[:rekening.index("#")]
+    JAAR = forr4(rekening[rekening.index("#")+1:])
+    if Taal == "EN":
+        vraag = textwrap.wrap("Change %s %s %s from %s to:" % (IBAN,JAAR,nieuwheaderlijstEN[15],coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]])+kleuren["ResetAll"]),w)
+    elif Taal == "IT":
+        vraag = textwrap.wrap("Cambia %s %s %s da %s in:" % (IBAN,JAAR,nieuwheaderlijstIT[15],coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]])+kleuren["ResetAll"]),w)
+    elif Taal == "CJ":
+        vraag = textwrap.wrap("hazüi %s %s %s qi %s qe:" % (IBAN,JAAR,nieuwheaderlijstCJ[15],coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]])+kleuren["ResetAll"]),w)
+    else:
+        vraag = textwrap.wrap("Wijzig %s %s %s van %s naar:" % (IBAN,JAAR,nieuwheaderlijst[15],coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]])+kleuren["ResetAll"]),w)
+    for i in vraag:
+        print(i)
+    antwoord = geefjaofnee(rekening,header)
+    if antwoord.upper() in afsluitlijst:
+        doei()
+    else:
+        header[nieuwheaderlijst[15]] = antwoord
         with open(os.path.join(rekening,"header"),"w") as h:
             print(header, file = h, end = "")
     return header
