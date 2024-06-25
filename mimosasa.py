@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.68"
-versiedatum = "20240616"
+versie = "0.0.69"
+versiedatum = "20240625"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -3134,7 +3134,7 @@ def geefwederpartij(rekening,header,col,ok): # H
     maxlen = len(max(elcat,key = len))
     loop = True
     while loop == True:
-        wederpartij = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(elcat[2].upper())+ResetAll+inputindent)
+        wederpartij = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(elcat[2].upper())+ResetAll+inputindent).replace(",","")
         if wederpartij.upper() in afsluitlijst:
             doei()
         elif wederpartij.upper() in neelijst:
@@ -3170,7 +3170,7 @@ def geefonderwerp(rekening,header,col,ok): # H
     maxlen = len(max(elcat,key = len))
     loop = True
     while loop == True:
-        onderwerp = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(elcat[3].upper())+ResetAll+inputindent)
+        onderwerp = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(elcat[3].upper())+ResetAll+inputindent).replace(",","")
         if onderwerp.upper() in afsluitlijst:
             doei()
         elif onderwerp.upper() in neelijst:
@@ -4378,7 +4378,6 @@ def nieuwnieuw(rekening,ok): # H
             for i in wraptekst1:
                 print(i)
         elif len(nieuwetransactieinputlijst) == 5:
-            print(nieuwetransactieinputlijst)
             if nieuwetransactieinputlijst[0] == "":
                 transactiedatum = int(nustr) 
             elif nieuwetransactieinputlijst[0] == "-":
