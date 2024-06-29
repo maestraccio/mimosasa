@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.69"
-versiedatum = "20240625"
+versie = "0.0.70"
+versiedatum = "20240629"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -4416,7 +4416,14 @@ def nieuwnieuw(rekening,ok): # H
             else:
                 test = checkint(nieuwetransactieinputlijst[0])
                 if test == True:
-                    transactiedatum = int(datetime.strftime(datetime.strptime(nustr,"%Y%m%d") - timedelta(days = int(nieuwetransactieinputlijst[0])),"%Y%m%d"))
+                    if len(str(nieuwetransactieinputlijst[0])) == 8:
+                        test = checkdatum(nieuwetransactieinputlijst[0])
+                        if test == True:
+                            transactiedatum = int(nieuwetransactieinputlijst[0])
+                        else:
+                            transactiedatum = int(datetime.strftime(datetime.strptime(nustr,"%Y%m%d") - timedelta(days = int(nieuwetransactieinputlijst[0])),"%Y%m%d"))
+                    else:
+                        transactiedatum = int(datetime.strftime(datetime.strptime(nustr,"%Y%m%d") - timedelta(days = int(nieuwetransactieinputlijst[0])),"%Y%m%d"))
                 else:
                     transactiedatum = int(nustr)
             if checkfloat(nieuwetransactieinputlijst[1]) == True:
