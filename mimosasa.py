@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.70"
-versiedatum = "20240629"
+versie = "0.0.75"
+versiedatum = "20241012"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -4463,6 +4463,27 @@ def nieuwnieuw(rekening,ok): # H
                 nieuwetransactie.append(transactiebedrag)
                 nieuwetransactie.append(wederpartij)
                 nieuwetransactie.append(onderwerp)
+                # Hier iets met "Toverwoord voor Spaarpotten": als ok[i][3] een "Toverwoord" bevat, vraag of deze verrekend moet worden met spaarpot
+                spaarpotten = haalspaarpotten(rekening)
+                if "#" in onderwerp:
+                    for i in spaarpotten:
+                        if i in onderwerp and transactiebedrag != 0:
+                            transactiebedrag = alsspaarpot(rekening,header,spaarpotten,i,transactiebedrag)
+                            break
+                    if Taal == "EN":
+                        wraptekst = textwrap.wrap("The %s contains an unassociated \"#\" symbol. You can choose to replace this symbol with a %s from the list provided, or leave the selection list without making a choice and not to replace the \"#\" symbol." % (elementenEN[3],woordspaarpotEN),w)
+                    elif Taal == "IT":
+                        wraptekst = textwrap.wrap("Il %s contiene un simbolo \"#\" non associato. Puoi scegliere di sostituire questo simbolo con un %s dalla lista fornita, oppure uscire dalla lista di selezione senza fare una scelta e non sostituire il simbolo \"#\"." % (elementenIT[3],woordspaarpotIT),w)
+                    elif Taal == "CJ":
+                        wraptekst = textwrap.wrap("%s %s %s" % (elementenCJ[3],woordspaarpotCJ,woordspaarpotCJ),w)
+                    else:
+                        wraptekst = textwrap.wrap("Het %s bevat een ongekoppeld \"#\"-karakter. U kunt ervoor kiezen dit symbool te vervangen door een %s uit de gepresenteerde lijst, of de selectielijst te verlaten zonder een keuze te maken en het \"#\"-karakter niet te vervangen." % (elementen[3],woordspaarpot),w)
+                    for i in wraptekst:
+                        print(kleuren["5"]+i+kleuren["ResetAll"])
+                    spaarpot = kiesspaarpot(rekening,header)
+                    if str(spaarpot) not in neelijst:
+                        alsspaarpot(rekening,header,spaarpotten,spaarpot,transactiebedrag)
+                        nieuwetransactie[3] = onderwerp.replace("#",spaarpot)
                 categorie = haalcategorie(rekening,nieuwetransactiecategorie)
                 categorie.append(nieuwetransactie)
                 cattrans = sorted(categorie[1:])
@@ -4470,11 +4491,6 @@ def nieuwnieuw(rekening,ok): # H
                 for j in cattrans:
                     cat.append(j)
                 schrijfcategorie(rekening,nieuwetransactiecategorie,cat)
-                # Hier iets met "Toverwoord voor Spaarpotten": als ok[i][3] een "Toverwoord" bevat, vraag of deze verrekend moet worden met spaarpot
-                spaarpotten = haalspaarpotten(rekening)
-                for i in spaarpotten:
-                    if i in onderwerp and transactiebedrag != 0:
-                        transactiebedrag = alsspaarpot(rekening,header,spaarpotten,i,transactiebedrag)
                 IDlijst.append(nieuwetransactiecategorie+str(categorie.index(nieuwetransactie)-1))
                 ok = IDlijst2ok(IDlijst)
                 toontransactie(rekening,header,col,ok)
