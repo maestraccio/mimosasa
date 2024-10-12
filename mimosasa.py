@@ -3,7 +3,7 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.75"
+versie = "0.0.76"
 versiedatum = "20241012"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
@@ -4466,24 +4466,26 @@ def nieuwnieuw(rekening,ok): # H
                 # Hier iets met "Toverwoord voor Spaarpotten": als ok[i][3] een "Toverwoord" bevat, vraag of deze verrekend moet worden met spaarpot
                 spaarpotten = haalspaarpotten(rekening)
                 if "#" in onderwerp:
+                    hekje = True
                     for i in spaarpotten:
-                        if i in onderwerp and transactiebedrag != 0:
+                        if i in onderwerp:
                             transactiebedrag = alsspaarpot(rekening,header,spaarpotten,i,transactiebedrag)
-                            break
-                    if Taal == "EN":
-                        wraptekst = textwrap.wrap("The %s contains an unassociated \"#\" symbol. You can choose to replace this symbol with a %s from the list provided, or leave the selection list without making a choice and not to replace the \"#\" symbol." % (elementenEN[3],woordspaarpotEN),w)
-                    elif Taal == "IT":
-                        wraptekst = textwrap.wrap("Il %s contiene un simbolo \"#\" non associato. Puoi scegliere di sostituire questo simbolo con un %s dalla lista fornita, oppure uscire dalla lista di selezione senza fare una scelta e non sostituire il simbolo \"#\"." % (elementenIT[3],woordspaarpotIT),w)
-                    elif Taal == "CJ":
-                        wraptekst = textwrap.wrap("%s %s %s" % (elementenCJ[3],woordspaarpotCJ,woordspaarpotCJ),w)
-                    else:
-                        wraptekst = textwrap.wrap("Het %s bevat een ongekoppeld \"#\"-karakter. U kunt ervoor kiezen dit symbool te vervangen door een %s uit de gepresenteerde lijst, of de selectielijst te verlaten zonder een keuze te maken en het \"#\"-karakter niet te vervangen." % (elementen[3],woordspaarpot),w)
-                    for i in wraptekst:
-                        print(kleuren["5"]+i+kleuren["ResetAll"])
-                    spaarpot = kiesspaarpot(rekening,header)
-                    if str(spaarpot) not in neelijst:
-                        alsspaarpot(rekening,header,spaarpotten,spaarpot,transactiebedrag)
-                        nieuwetransactie[3] = onderwerp.replace("#",spaarpot)
+                            hekje = False
+                    if hekje == True:
+                        if Taal == "EN":
+                            wraptekst = textwrap.wrap("The %s contains an unassociated \"#\" symbol. You can choose to replace this symbol with a %s from the list provided, or leave the selection list without making a choice and not to replace the \"#\" symbol." % (elementenEN[3],woordspaarpotEN),w)
+                        elif Taal == "IT":
+                            wraptekst = textwrap.wrap("Il %s contiene un simbolo \"#\" non associato. Puoi scegliere di sostituire questo simbolo con un %s dalla lista fornita, oppure uscire dalla lista di selezione senza fare una scelta e non sostituire il simbolo \"#\"." % (elementenIT[3],woordspaarpotIT),w)
+                        elif Taal == "CJ":
+                            wraptekst = textwrap.wrap("%s %s %s" % (elementenCJ[3],woordspaarpotCJ,woordspaarpotCJ),w)
+                        else:
+                            wraptekst = textwrap.wrap("Het %s bevat een ongekoppeld \"#\"-karakter. U kunt ervoor kiezen dit symbool te vervangen door een %s uit de gepresenteerde lijst, of de selectielijst te verlaten zonder een keuze te maken en het \"#\"-karakter niet te vervangen." % (elementen[3],woordspaarpot),w)
+                        for i in wraptekst:
+                            print(kleuren["5"]+i+kleuren["ResetAll"])
+                        spaarpot = kiesspaarpot(rekening,header)
+                        if str(spaarpot) not in neelijst:
+                            alsspaarpot(rekening,header,spaarpotten,spaarpot,transactiebedrag)
+                            nieuwetransactie[3] = onderwerp.replace("#",spaarpot)
                 categorie = haalcategorie(rekening,nieuwetransactiecategorie)
                 categorie.append(nieuwetransactie)
                 cattrans = sorted(categorie[1:])
@@ -7291,58 +7293,55 @@ def nieuwespaarpot(rekening,header): # geen H
     spaarpottenlijst = []
     for i in spaarpotten:
         spaarpottenlijst.append(i)
-    if len(spaarpotten) > 0:
-        toonspaarpotten(rekening,header)
-        if Taal == "EN":
-            print(menuEN["5,2"])
-            vragenlijst = ["Name",lijnlijstEN[2]]
-            bestaatal = "This %s exists already" % (woordspaarpotEN)
-        elif Taal == "IT":
-            print(menuIT["5,2"])
-            vragenlijst = ["Nome",lijnlijstIT[2]]
-            bestaatal = "Questo %s esiste già" % (woordspaarpotIT)
-        elif Taal == "CJ":
-            print(menuCJ["5,2"])
-            vragenlijst = ["huhi",lijnlijstCJ[2]]
-            bestaatal = "%sʒi hoqüoqila" % (woordspaarpotCJ)
-        else:
-            print(menu["5,2"])
-            vragenlijst = ["Naam",lijnlijst[2]]
-            bestaatal = "Deze %s bestaat al" % (woordspaarpot)
-        maxlen = len(max(vragenlijst, key = len))
-        loop = True
-        while loop == True:
-            naam = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(vragenlijst[0])+kleuren["ResetAll"]+inputindent)
-            if naam.upper() in afsluitlijst:
-                doei()
-            elif naam.upper() in neelijst:
-                return "<"
-            elif len(naam) > 0:
-                if naam[0] != "#":
-                    naam = "#"+naam
-            if naam in spaarpotten:
-                print(kleuren["colslecht"]+bestaatal+kleuren["ResetAll"])
-            elif naam == "":
-                pass
-            else:    
-                print(col+naam+kleuren["ResetAll"])
-                doel = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(vragenlijst[1])+kleuren["ResetAll"]+inputindent)
-                if doel.upper() in afsluitlijst:
-                    doei()
-                elif doel.upper() in neelijst:
-                    return "<"
-                test = checkfloat(doel)
-                if test == True:
-                    print(col+valuta+fornum(float(doel))+kleuren["ResetAll"])
-                    spaarpotten[naam] = [float(doel),0,0]
-                    with open(os.path.join(rekening,"spaarpotten"),"w") as s:
-                        print(spaarpotten, file = s, end = "")
-                    toonspaarpotten(rekening,header)
-                else:
-                    print(kleuren["colslecht"]+oeps+kleuren["ResetAll"])
-                
+    toonspaarpotten(rekening,header)
+    if Taal == "EN":
+        print(menuEN["5,2"])
+        vragenlijst = ["Name",lijnlijstEN[2]]
+        bestaatal = "This %s exists already" % (woordspaarpotEN)
+    elif Taal == "IT":
+        print(menuIT["5,2"])
+        vragenlijst = ["Nome",lijnlijstIT[2]]
+        bestaatal = "Questo %s esiste già" % (woordspaarpotIT)
+    elif Taal == "CJ":
+        print(menuCJ["5,2"])
+        vragenlijst = ["huhi",lijnlijstCJ[2]]
+        bestaatal = "%sʒi hoqüoqila" % (woordspaarpotCJ)
     else:
-        return "<"
+        print(menu["5,2"])
+        vragenlijst = ["Naam",lijnlijst[2]]
+        bestaatal = "Deze %s bestaat al" % (woordspaarpot)
+    maxlen = len(max(vragenlijst, key = len))
+    loop = True
+    while loop == True:
+        naam = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(vragenlijst[0])+kleuren["ResetAll"]+inputindent)
+        if naam.upper() in afsluitlijst:
+            doei()
+        elif naam.upper() in neelijst:
+            return "<"
+        elif len(naam) > 0:
+            if naam[0] != "#":
+                naam = "#"+naam
+        if naam in spaarpotten:
+            print(kleuren["colslecht"]+bestaatal+kleuren["ResetAll"])
+        elif naam == "":
+            pass
+        else:    
+            print(col+naam+kleuren["ResetAll"])
+            doel = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(vragenlijst[1])+kleuren["ResetAll"]+inputindent)
+            if doel.upper() in afsluitlijst:
+                doei()
+            elif doel.upper() in neelijst:
+                return "<"
+            test = checkfloat(doel)
+            if test == True:
+                print(col+valuta+fornum(float(doel))+kleuren["ResetAll"])
+                spaarpotten[naam] = [float(doel),0,0]
+                with open(os.path.join(rekening,"spaarpotten"),"w") as s:
+                    print(spaarpotten, file = s, end = "")
+                toonspaarpotten(rekening,header)
+            else:
+                print(kleuren["colslecht"]+oeps+kleuren["ResetAll"])
+                
 
 def kiesspaarpot(rekening,header): # geen H
     kleuren,catcol = updatekleuren(rekening)
