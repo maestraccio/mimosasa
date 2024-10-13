@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.76"
-versiedatum = "20241012"
+versie = "0.0.77"
+versiedatum = "20241013"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -4471,7 +4471,7 @@ def nieuwnieuw(rekening,ok): # H
                         if i in onderwerp:
                             transactiebedrag = alsspaarpot(rekening,header,spaarpotten,i,transactiebedrag)
                             hekje = False
-                    if hekje == True:
+                    if hekje == True and len(spaarpotten) > 0:
                         if Taal == "EN":
                             wraptekst = textwrap.wrap("The %s contains an unassociated \"#\" symbol. You can choose to replace this symbol with a %s from the list provided, or leave the selection list without making a choice and not to replace the \"#\" symbol." % (elementenEN[3],woordspaarpotEN),w)
                         elif Taal == "IT":
@@ -7404,6 +7404,8 @@ def verwijderspaarpot(rekening,header): # geen H
             wraptekst2 = textwrap.wrap("Kies een %s" % (woordspaarpot),w)
         loop = True
         while loop == True:
+            if len(spaarpotten) == 0:
+                return "<"
             for i in wraptekst1:
                 print(i)
             for i in wraptekst2:
