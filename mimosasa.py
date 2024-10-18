@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.77"
-versiedatum = "20241013"
+versie = "0.0.78"
+versiedatum = "20241018"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -101,7 +101,7 @@ woordtransactieIT = "Transazione"
 #           Choice(                         # choice        # me
 #               Direction1(                 # forward       # se
 #                   Separator(              # or            # m
-#                       Direction-0(        # from direction# süi
+#                       Direction-0(        # inward        # süi
 #)  )   )   )   )   )   )
 woordtransactieCJ = "hubiwamesemsüi"
 woordtransactie = "Transactie"
@@ -114,7 +114,7 @@ woordcategorieIT = "Categoria"
 #               Choice(                     # choice        # me
 #                   Direction1(             # forward       # se
 #                       Separator(          # or            # m
-#                           Direction-0(    # from direction# süi
+#                           Direction-0(    # inward        # süi
 #)  )   )   )   )   )   )   )
 woordcategorieCJ = "hupabiwamesemsüi"
 woordcategorie = "Categorie"
@@ -227,12 +227,12 @@ nieuwheaderlijstIT = [
         ]
 nieuwheaderlijstCJ = [
 #WTI:NOUN(                                  #               # hu
-#   Attribute(                              # name          # hi
+#   Adverb(                                 # name          # hi
 #       Distance0(                          # here          # ʒi
 #)  )   )
         "huhiʒi",
 #WTI:NOUN(                                  #               # hu
-#   Attribute(                              # name          # hi
+#   Adverb(                                 # name          # hi
 #       Nature4(                            # person        # fu
 #           Connection1(                    # associated    # ŋe
 #               Distance0(                  # here          # ʒi
@@ -251,12 +251,12 @@ nieuwheaderlijstCJ = [
 #)
         "mi huʒiʃa melamli",
 #WTI:NOUN(                                  #               # hu
-#   Registration3(                          # speak         # co
+#   Registration3(                          # sound         # co
 #       Distance0(                          # here          # ʒi
 #)  )   )
         "hucoʒi",
 #WTI:NOUN(                                  #               # hu
-#   Registration3(                          # name          # hi
+#   ADVERB(                                 # label         # hi
 #      Matter2(                             # stuff         # wa
 #)  )   )
         "huhiwa",
@@ -276,7 +276,7 @@ nieuwheaderlijstCJ = [
 #           Matter2(                        # stuff         # wa
 #               Scaling4(                   # all           # pu
 #   )   )   )   )
-#   WTI:ATTRIBUTE(                          #               # hi
+#   WTI:ADVERB(                             #               # hi
 #       Time0(                              # start         # zi
 #           ?(                              # APP           # APP
 #   )   )   )
@@ -309,7 +309,7 @@ nieuwheaderlijstCJ = [
 #           Registration2(                  # see           # ca
 #   )       ))
 #   WTI:(woordcategorie)(                   # woordcategorie# %s
-#       Phase0(                             # vacuum        # vi
+#       Phase0(                             # empty         # vi
 #           Scaling2(                       # group         # pa
 #   )   )   )
 #   WTI:Choice(                             # or            # me
@@ -322,7 +322,7 @@ nieuwheaderlijstCJ = [
 #STI:CHOICE(                                # choice        # me
 #   WTI:NOUN(                               #               # hu
 #       Registration2(                      # visual        # ca
-#           Attribute(                      # name          # hi
+#           Adverb(                         # name          # hi
 #               Time0(                      # zero          # qi
 #   )   )   )   )
 #)
@@ -444,7 +444,7 @@ lijnlijstCJ = [
 #)  )
         "hubi",
 #WTI:NOUN(                                  #               # hu
-#   Attribute(                              # name          # hi
+#   Adverb(                                 # name          # hi
 #)  )
         "huhi",
 #WTI:NOUN(                                  #               # hu
@@ -870,7 +870,7 @@ menuCJ = {
 #   Progression-0(                          # turn around   # züi
 #)  )
 #WTI:NOUN(                                  #               # hu
-#   Attribute(                              # name          # hi
+#   Adverb(                                 # name          # hi
 #)  )
             "0,2,2": " hazüi huhi %s" % (woordcategorieCJ),
 #WTI:VERB(                                  #               # ha
@@ -917,7 +917,7 @@ menuCJ = {
 #           Progression0(                   # start         # zi
 #)  )   )   )
 #WTI:NOUN(                                  #               # hu
-#   Attribute(                              # name          # hi
+#   Adverb(                                 # name          # hi
 #       (woordcategorie)(                   # woordcategorie# %s
 #           Scaling4(                       # all           # pu
 #)  )   )   )
@@ -1204,7 +1204,7 @@ helpmenuCJ = {
 #   WTI:(woordspaarpot)(                # savings pot   # %s
 #       Scaling2(                       # s             # pa
 #   )   )
-#   WTI:ATTRIBUTE(                      #               # hi
+#   WTI:ADVERB(                         #               # hi
 #       Connection2(                    # with          # ŋa
 #   )   )
 #   WTI:NOUN(                           #               # hu
@@ -1239,7 +1239,7 @@ helpmenuCJ = {
 # ma heu haʃaxa po %spa pa %spa hiŋa huAPPʒi"MIMOSASA" hasüiŋobiwabi haŋaʃobiwabi hufuMAESTRACCIO hazaŋaPYTHON.
 #STI:PHRASE(                            #               # ma
 #   WTI:NOUN(                           #               # hu
-#       Attribute(                      # label/name    # hi
+#       Adverb(                         # label/name    # hi
 #           ?(                          # "MIMOSASA"    # "MIMOSASA"
 #   )   )   )
 #   WTI:VERB(                           #               # ha
@@ -1262,7 +1262,7 @@ helpmenuCJ = {
 #       Choice(                         # choose        # me
 #           ?(                          # "H"           # "H"
 #   )   )   )
-#   WTI:ATTRIBUTE(                      #               # hi
+#   WTI:ADVERB(                         #               # hi
 #       Distance0(                      # here          # ʒi
 #           Scaling3(                   # many          # po
 #   )   )   )
@@ -1296,7 +1296,7 @@ helpmenuCJ = {
 #   )
 #   ?(                                  # \"(\", \"[\", # \"(\", \"[\",
 #   )
-#   WTI:ATTRIBUTE(                      #               # hi
+#   WTI:ADVERB(                         #               # hi
 #       Progression2(                   # progress      # za
 #   )   )
 #   WTI:CONDITIONAL(                    # if            # mo
@@ -1367,7 +1367,7 @@ helpmenuCJ = {
 #   )   )
 #   WTI:Separator(                      # or            # m
 #   )
-#   WTI:ATTRIBUTE(                      #               # hi
+#   WTI:ADVERB(                         #               # hi
 #       Progression2(                   # progress      # za
 #   )   )
 #   WTI:(woordtransactie)(              # woordtransacti# %s
@@ -1458,7 +1458,7 @@ helpmenuCJ = {
 #           Scaling2(                   # group         # pa
 #               Distance0(              # here          # ʒi
 #   )   )   )   )
-#   WTI:ATTRIBUTE(                      #               # hi
+#   WTI:ADVERB(                         #               # hi
 #       Distance0(                      # here          # ʒi
 #   )   )
 #)
@@ -1471,7 +1471,7 @@ helpmenuCJ = {
 #       State2(                         # ordened       # xa
 #           Distance0(                  # here          # ʒi
 #   )   )   )
-#   WTI:ATTRIBUTE(                      #               # hi
+#   WTI:ADVERB(                         #               # hi
 #       Direction-0(                    # from direction# süi
 #           Nature4(                    # person        # fu
 #   )   )   )
@@ -1488,7 +1488,7 @@ helpmenuCJ = {
 #           Scaling4(                   # all           # pu
 #               Distance0(              # here          # ʒi
 #   )   )   )   )
-#   WTI:ATTRIBUTE(                      #               # hi
+#   WTI:ADVERB(                         #               # hi
 #       Direction1(                     # forward       # se
 #   )   )
 #   WTI:NOUN(                           #               # hu
@@ -1508,14 +1508,14 @@ helpmenuCJ = {
 #       State2(                         # ordered       # xa
 #           Scaling2(                   # group         # pa
 #   )   )   )
-#   WTI:ATTRIBUTE(                      #               # hi
+#   WTI:ADVERB(                         #               # hi
 #       Direction1(                     # forward       # se
 #           Connection-0(               # inside        # ŋüi
 #               Distance0(              # here          # ʒi
 #   )   )   )   )
 #   WTI:SCALING2(                       # group         # pa
 #   )
-#   WTI:ATTRIBUTE(                      #               # hi
+#   WTI:ADVERB(                         #               # hi
 #       Direction1(                     # forward       # se
 #           Connection-0(               # inside        # ŋüi
 #               Distance0(              # here          # ʒi
@@ -1529,9 +1529,9 @@ helpmenuCJ = {
 #       Connection3(                    # fixed         # ŋo
 #   )   )
 #   WTI:NOUN(                           #               # hu
-#       Attribute(                      # name          # hi
+#       Adverb(                         # name          # hi
 #   )   )
-#   WTI:ATTRIBUTE(                      #               # hi
+#   WTI:ADVERB(                         #               # hi
 #       Connection1(                    # associated    # ŋe
 #   )   )
 #   WTI:NOUN(                           #               # hu
@@ -1573,7 +1573,7 @@ helpmenuCJ = {
 #           Distance0(                  # here          # ʒi
 #               Truth2(                 # true          # la
 #       )   )   )             
-#       WTI:ATTRIBUTE(                  #               # hi
+#       WTI:ADVERB(                     #               # hi
 #           Truth0(                     # not           # li
 #       )   )                 
 #       WTI:NOUN(                       #               # hu
@@ -1589,9 +1589,9 @@ helpmenuCJ = {
 #       Connection3(                    # fixed         # ŋo
 #   )   )
 #   WTI:NOUN(                           #               # hu
-#       Attribute(                      # name          # hi
+#       Adverb(                         # name          # hi
 #   )   )
-#   WTI:ATTRIBUTE(                      #               # hi
+#   WTI:ADVERB(                         #               # hi
 #       Connection1(                    # associated    # ŋe
 #   )   )
 #   WTI:NOUN(                           #               # hu
@@ -1662,7 +1662,7 @@ helpmenuCJ = {
 #                   Separator(          # or            # m
 #                       Truth0(         # not           # li
 #   )   )   )   )   )   )
-#   WTI:ATTRIBUTE(                      #               # hi
+#   WTI:ADVERB(                         #               # hi
 #       Connection1(                    # associated    # ŋe
 #   )   )
 #   WTI:NOUN(                           #               # hu
@@ -1677,7 +1677,7 @@ helpmenuCJ = {
 #           Activity2(                  # active        # ʃa
 #               Truth0(                 # not           # li
 #   )   )   )   )
-#   WTI:ATTRIBUTE(                      #               # hi
+#   WTI:ADVERB(                         #               # hi
 #       State0(                         # even          # xi
 #   )   )
 #   WTI:ADJECTIVE(                      #               # ho
@@ -1704,11 +1704,67 @@ helpmenuCJ = {
 #   )   )   )   )
 #)
 #ma heu hacali huʒiʃali.
+            "0,1,3": textwrap.wrap("ma heu haʃazüi huʒili me hoʃala m hoʃali. mu heu haʃalizüi huʒiseʃali m huʒiʃaqi. ma hazüi hoʃamelamli hiŋe huʒili. ma huʒiʃali hixi homecalimzeqo. ma heu hacali huʒiʃali.",w),
+
+#STI:PHRASE(                            #               # ma
+#   WTI:PERSON4(                        # anybody       # heu
+#   )
+#   WTI:VERB(                           #               # ha
+#       Activity2(                      # active        # ʃa
+#           Progression-0(              # turn around   # züi
+#   )   )   )
+#   WTI:NOUN(                           #               # hu
+#       Distance0(                      # here          # ʒi
+#   )   )
+#   WTI:NOUN(                           #               # hu
+#       Registration3(                  # hear          # co
+#           SCALING4(                   # all           # pu
+#   )   )   )
+#   WTI:ADVERB(                         #               # hi
+#       Connection1(                    # associated    # ŋe
+#   )   )
+#   WTI:NOUN(                           #               # hu
+#       Distance0(                      # here          # ʒi
+#   )   )
+#)
+# ma heu haʃazüi huʒi hame hucopu hiŋe huʒi. 
+#STI:PHRASE(                            #               # ma
+#   WTI:NOUN(                           #               # hu
+#       ADVERB(                         # label         # hi
+#           SCALING2(                   # plural        # po
+#   )   )   )
+#   WTI:ADVERB(                         #               # hi
+#           Connection1(                # associated    # ŋe
+#   )   )
+#   WTI:(woordtransactie)(              # woordtransacti# %s
+#   )
+#   WTI:VERB(                           #               # ha
+#       Progression-0(                  # turn around   # züi
+#           Truth0(                     # not           # li
+#   )   )   )
+#)
+# ma huhipo hiŋe %s hazüili.
+#STI:PHRASE(                            #               # ma
+#   WTI:NOUN(                           #               # hu
+#       ADVERB(                         # label         # hi
+#           Progression-0(              # turn around   # züi
+#               Time-3(                 # in the past   # qüo
+#                   SCALING2(           # plural        # po
+#   )   )   )   )   )
+#   WTI:ADVERB(                         #               # hi
+#           Connection1(                # associated    # ŋe
+#   )   )
+#   WTI:(woordcategorie)(               # woordcategorie# %s
+#   )
+#   WTI:VERB(                           #               # ha
+#       Progression-0(                  # turn around   # züi
+#           Truth0(                     # not           # li
+#   )   )   )
+#)
+# ma huhizüiqüopo hiŋe %s hazüili.
+#            "0,1,4": textwrap.wrap("Hier kunt u de taal van de app aanpassen. De %ss zelf worden niet vertaald, en gepersonaliseerde namen van %sën ook niet, maar alle menu's en opdrachten wel. Op dit moment kunt u kiezen tussen \"NL\" (Nederlands, standaard), \"EN\" (Engels), \"IT\" (Italiaans) en \"CJ\" (Hucoji)." % (woordtransactie,woordcategorie),w),
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
 #nonasciiletters = "ʃ ʒ ŋ"
-
-#Hier kunt u alleen de status van ANDERE rekeningen aanpassen. Het is niet mogelijk om de - vanzelfsprekend actieve - rekening die nu in gebruik is te deactiveren. Kies een andere rekening en geef aan of het een \"actieve\" of een \"niet-actieve\" rekening betreft. Niet-actieve rekeningen zijn bijvoorbeeld gearchiveerde of voorbereide rekeningen, die niet in de overzichten worden getoond.
-            "0,1,3": textwrap.wrap("ma heu haʃazüi huʒili me hoʃala m hoʃali. mu heu haʃalizüi huʒiseʃali m huʒiʃaqi. ma hazüi hoʃamelamli hiŋe huʒili. ma huʒiʃali hixi homecalimzeqo. ma heu hacali huʒiʃali.",w),
             "0,1,4": textwrap.wrap("",w),
             "0,1,5": textwrap.wrap("",w),
             "0,1,6": textwrap.wrap("",w),
@@ -3923,6 +3979,8 @@ def maandanalyse(rekening,datumlijst): # H
     loop = True
     while loop == True:
         datumkeuze = input(inputindent)
+        if datumkeuze == "":
+            datumkeuze = 0
         print(ResetAll,end = "")
         try:
             maandverschil = int(datumkeuze)
@@ -3987,7 +4045,8 @@ def maandanalyse(rekening,datumlijst): # H
             budgetnegatief += budget
             budgetcategorieenlijst.append(i)
             for j in categorie[1:]:
-                budgetcategorieensom += j[1]
+                if int(str(j[0])[2:]) >= int(str(startdatum)[2:]):
+                    budgetcategorieensom += j[1]
         elif budget == 0:
             budgetnegatief = budgetnul * -1
         if budgetnegatief == 0:
