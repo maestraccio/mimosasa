@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.78"
-versiedatum = "20241018"
+versie = "0.0.80"
+versiedatum = "20241026"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -4040,17 +4040,20 @@ def maandanalyse(rekening,datumlijst): # H
         forbud = fornum
         Kb = ""
         categorie = haalcategorie(rekening,i)
+        budgetnegatief = budgetnul*-1
         budget = categorie[0][1]
         if budget < 0:
             budgetnegatief += budget
-            budgetcategorieenlijst.append(i)
             for j in categorie[1:]:
-                if int(str(j[0])[2:]) >= int(str(startdatum)[2:]):
+                if int(str(datumlijst[0])[:6]+"01") <= j[0] <= int(str(datumlijst[1])[:6]+maandeind):
                     budgetcategorieensom += j[1]
-        elif budget == 0:
-            budgetnegatief = budgetnul * -1
-        if budgetnegatief == 0:
-            budgetnegatief = budgetnul * -1
+                    somal += j[1]
+        else:
+            for j in categorie[1:]:
+                if int(str(datumlijst[0])[:6]+"01") <= j[0] <= int(str(datumlijst[1])[:6]+maandeind):
+                    somal += j[1]
+        if budgetcategorieensom < budgetnegatief*-1:
+            somal += budgetnegatief*-1
         aantal = 0
         som = 0
         categorieinhoudgeselecteerdemaand = []
@@ -4061,11 +4064,6 @@ def maandanalyse(rekening,datumlijst): # H
             for j in categorieinhoudgeselecteerdemaand:
                 som += j[1]
                 aantal += 1
-        if i in budgetcategorieenlijst:
-            if som*-1 < budget:
-                somal += (som+budget)
-        else:
-            somal += som
         if aantal == 0:
             aantal = ""
         if budget < som*-1:
@@ -4131,7 +4129,7 @@ def maandanalyse(rekening,datumlijst): # H
     if score < 0:
         aantalstreepjes *= -1
         getalkleur = kleuren["colhuh"]
-    if aantalstreepjes > honderdprocent:
+    if somal < 0:
         getalkleur = kleuren["colslecht"]
     else:
         getalkleur = kleuren["colgoed"]
@@ -4146,6 +4144,8 @@ def maandanalyse(rekening,datumlijst): # H
             print(analyselijnzw, file = a)
             print("|"+forl12(voortgang)+"#"*(aantalstreepjes-1)+"|"+valuta+forsom(somal)+K+" "*(56-aantalstreepjes)+binnen+"|", file = a)
             print(analyselijnzw, file = a)
+
+
 
 def IDlijst2ok(IDlijst): # geen H
     ok = {}
