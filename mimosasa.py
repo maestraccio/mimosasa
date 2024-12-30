@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.80"
-versiedatum = "20241026"
+versie = "0.0.81"
+versiedatum = "20241230"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -2961,6 +2961,8 @@ def geefeendatum(rekening,header,col,ok,datum): # H
                 print(i)
             del datumkeuze
         else:
+            if datumkeuze.upper() == "=":
+                datumkeuze = str(datum)
             test = checkdatum(datumkeuze)
             if test == True:
                 transactiedatum = int(datumkeuze)
@@ -3094,6 +3096,8 @@ def geefeenbedrag(rekening,header,col,ok,bedrag): # H
                     print(i)
                 del bedragkeuze
             else:
+                if bedragkeuze.upper() == "=":
+                    bedragkeuze = str(bedrag)
                 test = checkfloat(bedragkeuze)
                 if test == True:
                     transactiebedrag = float(bedragkeuze)
