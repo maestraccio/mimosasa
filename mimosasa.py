@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.81"
-versiedatum = "20241230"
+versie = "0.0.82"
+versiedatum = "20250101"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -2867,13 +2867,23 @@ def eenrekeningtotaal(rekening): # geen H
     vrijbesteedbaar(rekening,header)
     return getal,forsom,K
 
+def geefkortelijst(rekeningenlijst):
+    kortelijst = []
+    for i in rekeningenlijst:
+        with open(i+os.path.sep+"header","r") as r:
+            actiefjn = ast.literal_eval(r.read())["Actieve rekening"]
+            if actiefjn in jalijst:
+                kortelijst.append(i)
+    return kortelijst
+
 def programmastart(): # geen H
     with open("header","w") as h:
         print(nieuwheader, file = h, end = "")
     try:
         rekeningenlijst = rekeningenoverzicht()
-        rekeningentotaal = toonrekeningsaldo(rekeningenlijst)
-        rekening = kiesrekening(rekeningenlijst)
+        kortelijst = geefkortelijst(rekeningenlijst)
+        rekeningentotaal = toonrekeningsaldo(kortelijst)
+        rekening = kiesrekening(kortelijst)
         if rekening == endederror:
             rekening = int(endederror)
     except(Exception) as f:
