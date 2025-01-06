@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.82"
-versiedatum = "20250101"
+versie = "0.0.9"
+versiedatum = "20250106"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -205,7 +205,8 @@ nieuwheaderlijstEN = [
         "Number of %ss until stop" % (woordtransactieEN),
         "Print monthly overview to file",
         "Export everything to CSV file",
-        "Tip of the day"
+        "Tip of the day",
+        "Autodecimals"
         ]
 nieuwheaderlijstIT = [
         "Nome del conto",
@@ -223,7 +224,8 @@ nieuwheaderlijstIT = [
         "Numero di Transazioni fino all'arresto",
         "Stampa riepilogo mensile su file",
         "Esporta tutto in file CSV",
-        "Consiglio del giorno"
+        "Consiglio del giorno",
+        "Autodecimali"
         ]
 nieuwheaderlijstCJ = [
 #WTI:NOUN(                                  #               # hu
@@ -402,7 +404,26 @@ nieuwheaderlijstCJ = [
 #   )   )   )   )
 #)
         "mi hakeca hudasepuŋeʃaʒibe melamli",
-        ]
+#STI:QUESTION(                              #               # mi
+#   WTI:VERB(                               #               # ha
+#       Desire1(                            # want          # ke
+#   )   )
+#   WTI:NOUN(                               #               # hu
+#       Matter0(                            # dot           # wi
+#           Connection-2(                   # between       # ŋüa
+#               Counting0(                  # 0             # bi
+#                   Counting-0(             # part          # büi
+#   )   )   )   )   )
+#   WTI:ADJECTIVE(                          #               # ho
+#       activity0(                          # passive       # ʃi
+#   )   )
+#   WTI:Choice(                             # or            # me
+#       Truth2(                             # true          # la
+#           Separator(                      # or            # m
+#               Truth0(                     # not           # li
+#   )   )   )   )
+#)
+        "mi hake huwiŋüabibüi hoʃi melamli"]
 nieuwheaderlijst = [
         "Rekeningnaam",                            # 0
         "Rekeninghouder",                          # 1
@@ -419,7 +440,8 @@ nieuwheaderlijst = [
         "Aantal %ss tot stop" % (woordtransactie), # 12
         "Print maandoverzicht naar bestand",       # 13
         "Exporteer alles naar csv-bestand",        # 14
-        "Tip van de dag"                           # 15
+        "Tip van de dag",                          # 15
+        "Autodecimalen"                            # 16
         ]
 
 lijnlijstEN = [
@@ -503,7 +525,8 @@ nieuwheader = {
         nieuwheaderlijst[12]:10,
         nieuwheaderlijst[13]:"<",
         nieuwheaderlijst[14]:"<",
-        nieuwheaderlijst[15]:">"
+        nieuwheaderlijst[15]:">",
+        nieuwheaderlijst[16]:"<"
         }
 nieuwalternatievenamendictEN = {
         "0":"fixd ass/equity",
@@ -687,6 +710,7 @@ menuEN = {
             "0,1,14": " "+nieuwheaderlijstEN[13],
             "0,1,15": " "+nieuwheaderlijstEN[14],
             "0,1,16": " "+nieuwheaderlijstEN[15],
+            "0,1,17": " "+nieuwheaderlijstEN[16],
         "0,2": "%s management" % (woordcategorieEN),
             "0,2,1": " Add new %s" % (woordcategorieEN),
             "0,2,2": " Modify %s name" % (woordcategorieEN),
@@ -754,6 +778,7 @@ menuIT = {
             "0,1,14": " "+nieuwheaderlijstIT[13],
             "0,1,15": " "+nieuwheaderlijstIT[14],
             "0,1,16": " "+nieuwheaderlijstIT[15],
+            "0,1,17": " "+nieuwheaderlijstIT[16],
         "0,2": "Gestione %s" % (woordcategorieIT),
             "0,2,1": " Aggiundere nuova %s" % (woordcategorieIT),
             "0,2,2": " Modificare nome %s" % (woordcategorieIT),
@@ -858,6 +883,7 @@ menuCJ = {
             "0,1,14": " "+nieuwheaderlijstCJ[13],
             "0,1,15": " "+nieuwheaderlijstCJ[14],
             "0,1,16": " "+nieuwheaderlijstCJ[15],
+            "0,1,17": " "+nieuwheaderlijstCJ[16],
 #WTI:VERB(                                  #               # ha
 #   State2(                                 # ordened       # xa
 #)  )
@@ -1006,6 +1032,7 @@ menu = {
             "0,1,14": " "+nieuwheaderlijst[13],
             "0,1,15": " "+nieuwheaderlijst[14],
             "0,1,16": " "+nieuwheaderlijst[15],
+            "0,1,17": " "+nieuwheaderlijst[16],
         "0,2": "%sbeheer" % (woordcategorie),
             "0,2,1": " Voeg nieuwe %s toe" % (woordcategorie),
             "0,2,2": " %snaam wijzigen" % (woordcategorie),
@@ -1073,6 +1100,7 @@ helpmenuEN = {
             "0,1,14": textwrap.wrap("The displayed monthly totals can also be saved as a plain text file. To avoid having to choose every time, you can set this as the default here or turn it off. You will find these files in the \"account folder\" with the \"year+month\" (\"YYYYMM\") for the %ss, and as \"year+month+a\" (\"YYYYMMa\") for the budget analysis, without a file extension. These files are created if they do not exist yet, and otherwise overwritten each time. If necessary, you can manually add the file extension \".txt\", but then it will not be updated." % (woordtransactieEN),w),
             "0,1,15": textwrap.wrap("You can choose to save a csv file with all %ss from that account each time you close the app. You will find this csv file in the \"account folder\" as \"export.csv\". This file is created if it does not exist yet, and otherwise overwritten with fresh data." % (woordtransactieEN),w),
             "0,1,16": textwrap.wrap("At the start of the app, a random help article can be shown as the \"Tip of the day\". This can be useful, especially in the beginning, to familiarize yourself with the functionalities. This can be turned on or off here.",w),
+            "0,1,17": textwrap.wrap("You can choose to enter the %s amount with or without a decimal separator. If \"Yes\", the entered amount will be treated as in cents, and a decimal separator will be added before the last two digits. This can be turned on or off here." % (woordtransactieEN),w),
         "0,2": textwrap.wrap("Here you can adjust the names of different Categories, allocate budgets, and more. Categories where money comes in (monthly) are assigned a negative budget, which is used as a buffer at the beginning of a new month. In the monthly analysis, the balance booked on those Categories is ignored until the buffer is reached.",w),
             "0,2,1": textwrap.wrap("Add a new %s. Business accounts contain standard ledgers \"%s\" through \"%s\", household accounts the Categories \"%s\" through \"%s\" and \"%s\", but all intermediate letters can be used, and all those letters and numbers can also be exchanged between business and household accounts." % (woordcategorieEN,zakelijkelijst[0],zakelijkelijst[-1],huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
             "0,2,2": textwrap.wrap("Initially, standard names are assigned to the Categories, but you can adjust them here as desired. The default Categories for business accounts are: 0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s, 9: %s, and for household accounts (standard): A: %s, B: %s, C: %s, D: %s, E: %s, F: %s, O: %s. All these standard %s names are automatically translated from Dutch (the default language) to other languages when you switch languages, but not if you have adjusted a %s name yourself." % (nieuwalternatievenamendictEN[zakelijkelijst[0]],nieuwalternatievenamendictEN[zakelijkelijst[1]],nieuwalternatievenamendictEN[zakelijkelijst[2]],nieuwalternatievenamendictEN[zakelijkelijst[3]],nieuwalternatievenamendictEN[zakelijkelijst[4]],nieuwalternatievenamendictEN[zakelijkelijst[5]],nieuwalternatievenamendictEN[zakelijkelijst[6]],nieuwalternatievenamendictEN[zakelijkelijst[7]],nieuwalternatievenamendictEN[zakelijkelijst[8]],nieuwalternatievenamendictEN[zakelijkelijst[9]],nieuwalternatievenamendictEN[huishoudelijkelijst[0]],nieuwalternatievenamendictEN[huishoudelijkelijst[1]],nieuwalternatievenamendictEN[huishoudelijkelijst[2]],nieuwalternatievenamendictEN[huishoudelijkelijst[3]],nieuwalternatievenamendictEN[huishoudelijkelijst[4]],nieuwalternatievenamendictEN[huishoudelijkelijst[5]],nieuwalternatievenamendictEN[huishoudelijkelijst[6]],woordcategorieEN,woordcategorieEN),w),
@@ -1140,6 +1168,7 @@ helpmenuIT = {
             "0,1,14": textwrap.wrap("I totali mensili mostrati possono essere salvati anche come file di testo semplice. Per evitare di dover scegliere ogni volta, è possibile impostarlo o disattivarlo qui per impostazione predefinita. Troverete questi file nella \"cartella del conto\" con l'anno e il mese (\"AAAAMM\") per le Transazioni, e come \"anno+mese+a\" (\"AAAAMMa\") per l'analisi del budget, senza estensione del file. Questi file vengono creati se non esistono ancora, altrimenti vengono sovrascritti continuamente. Se necessario, è possibile aggiungere manualmente l'estensione del file \".txt\", ma in tal caso non verrà aggiornato.",w),
             "0,1,15": textwrap.wrap("È possibile scegliere di salvare sempre un file csv con tutte le Transazioni di quel conto quando si chiude l'applicazione. Troverete questo file csv nella \"cartella del conto\" come \"export.csv\". Questo file viene creato se non esiste ancora, altrimenti sovrascritto con nuovi dati.",w),
             "0,1,16": textwrap.wrap("All'avvio dell'app, può essere visualizzato un articolo casuale di aiuto come \"Suggerimento del giorno\". Questo può essere utile soprattutto all'inizio per familiarizzare con le funzionalità. È possibile attivarlo o disattivarlo qui.",w),
+            "0,1,17": textwrap.wrap("Puoi scegliere di inserire l'importo della %s con o senza un separatore decimale. Se \"Sì\", l'importo inserito verrà trattato come in centesimi e verrà aggiunto un separatore decimale prima delle ultime due cifre. Questo può essere attivato o disattivato qui." % (woordtransactieIT),w),
         "0,2": textwrap.wrap("Qui è possibile modificare il nome delle varie Categorie, distribuire i budget, eccetera. Le Categorie su cui entra denaro (mensilmente) ricevono un budget negativo, che viene utilizzato come buffer all'inizio di un nuovo mese. Nell'analisi mensile il saldo registrato su tali categorie viene ignorato fino a quando il buffer non è raggiunto.",w),
             "0,2,1": textwrap.wrap("Aggiungi una nuova %s. I conti aziendali contengono di default i conti \"%s\" a \"%s\", i conti domestici le Categorie \"%s\" a \"%s\" e \"%s\", ma tutte le lettere intermedie possono essere utilizzate, e tutte quelle lettere e numeri possono anche essere scambiati tra conti aziendali e domestici." % (woordcategorieIT,zakelijkelijst[0],zakelijkelijst[-1],huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
             "0,2,2": textwrap.wrap("Di base vengono assegnati nomi standard alle Categorie, ma qui puoi modificarli a tuo piacimento. Le Categorie standard per i conti aziendali sono: 0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s, 9: %s, e per i conti domestici (standard): A: %s, B: %s, C: %s, D: %s, E: %s, F: %s, O: %s. Tutti questi nomi (standard olandesi) vengono tradotti quando si cambia lingua, ma non se hai personalizzato il nome di una %s." % (nieuwalternatievenamendictIT[zakelijkelijst[0]],nieuwalternatievenamendictIT[zakelijkelijst[1]],nieuwalternatievenamendictIT[zakelijkelijst[2]],nieuwalternatievenamendictIT[zakelijkelijst[3]],nieuwalternatievenamendictIT[zakelijkelijst[4]],nieuwalternatievenamendictIT[zakelijkelijst[5]],nieuwalternatievenamendictIT[zakelijkelijst[6]],nieuwalternatievenamendictIT[zakelijkelijst[7]],nieuwalternatievenamendictIT[zakelijkelijst[8]],nieuwalternatievenamendictIT[zakelijkelijst[9]],nieuwalternatievenamendictIT[huishoudelijkelijst[0]],nieuwalternatievenamendictIT[huishoudelijkelijst[1]],nieuwalternatievenamendictIT[huishoudelijkelijst[2]],nieuwalternatievenamendictIT[huishoudelijkelijst[3]],nieuwalternatievenamendictIT[huishoudelijkelijst[4]],nieuwalternatievenamendictIT[huishoudelijkelijst[5]],nieuwalternatievenamendictIT[huishoudelijkelijst[6]],woordcategorieIT),w),
@@ -1778,6 +1807,7 @@ helpmenuCJ = {
             "0,1,14": textwrap.wrap("",w),
             "0,1,15": textwrap.wrap("",w),
             "0,1,16": textwrap.wrap("",w),
+            "0,1,17": textwrap.wrap("",w),
         "0,2": textwrap.wrap("",w),
             "0,2,1": textwrap.wrap("\"%s\"  \"%s\" \"%s\"  \"%s\"  \"%s\"" % (zakelijkelijst[0],zakelijkelijst[-1],huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
             "0,2,2": textwrap.wrap("0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s 9: %s A: %s, B: %s, C: %s, D: %s, E: %s, F: %s O: %s" % (nieuwalternatievenamendictCJ[zakelijkelijst[0]],nieuwalternatievenamendictCJ[zakelijkelijst[1]],nieuwalternatievenamendictCJ[zakelijkelijst[2]],nieuwalternatievenamendictCJ[zakelijkelijst[3]],nieuwalternatievenamendictCJ[zakelijkelijst[4]],nieuwalternatievenamendictCJ[zakelijkelijst[5]],nieuwalternatievenamendictCJ[zakelijkelijst[6]],nieuwalternatievenamendictCJ[zakelijkelijst[7]],nieuwalternatievenamendictCJ[zakelijkelijst[8]],nieuwalternatievenamendictCJ[zakelijkelijst[9]],nieuwalternatievenamendictCJ[huishoudelijkelijst[0]],nieuwalternatievenamendictCJ[huishoudelijkelijst[1]],nieuwalternatievenamendictCJ[huishoudelijkelijst[2]],nieuwalternatievenamendictCJ[huishoudelijkelijst[3]],nieuwalternatievenamendictCJ[huishoudelijkelijst[4]],nieuwalternatievenamendictCJ[huishoudelijkelijst[5]],nieuwalternatievenamendictCJ[huishoudelijkelijst[6]]),w),
@@ -1845,6 +1875,7 @@ helpmenu = {
             "0,1,14": textwrap.wrap("De getoonde maandtotalen kunt u ook als platte-tekstbestand opslaan. Om niet iedere keer te hoeven kiezen kunt u dat hier standaard instellen of uitzetten. U vindt deze tekstbestanden dan in de \"rekeningmap\" met het \"jaartal+maand\" (\"JJJJMM\") voor de %ss, en als \"jaartal+maand+a\" (\"JJJJMMa\") voor de budgetanalyse, zonder enige bestandsextensie. Deze bestanden worden aangemaakt als ze nog niet bestaan, en anders steeds opnieuw overschreven. U kunt hier zelf, indien nodig, handmatig de bestandsextensie \".txt\" achter zetten, maar dat bestand zal dan niet worden ververst." % (woordtransactie),w),
             "0,1,15": textwrap.wrap("U kunt ervoor kiezen om bij het afsluiten van de app steeds automatisch een csv-bestand op te slaan met alle %ss van die rekening erin. U vindt dit csv-bestand dan in de \"rekeningmap\" als \"export.csv\". Dit wordt aangemaakt als het nog niet bestaat, en anders overschreven met verse data." % (woordtransactie),w),
             "0,1,16": textwrap.wrap("Bij aanvang van de app kan steeds een willekeurig helpartikel als \"Tip van de dag\" worden getoond. Dat kan zeker in het begin handig zijn om kennis te maken met de functionaliteiten. Dit kan hier worden aan- of uitgezet.",w),
+            "0,1,17": textwrap.wrap("U kunt ervoor kiezen om het %sbedrag in te voeren met of zonder een decimaalscheidingsteken. Als u voor \"Ja\" kiest, wordt het ingevoerde bedrag behandeld als in centen, en wordt er een decimaalscheidingsteken toegevoegd vóór de laatste twee cijfers. Dit kan hier worden in- of uitgeschakeld." % (woordtransactie),w),
         "0,2": textwrap.wrap("Hier kunt u de naam van de verschillende %sën aanpassen, budgetten verdelen, enzovoorts. De %sën waarop (maandelijks) geld binnenkomt krijgen een negatief budget, dat als buffer wordt gebruikt bij aanvang van een nieuwe maand. In de maandanalyse wordt het saldo dat op die %sën wordt ingeboekt genegeerd totdat de buffer is bereikt." % (woordcategorie,woordcategorie,woordcategorie),w),
             "0,2,1": textwrap.wrap("Voeg een nieuwe %s toe. Zakelijke rekeningen bevatten standaard de grootboeken \"%s\" t/m \"%s\", huishoudelijke rekeningen de %sën \"%s\" t/m \"%s\" en \"%s\", maar alle tussenliggende letters kunnen worden gebruikt, en al die letters en cijfers kunnen ook tussen zakelijke en huishoudelijke rekeningen worden uitgewisseld." % (woordcategorie,zakelijkelijst[0],zakelijkelijst[-1],woordcategorie,huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
             "0,2,2": textwrap.wrap("Aan de %sën worden in beginsel standaardnamen toegekend, maar u kunt die hier zelf naar wens aanpassen. De standaard%sën zijn voor zakelijke rekeningen: 0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s, 9: %s, en voor huishoudelijke rekeningen (standaard): A: %s, B: %s, C: %s, D: %s, E: %s, F: %s, O: %s. Al deze (standaard Nederlandse) namen worden vertaald als u van taal wisselt, maar niet als u zelf een %snaam heeft aangepast." % (woordcategorie,woordcategorie,nieuwalternatievenamendict[zakelijkelijst[0]],nieuwalternatievenamendict[zakelijkelijst[1]],nieuwalternatievenamendict[zakelijkelijst[2]],nieuwalternatievenamendict[zakelijkelijst[3]],nieuwalternatievenamendict[zakelijkelijst[4]],nieuwalternatievenamendict[zakelijkelijst[5]],nieuwalternatievenamendict[zakelijkelijst[6]],nieuwalternatievenamendict[zakelijkelijst[7]],nieuwalternatievenamendict[zakelijkelijst[8]],nieuwalternatievenamendict[zakelijkelijst[9]],nieuwalternatievenamendict[huishoudelijkelijst[0]],nieuwalternatievenamendict[huishoudelijkelijst[1]],nieuwalternatievenamendict[huishoudelijkelijst[2]],nieuwalternatievenamendict[huishoudelijkelijst[3]],nieuwalternatievenamendict[huishoudelijkelijst[4]],nieuwalternatievenamendict[huishoudelijkelijst[5]],nieuwalternatievenamendict[huishoudelijkelijst[6]],woordcategorie),w),
@@ -2773,6 +2804,8 @@ def printheaderall(rekening): # geen H
     print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[12])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[12]])+ResetAll)
     print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[13])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[13]])+ResetAll)
     print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[14])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[14]])+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[15])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[15]])+ResetAll)
+    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[16])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[16]])+ResetAll)
 
 def printheader(rekening): # geen H
     kleuren,catcol = updatekleuren(rekening)
@@ -3087,6 +3120,8 @@ def geefeenbedrag(rekening,header,col,ok,bedrag): # H
         loop = True
         while loop == True:
             bedragkeuze = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(elcat[1].upper())+ResetAll+inputindent)
+            if header["Autodecimalen"] in jalijst:
+                bedragkeuze = str(int(bedragkeuze)/100)
             if bedragkeuze.upper() in afsluitlijst:
                 doei()
             elif bedragkeuze.upper() in neelijst:
@@ -4500,6 +4535,8 @@ def nieuwnieuw(rekening,ok): # H
                 else:
                     transactiedatum = int(nustr)
             if checkfloat(nieuwetransactieinputlijst[1]) == True:
+                if header["Autodecimalen"] in jalijst:
+                    nieuwetransactieinputlijst[1] = int(nieuwetransactieinputlijst[1])/100
                 transactiebedrag = round(float(nieuwetransactieinputlijst[1]),2)
             else:
                 transactiebedrag = 0.0
@@ -5855,6 +5892,30 @@ def wijzigtipvandedag(rekening,header): # geen H
             print(header, file = h, end = "")
     return header
 
+def wijzigautodecimalen(rekening,header): # geen H
+    kleuren,catcol = updatekleuren(rekening)
+    Taal = header[nieuwheaderlijst[3]]
+    IBAN = rekening[:rekening.index("#")]
+    JAAR = forr4(rekening[rekening.index("#")+1:])
+    if Taal == "EN":
+        vraag = textwrap.wrap("Change %s %s %s from %s to:" % (IBAN,JAAR,nieuwheaderlijstEN[16],coljanee(rekening,header,header[nieuwheaderlijst[16]])+vertaalv(header[nieuwheaderlijst[16]])+kleuren["ResetAll"]),w)
+    elif Taal == "IT":
+        vraag = textwrap.wrap("Cambia %s %s %s da %s in:" % (IBAN,JAAR,nieuwheaderlijstIT[16],coljanee(rekening,header,header[nieuwheaderlijst[16]])+vertaalv(header[nieuwheaderlijst[16]])+kleuren["ResetAll"]),w)
+    elif Taal == "CJ":
+        vraag = textwrap.wrap("hazüi %s %s %s qi %s qe:" % (IBAN,JAAR,nieuwheaderlijstCJ[16],coljanee(rekening,header,header[nieuwheaderlijst[16]])+vertaalv(header[nieuwheaderlijst[16]])+kleuren["ResetAll"]),w)
+    else:
+        vraag = textwrap.wrap("Wijzig %s %s %s van %s naar:" % (IBAN,JAAR,nieuwheaderlijst[16],coljanee(rekening,header,header[nieuwheaderlijst[16]])+vertaalv(header[nieuwheaderlijst[16]])+kleuren["ResetAll"]),w)
+    for i in vraag:
+        print(i)
+    antwoord = geefjaofnee(rekening,header)
+    if antwoord.upper() in afsluitlijst:
+        doei()
+    else:
+        header[nieuwheaderlijst[16]] = antwoord
+        with open(os.path.join(rekening,"header"),"w") as h:
+            print(header, file = h, end = "")
+    return header
+
 def tipvandedag(rekening,header,col): # geen H
     Taal = header[nieuwheaderlijst[3]]
     kleuren,catcol = updatekleuren(rekening)
@@ -6580,7 +6641,8 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
  13 : %s %s
  14 : %s %s
  15 : %s %s
- 16 : %s %s""" % (
+ 16 : %s %s
+ 17 : %s %s""" % (
           menuEN["0,1,0"],
           ("{:<%d}" % (maxlen)).format(menuEN["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
           ("{:<%d}" % (maxlen)).format(menuEN["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
@@ -6597,7 +6659,8 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
           ("{:<%d}" % (maxlen)).format(menuEN["0,1,13"]), header[nieuwheaderlijst[12]],
           ("{:<%d}" % (maxlen)).format(menuEN["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
           ("{:<%d}" % (maxlen)).format(menuEN["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
-          ("{:<%d}" % (maxlen)).format(menuEN["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]]+kleuren["ResetAll"])
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,17"]), coljanee(rekening,header,header[nieuwheaderlijst[16]])+vertaalv(header[nieuwheaderlijst[16]]+kleuren["ResetAll"])
           )
     )
                     elif Taal == "IT":
@@ -6618,7 +6681,8 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
  13 : %s %s
  14 : %s %s
  15 : %s %s
- 16 : %s %s""" % (
+ 16 : %s %s
+ 17 : %s %s""" % (
           menuIT["0,1,0"],
           ("{:<%d}" % (maxlen)).format(menuIT["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
           ("{:<%d}" % (maxlen)).format(menuIT["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
@@ -6635,7 +6699,8 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
           ("{:<%d}" % (maxlen)).format(menuIT["0,1,13"]), header[nieuwheaderlijst[12]],
           ("{:<%d}" % (maxlen)).format(menuIT["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
           ("{:<%d}" % (maxlen)).format(menuIT["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
-          ("{:<%d}" % (maxlen)).format(menuIT["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]]+kleuren["ResetAll"])
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,17"]), coljanee(rekening,header,header[nieuwheaderlijst[16]])+vertaalv(header[nieuwheaderlijst[16]]+kleuren["ResetAll"])
           )
     )
                     elif Taal == "CJ":
@@ -6656,7 +6721,8 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
  13 : %s %s
  14 : %s %s
  15 : %s %s
- 16 : %s %s""" % (
+ 16 : %s %s
+ 17 : %s %s""" % (
           menuCJ["0,1,0"],
           ("{:<%d}" % (maxlen)).format(menuCJ["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
           ("{:<%d}" % (maxlen)).format(menuCJ["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
@@ -6673,7 +6739,8 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
           ("{:<%d}" % (maxlen)).format(menuCJ["0,1,13"]), header[nieuwheaderlijst[12]],
           ("{:<%d}" % (maxlen)).format(menuCJ["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
           ("{:<%d}" % (maxlen)).format(menuCJ["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
-          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]]+kleuren["ResetAll"])
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,17"]), coljanee(rekening,header,header[nieuwheaderlijst[16]])+vertaalv(header[nieuwheaderlijst[16]]+kleuren["ResetAll"])
           )
     )
                     else:
@@ -6694,7 +6761,8 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
  13 : %s %s
  14 : %s %s
  15 : %s %s
- 16 : %s %s""" % (
+ 16 : %s %s
+ 17 : %s %s""" % (
           menu["0,1,0"],
           ("{:<%d}" % (maxlen)).format(menu["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
           ("{:<%d}" % (maxlen)).format(menu["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
@@ -6711,7 +6779,8 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
           ("{:<%d}" % (maxlen)).format(menu["0,1,13"]), header[nieuwheaderlijst[12]],
           ("{:<%d}" % (maxlen)).format(menu["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
           ("{:<%d}" % (maxlen)).format(menu["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
-          ("{:<%d}" % (maxlen)).format(menu["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]]+kleuren["ResetAll"])
+          ("{:<%d}" % (maxlen)).format(menu["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]])+kleuren["ResetAll"],
+          ("{:<%d}" % (maxlen)).format(menu["0,1,17"]), coljanee(rekening,header,header[nieuwheaderlijst[16]])+vertaalv(header[nieuwheaderlijst[16]]+kleuren["ResetAll"])
           )
     )
                     keuze3 = input(col+inputindent)
@@ -6774,6 +6843,9 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
                     del keuze3
                 elif keuze3 == "16":
                     header = wijzigtipvandedag(rekening,header)
+                    del keuze3
+                elif keuze3 == "17":
+                    header = wijzigautodecimalen(rekening,header)
                     del keuze3
                 else:
                     del keuze3
