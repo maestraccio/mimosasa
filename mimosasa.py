@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.91"
-versiedatum = "20250107"
+versie = "0.0.95"
+versiedatum = "20250112"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -737,7 +737,8 @@ menuEN = {
         "1,3": "View %ss in collection" % (woordtransactieEN),
     "2": "Add %s" % (woordtransactieEN),
         "2,1": "Add a new %s to the account" % (woordtransactieEN),
-        "2,2": "Copy an existing %s to today" % (woordtransactieEN),
+        "2,2": "Copy a %s to today" % (woordtransactieEN),
+        "2,3": "Copy a %s to another account" % (woordtransactieEN),
     "3": "Modify %s" % (woordtransactieEN),
         "3,1": "Modify %s %s" % (woordtransactieEN,elementenEN[0]),
         "3,2": "Modify %s %s" % (woordtransactieEN,elementenEN[1]),
@@ -805,7 +806,8 @@ menuIT = {
         "1,3": "Visualizzare Transazioni in collezione",
     "2": "Aggiungere %s" % (woordtransactieIT),
         "2,1": "Aggiungere una nuova %s al conto" % (woordtransactieIT),
-        "2,2": "Copiare una %s esistente su oggi" % (woordtransactieIT),
+        "2,2": "Copiare una %s su oggi" % (woordtransactieIT),
+        "2,3": "Copiare una %s su un altro account" % (woordtransactieIT),
     "3": "Modificare %s" % (woordtransactieIT),
         "3,1": "Modificare %s %s" % (woordtransactieIT,elementenIT[0]),
         "3,2": "Modificare %s %s" % (woordtransactieIT,elementenIT[1]),
@@ -992,6 +994,7 @@ menuCJ = {
     "2": "hazi %s" % (woordtransactieCJ),
         "2,1": "hazi %szi" % (woordtransactieCJ),
         "2,2": "hazi %sxiba" % (woordtransactieCJ),
+        "2,3": "hazi %sxi hubiwasemesüipa hoxili" % (woordtransactieCJ),
     "3": "hazüi %s" % woordtransactieCJ,
         "3,1": "hazüi %s hiŋe %s" % (elementenCJ[0],woordtransactieCJ),
         "3,2": "hazüi %s hiŋe %s" % (elementenCJ[1],woordtransactieCJ),
@@ -1059,7 +1062,8 @@ menu = {
         "1,3": "Bekijk %ss in collectie" % (woordtransactie),
     "2": "%s toevoegen" % (woordtransactie),
         "2,1": "Voeg een nieuwe %s aan de rekening toe" % (woordtransactie),
-        "2,2": "Kopieer een bestaande %s naar vandaag" % (woordtransactie),
+        "2,2": "Kopieer een %s naar vandaag" % (woordtransactie),
+        "2,3": "Kopieer een %s naar een andere rekening" % (woordtransactie),
     "3": "%s wijzigen" % (woordtransactie),
         "3,1": "Wijzig %s%s" % (woordtransactie,elementen[0]),
         "3,2": "Wijzig %s%s" % (woordtransactie,elementen[1]),
@@ -1128,6 +1132,7 @@ helpmenuEN = {
     "2": textwrap.wrap("You can add new %ss to your account, and assign each one to a %s. You can enter a new %s per element or consecutively on one line in CSV style, or you can make a copy of a previous %s and later adjust the details using the options under \"3\". New %ss are immediately added to the collection, so you can view or modify them right away." % (woordtransactieEN,woordcategorieEN,woordtransactieEN,woordtransactieEN,woordtransactieEN),w),
         "2,1": textwrap.wrap("Add a new %s to your account here. You can enter the elements step by step, or - for the more experienced user - consecutively on one line in CSV style: \"%s, %s, %s, %s, %s\". Therefore, you cannot use a comma (\",\") in any element. Always use a period (\".\") as the decimal separator or set the \"%s\" (\"0,1,17\") to \"Yes\" to enter the %s as cents. If the CSV input contains invalid data, the step-by-step input takes over." % (woordtransactieEN,elementenEN[0],elementenEN[1],elementenEN[2],elementenEN[3],woordcategorieEN,nieuwheaderlijstEN[16],elementenEN[1]),w),
         "2,2": textwrap.wrap("Make a copy of a previously entered %s here and automatically replace the original %s with today's %s. You can use any transaction as a template to later adjust details with the options in menu \"3\". If a collection already exists, those %ss are offered one by one; otherwise, you will be asked to provide an \"ID\" - or more precisely: a list of \"ID's\" in the form of a CSV list. This is the recommended method for adding recurring %ss. Note: if you make an identical copy of a %s earlier today, it will not be automatically added to the collection." % (woordtransactieEN,elementenEN[0],elementen[0],woordtransactieEN,woordtransactieEN,woordtransactieEN),w),
+        "2,3": textwrap.wrap("Copy a previously entered %s to another account. Note: if the %s does not exist in the other account, the transfer will be aborted. You will be prompted if you want to delete the original %s." % (woordtransactieEN,woordcategorieEN,woordtransactieEN),w),
     "3": textwrap.wrap("All elements of an existing %s can be adjusted here. If a collection already exists, those %ss are offered one by one; otherwise, you will be asked to provide an \"ID\" - or more precisely: a list of \"ID's\" in the form of a CSV list." % (woordtransactieEN,woordtransactieEN),w),
         "3,1": textwrap.wrap("Adjust the %s of the %s. Enter the new %s as \"YYYYMMDD\". The default %s, for example if an invalid or incomplete %s is entered, is today's %s. Set the %s format displayed for example in the table (\"1,1\") or the %s display (\"1,3\") at \"0,1,10\"." % (elementenEN[0],woordtransactieEN,elementenEN[0],elementenEN[0],elementenEN[0],elementenEN[0],elementenEN[0],woordtransactieEN),w),
         "3,2": textwrap.wrap("Adjust the %s of the %s. Enter the amount without currency and with a period (\".\") as decimal separator, or in cents if \"%s\" (\"0,1,17\") is set to \"Yes\". Set the currency symbol at \"0,1,5\"." % (elementenEN[1],woordtransactieEN,nieuwheaderlijstEN[16]),w),
@@ -1196,6 +1201,7 @@ helpmenuIT = {
     "2": textwrap.wrap("È possibile aggiungere nuove Transazioni al proprio conto, assegnandole ciascuna a una %s. Una nuova %s può essere inserita per elemento o in successione su una singola riga in stile CSV, oppure è possibile creare una copia di una %s precedente e modificare i dettagli successivamente con le opzioni sotto \"3\". Le nuove Transazioni vengono aggiunte direttamente alla collezione, in modo da poterle visualizzare o modificare immediatamente." % (woordcategorieIT,woordtransactieIT,woordtransactieIT),w),
         "2,1": textwrap.wrap("Aggiungi qui una nuova %s al tuo conto. Puoi inserire gli elementi passo dopo passo, o - per l'utente più esperto - uno di seguito all'altro su una riga in stile CSV: \"%s, %s, %s, %s, %s\". Pertanto, non è possibile utilizzare una virgola (\",\") in nessun elemento. Usa sempre un punto (\".\") come separatore decimale, o imposta \"%s\" (\"0,1,17\") su \"Sì\" per inserire l'%s come centesimi. Se l'input CSV contiene dati non validi, il metodo passo dopo passo prenderà il sopravvento." % (woordtransactieIT,elementenIT[0],elementenIT[1],elementenIT[2],elementenIT[3],woordcategorieIT,nieuwheaderlijstIT[16],elementenIT[1]),w),
         "2,2": textwrap.wrap("Fai qui una copia di una %s inserita in precedenza e sostituisci automaticamente la data originale con quella di oggi. Puoi usare ogni %s come modello per modificarla in dettaglio più tardi con le opzioni nel menu \"3\". Se esiste già una collezione, tali Transazioni verranno offerte una per una, altrimenti ti verrà chiesto di specificare un \"ID\" - o meglio: un elenco di \"ID\" nel formato di un elenco CSV. Questo è il metodo consigliato per aggiungere Transazioni ricorrenti. Nota: se fai una copia identica di una %s già oggi, questa non verrà aggiunta automaticamente alla collezione." % (woordtransactieIT,woordtransactieIT,woordtransactieIT),w),
+        "2,3": textwrap.wrap("Copia un %s precedentemente inserito in un altro conto. Nota: se la %s non esiste nell'altro conto, il trasferimento verrà annullato. Ti verrà chiesto se desideri eliminare la %s originale." % (woordtransactieIT,woordcategorieIT,woordtransactieIT),w),
     "3": textwrap.wrap("Tutti gli elementi di una %s esistente possono essere modificati qui. Se esiste già una collezione, tali Transazioni verranno offerte una per una, altrimenti ti verrà chiesto di specificare un \"ID\" - o meglio: una lista di \"ID\" sotto forma di lista CSV." % (woordtransactieIT),w),
         "3,1": textwrap.wrap("Modifica la %s della %s. Inserisci la nuova %s come \"AAAAMMGG\". La %s predefinita, ad esempio se viene inserita una %s non valida o incompleta, è la %s odierna. Puoi impostare il formato della %s per esempio nella tabella (\"1,1\") o nella visualizzazione della %s (\"1,3\") con \"0,1,10\"." % (elementenIT[0],woordtransactieIT,elementenIT[0],elementenIT[0],elementenIT[0],elementenIT[0],elementenIT[0],woordtransactie),w),
         "3,2": textwrap.wrap("Modifica l'%s della %s. Inserisci l'importo senza valuta e con un punto (\".\") come separatore decimale, oppure in centesimi se \"%s\" (\"0,1,17\") è impostato come \"Sì\". Puoi impostare la valuta con \"0,1,5\"." % (elementenIT[1],woordtransactieIT,nieuwheaderlijstIT[16]),w),
@@ -1835,6 +1841,7 @@ helpmenuCJ = {
     "2": textwrap.wrap("",w),
         "2,1": textwrap.wrap("CSV: \"%s, %s, %s, %s, %s\"" % (elementenCJ[0],elementenCJ[1],elementenCJ[2],elementenCJ[3],woordcategorieCJ),w),
         "2,2": textwrap.wrap("",w),
+        "2,3": textwrap.wrap("",w),
     "3": textwrap.wrap("CSV",w),
         "3,1": textwrap.wrap("(\"1,1\") (\"1,3\") \"0,1,10\"",w),
         "3,2": textwrap.wrap("\"0,1,5\"",w),
@@ -1900,6 +1907,7 @@ helpmenu = {
     "2": textwrap.wrap("U kunt nieuwe %ss aan uw rekening toevoegen, die elk aan een %s worden toegekend. Een nieuwe %s kunt u per element invoeren of achter elkaar op één regel in CSV-stijl, of u kunt een kopie maken van een eerdere %s en de details later aanpassen met de opties onder \"3\". Nieuwe %ss worden direct aan de collectie toegevoegd, zodat u die meteen kunt inzien of aanpassen." % (woordtransactie,woordcategorie,woordtransactie,woordtransactie,woordtransactie),w),
         "2,1": textwrap.wrap("Voeg hier een nieuwe %s aan uw rekening toe. U kunt de elementen stap-voor-stap ingeven, of - voor de meer ervaren gebruiker - achter elkaar op één lijn in CSV-stijl: \"%s, %s, %s, %s, %s\". U kunt daarom in geen enkel element een komma (\",\") gebruiken. Gebruik altijd een punt (\".\") als decimaalscheidingsteken of zet \"%s\" (\"0,1,17\") op \"Ja\" om het %s als centen in te voeren. Mocht de CSV-ingave ongeldige data bevatten, dan neemt de stap-voor-stap-ingave het over." % (woordtransactie,elementen[0],elementen[1],elementen[2],elementen[3],woordcategorie,nieuwheaderlijst[16],elementen[1]),w),
         "2,2": textwrap.wrap("Maak hier een kopie van een eerder ingevoerde %s en vervang automatisch de oorspronkelijke %s met die van vandaag. U kunt iedere %s als sjabloon gebruiken om later op details aan te passen met de opties in menu \"3\". Als er al een collectie bestaat worden die %ss één voor één aangeboden, anders wordt u gevraagd een \"ID\" - of beter: een lijst van \"ID's\" in de vorm van een CSV-lijst - op te geven. Dit is de aanbevolen methode voor het toevoegen van terugkerende %ss. Let op: als u een identieke kopie maakt van een %s eerder vandaag, dan wordt die niet automatisch aan de collectie toegevoegd." % (woordtransactie,elementen[0],woordtransactie,woordtransactie,woordtransactie,woordtransactie),w),
+        "2,3": textwrap.wrap("Kopieer een eerder ingevoerde %s naar een andere rekening. Let op: Als de %s niet in de andere rekening bestaat wordt het verplaatsen afgebroken. U wordt gevraagd of u de originele %s wilt verwijderen." % (woordtransactie,woordcategorie,woordtransactie),w),
     "3": textwrap.wrap("Alle elementen van een bestaande %s kunnen hier worden aangepast. Als er al een collectie bestaat worden die %ss één voor één aangeboden, anders wordt u gevraagd een \"ID\" - of beter: een lijst van \"ID's\" in de vorm van een CSV-lijst - op te geven." % (woordtransactie,woordtransactie),w),
         "3,1": textwrap.wrap("Pas de %s van de %s aan. Voer de nieuwe %s in als \"JJJJMMDD\". De standaard%s, bijvoorbeeld als er een ongeldige of onvolledige %s wordt ingevoerd, is de %s van vandaag. De %sopmaak bijvoorbeeld in de tabel (\"1,1\") of de %sweergave (\"1,3\") stelt u in bij \"0,1,10\"." % (elementen[0],woordtransactie,elementen[0],elementen[0],elementen[0],elementen[0],elementen[0],woordtransactie),w),
         "3,2": textwrap.wrap("Pas het %s van de %s aan. Voer het bedrag in zonder valuta en met een punt (\".\") als decimaalscheidingsteken, of in centen als \"%s\" (\"0,1,17\") op \"Ja\" staat. De valuta stelt u in bij \"0,1,5\"." % (elementen[1],woordtransactie,nieuwheaderlijst[16]),w),
@@ -3408,7 +3416,7 @@ def haalopmaakdatumdict(datum): # geen H
 
 def toondatumopmaakopties(datum): # geen H
     header = haalheader(rekening)
-    datumopmaak = header[nieuwheaderlijst[9]]
+    DATUMOPMAAK = HEADER[NIEUWHEADERLIJST[9]]
     opmaakdatumdict = haalopmaakdatumdict(datum)
     tel = 0
     for i in opmaakdatumdict:
@@ -4692,6 +4700,75 @@ def nieuwkopie(rekening,header,col,ok): # geen H
                 IDlijst.append(i[0]+str(categorie.index(j)-1))
     IDlijst = sorted(IDlijst)
     ok = IDlijst2ok(IDlijst)
+    return ok
+
+def nieuwkopieandererekening(rekening,header,col,ok): # geen H
+    kleuren,catcol = updatekleuren(rekening)
+    Taal = header[nieuwheaderlijst[3]]
+    ok = ifok(rekening,header,col,ok)
+    translijst = []
+    IDlijst = []
+    for i in ok:
+        oudetransactie = ok[i]
+        translijst.append(oudetransactie)
+        categorie = haalcategorie(rekening,i[0])
+        catsort = categorie[1:]
+        dezeok = {i[0]+str(categorie.index(oudetransactie)-1):oudetransactie}
+        dezeok = toontransactie(rekening,header,col,dezeok)
+        if Taal == "EN":
+            print("%s:" % (col+menuEN["2,3"]+kleuren["ResetAll"]))
+            geencategorie = "There's no %s %s in this account" % (woordcategorieEN,i[0])
+        elif Taal == "IT":
+            print("%s:" % (col+menuIT["2,3"]+kleuren["ResetAll"]))
+            geencategorie = "Non esiste una %s %s in questo account" % (woordcategorieIT,i[0])
+        elif Taal == "CJ":
+            print("%s:" % (col+menuCJ["2,3"]+kleuren["ResetAll"]))
+            geencategorie = "ma hiŋe hubiwamesemsüipa %s %s hili" % (woordcategorieCJ,i[0])
+        else:
+            print("%s:" % (col+menu["2,3"]+kleuren["ResetAll"]))
+            geencategorie = "There's no %s %s in this account" % (woordcategorie,i[0])
+        jn = geefjaofnee(rekening,header)
+        if jn.upper() in afsluitlijst:
+            doei()
+        else:
+            nieuwetransactie = oudetransactie
+            andererekening = programmastart()
+            with open("laatstgekozen","w") as l:
+                print(rekening, end = "", file = l)
+            try:
+                open(os.path.join(andererekening,i[0]))
+            except (Exception) as f:
+                print(geencategorie)
+                return ok
+            anderecategorie = haalcategorie(andererekening,i[0])
+            anderecatsort = anderecategorie[1:]
+            anderecategorie.append(nieuwetransactie)
+            anderecat = [anderecategorie[0]]
+            anderecattrans = []
+            for j in anderecategorie[1:]:
+                anderecattrans.append(j)
+            anderecatsort = sorted(anderecattrans)
+            for j in anderecatsort:
+                anderecat.append(j)
+            schrijfcategorie(andererekening,i[0],anderecat)
+            transactiebedrag = nieuwetransactie[1]
+            onderwerp = nieuwetransactie[3]
+            # Hier iets met "Toverwoord voor Spaarpotten": als ok[i][3] een "Toverwoord" bevat, vraag of deze verrekend moet worden met spaarpot
+            anderespaarpotten = haalspaarpotten(andererekening)
+            for i in anderespaarpotten:
+                if i in onderwerp and transactiebedrag != 0:
+                    transactiebedrag = alsspaarpot(andererekening,header,anderespaarpotten,i,transactiebedrag)
+        #dezeok = {i[0]+str(anderecatsort.index(nieuwetransactie)):nieuwetransactie}
+        #if Taal == "EN":
+        #    print(kleuren["Omkeren"]+col+"NOW:"+kleuren["ResetAll"])
+        #elif Taal == "IT":
+        #    print(kleuren["Omkeren"]+col+"ORA:"+kleuren["ResetAll"])
+        #elif Taal == "CJ":
+        #    print(kleuren["Omkeren"]+col+"huqi:"+kleuren["ResetAll"])
+        #else:
+        #    print(kleuren["Omkeren"]+col+"NU:"+kleuren["ResetAll"])
+        #dezeok = toontransactie(andererekening,header,col,dezeok)
+    verwijderkeuze(rekening,header,col,keuze1lijst,ok)
     return ok
 
 def verwijderkeuze(rekening,header,col,keuze1lijst,ok): # geen H
@@ -7148,6 +7225,13 @@ def nieuwkeuze(keuze1lijst,rekening,ok): # H
             except(Exception) as f:
                 #print(f)
                 ok = nieuwkopie(rekening,header,col,ok)
+                return rekening,header,col,keuze1lijst,ok
+        elif keuze2 == "3":
+            try:
+                keuze3
+            except(Exception) as f:
+                #print(f)
+                ok = nieuwkopieandererekening(rekening,header,col,ok)
                 return rekening,header,col,keuze1lijst,ok
         else: # "1"
             try:
