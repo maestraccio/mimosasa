@@ -3416,7 +3416,7 @@ def haalopmaakdatumdict(datum): # geen H
 
 def toondatumopmaakopties(datum): # geen H
     header = haalheader(rekening)
-    DATUMOPMAAK = HEADER[NIEUWHEADERLIJST[9]]
+    datumopmaak = header[nieuwheaderlijst[9]]
     opmaakdatumdict = haalopmaakdatumdict(datum)
     tel = 0
     for i in opmaakdatumdict:
