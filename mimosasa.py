@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.97"
-versiedatum = "20250129"
+versie = "0.0.98"
+versiedatum = "20250222"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -3823,7 +3823,6 @@ def printselectie(rekening,header,col,ok): # H
     oktot = 0
     for i in ok:
         K = ""
-        forsom = fornum
         getal = ok[i][1]
         oktot += getal
         keen,forsom,K = grootgetal(header,getal,forsom,K)
@@ -3834,17 +3833,18 @@ def printselectie(rekening,header,col,ok): # H
         #print(transactielijnzw, file = m)                                                                                                          # Uncomment bij print naar file
         transactielijn = kleuren["coltoon"]+"|"+kleuren["ResetAll"]+catcol[i[0]]+forr5(i)+kleuren["ResetAll"]+" :"+forc10(datum)+" "+kleinegetalkleuren(getal)+forl2(valuta)+kleuren["ResetAll"]+forsom(keen)+K+" "+forr14(ok[i][2][:14])+" "+catcol[i[0]]+forl34(ok[i][3][:34])+kleuren["ResetAll"]+kleuren["coltoon"]+"|"+kleuren["ResetAll"] # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
         print(transactielijn)                                                                       # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+    forsom = fornum
     print(kleuren["coltoon"]+toplijn+kleuren["ResetAll"])
     if Taal == "EN":                                                                                                                                                                            # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
-        print("Number of %ss: %s - Total %s in this collection: %s" % (woordtransactieEN,len(ok),elementenEN[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,header[nieuwheaderlijst[17]]))))  # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+        print("Number of %ss: %s - Total %s in this collection: %s" % (woordtransactieEN,len(ok),elementenEN[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(forsom(oktot))))  # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
         #print("Number of %ss: %s - Total %s in this collection: %s" % (woordtransactieEN,len(ok),elementenEN[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))  # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
     elif Taal == "IT":                                                                                                                                                                          # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
-        print("Numero di Transazioni: %s - Totale %s in questa collezione: %s" % (len(ok),elementenIT[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,header[nieuwheaderlijst[17]]))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+        print("Numero di Transazioni: %s - Totale %s in questa collezione: %s" % (len(ok),elementenIT[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(forsom(oktot))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
         #print("Numero di Transazioni: %s - Totale %s in questa collezione: %s" % (len(ok),elementenIT[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
     elif Taal == "CJ":                                                                                                                                                                          # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
-        print("hubi %s: %s - %spu hopaʒi: %s" % (woordtransactieCJ,len(ok),elementenCJ[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,header[nieuwheaderlijst[17]]))))                        # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+        print("hubi %s: %s - %spu hopaʒi: %s" % (woordtransactieCJ,len(ok),elementenCJ[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(forsom(oktot))))                        # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
     else:                                                                                                                                                                                       # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
-        print("Aantal %ss: %s - Totaal %s in deze collectie: %s" % (woordtransactie,len(ok),elementen[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,header[nieuwheaderlijst[17]]))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+        print("Aantal %ss: %s - Totaal %s in deze collectie: %s" % (woordtransactie,len(ok),elementen[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(forsom(oktot))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
         #print("Aantal %ss: %s - Totaal %s in deze collectie: %s" % (woordtransactie,len(ok),elementen[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
     #if Taal == "EN":                                                                                                                                       # Uncomment bij print naar file
     #    print("Number of %ss: %s - Total %s in this collection: %s" % (woordtransactieEN,len(ok),elementenEN[1],valuta+" "+str(round(oktot,2))), file = m) # uncomment bij print naar file
@@ -3891,13 +3891,13 @@ def printselectie(rekening,header,col,ok): # H
             #else:                                                                                                                                                                                       # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
             #    print("Aantal %ss: %s - Totaal %s in deze collectie: %s" % (woordtransactie,len(ok),elementen[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
             if Taal == "EN":                                                                                                                                       # Uncomment bij print naar file
-                print("Number of %ss: %s - Total %s in this collection: %s" % (woordtransactieEN,len(ok),elementenEN[1],valuta+" "+str(round(oktot,header[nieuwheaderlijst[17]]))), file = m) # uncomment bij print naar file
+                print("Number of %ss: %s - Total %s in this collection: %s" % (woordtransactieEN,len(ok),elementenEN[1],valuta+" "+str(forsom(oktot))), file = m) # uncomment bij print naar file
             elif Taal == "IT":                                                                                                                                     # uncomment bij print naar file
-                print("Numero di Transazioni: %s - Totale %s in questa collezione: %s" % (len(ok),elementenIT[1],valuta+" "+str(round(oktot,header[nieuwheaderlijst[17]]))), file = m)        # uncomment bij print naar file
+                print("Numero di Transazioni: %s - Totale %s in questa collezione: %s" % (len(ok),elementenIT[1],valuta+" "+str(forsom(oktot))), file = m)        # uncomment bij print naar file
             elif Taal == "CJ":                                                                                                                                     # uncomment bij print naar file
-                print("hubi %s: %s - %spu hopaʒi: %s" % (woordtransactieCJ,len(ok),elementenCJ[1],valuta+" "+str(round(oktot,header[nieuwheaderlijst[17]]))), file = m)                       # uncomment bij print naar file
+                print("hubi %s: %s - %spu hopaʒi: %s" % (woordtransactieCJ,len(ok),elementenCJ[1],valuta+" "+str(forsom(oktot))), file = m)                       # uncomment bij print naar file
             else:                                                                                                                                                  # uncomment bij print naar file
-                print("Aantal %ss: %s - Totaal %s in deze collectie: %s" % (woordtransactie,len(ok),elementen[1],valuta+" "+str(round(oktot,header[nieuwheaderlijst[17]]))), file = m)        # uncomment bij print naar file
+                print("Aantal %ss: %s - Totaal %s in deze collectie: %s" % (woordtransactie,len(ok),elementen[1],valuta+" "+str(forsom(oktot))), file = m)        # uncomment bij print naar file
             ########## print naar file stop ##########
     if datumlijst[0] == datumlijst[1]:
         dagtotaal(rekening,header,col,datumlijst[0])
@@ -7247,9 +7247,9 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
                 return rekening,header,col,keuze1lijst,ok
 
 def nieuwkeuze(keuze1lijst,rekening,ok): # H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     header = haalheader(rekening)
+    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     Taal = header[nieuwheaderlijst[3]]
     if len(keuze1lijst) > 4:
         keuze2 = keuze1lijst[1]
@@ -7336,9 +7336,9 @@ def nieuwkeuze(keuze1lijst,rekening,ok): # H
                 return rekening,header,col,keuze1lijst,ok
 
 def wijzigkeuze(keuze1lijst,rekening,ok): # H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     header = haalheader(rekening)
+    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     Taal = header[nieuwheaderlijst[3]]
     if len(keuze1lijst) > 4:
         keuze2 = keuze1lijst[1]
