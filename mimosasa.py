@@ -3,8 +3,8 @@ import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.98"
-versiedatum = "20250222"
+versie = "0.0.99"
+versiedatum = "20250309"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -3595,6 +3595,7 @@ def geefsneltoets(rekening,header,col,ok): # H
 
 def printselectie(rekening,header,col,ok): # H
     fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
+    forsom = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -3908,9 +3909,9 @@ def printselectie(rekening,header,col,ok): # H
     return rekening,header,col,keuze1lijst,ok
 
 def samenvattingcategorie(rekening,cat,datumlijst): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     header = haalheader(rekening)
+    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
     categorie = haalcategorie(rekening,cat)
@@ -4675,7 +4676,7 @@ def ifok(rekening,header,col,ok): # geen H
     ok = IDlijst2ok(IDlijst)
     return ok
 
-def nieuwkopie(rekening,header,col,ok): # geen H
+ nieuwkopie(rekening,header,col,ok): # geen H
     fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
