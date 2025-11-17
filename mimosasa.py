@@ -2911,6 +2911,26 @@ def eenrekeningtotaal(rekening): # geen H
     vrijbesteedbaar(rekening,header)
     return getal,forsom,K
 
+def eenrekeningtotaalkort(rekening,header): # geen H
+    Taal = header[nieuwheaderlijst[3]]
+    if Taal == "EN":
+        rekeningtotaal = "Account total"
+    elif Taal == "IT":
+        rekeningtotaal = "Totale del conto"
+    elif Taal == "CJ":
+        rekeningtotaal = "hubiwapu"
+    else:
+        rekeningtotaal = "Rekeningtotaal"
+    header = haalheader(rekening)
+    kleuren,catcol = updatekleuren(rekening)
+    valuta = header[nieuwheaderlijst[4]]
+    getal = rekeningsom(rekening)
+    getalkleur = kleinegetalkleuren(getal)
+    getal,forsom,K = grootgetal(getal,fornum,"")
+    printstuff = kleuren["coltekst"]+rekeningtotaal+ResetAll+" "+getalkleur+valuta+" "+forsom(getal)+K+ResetAll
+    print(printstuff)
+    return getal,forsom,K
+
 def geefkortelijst(rekeningenlijst):
     kortelijst = []
     for i in rekeningenlijst:
@@ -4616,7 +4636,7 @@ def nieuwnieuw(rekening,ok): # H
                 schrijfcategorie(rekening,nieuwetransactiecategorie,cat)
                 IDlijst.append(nieuwetransactiecategorie+str(categorie.index(nieuwetransactie)-1))
                 ok = IDlijst2ok(IDlijst)
-                eenrekeningtotaal(rekening)
+                eenrekeningtotaalkort(rekening,header)
                 toontransactie(rekening,header,col,ok)
             except(Exception) as f:
                 print(f)
@@ -4686,7 +4706,7 @@ def nieuwkopie(rekening,header,col,ok): # geen H
                 if i in onderwerp and transactiebedrag != 0:
                     transactiebedrag = alsspaarpot(rekening,header,spaarpotten,i,transactiebedrag)
         #dezeok = {i[0]+str(catsort.index(nieuwetransactie)):nieuwetransactie}
-        eenrekeningtotaal(rekening)
+        eenrekeningtotaalkort(rekening,header)
         if Taal == "EN":
             print(kleuren["Omkeren"]+col+"New copy:"+kleuren["ResetAll"])
         elif Taal == "IT":
