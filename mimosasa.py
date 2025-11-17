@@ -2,15 +2,21 @@
 import pathlib, os, ast, calendar, textwrap, random, shutil
 from time import sleep
 from datetime import datetime, date, timedelta
-os.chdir(os.path.dirname(os.path.realpath(__file__)))
-versie = "0.0.99"
-versiedatum = "20250309"
+dir_path = os.path.dirname(os.path.realpath(__file__))
+os.chdir(dir_path)
+cwd = os.getcwd()
+print(cwd)
+versie = "0.0.96"
+versiedatum = "20251117"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
 #nonasciiletters = "ʃ ʒ ŋ"
 w = 80
 K = ""
+fornum = "{0:>8.2f}".format
+forni = fornum
+forno = fornum
 forl2 = "{:<2}".format
 forc3 = "{:^3}".format
 forl3 = "{:<3}".format
@@ -203,8 +209,7 @@ nieuwheaderlijstEN = [
         "Print monthly overview to file",
         "Export everything to CSV file",
         "Tip of the day",
-        "Autodecimals",
-        "Number of decimals"
+        "Autodecimals"
         ]
 nieuwheaderlijstIT = [
         "Nome del conto",
@@ -223,8 +228,7 @@ nieuwheaderlijstIT = [
         "Stampa riepilogo mensile su file",
         "Esporta tutto in file CSV",
         "Consiglio del giorno",
-        "Autodecimali",
-        "Numero di decimali"
+        "Autodecimali"
         ]
 nieuwheaderlijstCJ = [
 #WTI:NOUN(                                  #               # hu
@@ -422,15 +426,7 @@ nieuwheaderlijstCJ = [
 #               Truth0(                     # not           # li
 #   )   )   )   )
 #)
-        "mi hake huwiŋüabibüi hoʃi melamli",
-#STI:CHOICE(                                # choice        # me
-#   WTI:NOUN(                               #               # hu
-#       Counting0(                          # number        # bi
-#          Distance1(                       # near          # ze
-#               Matter0(                    # dot           # wi
-#   )  )   )   )
-#)
-        "me hubizewi"]
+        "mi hake huwiŋüabibüi hoʃi melamli"]
 nieuwheaderlijst = [
         "Rekeningnaam",                            # 0
         "Rekeninghouder",                          # 1
@@ -448,8 +444,7 @@ nieuwheaderlijst = [
         "Print maandoverzicht naar bestand",       # 13
         "Exporteer alles naar csv-bestand",        # 14
         "Tip van de dag",                          # 15
-        "Autodecimalen",                           # 16
-        "Aantal decimalen"                         # 17
+        "Autodecimalen"                            # 16
         ]
 
 lijnlijstEN = [
@@ -534,8 +529,7 @@ nieuwheader = {
         nieuwheaderlijst[13]:"<",
         nieuwheaderlijst[14]:"<",
         nieuwheaderlijst[15]:">",
-        nieuwheaderlijst[16]:"<",
-        nieuwheaderlijst[17]:2
+        nieuwheaderlijst[16]:"<"
         }
 nieuwalternatievenamendictEN = {
         "0":"fixd ass/equity",
@@ -720,7 +714,6 @@ menuEN = {
             "0,1,15": " "+nieuwheaderlijstEN[14],
             "0,1,16": " "+nieuwheaderlijstEN[15],
             "0,1,17": " "+nieuwheaderlijstEN[16],
-            "0,1,18": " "+nieuwheaderlijstEN[17],
         "0,2": "%s management" % (woordcategorieEN),
             "0,2,1": " Add new %s" % (woordcategorieEN),
             "0,2,2": " Modify %s name" % (woordcategorieEN),
@@ -790,7 +783,6 @@ menuIT = {
             "0,1,15": " "+nieuwheaderlijstIT[14],
             "0,1,16": " "+nieuwheaderlijstIT[15],
             "0,1,17": " "+nieuwheaderlijstIT[16],
-            "0,1,18": " "+nieuwheaderlijstIT[17],
         "0,2": "Gestione %s" % (woordcategorieIT),
             "0,2,1": " Aggiundere nuova %s" % (woordcategorieIT),
             "0,2,2": " Modificare nome %s" % (woordcategorieIT),
@@ -897,7 +889,6 @@ menuCJ = {
             "0,1,15": " "+nieuwheaderlijstCJ[14],
             "0,1,16": " "+nieuwheaderlijstCJ[15],
             "0,1,17": " "+nieuwheaderlijstCJ[16],
-            "0,1,18": " "+nieuwheaderlijstCJ[17],
 #WTI:VERB(                                  #               # ha
 #   State2(                                 # ordened       # xa
 #)  )
@@ -1048,7 +1039,6 @@ menu = {
             "0,1,15": " "+nieuwheaderlijst[14],
             "0,1,16": " "+nieuwheaderlijst[15],
             "0,1,17": " "+nieuwheaderlijst[16],
-            "0,1,18": " "+nieuwheaderlijst[17],
         "0,2": "%sbeheer" % (woordcategorie),
             "0,2,1": " Voeg nieuwe %s toe" % (woordcategorie),
             "0,2,2": " %snaam wijzigen" % (woordcategorie),
@@ -1118,7 +1108,6 @@ helpmenuEN = {
             "0,1,15": textwrap.wrap("You can choose to save a csv file with all %ss from that account each time you close the app. You will find this csv file in the \"account folder\" as \"export.csv\". This file is created if it does not exist yet, and otherwise overwritten with fresh data." % (woordtransactieEN),w),
             "0,1,16": textwrap.wrap("At the start of the app, a random help article can be shown as the \"Tip of the day\". This can be useful, especially in the beginning, to familiarize yourself with the functionalities. This can be turned on or off here.",w),
             "0,1,17": textwrap.wrap("You can choose to enter the %s amount with or without a decimal separator. If \"Yes\", the entered amount will be treated as in cents, and a decimal separator will be added before the last two digits." % (woordtransactieEN),w),
-            "0,1,18": textwrap.wrap("",w),
         "0,2": textwrap.wrap("Here you can adjust the names of different Categories, allocate budgets, and more. Categories where money comes in (monthly) are assigned a negative budget, which is used as a buffer at the beginning of a new month. In the monthly analysis, the balance booked on those Categories is ignored until the buffer is reached.",w),
             "0,2,1": textwrap.wrap("Add a new %s. Business accounts contain standard ledgers \"%s\" through \"%s\", household accounts the Categories \"%s\" through \"%s\" and \"%s\", but all intermediate letters can be used, and all those letters and numbers can also be exchanged between business and household accounts." % (woordcategorieEN,zakelijkelijst[0],zakelijkelijst[-1],huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
             "0,2,2": textwrap.wrap("Initially, standard names are assigned to the Categories, but you can adjust them here as desired. The default Categories for business accounts are: 0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s, 9: %s, and for household accounts (standard): A: %s, B: %s, C: %s, D: %s, E: %s, F: %s, O: %s. All these standard %s names are automatically translated from Dutch (the default language) to other languages when you switch languages, but not if you have adjusted a %s name yourself." % (nieuwalternatievenamendictEN[zakelijkelijst[0]],nieuwalternatievenamendictEN[zakelijkelijst[1]],nieuwalternatievenamendictEN[zakelijkelijst[2]],nieuwalternatievenamendictEN[zakelijkelijst[3]],nieuwalternatievenamendictEN[zakelijkelijst[4]],nieuwalternatievenamendictEN[zakelijkelijst[5]],nieuwalternatievenamendictEN[zakelijkelijst[6]],nieuwalternatievenamendictEN[zakelijkelijst[7]],nieuwalternatievenamendictEN[zakelijkelijst[8]],nieuwalternatievenamendictEN[zakelijkelijst[9]],nieuwalternatievenamendictEN[huishoudelijkelijst[0]],nieuwalternatievenamendictEN[huishoudelijkelijst[1]],nieuwalternatievenamendictEN[huishoudelijkelijst[2]],nieuwalternatievenamendictEN[huishoudelijkelijst[3]],nieuwalternatievenamendictEN[huishoudelijkelijst[4]],nieuwalternatievenamendictEN[huishoudelijkelijst[5]],nieuwalternatievenamendictEN[huishoudelijkelijst[6]],woordcategorieEN,woordcategorieEN),w),
@@ -1188,7 +1177,6 @@ helpmenuIT = {
             "0,1,15": textwrap.wrap("È possibile scegliere di salvare sempre un file csv con tutte le Transazioni di quel conto quando si chiude l'applicazione. Troverete questo file csv nella \"cartella del conto\" come \"export.csv\". Questo file viene creato se non esiste ancora, altrimenti sovrascritto con nuovi dati.",w),
             "0,1,16": textwrap.wrap("All'avvio dell'app, può essere visualizzato un articolo casuale di aiuto come \"Suggerimento del giorno\". Questo può essere utile soprattutto all'inizio per familiarizzare con le funzionalità. È possibile attivarlo o disattivarlo qui.",w),
             "0,1,17": textwrap.wrap("Puoi scegliere di inserire l'importo della %s con o senza un separatore decimale. Se \"Sì\", l'importo inserito verrà trattato come in centesimi e verrà aggiunto un separatore decimale prima delle ultime due cifre." % (woordtransactieIT),w),
-            "0,1,18": textwrap.wrap("",w),
         "0,2": textwrap.wrap("Qui è possibile modificare il nome delle varie Categorie, distribuire i budget, eccetera. Le Categorie su cui entra denaro (mensilmente) ricevono un budget negativo, che viene utilizzato come buffer all'inizio di un nuovo mese. Nell'analisi mensile il saldo registrato su tali categorie viene ignorato fino a quando il buffer non è raggiunto.",w),
             "0,2,1": textwrap.wrap("Aggiungi una nuova %s. I conti aziendali contengono di default i conti \"%s\" a \"%s\", i conti domestici le Categorie \"%s\" a \"%s\" e \"%s\", ma tutte le lettere intermedie possono essere utilizzate, e tutte quelle lettere e numeri possono anche essere scambiati tra conti aziendali e domestici." % (woordcategorieIT,zakelijkelijst[0],zakelijkelijst[-1],huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
             "0,2,2": textwrap.wrap("Di base vengono assegnati nomi standard alle Categorie, ma qui puoi modificarli a tuo piacimento. Le Categorie standard per i conti aziendali sono: 0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s, 9: %s, e per i conti domestici (standard): A: %s, B: %s, C: %s, D: %s, E: %s, F: %s, O: %s. Tutti questi nomi (standard olandesi) vengono tradotti quando si cambia lingua, ma non se hai personalizzato il nome di una %s." % (nieuwalternatievenamendictIT[zakelijkelijst[0]],nieuwalternatievenamendictIT[zakelijkelijst[1]],nieuwalternatievenamendictIT[zakelijkelijst[2]],nieuwalternatievenamendictIT[zakelijkelijst[3]],nieuwalternatievenamendictIT[zakelijkelijst[4]],nieuwalternatievenamendictIT[zakelijkelijst[5]],nieuwalternatievenamendictIT[zakelijkelijst[6]],nieuwalternatievenamendictIT[zakelijkelijst[7]],nieuwalternatievenamendictIT[zakelijkelijst[8]],nieuwalternatievenamendictIT[zakelijkelijst[9]],nieuwalternatievenamendictIT[huishoudelijkelijst[0]],nieuwalternatievenamendictIT[huishoudelijkelijst[1]],nieuwalternatievenamendictIT[huishoudelijkelijst[2]],nieuwalternatievenamendictIT[huishoudelijkelijst[3]],nieuwalternatievenamendictIT[huishoudelijkelijst[4]],nieuwalternatievenamendictIT[huishoudelijkelijst[5]],nieuwalternatievenamendictIT[huishoudelijkelijst[6]],woordcategorieIT),w),
@@ -1829,7 +1817,6 @@ helpmenuCJ = {
             "0,1,15": textwrap.wrap("",w),
             "0,1,16": textwrap.wrap("",w),
             "0,1,17": textwrap.wrap("",w),
-            "0,1,18": textwrap.wrap("",w),
         "0,2": textwrap.wrap("",w),
             "0,2,1": textwrap.wrap("\"%s\"  \"%s\" \"%s\"  \"%s\"  \"%s\"" % (zakelijkelijst[0],zakelijkelijst[-1],huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
             "0,2,2": textwrap.wrap("0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s 9: %s A: %s, B: %s, C: %s, D: %s, E: %s, F: %s O: %s" % (nieuwalternatievenamendictCJ[zakelijkelijst[0]],nieuwalternatievenamendictCJ[zakelijkelijst[1]],nieuwalternatievenamendictCJ[zakelijkelijst[2]],nieuwalternatievenamendictCJ[zakelijkelijst[3]],nieuwalternatievenamendictCJ[zakelijkelijst[4]],nieuwalternatievenamendictCJ[zakelijkelijst[5]],nieuwalternatievenamendictCJ[zakelijkelijst[6]],nieuwalternatievenamendictCJ[zakelijkelijst[7]],nieuwalternatievenamendictCJ[zakelijkelijst[8]],nieuwalternatievenamendictCJ[zakelijkelijst[9]],nieuwalternatievenamendictCJ[huishoudelijkelijst[0]],nieuwalternatievenamendictCJ[huishoudelijkelijst[1]],nieuwalternatievenamendictCJ[huishoudelijkelijst[2]],nieuwalternatievenamendictCJ[huishoudelijkelijst[3]],nieuwalternatievenamendictCJ[huishoudelijkelijst[4]],nieuwalternatievenamendictCJ[huishoudelijkelijst[5]],nieuwalternatievenamendictCJ[huishoudelijkelijst[6]]),w),
@@ -1899,7 +1886,6 @@ helpmenu = {
             "0,1,15": textwrap.wrap("U kunt ervoor kiezen om bij het afsluiten van de app steeds automatisch een csv-bestand op te slaan met alle %ss van die rekening erin. U vindt dit csv-bestand dan in de \"rekeningmap\" als \"export.csv\". Dit wordt aangemaakt als het nog niet bestaat, en anders overschreven met verse data." % (woordtransactie),w),
             "0,1,16": textwrap.wrap("Bij aanvang van de app kan steeds een willekeurig helpartikel als \"Tip van de dag\" worden getoond. Dat kan zeker in het begin handig zijn om kennis te maken met de functionaliteiten. Dit kan hier worden aan- of uitgezet.",w),
             "0,1,17": textwrap.wrap("U kunt ervoor kiezen om het %sbedrag in te voeren met of zonder een decimaalscheidingsteken. Als u voor \"Ja\" kiest, wordt het ingevoerde bedrag behandeld als in centen, en wordt er een decimaalscheidingsteken toegevoegd vóór de laatste twee cijfers." % (woordtransactie),w),
-            "0,1,18": textwrap.wrap("",w),
         "0,2": textwrap.wrap("Hier kunt u de naam van de verschillende %sën aanpassen, budgetten verdelen, enzovoorts. De %sën waarop (maandelijks) geld binnenkomt krijgen een negatief budget, dat als buffer wordt gebruikt bij aanvang van een nieuwe maand. In de maandanalyse wordt het saldo dat op die %sën wordt ingeboekt genegeerd totdat de buffer is bereikt." % (woordcategorie,woordcategorie,woordcategorie),w),
             "0,2,1": textwrap.wrap("Voeg een nieuwe %s toe. Zakelijke rekeningen bevatten standaard de grootboeken \"%s\" t/m \"%s\", huishoudelijke rekeningen de %sën \"%s\" t/m \"%s\" en \"%s\", maar alle tussenliggende letters kunnen worden gebruikt, en al die letters en cijfers kunnen ook tussen zakelijke en huishoudelijke rekeningen worden uitgewisseld." % (woordcategorie,zakelijkelijst[0],zakelijkelijst[-1],woordcategorie,huishoudelijkelijst[0],huishoudelijkelijst[5],huishoudelijkelijst[-1]),w),
             "0,2,2": textwrap.wrap("Aan de %sën worden in beginsel standaardnamen toegekend, maar u kunt die hier zelf naar wens aanpassen. De standaard%sën zijn voor zakelijke rekeningen: 0: %s, 1: %s, 2: %s, 3: %s, 4: %s, 5: %s, 6: %s, 7: %s, 8: %s, 9: %s, en voor huishoudelijke rekeningen (standaard): A: %s, B: %s, C: %s, D: %s, E: %s, F: %s, O: %s. Al deze (standaard Nederlandse) namen worden vertaald als u van taal wisselt, maar niet als u zelf een %snaam heeft aangepast." % (woordcategorie,woordcategorie,nieuwalternatievenamendict[zakelijkelijst[0]],nieuwalternatievenamendict[zakelijkelijst[1]],nieuwalternatievenamendict[zakelijkelijst[2]],nieuwalternatievenamendict[zakelijkelijst[3]],nieuwalternatievenamendict[zakelijkelijst[4]],nieuwalternatievenamendict[zakelijkelijst[5]],nieuwalternatievenamendict[zakelijkelijst[6]],nieuwalternatievenamendict[zakelijkelijst[7]],nieuwalternatievenamendict[zakelijkelijst[8]],nieuwalternatievenamendict[zakelijkelijst[9]],nieuwalternatievenamendict[huishoudelijkelijst[0]],nieuwalternatievenamendict[huishoudelijkelijst[1]],nieuwalternatievenamendict[huishoudelijkelijst[2]],nieuwalternatievenamendict[huishoudelijkelijst[3]],nieuwalternatievenamendict[huishoudelijkelijst[4]],nieuwalternatievenamendict[huishoudelijkelijst[5]],nieuwalternatievenamendict[huishoudelijkelijst[6]],woordcategorie),w),
@@ -2419,8 +2405,7 @@ def checkdatum(YYYYMMDD): # geen H
     except:
         return False
 
-def grootgetal(header,getal,forsom,K): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
+def grootgetal(getal,forsom,K): # geen H
     if getal <= -1000000:
         getal = "-----"
         forsom = "{:>5}".format
@@ -2440,8 +2425,7 @@ def grootgetal(header,getal,forsom,K): # geen H
         getal = getal
         forsom = fornum
         K = ""
-        return round(getal,header[nieuwheaderlijst[17]]),forsom,K
-        #return round(getal,2),forsom,K
+        return round(getal,2),forsom,K
 
 def rekeningsom(rekening): # geen H
     header = haalheader(rekening)
@@ -2454,8 +2438,7 @@ def rekeningsom(rekening): # geen H
         except(Exception) as f:
             pass
             #print(f)
-    return round(som,header[nieuwheaderlijst[17]])
-    #return round(som,2)
+    return round(som,2)
 
 def haalheader(rekening): # geen H
     if rekening.upper() in (neelijst+afsluitlijst):
@@ -2498,7 +2481,6 @@ def toonrekeningsaldo(rekeningenlijst): # geen H
             L = " "
         kleuren,catcol = updatekleuren(i)
         header = haalheader(i)
-        fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
         rekeningnaam = header[nieuwheaderlijst[0]]
         actieverekening = header[nieuwheaderlijst[2]]
         Taal = header[nieuwheaderlijst[3]]
@@ -2521,7 +2503,7 @@ def toonrekeningsaldo(rekeningenlijst): # geen H
                             rekeningtotaal += k[1]
                 valutalijst.append(valuta)
                 totaalalles += rekeningtotaal
-                getal,forsom,K = grootgetal(header,rekeningtotaal,forsom,"")
+                getal,forsom,K = grootgetal(rekeningtotaal,forsom,"")
                 printstuffzw = L+forl3(rekeningenlijst.index(i)+1)+" "+("{:>%s}" % (maxreklen)).format(IBAN+" "+JAAR)+" "+valuta+forsom(getal)+K+forr25(rekeningnaam)
                 lenprtstfzw = len(printstuffzw)
                 print(int((w-lenprtstfzw)/2)*" "+kleuren["coltoe"]+L+forl3(rekeningenlijst.index(i)+1)+" "+catcol["5"]+("{:>%s}" % (maxreklen)).format(IBAN+" "+JAAR)+kleuren["ResetAll"]+" "+grotegetalkleuren(i,header,rekeningtotaal)+valuta+forsom(getal)+K+kleuren["ResetAll"]+kleuren["coltekst"]+forr25(rekeningnaam)+kleuren["ResetAll"])
@@ -2532,7 +2514,7 @@ def toonrekeningsaldo(rekeningenlijst): # geen H
     valutalijst = sorted(valutalijst)
     if len(valutalijst) > 0:
         if valutalijst[0] == valutalijst[-1]:
-            totaalallesK,forsom,K = grootgetal(header,totaalalles,forsom,K)
+            totaalallesK,forsom,K = grootgetal(totaalalles,forsom,K)
             print(int((w-lenprtstfzw)/2)*" "+" "+forl3(" ")+" "+("{:^%s}" % (maxreklen)).format(" ")+" "+"_"+"_"*8)
             print(int((w-lenprtstfzw)/2)*" "+" "+forl3(" ")+" "+("{:^%s}" % (maxreklen)).format(" ")+" "+grotegetalkleuren("","",totaalalles)+valuta+forsom(totaalallesK)+K+ResetAll)
 
@@ -2550,7 +2532,6 @@ def toonrekeningenactief(rekeningenlijst): # geen H
             L = " "
         kleuren,catcol = updatekleuren(i)
         header = haalheader(i)
-        fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
         rekeningnaam = header[nieuwheaderlijst[0]]
         actieverekening = header[nieuwheaderlijst[2]]
         Taal = header[nieuwheaderlijst[3]]
@@ -2593,7 +2574,7 @@ def toonrekeningenactief(rekeningenlijst): # geen H
                         rekeningtotaal += k[1]
             valutalijst.append(valuta)
             totaalalles += rekeningtotaal
-            getal,forsom,K = grootgetal(header,rekeningtotaal,forsom,"")
+            getal,forsom,K = grootgetal(rekeningtotaal,forsom,"")
             printstuffzw = L+forl3(rekeningenlijst.index(i)+1)+" "+("{:>%s}" % (maxreklen)).format(IBAN+" "+JAAR)+" "+valuta+forsom(getal)+K+forl25(actief)
             lenprtstfzw = len(printstuffzw)
             print(int((w-lenprtstfzw)/2)*" "+kleuren["coltoe"]+L+forl3(rekeningenlijst.index(i)+1)+" "+kleuren["coltoon"]+("{:>%s}" % (maxreklen)).format(IBAN+" "+JAAR)+" "+grotegetalkleuren(i,header,rekeningtotaal)+valuta+forsom(getal)+K+kleuren["ResetAll"]+kleuren["coltekst"]+forl25(actief)+kleuren["ResetAll"])
@@ -2809,7 +2790,6 @@ def vertaalv(v): # geen H
 def printheaderall(rekening): # geen H
     kleuren,catcol = updatekleuren(rekening)
     header = haalheader(rekening)
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     Taal = header[nieuwheaderlijst[3]]
     if Taal == "EN":
         menulinks = nieuwheaderlijstEN
@@ -2837,7 +2817,6 @@ def printheaderall(rekening): # geen H
     print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[14])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[14]])+ResetAll)
     print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[15])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[15]])+ResetAll)
     print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[16])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+vertaalv(header[nieuwheaderlijst[16]])+ResetAll)
-    print(kleuren["LichtRood"]+("{:<%d}" % (maxlen)).format(menulinks[17])+kleuren["Blauw"]+": "+kleuren["LichtGroen"]+str(header[nieuwheaderlijst[17]])+ResetAll)
 
 def printheader(rekening): # geen H
     kleuren,catcol = updatekleuren(rekening)
@@ -2865,7 +2844,6 @@ def haalalternatievenamen(rekening): # geen H
     return alternatievenamendict
 
 def tooncategorieen(rekening,header): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     valuta = header[nieuwheaderlijst[4]]
     alternatievenamendict = haalalternatievenamen(rekening)
@@ -2877,8 +2855,8 @@ def tooncategorieen(rekening,header): # geen H
             for j in cat[1:]:
                 if int(nustr[:6]+"01") <= int(j[0]) <= int(nustr[:]+"31"):
                     som += j[1]
-        som,forsom,K = grootgetal(header,som,fornum,"")
-        bud,forbud,Kb = grootgetal(header,budget,fornum,"")
+        som,forsom,K = grootgetal(som,fornum,"")
+        bud,forbud,Kb = grootgetal(budget,fornum,"")
         print(catcol[i]+forcw(forc3(i)+forc15(vertaalv(alternatievenamendict[i]))+forc3(valuta)+forsom(som)+K+"/"+forc3(valuta)+forbud(bud)+Kb)+ResetAll)
 
 def kleinegetalkleuren(getal): # geen H
@@ -2915,14 +2893,13 @@ def grotegetalkleuren(rekening,header,getal): # geen H
 
 def eenrekeningtotaal(rekening): # geen H
     header = haalheader(rekening)
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     rekeningnaam = header[nieuwheaderlijst[0]]
     rekeninghouder = header[nieuwheaderlijst[1]]
     kleuren,catcol = updatekleuren(rekening)
     valuta = header[nieuwheaderlijst[4]]
     getal = rekeningsom(rekening)
     getalkleur = kleinegetalkleuren(getal)
-    getal,forsom,K = grootgetal(header,getal,fornum,"")
+    getal,forsom,K = grootgetal(getal,fornum,"")
     IBAN = rekening[:rekening.index("#")]
     if len(IBAN) > 20:
         toonIBAN = IBAN[:15]+"..."+IBAN[-2:]
@@ -3128,7 +3105,6 @@ def geefdatumbereik(rekening,header,col,ok,datum): # geen H
     return datumlijst
 
 def geefeenbedrag(rekening,header,col,ok,bedrag): # H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -3195,12 +3171,11 @@ def geefeenbedrag(rekening,header,col,ok,bedrag): # H
                     else:
                         transactiebedrag = header[nieuwheaderlijst[7]][0]
                 K = ""
-                toongetal,forsom,K = grootgetal(header,transactiebedrag,fornum,K)
+                toongetal,forsom,K = grootgetal(transactiebedrag,fornum,K)
                 print(col+valuta+forsom(toongetal)+K+ResetAll)
                 return transactiebedrag
 
 def geefbedragbereik(rekening,header,col,ok,bedrag): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -3229,7 +3204,7 @@ def geefbedragbereik(rekening,header,col,ok,bedrag): # geen H
         else:
             print("Top")
         K = ""
-        toongetal,forsom,K = grootgetal(header,topbedrag,fornum,K)
+        toongetal,forsom,K = grootgetal(topbedrag,fornum,K)
         print(col+valuta+forsom(toongetal)+K+ResetAll)
     else:
         if Taal == "EN":
@@ -3444,7 +3419,7 @@ def haalopmaakdatumdict(datum): # geen H
 
 def toondatumopmaakopties(datum): # geen H
     header = haalheader(rekening)
-    datumopmaak = header[nieuwheaderlijst[9]]
+    DATUMOPMAAK = HEADER[NIEUWHEADERLIJST[9]]
     opmaakdatumdict = haalopmaakdatumdict(datum)
     tel = 0
     for i in opmaakdatumdict:
@@ -3594,8 +3569,6 @@ def geefsneltoets(rekening,header,col,ok): # H
     return sneltoets,ok,datumlijst,bedraglijst,wederpartij,onderwerp,categoriekeuzelijst
 
 def printselectie(rekening,header,col,ok): # H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
-    forsom = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -3824,9 +3797,10 @@ def printselectie(rekening,header,col,ok): # H
     oktot = 0
     for i in ok:
         K = ""
+        forsom = fornum
         getal = ok[i][1]
         oktot += getal
-        keen,forsom,K = grootgetal(header,getal,forsom,K)
+        keen,forsom,K = grootgetal(getal,forsom,K)
         datum = ok[i][0]
         mnd = vertaalmnd(datum)
         datum = opmaakdatum(datum)
@@ -3834,19 +3808,15 @@ def printselectie(rekening,header,col,ok): # H
         #print(transactielijnzw, file = m)                                                                                                          # Uncomment bij print naar file
         transactielijn = kleuren["coltoon"]+"|"+kleuren["ResetAll"]+catcol[i[0]]+forr5(i)+kleuren["ResetAll"]+" :"+forc10(datum)+" "+kleinegetalkleuren(getal)+forl2(valuta)+kleuren["ResetAll"]+forsom(keen)+K+" "+forr14(ok[i][2][:14])+" "+catcol[i[0]]+forl34(ok[i][3][:34])+kleuren["ResetAll"]+kleuren["coltoon"]+"|"+kleuren["ResetAll"] # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
         print(transactielijn)                                                                       # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
-    forsom = fornum
     print(kleuren["coltoon"]+toplijn+kleuren["ResetAll"])
     if Taal == "EN":                                                                                                                                                                            # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
-        print("Number of %ss: %s - Total %s in this collection: %s" % (woordtransactieEN,len(ok),elementenEN[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(forsom(oktot))))  # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
-        #print("Number of %ss: %s - Total %s in this collection: %s" % (woordtransactieEN,len(ok),elementenEN[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))  # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+        print("Number of %ss: %s - Total %s in this collection: %s" % (woordtransactieEN,len(ok),elementenEN[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))  # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
     elif Taal == "IT":                                                                                                                                                                          # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
-        print("Numero di Transazioni: %s - Totale %s in questa collezione: %s" % (len(ok),elementenIT[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(forsom(oktot))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
-        #print("Numero di Transazioni: %s - Totale %s in questa collezione: %s" % (len(ok),elementenIT[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+        print("Numero di Transazioni: %s - Totale %s in questa collezione: %s" % (len(ok),elementenIT[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
     elif Taal == "CJ":                                                                                                                                                                          # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
-        print("hubi %s: %s - %spu hopaʒi: %s" % (woordtransactieCJ,len(ok),elementenCJ[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(forsom(oktot))))                        # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+        print("hubi %s: %s - %spu hopaʒi: %s" % (woordtransactieCJ,len(ok),elementenCJ[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))                        # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
     else:                                                                                                                                                                                       # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
-        print("Aantal %ss: %s - Totaal %s in deze collectie: %s" % (woordtransactie,len(ok),elementen[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(forsom(oktot))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
-        #print("Aantal %ss: %s - Totaal %s in deze collectie: %s" % (woordtransactie,len(ok),elementen[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
+        print("Aantal %ss: %s - Totaal %s in deze collectie: %s" % (woordtransactie,len(ok),elementen[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
     #if Taal == "EN":                                                                                                                                       # Uncomment bij print naar file
     #    print("Number of %ss: %s - Total %s in this collection: %s" % (woordtransactieEN,len(ok),elementenEN[1],valuta+" "+str(round(oktot,2))), file = m) # uncomment bij print naar file
     #elif Taal == "IT":                                                                                                                                     # uncomment bij print naar file
@@ -3874,7 +3844,7 @@ def printselectie(rekening,header,col,ok): # H
                 K = ""
                 forsom = fornum
                 getal = ok[i][1]
-                keen,forsom,K = grootgetal(header,getal,forsom,K)
+                keen,forsom,K = grootgetal(getal,forsom,K)
                 datum = ok[i][0]
                 mnd = vertaalmnd(datum)
                 datum = opmaakdatum(datum)
@@ -3892,13 +3862,13 @@ def printselectie(rekening,header,col,ok): # H
             #else:                                                                                                                                                                                       # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
             #    print("Aantal %ss: %s - Totaal %s in deze collectie: %s" % (woordtransactie,len(ok),elementen[1],kleinegetalkleuren(oktot)+valuta+kleuren["ResetAll"]+" "+str(round(oktot,2))))         # COMMENT BIJ PRINT NAAR FILE OF WEGHALEN
             if Taal == "EN":                                                                                                                                       # Uncomment bij print naar file
-                print("Number of %ss: %s - Total %s in this collection: %s" % (woordtransactieEN,len(ok),elementenEN[1],valuta+" "+str(forsom(oktot))), file = m) # uncomment bij print naar file
+                print("Number of %ss: %s - Total %s in this collection: %s" % (woordtransactieEN,len(ok),elementenEN[1],valuta+" "+str(round(oktot,2))), file = m) # uncomment bij print naar file
             elif Taal == "IT":                                                                                                                                     # uncomment bij print naar file
-                print("Numero di Transazioni: %s - Totale %s in questa collezione: %s" % (len(ok),elementenIT[1],valuta+" "+str(forsom(oktot))), file = m)        # uncomment bij print naar file
+                print("Numero di Transazioni: %s - Totale %s in questa collezione: %s" % (len(ok),elementenIT[1],valuta+" "+str(round(oktot,2))), file = m)        # uncomment bij print naar file
             elif Taal == "CJ":                                                                                                                                     # uncomment bij print naar file
-                print("hubi %s: %s - %spu hopaʒi: %s" % (woordtransactieCJ,len(ok),elementenCJ[1],valuta+" "+str(forsom(oktot))), file = m)                       # uncomment bij print naar file
+                print("hubi %s: %s - %spu hopaʒi: %s" % (woordtransactieCJ,len(ok),elementenCJ[1],valuta+" "+str(round(oktot,2))), file = m)                       # uncomment bij print naar file
             else:                                                                                                                                                  # uncomment bij print naar file
-                print("Aantal %ss: %s - Totaal %s in deze collectie: %s" % (woordtransactie,len(ok),elementen[1],valuta+" "+str(forsom(oktot))), file = m)        # uncomment bij print naar file
+                print("Aantal %ss: %s - Totaal %s in deze collectie: %s" % (woordtransactie,len(ok),elementen[1],valuta+" "+str(round(oktot,2))), file = m)        # uncomment bij print naar file
             ########## print naar file stop ##########
     if datumlijst[0] == datumlijst[1]:
         dagtotaal(rekening,header,col,datumlijst[0])
@@ -3911,7 +3881,6 @@ def printselectie(rekening,header,col,ok): # H
 def samenvattingcategorie(rekening,cat,datumlijst): # geen H
     kleuren,catcol = updatekleuren(rekening)
     header = haalheader(rekening)
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
     categorie = haalcategorie(rekening,cat)
@@ -3958,7 +3927,6 @@ def samenvattingcategorie(rekening,cat,datumlijst): # geen H
     print(" "*10+col+"+-"+"-"*maxlen+"+"+"-"*10+kleuren["ResetAll"])
 
 def dagtotaal(rekening,header,col,datum): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -4052,7 +4020,6 @@ def printkleuren(): # geen H
 def maandanalyse(rekening,datumlijst): # H
     kleuren,catcol = updatekleuren(rekening)
     header = haalheader(rekening)
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
     nul = header[nieuwheaderlijst[8]]
@@ -4168,12 +4135,12 @@ def maandanalyse(rekening,datumlijst): # H
         if som * budget > 0:
             aantalstreepjes = aantalstreepjes * -1
             getalkleur = kleuren["colhuh"]
-        budget,forbud,Kb = grootgetal(header,budget,forsom,K)
+        budget,forbud,Kb = grootgetal(budget,forsom,K)
         aantalstreepjesbovenbudget = 0
         if aantalstreepjes > honderdprocent:
             aantalstreepjesbovenbudget = aantalstreepjes - honderdprocent
             aantalstreepjes = honderdprocent
-        som,forsom,K = grootgetal(header,som,forsom,K)
+        som,forsom,K = grootgetal(som,forsom,K)
         lenstraant = 0
         if aantalstreepjes == 0:
             lenstraant = len(str(aantal))
@@ -4217,7 +4184,7 @@ def maandanalyse(rekening,datumlijst): # H
         binnen = "-"
         colbinnen = kleuren["Omkeren"]+kleuren["colslecht"]
     score = somal/budgetnegatief
-    somal,forsom,K = grootgetal(header,somal,forsom,K)
+    somal,forsom,K = grootgetal(somal,forsom,K)
     aantalstreepjes = int(round(score * honderdprocent))
     if score < 0:
         aantalstreepjes *= -1
@@ -4255,7 +4222,6 @@ def IDlijst2ok(IDlijst): # geen H
 def toontransactie(rekening,header,col,ok): # geen H
     kleuren,catcol = updatekleuren(rekening)
     header = haalheader(rekening)
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
     aantal = header[nieuwheaderlijst[12]]
@@ -4416,7 +4382,6 @@ def filtercategorie(categoriekeuzelijst,okal): # geen H
 def alsspaarpot(rekening,header,spaarpotten,i,transactiebedrag): # geen H
     kleuren,catcol = updatekleuren(rekening)
     header = haalheader(rekening)
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
     toonspaarpotten(rekening,header)
@@ -4499,7 +4464,6 @@ def alsspaarpot(rekening,header,spaarpotten,i,transactiebedrag): # geen H
 def nieuwnieuw(rekening,ok): # H
     kleuren,catcol = updatekleuren(rekening)
     header = haalheader(rekening)
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     Taal = header[nieuwheaderlijst[3]]
     categorieenlijst = haalcategorieen(rekening)
     printdatum(nustr)
@@ -4652,6 +4616,7 @@ def nieuwnieuw(rekening,ok): # H
                 schrijfcategorie(rekening,nieuwetransactiecategorie,cat)
                 IDlijst.append(nieuwetransactiecategorie+str(categorie.index(nieuwetransactie)-1))
                 ok = IDlijst2ok(IDlijst)
+                eenrekeningtotaal(rekening)
                 toontransactie(rekening,header,col,ok)
             except(Exception) as f:
                 print(f)
@@ -4676,8 +4641,7 @@ def ifok(rekening,header,col,ok): # geen H
     ok = IDlijst2ok(IDlijst)
     return ok
 
- nieuwkopie(rekening,header,col,ok): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
+def nieuwkopie(rekening,header,col,ok): # geen H
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     ok = ifok(rekening,header,col,ok)
@@ -4721,15 +4685,16 @@ def ifok(rekening,header,col,ok): # geen H
             for i in spaarpotten:
                 if i in onderwerp and transactiebedrag != 0:
                     transactiebedrag = alsspaarpot(rekening,header,spaarpotten,i,transactiebedrag)
-        dezeok = {i[0]+str(catsort.index(nieuwetransactie)):nieuwetransactie}
+        #dezeok = {i[0]+str(catsort.index(nieuwetransactie)):nieuwetransactie}
+        eenrekeningtotaal(rekening)
         if Taal == "EN":
-            print(kleuren["Omkeren"]+col+"NOW:"+kleuren["ResetAll"])
+            print(kleuren["Omkeren"]+col+"New copy:"+kleuren["ResetAll"])
         elif Taal == "IT":
-            print(kleuren["Omkeren"]+col+"ORA:"+kleuren["ResetAll"])
+            print(kleuren["Omkeren"]+col+"Nuova copia:"+kleuren["ResetAll"])
         elif Taal == "CJ":
-            print(kleuren["Omkeren"]+col+"huqi:"+kleuren["ResetAll"])
+            print(kleuren["Omkeren"]+col+"huwaxi hoziqi:"+kleuren["ResetAll"])
         else:
-            print(kleuren["Omkeren"]+col+"NU:"+kleuren["ResetAll"])
+            print(kleuren["Omkeren"]+col+"Nieuwe kopie:"+kleuren["ResetAll"])
         dezeok = toontransactie(rekening,header,col,dezeok)
         translijst.append(nieuwetransactie)
         print(col+scheidtransactielijn+kleuren["ResetAll"])
@@ -4743,7 +4708,6 @@ def ifok(rekening,header,col,ok): # geen H
     return ok
 
 def nieuwkopieandererekening(rekening,header,col,ok): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     ok = ifok(rekening,header,col,ok)
@@ -4813,7 +4777,6 @@ def nieuwkopieandererekening(rekening,header,col,ok): # geen H
     return ok
 
 def verwijderkeuze(rekening,header,col,keuze1lijst,ok): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     ok = ifok(rekening,header,col,ok)
@@ -4855,7 +4818,6 @@ def verwijderkeuze(rekening,header,col,keuze1lijst,ok): # geen H
     return rekening,header,col,keuze1lijst,ok
 
 def wijzigdatum(rekening,header,col,ok): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     ok = ifok(rekening,header,col,ok)
@@ -4920,7 +4882,6 @@ def wijzigdatum(rekening,header,col,ok): # geen H
     return ok
 
 def wijzigbedrag(rekening,header,col,ok): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -5039,7 +5000,6 @@ def kieswederpartijuitlijst(rekening,header,col,cat,wederpartij):
     return weerwederpartij
 
 def wijzigwederpartij(rekening,header,col,ok): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     ok = ifok(rekening,header,col,ok)
@@ -5157,7 +5117,6 @@ def kiesonderwerpuitlijst(rekening,header,col,cat,onderwerp): # H
     return weeronderwerp
 
 def wijzigonderwerp(rekening,header,col,ok): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     ok = ifok(rekening,header,col,ok)
@@ -5222,7 +5181,6 @@ def wijzigonderwerp(rekening,header,col,ok): # geen H
     return ok
 
 def wijzigcategorie(rekening,header,col,ok): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     ok = ifok(rekening,header,col,ok)
@@ -5674,7 +5632,6 @@ def wijzigvaluta(rekening,header): # geen H
     return header
 
 def wijzigstartsaldo(rekening,header): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     IBAN = rekening[:rekening.index("#")]
@@ -5728,7 +5685,6 @@ def wijzigtoonsaldo(rekening,header): # geen H
     return header
 
 def wijzigmarkering(rekening,header): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     IBAN = rekening[:rekening.index("#")]
@@ -6042,37 +5998,6 @@ def wijzigautodecimalen(rekening,header): # geen H
             print(header, file = h, end = "")
     return header
 
-def wijzigaantaldecimalen(rekening,header): # geen H
-    kleuren,catcol = updatekleuren(rekening)
-    Taal = header[nieuwheaderlijst[3]]
-    IBAN = rekening[:rekening.index("#")]
-    JAAR = forr4(rekening[rekening.index("#")+1:])
-    if Taal == "EN":
-        vraag = textwrap.wrap("Change %s %s %s from %s to:" % (IBAN,JAAR,nieuwheaderlijstEN[17],header[nieuwheaderlijst[17]]),w)
-    elif Taal == "IT":
-        vraag = textwrap.wrap("Cambia %s %s %s da %s in:" % (IBAN,JAAR,nieuwheaderlijstIT[17],header[nieuwheaderlijst[17]]),w)
-    elif Taal == "CJ":
-        vraag = textwrap.wrap("hazüi %s %s %s qi %s qe:" % (IBAN,JAAR,nieuwheaderlijstCJ[17],header[nieuwheaderlijst[17]]),w)
-    else:
-        vraag = textwrap.wrap("Wijzig %s %s %s van %s naar:" % (IBAN,JAAR,nieuwheaderlijst[17],header[nieuwheaderlijst[17]]),w)
-    for i in vraag:
-        print(i)
-    antwoord = input(col+inputindent)
-    print(ResetAll, end = "")
-    if antwoord.upper() in afsluitlijst:
-        doei()
-    elif antwoord.upper() in neelijst:
-        return header
-    else:
-        test = checkint(antwoord)
-        if test == True:
-            if int(antwoord) < 0:
-                antwoord = 0
-            header[nieuwheaderlijst[17]] = int(antwoord)
-            with open(os.path.join(rekening,"header"),"w") as h:
-                print(header, file = h, end = "")
-    return header
-
 def tipvandedag(rekening,header,col): # geen H
     Taal = header[nieuwheaderlijst[3]]
     kleuren,catcol = updatekleuren(rekening)
@@ -6300,7 +6225,6 @@ def wijzigcategorienaam(rekening,header,col): # geen H
                     print(cat, file = c, end = "")
 
 def wijzigbudget(rekening,header,col): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -6538,7 +6462,6 @@ def headeroverzetten(rekening,header,col): # geen H
                     pass
 
 def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -6801,8 +6724,7 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
  14 : %s %s
  15 : %s %s
  16 : %s %s
- 17 : %s %s
- 18 : %s %s""" % (
+ 17 : %s %s""" % (
           menuEN["0,1,0"],
           ("{:<%d}" % (maxlen)).format(menuEN["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
           ("{:<%d}" % (maxlen)).format(menuEN["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
@@ -6820,8 +6742,7 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
           ("{:<%d}" % (maxlen)).format(menuEN["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
           ("{:<%d}" % (maxlen)).format(menuEN["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
           ("{:<%d}" % (maxlen)).format(menuEN["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]])+kleuren["ResetAll"],
-          ("{:<%d}" % (maxlen)).format(menuEN["0,1,17"]), coljanee(rekening,header,header[nieuwheaderlijst[16]])+vertaalv(header[nieuwheaderlijst[16]])+kleuren["ResetAll"],
-          ("{:<%d}" % (maxlen)).format(menuEN["0,1,18"]), header[nieuwheaderlijst[17]]
+          ("{:<%d}" % (maxlen)).format(menuEN["0,1,17"]), coljanee(rekening,header,header[nieuwheaderlijst[16]])+vertaalv(header[nieuwheaderlijst[16]]+kleuren["ResetAll"])
           )
     )
                     elif Taal == "IT":
@@ -6843,8 +6764,7 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
  14 : %s %s
  15 : %s %s
  16 : %s %s
- 17 : %s %s
- 18 : %s %s""" % (
+ 17 : %s %s""" % (
           menuIT["0,1,0"],
           ("{:<%d}" % (maxlen)).format(menuIT["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
           ("{:<%d}" % (maxlen)).format(menuIT["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
@@ -6862,8 +6782,7 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
           ("{:<%d}" % (maxlen)).format(menuIT["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
           ("{:<%d}" % (maxlen)).format(menuIT["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
           ("{:<%d}" % (maxlen)).format(menuIT["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]])+kleuren["ResetAll"],
-          ("{:<%d}" % (maxlen)).format(menuIT["0,1,17"]), coljanee(rekening,header,header[nieuwheaderlijst[16]])+vertaalv(header[nieuwheaderlijst[16]])+kleuren["ResetAll"],
-          ("{:<%d}" % (maxlen)).format(menuIT["0,1,18"]), header[nieuwheaderlijst[17]]
+          ("{:<%d}" % (maxlen)).format(menuIT["0,1,17"]), coljanee(rekening,header,header[nieuwheaderlijst[16]])+vertaalv(header[nieuwheaderlijst[16]]+kleuren["ResetAll"])
           )
     )
                     elif Taal == "CJ":
@@ -6885,8 +6804,7 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
  14 : %s %s
  15 : %s %s
  16 : %s %s
- 17 : %s %s
- 18 : %s %s""" % (
+ 17 : %s %s""" % (
           menuCJ["0,1,0"],
           ("{:<%d}" % (maxlen)).format(menuCJ["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
           ("{:<%d}" % (maxlen)).format(menuCJ["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
@@ -6904,8 +6822,7 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
           ("{:<%d}" % (maxlen)).format(menuCJ["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
           ("{:<%d}" % (maxlen)).format(menuCJ["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
           ("{:<%d}" % (maxlen)).format(menuCJ["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]])+kleuren["ResetAll"],
-          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,17"]), coljanee(rekening,header,header[nieuwheaderlijst[16]])+vertaalv(header[nieuwheaderlijst[16]])+kleuren["ResetAll"],
-          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,18"]), header[nieuwheaderlijst[17]]
+          ("{:<%d}" % (maxlen)).format(menuCJ["0,1,17"]), coljanee(rekening,header,header[nieuwheaderlijst[16]])+vertaalv(header[nieuwheaderlijst[16]]+kleuren["ResetAll"])
           )
     )
                     else:
@@ -6927,8 +6844,7 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
  14 : %s %s
  15 : %s %s
  16 : %s %s
- 17 : %s %s
- 18 : %s %s""" % (
+ 17 : %s %s""" % (
           menu["0,1,0"],
           ("{:<%d}" % (maxlen)).format(menu["0,1,1"]), header[nieuwheaderlijst[0]][:w - maxlen -7],
           ("{:<%d}" % (maxlen)).format(menu["0,1,2"]), header[nieuwheaderlijst[1]][:w - maxlen -7],
@@ -6946,8 +6862,7 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
           ("{:<%d}" % (maxlen)).format(menu["0,1,14"]), coljanee(rekening,header,header[nieuwheaderlijst[13]])+vertaalv(header[nieuwheaderlijst[13]])+kleuren["ResetAll"],
           ("{:<%d}" % (maxlen)).format(menu["0,1,15"]), coljanee(rekening,header,header[nieuwheaderlijst[14]])+vertaalv(header[nieuwheaderlijst[14]])+kleuren["ResetAll"],
           ("{:<%d}" % (maxlen)).format(menu["0,1,16"]), coljanee(rekening,header,header[nieuwheaderlijst[15]])+vertaalv(header[nieuwheaderlijst[15]])+kleuren["ResetAll"],
-          ("{:<%d}" % (maxlen)).format(menu["0,1,17"]), coljanee(rekening,header,header[nieuwheaderlijst[16]])+vertaalv(header[nieuwheaderlijst[16]])+kleuren["ResetAll"],
-          ("{:<%d}" % (maxlen)).format(menu["0,1,18"]), header[nieuwheaderlijst[17]]
+          ("{:<%d}" % (maxlen)).format(menu["0,1,17"]), coljanee(rekening,header,header[nieuwheaderlijst[16]])+vertaalv(header[nieuwheaderlijst[16]]+kleuren["ResetAll"])
           )
     )
                     keuze3 = input(col+inputindent)
@@ -7014,15 +6929,11 @@ def beheerkeuze(rekening,header,col,keuze1lijst,ok): # H
                 elif keuze3 == "17":
                     header = wijzigautodecimalen(rekening,header)
                     del keuze3
-                elif keuze3 == "18":
-                    header = wijzigaantaldecimalen(rekening,header)
-                    del keuze3
                 else:
                     del keuze3
             return rekening,header,col,keuze1lijst,ok
 
 def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -7250,7 +7161,6 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
 def nieuwkeuze(keuze1lijst,rekening,ok): # H
     kleuren,catcol = updatekleuren(rekening)
     header = haalheader(rekening)
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     Taal = header[nieuwheaderlijst[3]]
     if len(keuze1lijst) > 4:
         keuze2 = keuze1lijst[1]
@@ -7339,7 +7249,6 @@ def nieuwkeuze(keuze1lijst,rekening,ok): # H
 def wijzigkeuze(keuze1lijst,rekening,ok): # H
     kleuren,catcol = updatekleuren(rekening)
     header = haalheader(rekening)
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     Taal = header[nieuwheaderlijst[3]]
     if len(keuze1lijst) > 4:
         keuze2 = keuze1lijst[1]
@@ -7478,7 +7387,6 @@ def haalspaarpotten(rekening): # geen H
     return spaarpotten
 
 def inspaarpotten(rekening,header): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -7487,7 +7395,7 @@ def inspaarpotten(rekening,header): # geen H
     if len(spaarpotten) > 0:
         for i in spaarpotten:
             spaarpottegoed += spaarpotten[i][1]
-        tegoed,forsom,K = grootgetal(header,spaarpottegoed,fornum,"")
+        tegoed,forsom,K = grootgetal(spaarpottegoed,fornum,"")
         if Taal == "EN":
             totaalinspaarpotten = "There is %s put aside in %s%s %ss%s" % (grotegetalkleuren(rekening,header,spaarpottegoed)+valuta+forsom(tegoed)+K+kleuren["ResetAll"],kleuren["5"],len(spaarpotten),woordspaarpotEN.lower(),kleuren["ResetAll"])
         elif Taal == "IT":
@@ -7500,7 +7408,6 @@ def inspaarpotten(rekening,header): # geen H
     return spaarpottegoed
         
 def vrijbesteedbaar(rekening,header): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -7514,7 +7421,7 @@ def vrijbesteedbaar(rekening,header): # geen H
         if categorie[0][1] < 0:
             negatiefbudget += categorie[0][1]
     besteedbaar = rekeningtotaal - spaarpottegoed + negatiefbudget
-    vrij,forsom,K = grootgetal(header,besteedbaar,fornum,"")
+    vrij,forsom,K = grootgetal(besteedbaar,fornum,"")
     if Taal == "EN":
         vrijtegoed = "There is %s discretionary" % (grotegetalkleuren(rekening,header,besteedbaar)+valuta+forsom(vrij)+K+kleuren["ResetAll"])
     elif Taal == "IT":
@@ -7527,7 +7434,6 @@ def vrijbesteedbaar(rekening,header): # geen H
     return besteedbaar
 
 def toonspaarpotten(rekening,header): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     vrijbesteedbaar(rekening,header)
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
@@ -7576,17 +7482,16 @@ def toonspaarpotten(rekening,header): # geen H
             print(col+"|"+kleuren["ResetAll"]\
                 +forc3(tel)+":"\
                 +kleuren["5"]+("{:<%d}" % (lennaamveld)).format(i[:lennaamveld])+":"\
-                +kleuren["Vaag"]+("{:^%d}" % (len(lijnst[2])+2)).format(forc11(valuta+grootgetal(header,spaarpotten[i][0],fornum,"")[1](grootgetal(header,spaarpotten[i][0],fornum,"")[0])+grootgetal(header,spaarpotten[i][0],fornum,"")[2]))+kleuren["ResetAll"]+":"\
-                +grotegetalkleuren(rekening,header,spaarpotten[i][1])+forc11(valuta+grootgetal(header,spaarpotten[i][1],fornum,"")[1](grootgetal(header,spaarpotten[i][1],fornum,"")[0])+grootgetal(header,spaarpotten[i][1],fornum,"")[2])+kleuren["ResetAll"]+":"\
-                +grotegetalkleuren(rekening,header,spaarpotten[i][2])+forc11(valuta+grootgetal(header,spaarpotten[i][2],fornum,"")[1](grootgetal(header,spaarpotten[i][2],fornum,"")[0])+grootgetal(header,spaarpotten[i][2],fornum,"")[2])+kleuren["ResetAll"]+":"\
-                +grotegetalkleuren(rekening,header,tegaan)+forc11(valuta+grootgetal(header,tegaan,fornum,"")[1](grootgetal(header,tegaan,fornum,"")[0])+grootgetal(header,tegaan,fornum,"")[2])+kleuren["ResetAll"]\
+                +kleuren["Vaag"]+("{:^%d}" % (len(lijnst[2])+2)).format(forc11(valuta+grootgetal(spaarpotten[i][0],fornum,"")[1](grootgetal(spaarpotten[i][0],fornum,"")[0])+grootgetal(spaarpotten[i][0],fornum,"")[2]))+kleuren["ResetAll"]+":"\
+                +grotegetalkleuren(rekening,header,spaarpotten[i][1])+forc11(valuta+grootgetal(spaarpotten[i][1],fornum,"")[1](grootgetal(spaarpotten[i][1],fornum,"")[0])+grootgetal(spaarpotten[i][1],fornum,"")[2])+kleuren["ResetAll"]+":"\
+                +grotegetalkleuren(rekening,header,spaarpotten[i][2])+forc11(valuta+grootgetal(spaarpotten[i][2],fornum,"")[1](grootgetal(spaarpotten[i][2],fornum,"")[0])+grootgetal(spaarpotten[i][2],fornum,"")[2])+kleuren["ResetAll"]+":"\
+                +grotegetalkleuren(rekening,header,tegaan)+forc11(valuta+grootgetal(tegaan,fornum,"")[1](grootgetal(tegaan,fornum,"")[0])+grootgetal(tegaan,fornum,"")[2])+kleuren["ResetAll"]\
                 +col+"|"+kleuren["ResetAll"]
             )
             tel += 1
         print(spaarpottentoplijn)
 
 def tooneenspaarpot(rekening,header,spaarpotten,spaarpot): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -7606,16 +7511,15 @@ def tooneenspaarpot(rekening,header,spaarpotten,spaarpot): # geen H
             tegaan = (spaarpotten[i][0] + spaarpotten[i][2]) * -1
             try:
                 print(" "*10+col+"+-"+kleuren["Omkeren"]+spaarpot+kleuren["ResetAll"]+col+"-"*(maxlen-(len(spaarpot)))+"+"+"-"*10+kleuren["ResetAll"])
-                print(" "*10+col+"| "+kleuren["ResetAll"]+("{:<%d}" % (maxlen)).format(lijnst[2])+":  "+col+kleuren["Vaag"]+valuta+grootgetal(header,spaarpotten[i][0],fornum,"")[1](grootgetal(header,spaarpotten[i][0],fornum,"")[0])+grootgetal(header,spaarpotten[i][0],fornum,"")[2]+kleuren["ResetAll"])
-                print(" "*10+col+"| "+kleuren["ResetAll"]+("{:<%d}" % (maxlen)).format(lijnst[3])+":  "+grotegetalkleuren(rekening,header,spaarpotten[i][1])+valuta+grootgetal(header,spaarpotten[i][1],fornum,"")[1](grootgetal(header,spaarpotten[i][1],fornum,"")[0])+grootgetal(header,spaarpotten[i][1],fornum,"")[2]+kleuren["ResetAll"])
-                print(" "*10+col+"| "+kleuren["ResetAll"]+("{:<%d}" % (maxlen)).format(lijnst[4])+":  "+grotegetalkleuren(rekening,header,spaarpotten[i][2])+valuta+grootgetal(header,spaarpotten[i][2],fornum,"")[1](grootgetal(header,spaarpotten[i][2],fornum,"")[0])+grootgetal(header,spaarpotten[i][2],fornum,"")[2]+kleuren["ResetAll"])
+                print(" "*10+col+"| "+kleuren["ResetAll"]+("{:<%d}" % (maxlen)).format(lijnst[2])+":  "+col+kleuren["Vaag"]+valuta+grootgetal(spaarpotten[i][0],fornum,"")[1](grootgetal(spaarpotten[i][0],fornum,"")[0])+grootgetal(spaarpotten[i][0],fornum,"")[2]+kleuren["ResetAll"])
+                print(" "*10+col+"| "+kleuren["ResetAll"]+("{:<%d}" % (maxlen)).format(lijnst[3])+":  "+grotegetalkleuren(rekening,header,spaarpotten[i][1])+valuta+grootgetal(spaarpotten[i][1],fornum,"")[1](grootgetal(spaarpotten[i][1],fornum,"")[0])+grootgetal(spaarpotten[i][1],fornum,"")[2]+kleuren["ResetAll"])
+                print(" "*10+col+"| "+kleuren["ResetAll"]+("{:<%d}" % (maxlen)).format(lijnst[4])+":  "+grotegetalkleuren(rekening,header,spaarpotten[i][2])+valuta+grootgetal(spaarpotten[i][2],fornum,"")[1](grootgetal(spaarpotten[i][2],fornum,"")[0])+grootgetal(spaarpotten[i][2],fornum,"")[2]+kleuren["ResetAll"])
                 print(" "*10+col+"+-"+"-"*maxlen+"+"+"-"*10+kleuren["ResetAll"])
             except(Exception) as f:
                 #print(f)
                 pass
 
 def nieuwespaarpot(rekening,header): # geen H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -7866,7 +7770,6 @@ def wijzigspaarpotnaam(rekening,header): # H
         return "<"
 
 def wijzigspaarpotdoelsaldo(rekening,header): # H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -7955,7 +7858,6 @@ def wijzigspaarpotdoelsaldo(rekening,header): # H
         return "<"
 
 def wijzigspaarpottegoed(rekening,header): # H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
@@ -8044,7 +7946,6 @@ def wijzigspaarpottegoed(rekening,header): # H
         return "<"
 
 def wijzigspaarpotbetaald(rekening,header): # H
-    fornum = ("{0:>8.%df}" % header[nieuwheaderlijst[17]]).format
     kleuren,catcol = updatekleuren(rekening)
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
