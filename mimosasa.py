@@ -6,8 +6,8 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
 cwd = os.getcwd()
 print(cwd)
-versie = "0.0.96"
-versiedatum = "20251117"
+versie = "0.0.965"
+versiedatum = "20251122"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -4037,6 +4037,195 @@ def printkleuren(): # geen H
     getalkleur = ""
     return kleuren,catcol,getalkleur
 
+#def maandanalyse(rekening,datumlijst): # H
+#    kleuren,catcol = updatekleuren(rekening)
+#    header = haalheader(rekening)
+#    Taal = header[nieuwheaderlijst[3]]
+#    valuta = header[nieuwheaderlijst[4]]
+#    nul = header[nieuwheaderlijst[8]]
+#    if Taal == "EN":
+#        print("Give the number of months in the past")
+#        wraptekst = textwrap.wrap("You can see here how much you have spent or received per category, how many transactions there were per category, and what percentage they represent in relation to the budget assigned to that category. The month to which it refers is indicated as a number next to the score. Because the total monthly budget is determined by the category(-ies) on which the income is received, but it can vary at what point in that month it happens (for example, salaries are usually not paid out on the first day of the month), those categories are ignored until the budget is replenished. You can set at \"0,1,9\" whether you want to hide or show categories without transactions.",w)
+#    elif Taal == "IT":
+#        print("Inserisci il numero di mesi nel passato")
+#        wraptekst = textwrap.wrap("Qui puoi vedere quanto hai speso o ricevuto per categoria, quante transazioni ci sono state per categoria e quale percentuale rappresentano rispetto al budget assegnato a quella categoria. Il mese a cui si riferisce è indicato come numero accanto al punteggio. Poiché il budget mensile totale è determinato dalla categoria(-ie) in cui entrano i redditi, ma può variare nel momento in cui questo avviene nel mese (ad esempio, lo stipendio di solito non viene pagato il primo giorno del mese), quelle categorie vengono ignorate fino a quando il budget non è ricostituito. È possibile impostare su \"0,1,9\" se si desidera nascondere o mostrare le categorie senza transazioni.",w)
+#    elif Taal == "CJ":
+#        print("haŋo hubipa huqipabobiqüa")
+#        wraptekst = textwrap.wrap("",w)
+#    else:
+#        print("Geef het aantal maanden in het verleden")
+#        wraptekst = textwrap.wrap("U ziet hier hoeveel u per categorie heeft uitgegeven of ontvangen, hoe veel transacties er per categorie waren, en welk percentage die samen vormen ten aanzien van het aan die categorie toegewezen budget. Welke maand het betreft vindt u als getal bij de score. Omdat het totale maandbudget wordt bepaald door de categorie(-ën) waarop de inkomsten binnenkomen, maar het kan variëren op welk moment dat in die maand gebeurt (het salaris wordt bijvoorbeeld meestal niet op de eerste dag van de maand uitbetaald), worden die categorieën genegeerd totdat het budget is aangevuld. U kunt bij \"0,1,9\" instellen of u categorieën zonder transacties wilt verbergen of tonen.",w)
+#    print(col, end = "")
+#    loop = True
+#    while loop == True:
+#        datumkeuze = input(inputindent)
+#        if datumkeuze == "":
+#            datumkeuze = 0
+#        print(ResetAll,end = "")
+#        try:
+#            maandverschil = int(datumkeuze)
+#            maand = int(nustr[4:6])
+#            jaar = int(nustr[:4])
+#            while maandverschil > 0:
+#                maand = int(maand)-1
+#                if maand == 0:
+#                    maand = 12
+#                    jaar = jaar-1
+#                maandverschil -= 1
+#            startdatum = int("{:0>4}".format(jaar)+"{:0>2}".format(maand)+"01")
+#            datumlijst[0] = str(startdatum)
+#            loop = False
+#        except(Exception) as f:
+#            #print(f)
+#            if datumkeuze.upper() == "H":
+#                for i in wraptekst:
+#                    print(i)
+#            else:
+#                loop = False
+#    maandeind = str(calendar.monthrange(int(str(datumlijst[0])[:4]),int(str(datumlijst[0])[4:6]))[1])
+#    datumlijst[1] = datumlijst[0][:6]+maandeind
+#    print("%s%s >=< %s%s" % (col,datumlijst[0],datumlijst[1],kleuren["ResetAll"]))
+#    totaalsaldo,forsomtotaal,Kt = eenrekeningtotaal(rekening)
+#    somal = 0
+#    budgetnegatief = budgetnul*-1
+#    categorieenlijst = haalcategorieen(rekening)
+#    budgetcategorieenlijst = []
+#    budgetcategorieensom = budgetnul
+#    if Taal == "EN":
+#        Bud = "%s bud" % (valuta)
+#        Tot = "%s tot" % (valuta)
+#    elif Taal == "IT":
+#        Bud = "%s bud" % (valuta)
+#        Tot = "%s tot" % (valuta)
+#    elif Taal == "CJ":
+#        Bud = "%s hubiŋo" % (valuta)
+#        Tot = "%s hubipu" % (valuta)
+#    else:
+#        Bud = "%s bud" % (valuta)
+#        Tot = "%s tot" % (valuta)
+#    honderdprocent = 44
+#    if honderdprocent % 2 == 0:
+#        off = ""
+#    else:
+#        off = "-"
+#    analyselijn = col+"+"+"-"*3+forc9(Tot)+"<0%--"+"-"*int((honderdprocent-12)/2)+"-+"+"-"*int(((honderdprocent-12)/2))+off+"100%>"+forc9(Bud)+"-"*13+"+"+kleuren["ResetAll"]
+#    analyselijnzw = "+"+"-"*3+forc9(Tot)+"<0%--"+"-"*int((honderdprocent-12)/2)+"-+"+"-"*int(((honderdprocent-12)/2))+off+"100%>"+forc9(Bud)+"-"*13+"+"
+#    print(analyselijn)
+#    if header[nieuwheaderlijst[13]] == ">" and str(datumlijst[0])[:6] == str(datumlijst[1])[:6]:
+#        with open(os.path.join(rekening,str(datumlijst[0])[:6])+"a","w") as a:
+#            print(analyselijnzw, file = a)
+#    for i in categorieenlijst:
+#        forsom = fornum
+#        K = ""
+#        forbud = fornum
+#        Kb = ""
+#        categorie = haalcategorie(rekening,i)
+#        budgetnegatief = budgetnul*-1
+#        budget = categorie[0][1]
+#        if budget < 0:
+#            budgetnegatief += budget
+#            for j in categorie[1:]:
+#                if int(str(datumlijst[0])[:6]+"01") <= j[0] <= int(str(datumlijst[1])[:6]+maandeind):
+#                    budgetcategorieensom += j[1]
+#                    somal += j[1]
+#        else:
+#            for j in categorie[1:]:
+#                if int(str(datumlijst[0])[:6]+"01") <= j[0] <= int(str(datumlijst[1])[:6]+maandeind):
+#                    somal += j[1]
+#        if budgetcategorieensom < budgetnegatief*-1:
+#            somal += budgetnegatief*-1
+#        aantal = 0
+#        som = 0
+#        categorieinhoudgeselecteerdemaand = []
+#        for d in categorie[1:]:
+#            if int(str(datumlijst[0])[:6]+"01") <= d[0] <= int(str(datumlijst[1])[:6]+maandeind):
+#                categorieinhoudgeselecteerdemaand.append(d)
+#        if len(categorieinhoudgeselecteerdemaand) > 0:
+#            for j in categorieinhoudgeselecteerdemaand:
+#                som += j[1]
+#                aantal += 1
+#        if aantal == 0:
+#            aantal = ""
+#        if budget < som*-1:
+#            getalkleur = kleuren["colslecht"]
+#        elif budget >= som*-1:
+#            getalkleur = kleuren["colgoed"]
+#        streepje = budget/honderdprocent*-1
+#        aantalstreepjes = int(round(som/streepje))
+#        if som * budget > 0:
+#            aantalstreepjes = aantalstreepjes * -1
+#            getalkleur = kleuren["colhuh"]
+#        budget,forbud,Kb = grootgetal(budget,forsom,K)
+#        aantalstreepjesbovenbudget = 0
+#        if aantalstreepjes > honderdprocent:
+#            aantalstreepjesbovenbudget = aantalstreepjes - honderdprocent
+#            aantalstreepjes = honderdprocent
+#        som,forsom,K = grootgetal(som,forsom,K)
+#        lenstraant = 0
+#        if aantalstreepjes == 0:
+#            lenstraant = len(str(aantal))
+#        maandlijndezecategorie = col+"|"+kleuren["ResetAll"]+\
+#                kleuren["Omkeren"]+catcol[i]+" "+i+kleuren["ResetAll"]+" "+\
+#                getalkleur+valuta+kleuren["ResetAll"]+forsom(som)+K+\
+#                getalkleur+"-"*(aantalstreepjes-len(str(aantal)))+catcol[i]+str(aantal)+kleuren["ResetAll"]+" "*(honderdprocent-aantalstreepjes-lenstraant)+\
+#                catcol[i]+valuta+forbud(budget)+Kb+kleuren["ResetAll"]+\
+#                getalkleur+forl11("-"*aantalstreepjesbovenbudget)[:11]+kleuren["ResetAll"]+\
+#                kleuren["Omkeren"]+catcol[i]+i+" "+kleuren["ResetAll"]+\
+#                col+"|"+kleuren["ResetAll"]
+#        maandlijndezecategoriezw = "|"+\
+#                " "+i+" "+\
+#                valuta+forsom(som)+K+\
+#                "-"*(aantalstreepjes-len(str(aantal)))+str(aantal)+" "*(honderdprocent-aantalstreepjes-lenstraant)+\
+#                valuta+forbud(budget)+Kb+\
+#                forl11("-"*aantalstreepjesbovenbudget)[:11]+\
+#                i+" "+\
+#                "|"
+#        if nul == "<" and len(categorieinhoudgeselecteerdemaand) == 0:
+#            maandlijndezecategorie = ""
+#            maandlijndezecategoriezw = ""
+#        if maandlijndezecategorie != "":
+#            print(maandlijndezecategorie)
+#        if header[nieuwheaderlijst[13]] == ">" and str(datumlijst[0])[:6] == str(datumlijst[1])[:6] and maandlijndezecategorie != "":
+#            with open(os.path.join(rekening,str(datumlijst[0])[:6])+"a","a") as a:
+#                print(maandlijndezecategoriezw, file = a)
+#    print(analyselijn)
+#    if Taal == "EN":
+#        voortgang = ("Score %s" % (str(datumlijst[0])[4:6]))[:12]
+#    elif Taal == "IT":
+#        voortgang = ("Score %s" % (str(datumlijst[0])[4:6]))[:12]
+#    elif Taal == "CJ":
+#        voortgang = ("huza %s" % (str(datumlijst[0])[4:6]))[:12]
+#    else:
+#        voortgang = ("Score %s" % (str(datumlijst[0])[4:6]))[:12]
+#    if budgetcategorieensom + budgetnegatief >= 0:
+#        binnen = "+"
+#        colbinnen = kleuren["Omkeren"]+kleuren["colgoed"]
+#    else:
+#        binnen = "-"
+#        colbinnen = kleuren["Omkeren"]+kleuren["colslecht"]
+#    score = somal/budgetnegatief
+#    somal,forsom,K = grootgetal(somal,forsom,K)
+#    aantalstreepjes = int(round(score * honderdprocent))
+#    if score < 0:
+#        aantalstreepjes *= -1
+#        getalkleur = kleuren["colhuh"]
+#    if somal < 0:
+#        getalkleur = kleuren["colslecht"]
+#    else:
+#        getalkleur = kleuren["colgoed"]
+#    if aantalstreepjes >= 56:
+#        aantalstreepjes = 56
+#    if aantalstreepjes == 0:
+#        aantalstreepjes = 1
+#    print(col+"|"+kleuren["ResetAll"]+getalkleur+forl12(voortgang)+kleuren["Omkeren"]+"#"*(aantalstreepjes-1)+"|"+valuta+forsom(somal)+K+kleuren["ResetAll"]+" "*(56-aantalstreepjes)+colbinnen+binnen+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"])
+#    print(analyselijn)
+#    if header[nieuwheaderlijst[13]] == ">" and str(datumlijst[0])[:6] == str(datumlijst[1])[:6]:
+#        with open(os.path.join(rekening,str(datumlijst[0])[:6])+"a","a") as a:
+#            print(analyselijnzw, file = a)
+#            print("|"+forl12(voortgang)+"#"*(aantalstreepjes-1)+"|"+valuta+forsom(somal)+K+" "*(56-aantalstreepjes)+binnen+"|", file = a)
+#            print(analyselijnzw, file = a)
+
+
 def maandanalyse(rekening,datumlijst): # H
     kleuren,catcol = updatekleuren(rekening)
     header = haalheader(rekening)
@@ -4091,6 +4280,11 @@ def maandanalyse(rekening,datumlijst): # H
     categorieenlijst = haalcategorieen(rekening)
     budgetcategorieenlijst = []
     budgetcategorieensom = budgetnul
+    for i in categorieenlijst:
+        with open(os.path.join(rekening,i),"r") as cat:
+            ca = ast.literal_eval(cat.read())
+            if ca[0][1] < 0:
+                budgetcategorieensom += ca[0][1]
     if Taal == "EN":
         Bud = "%s bud" % (valuta)
         Tot = "%s tot" % (valuta)
@@ -4108,8 +4302,8 @@ def maandanalyse(rekening,datumlijst): # H
         off = ""
     else:
         off = "-"
-    analyselijn = col+"+"+"-"*3+forc9(Tot)+"<0%--"+"-"*int((honderdprocent-12)/2)+"-+"+"-"*int(((honderdprocent-12)/2))+off+"100%>"+forc9(Bud)+"-"*13+"+"+kleuren["ResetAll"]
-    analyselijnzw = "+"+"-"*3+forc9(Tot)+"<0%--"+"-"*int((honderdprocent-12)/2)+"-+"+"-"*int(((honderdprocent-12)/2))+off+"100%>"+forc9(Bud)+"-"*13+"+"
+    analyselijn = col+"+"+"-"*3+forc9(Tot)+"<0%--"+"-"*int((honderdprocent-12)/2)+"-|"+"-"*int(((honderdprocent-12)/2))+off+"100%>"+forc9(Bud)+"-"*13+"+"+kleuren["ResetAll"]
+    analyselijnzw = "+"+"-"*3+forc9(Tot)+"<0%--"+"-"*int((honderdprocent-12)/2)+"-|"+"-"*int(((honderdprocent-12)/2))+off+"100%>"+forc9(Bud)+"-"*13+"+"
     print(analyselijn)
     if header[nieuwheaderlijst[13]] == ">" and str(datumlijst[0])[:6] == str(datumlijst[1])[:6]:
         with open(os.path.join(rekening,str(datumlijst[0])[:6])+"a","w") as a:
@@ -4197,9 +4391,11 @@ def maandanalyse(rekening,datumlijst): # H
         voortgang = ("huza %s" % (str(datumlijst[0])[4:6]))[:12]
     else:
         voortgang = ("Score %s" % (str(datumlijst[0])[4:6]))[:12]
-    if budgetcategorieensom + budgetnegatief >= 0:
+    if budgetcategorieensom + budgetnegatief >= budgetnegatief:
+    #if budgetcategorieensom + budgetnegatief >= 0:
         binnen = "+"
         colbinnen = kleuren["Omkeren"]+kleuren["colgoed"]
+        print(budgetcategorieensom + budgetnegatief)
     else:
         binnen = "-"
         colbinnen = kleuren["Omkeren"]+kleuren["colslecht"]
