@@ -6,8 +6,8 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
 cwd = os.getcwd()
 print(cwd)
-versie = "0.0.97"
-versiedatum = "20251124"
+versie = "0.0.971"
+versiedatum = "20251125"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -4201,7 +4201,7 @@ def maandanalyse(rekening,datumlijst): # H
             perc = "---"
         else:
             perc = str(round(voort/voortlen*100))
-        catuin = col+"|"+kleuren["ResetAll"]+catcol[i[0][0]]+i[0][0]+" "+forc15(alt)+kleuren["ResetAll"]+" "+colvoort+streepje*(voorts-calen)+kleuren["ResetAll"]+str(i[3])+" "*(voortlen-voorts+buffer)+" "+forr4(perc)+"% "+grotegetalkleuren(rekening,header,i[2])+forr8(str(fornum(grootgetal(i[2],fornum,K)[0]))+grootgetal(i[2],fornum,K)[2])+kleuren["ResetAll"]+" "+catcol[i[0][0]]+i[0][0]+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"]
+        catuin = col+"|"+kleuren["ResetAll"]+catcol[i[0][0]]+i[0][0]+" "+forc15(alt)+kleuren["ResetAll"]+" "+colvoort+streepje*(voorts-calen)+kleuren["ResetAll"]+str(i[3])+" "*(voortlen-voorts+buffer)+" "+forr4(perc)+"% "+grotegetalkleuren(rekening,header,i[2])+forr8(str(grootgetal(i[2],fornum,K)[0])+grootgetal(i[2],fornum,K)[2])+kleuren["ResetAll"]+" "+catcol[i[0][0]]+i[0][0]+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"]
         catuinmc = "|"+i[0][0]+" "+forc15(alt)+" "+streepje*(voorts-calen)+str(i[3])+" "*(voortlen-voorts+buffer)+" "+forr4(perc)+"% "+forr8(str(grootgetal(i[2],fornum,K)[0])+grootgetal(i[2],fornum,K)[2])+" "+i[0][0]+"|"
         print(catuin)
         if header[nieuwheaderlijst[13]] == ">":
