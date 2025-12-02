@@ -6,8 +6,8 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
 cwd = os.getcwd()
 print(cwd)
-versie = "0.0.971"
-versiedatum = "20251125"
+versie = "0.0.98"
+versiedatum = "20251202"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -739,6 +739,7 @@ menuEN = {
         "1,1": "Collect %ss and display table" % (woordtransactieEN),
         "1,2": "Show monthly total",
         "1,3": "View %ss in collection" % (woordtransactieEN),
+        "1,4": "View account report",
     "2": "Add %s" % (woordtransactieEN),
         "2,1": "Add a new %s to the account" % (woordtransactieEN),
         "2,2": "Copy a %s to today" % (woordtransactieEN),
@@ -808,6 +809,7 @@ menuIT = {
         "1,1": "Collezionare Transazioni e visualizzare la tabella",
         "1,2": "Visualizzare totale mensile",
         "1,3": "Visualizzare Transazioni in collezione",
+        "1,4": "Visualizzare informativa del conto",
     "2": "Aggiungere %s" % (woordtransactieIT),
         "2,1": "Aggiungere una nuova %s al conto" % (woordtransactieIT),
         "2,2": "Copiare una %s su oggi" % (woordtransactieIT),
@@ -995,6 +997,7 @@ menuCJ = {
         "1,1": "hucaxa hubiwasemesüipa",
         "1,2": "hucaxa huzaqipabobi",
         "1,3": "haca hubiwasemesüipa hizaberebe",
+        "1,4": "haca hudohuʒi",
     "2": "hazi %s" % (woordtransactieCJ),
         "2,1": "hazi %szi" % (woordtransactieCJ),
         "2,2": "hazi %sxiba" % (woordtransactieCJ),
@@ -1064,6 +1067,7 @@ menu = {
         "1,1": "Verzamel %ss en toon tabel" % (woordtransactie),
         "1,2": "Maandtotaal weergeven",
         "1,3": "Bekijk %ss in collectie" % (woordtransactie),
+        "1,4": "Bekijk rekeningrapportage",
     "2": "%s toevoegen" % (woordtransactie),
         "2,1": "Voeg een nieuwe %s aan de rekening toe" % (woordtransactie),
         "2,2": "Kopieer een %s naar vandaag" % (woordtransactie),
@@ -1133,6 +1137,7 @@ helpmenuEN = {
         "1,1": textwrap.wrap("Select %ss based on various criteria (%s, %s, %s, %s and %s) and generate a clear table. You can use \"keyboard shortcuts\", or specify each element individually. The possible \"keyboard shortcuts\" are displayed; it is possible to add a number to \"M\" (month) or \"W\" (week): \"0\" includes today. Before the table is displayed, you will be asked how you want to sort the collection. If you do not make a choice, the %ss will be ordered by %s and %s grouped by %s. All selected %ss are also collected in the collection, which is always displayed above the selection menu. If the selection covers one day, the daily total for that day is shown." % (woordtransactieEN,elementenEN[0],elementenEN[1],elementenEN[2],elementenEN[3],woordcategorieEN,woordtransactieEN,elementenEN[0],elementenEN[1],woordcategorieEN,woordtransactieEN),w),
         "1,2": textwrap.wrap("Show the budget analysis of one month. By default, the current month is displayed. You will see the progress of each %s compared to the assigned budget, and the monthly performance." % (woordcategorieEN),w),
         "1,3": textwrap.wrap("Show the details of individual %ss in the collection. The number of characters in \"%s\" and \"%s\" is unlimited but is truncated in the table \"1,1\". All additional information is expanded here. In \"0,1,13\", you can set after how many displayed %ss you need to press \"Enter\" to continue, or \"<\" to exit the display." % (woordtransactieEN,elementenEN[2],elementenEN[3],woordtransactieEN),w),
+        "1,4": textwrap.wrap("Here you can see a compact overview of your score per month, and how it compares to the rest of the year (shown in the last two columns). The month is entered as one or two digits.",w),
     "2": textwrap.wrap("You can add new %ss to your account, and assign each one to a %s. You can enter a new %s per element or consecutively on one line in CSV style, or you can make a copy of a previous %s and later adjust the details using the options under \"3\". New %ss are immediately added to the collection, so you can view or modify them right away." % (woordtransactieEN,woordcategorieEN,woordtransactieEN,woordtransactieEN,woordtransactieEN),w),
         "2,1": textwrap.wrap("Add a new %s to your account here. You can enter the elements step by step, or - for the more experienced user - consecutively on one line in CSV style: \"%s, %s, %s, %s, %s\". Therefore, you cannot use a comma (\",\") in any element. Always use a period (\".\") as the decimal separator or set the \"%s\" (\"0,1,17\") to \"Yes\" to enter the %s as cents. If the CSV input contains invalid data, the step-by-step input takes over." % (woordtransactieEN,elementenEN[0],elementenEN[1],elementenEN[2],elementenEN[3],woordcategorieEN,nieuwheaderlijstEN[16],elementenEN[1]),w),
         "2,2": textwrap.wrap("Make a copy of a previously entered %s here and automatically replace the original %s with today's %s. You can use any transaction as a template to later adjust details with the options in menu \"3\". If a collection already exists, those %ss are offered one by one; otherwise, you will be asked to provide an \"ID\" - or more precisely: a list of \"ID's\" in the form of a CSV list. This is the recommended method for adding recurring %ss. Note: if you make an identical copy of a %s earlier today, it will not be automatically added to the collection." % (woordtransactieEN,elementenEN[0],elementen[0],woordtransactieEN,woordtransactieEN,woordtransactieEN),w),
@@ -1202,6 +1207,7 @@ helpmenuIT = {
         "1,1": textwrap.wrap("Seleziona Transazioni basate su diversi criteri (%s, %s, %s, %s e %s) e genera una tabella ben organizzata. Puoi utilizzare \"scorciatoie da tastiera\", oppure specificare singolarmente tutti gli elementi. Le possibili \"scorciatoie da tastiera\" vengono mostrate; è possibile aggiungere un numero a \"M\" (mese) o \"W\" (settimana): \"0\" include oggi. Prima che venga visualizzata la tabella, ti verrà chiesto come desideri ordinare la collezione. Se non fai una scelta, le Transazioni saranno ordinate per %s e %s raggruppate per %s. Tutte le Transazioni selezionate vengono anche raccolte nella collezione, che viene mostrata sempre sopra il menu a discesa. Se la selezione comprende un solo giorno, verrà mostrato il totale di quel giorno." % (elementenIT[0],elementenIT[1],elementenIT[2],elementenIT[3],woordcategorieIT,elementenIT[0],elementenIT[1],woordcategorieIT),w),
         "1,2": textwrap.wrap("Mostra l'analisi del bilancio di un mese. Di default viene mostrato il mese corrente. Vedrai il progresso di ogni %s rispetto al budget assegnato e le prestazioni mensili." % (woordcategorieIT),w),
         "1,3": textwrap.wrap("Mostra i dettagli delle singole Transazioni nella collezione. Il numero di caratteri consentito in \"%s\" e \"%s\" è illimitato, ma nella tabella (\"1,1\") verranno tagliati e mostrati solo parzialmente. Tutte le informazioni in quei caratteri extra verranno comunque espanse qui. In \"0,1,13\" puoi impostare dopo quante Transazioni visualizzate devi premere \"Invio\" per continuare, oppure \"<\" per uscire dalla visualizzazione." % (elementenIT[2],elementenIT[3]),w),
+        "1,4": textwrap.wrap("Guarda qui in un riepilogo compatto quale è il tuo punteggio mensile e come si confronta con il resto dell'anno (mostrato nelle ultime due colonne). Il mese viene inserito come uno o due cifre.",w),
     "2": textwrap.wrap("È possibile aggiungere nuove Transazioni al proprio conto, assegnandole ciascuna a una %s. Una nuova %s può essere inserita per elemento o in successione su una singola riga in stile CSV, oppure è possibile creare una copia di una %s precedente e modificare i dettagli successivamente con le opzioni sotto \"3\". Le nuove Transazioni vengono aggiunte direttamente alla collezione, in modo da poterle visualizzare o modificare immediatamente." % (woordcategorieIT,woordtransactieIT,woordtransactieIT),w),
         "2,1": textwrap.wrap("Aggiungi qui una nuova %s al tuo conto. Puoi inserire gli elementi passo dopo passo, o - per l'utente più esperto - uno di seguito all'altro su una riga in stile CSV: \"%s, %s, %s, %s, %s\". Pertanto, non è possibile utilizzare una virgola (\",\") in nessun elemento. Usa sempre un punto (\".\") come separatore decimale, o imposta \"%s\" (\"0,1,17\") su \"Sì\" per inserire l'%s come centesimi. Se l'input CSV contiene dati non validi, il metodo passo dopo passo prenderà il sopravvento." % (woordtransactieIT,elementenIT[0],elementenIT[1],elementenIT[2],elementenIT[3],woordcategorieIT,nieuwheaderlijstIT[16],elementenIT[1]),w),
         "2,2": textwrap.wrap("Fai qui una copia di una %s inserita in precedenza e sostituisci automaticamente la data originale con quella di oggi. Puoi usare ogni %s come modello per modificarla in dettaglio più tardi con le opzioni nel menu \"3\". Se esiste già una collezione, tali Transazioni verranno offerte una per una, altrimenti ti verrà chiesto di specificare un \"ID\" - o meglio: un elenco di \"ID\" nel formato di un elenco CSV. Questo è il metodo consigliato per aggiungere Transazioni ricorrenti. Nota: se fai una copia identica di una %s già oggi, questa non verrà aggiunta automaticamente alla collezione." % (woordtransactieIT,woordtransactieIT,woordtransactieIT),w),
@@ -1842,6 +1848,7 @@ helpmenuCJ = {
         "1,1": textwrap.wrap("(%s, %s, %s, %s e %s)" % (elementenCJ[0],elementenCJ[1],elementenCJ[2],elementenCJ[3],woordcategorieCJ),w),
         "1,2": textwrap.wrap("",w),
         "1,3": textwrap.wrap("\"%s\"  \"%s\" (\"1,1\") " % (elementenCJ[2],elementenCJ[3]),w),
+        "1,4": textwrap.wrap("",w),
     "2": textwrap.wrap("",w),
         "2,1": textwrap.wrap("CSV: \"%s, %s, %s, %s, %s\"" % (elementenCJ[0],elementenCJ[1],elementenCJ[2],elementenCJ[3],woordcategorieCJ),w),
         "2,2": textwrap.wrap("",w),
@@ -1908,6 +1915,7 @@ helpmenu = {
         "1,1": textwrap.wrap("Selecteer %ss op basis van verschillende criteria (%s, %s, %s, %s en %s) en genereer een overzichtelijke tabel. Er kan gebruik worden gemaakt van \"sneltoetsen\", of u kunt alle elementen afzonderlijk opgeven. De mogelijke \"sneltoetsen\" worden vooraf getoond; \"M\" (maand) of \"W\" (week) moeten worden voorzien van een getal; \"0\" is inclusief vandaag. Voordat de tabel wordt getoond wordt u gevraagd op welke wijze u de collectie wilt sorteren. Maakt u geen keuze, dan staan de %ss op volgorde van %s en %s gegroepeerd per %s. Alle geselecteerde %ss worden ook verzameld in de collectie, die steeds getoond wordt boven het keuzemenu. Omvat de selectie één dag, dan wordt het dagtotaal op die dag getoond." % (woordtransactie,elementen[0],elementen[1],elementen[2],elementen[3],woordcategorie,woordtransactie,elementen[0],elementen[1],woordcategorie,woordtransactie),w),
         "1,2": textwrap.wrap("Toon de budgetanalyse van één maand. Standaard wordt de huidige maand getoond. U ziet de voortgang van iedere %s ten opzichte van het daaraan toegekende budget, en de maandprestatie." % (woordcategorie),w),
         "1,3": textwrap.wrap("Toon de details van individuele %ss in de collectie. Het toegestaan aantal karakters in \"%s\" en \"%s\" is onbeperkt, maar in de tabel (\"1,1\") worden die afgekapt en slechts ten dele getoond. Alle informatie in die extra karakters wordt hier wel uitgevouwen. In \"0,1,13\" kunt u instellen na hoeveel weergegeven %ss u op \"Enter\" moet drukken om door te gaan, of \"<\" om de weergave te verlaten." % (woordtransactie,elementen[2],elementen[3],woordtransactie),w),
+        "1,4": textwrap.wrap("Bekijk hier in een compact overzicht wat je score per maand is, en hoe die zich verhoudt tot de rest van het jaar (getoond in de laatste twee kolommen). De maand wordt als één of twee cijfers ingegeven.",w),
     "2": textwrap.wrap("U kunt nieuwe %ss aan uw rekening toevoegen, die elk aan een %s worden toegekend. Een nieuwe %s kunt u per element invoeren of achter elkaar op één regel in CSV-stijl, of u kunt een kopie maken van een eerdere %s en de details later aanpassen met de opties onder \"3\". Nieuwe %ss worden direct aan de collectie toegevoegd, zodat u die meteen kunt inzien of aanpassen." % (woordtransactie,woordcategorie,woordtransactie,woordtransactie,woordtransactie),w),
         "2,1": textwrap.wrap("Voeg hier een nieuwe %s aan uw rekening toe. U kunt de elementen stap-voor-stap ingeven, of - voor de meer ervaren gebruiker - achter elkaar op één lijn in CSV-stijl: \"%s, %s, %s, %s, %s\". U kunt daarom in geen enkel element een komma (\",\") gebruiken. Gebruik altijd een punt (\".\") als decimaalscheidingsteken of zet \"%s\" (\"0,1,17\") op \"Ja\" om het %s als centen in te voeren. Mocht de CSV-ingave ongeldige data bevatten, dan neemt de stap-voor-stap-ingave het over." % (woordtransactie,elementen[0],elementen[1],elementen[2],elementen[3],woordcategorie,nieuwheaderlijst[16],elementen[1]),w),
         "2,2": textwrap.wrap("Maak hier een kopie van een eerder ingevoerde %s en vervang automatisch de oorspronkelijke %s met die van vandaag. U kunt iedere %s als sjabloon gebruiken om later op details aan te passen met de opties in menu \"3\". Als er al een collectie bestaat worden die %ss één voor één aangeboden, anders wordt u gevraagd een \"ID\" - of beter: een lijst van \"ID's\" in de vorm van een CSV-lijst - op te geven. Dit is de aanbevolen methode voor het toevoegen van terugkerende %ss. Let op: als u een identieke kopie maakt van een %s eerder vandaag, dan wordt die niet automatisch aan de collectie toegevoegd." % (woordtransactie,elementen[0],woordtransactie,woordtransactie,woordtransactie,woordtransactie),w),
@@ -4062,6 +4070,10 @@ def maandanalyse(rekening,datumlijst): # H
     loop = True
     while loop == True:
         datumkeuze = input(inputindent)
+        if datumkeuze.upper() in afsluitlijst:
+            doei()
+        elif datumkeuze.upper() in neelijst:
+            return ok
         if datumkeuze == "":
             datumkeuze = 0
         print(ResetAll,end = "")
@@ -4272,6 +4284,122 @@ def maandanalyse(rekening,datumlijst): # H
         with open(os.path.join(rekening,str(datumlijst[0])[:6])+"a","a") as a:
             print(totalijnmc, file = a)
 
+def rapportage(rekening,header,col,ok):
+    kleuren,catcol = updatekleuren(rekening)
+    header = haalheader(rekening)
+    categorieenlijst = haalcategorieen(rekening)
+    alternatievenamendict = haalalternatievenamen(rekening)
+    Taal = header[nieuwheaderlijst[3]]
+    valuta = header[nieuwheaderlijst[4]]
+    if Taal == "EN":
+        CAT = woordcategorieEN[:3]
+        ALT = woordcategorieEN
+        BUD = "Budget"
+        TOT = "Total"
+        AAN = "Number"
+        GEM = "Average"
+        MND = "Month"
+        GMD = "MnthlyAvg"
+        PRC = "Percent"
+    elif Taal == "IT":
+        CAT = woordcategorieIT[:3]
+        ALT = woordcategorieIT
+        BUD = "Budget"
+        TOT = "Totale"
+        AAN = "Numero"
+        GEM = "Media"
+        MND = "Mese"
+        GMD = "MedMens"
+        PRC = "Percent"
+    elif Taal == "CJ":
+        CAT = "pbw"
+        ALT = woordcategorieCJ
+        BUD = "hubiŋo"
+        TOT = "hubipu"
+        AAN = "hubi"
+        GEM = "huñañüa"
+        MND = "huqipo"
+        GMD = "hññqp"
+        PRC = "hubüibebb"
+    else:
+        CAT = woordcategorie[:3]
+        ALT = woordcategorie
+        BUD = "Budget"
+        TOT = "Totaal"
+        AAN = "Aantal"
+        GEM = "Gemiddeld"
+        MND = "Maand"
+        GMD = "MndlksGem"
+        PRC = "Percent"
+    loop = True
+    while loop == True:
+        mm = input(col+MND+inputindent)
+        if mm.upper() == "H":
+            print(kleuren["ResetAll"],end="")
+            if Taal == "EN":
+                for i in helpmenuEN["1,4"]:
+                    print(i)
+            elif Taal == "IT":
+                for i in helpmenuIT["1,4"]:
+                    print(i)
+            elif Taal == "CJ":
+                for i in helpmenuCJ["1,4"]:
+                    print(i)
+            else:
+                for i in helpmenu["1,4"]:
+                    print(i)
+            print(col,end="")
+        else:
+            loop = False
+    print(kleuren["ResetAll"],end="")
+    if mm.upper() in afsluitlijst:
+        doei()
+    elif mm.upper() in neelijst:
+        return
+    test = checkint(mm)
+    if test == True:
+        if mm == "0":
+            MM = nustr[4:6]
+        elif len(mm) == 1:
+            MM = "0"+mm
+        elif len(mm) == 2:
+            if int(mm) <= 12:
+                MM = mm
+            else:
+                MM = nustr[4:6]
+    else:
+        MM = nustr[4:6]
+    toplijn = col+"+"+"-"*3+"+"+"-"*15+"+"+"-"*9+"+"+"-"*9+"+"+"-"*8+"+"+"-"*9+"+"+"-"*9+"+"+"-"*9+"+"+kleuren["ResetAll"]
+    koplijn = col+"|"+forc3(CAT)+" "+forc15(ALT)+" "+forc10(BUD)+forc10(TOT)+forc9(AAN)+forc10(GEM)+forc10(GMD)+forc9(PRC)+"|"+kleuren["ResetAll"]
+    print(toplijn)
+    print(koplijn)
+    print(toplijn)
+    for i,j in alternatievenamendict.items():
+        with open(os.path.join(rekening,i),"r") as cat:
+            ca = ast.literal_eval(cat.read())
+            bud = ca[0][1]
+            tot = 0
+            aan = 0
+            toto = 0
+            mndl = []
+            amnd = 0
+            for k in ca[1:]:
+                if str(k[0])[4:6] == MM:
+                    tot += k[1]
+                    aan += 1
+                toto += k[1]
+                if str(k[0])[4:6] not in mndl:
+                    mndl.append(str(k[0])[4:6])
+        if aan == 0:
+            aan = budgetnul
+        if bud == budgetnul:
+            perc = 0
+        else:
+            perc = toto/len(mndl)/bud*-100
+        print(col+"|"+kleuren["ResetAll"]+catcol[i]+forc3(i)+" "+forc15(j)+kleuren["ResetAll"]+" "+grotegetalkleuren(rekening,header,bud)+forc10(valuta+grootgetal(bud,fornum,K)[1](grootgetal(bud,fornum,K)[0])+grootgetal(bud,fornum,K)[2])+kleuren["ResetAll"]+grotegetalkleuren(rekening,header,tot)+forc10(valuta+grootgetal(tot,fornum,K)[1](grootgetal(tot,fornum,K)[0])+grootgetal(tot,fornum,K)[2])+kleuren["ResetAll"]+forr5(round(aan))+" "*4+kleinegetalkleuren(tot/aan)+forc10(valuta+grootgetal(tot/aan,fornum,K)[1](grootgetal(tot/aan,fornum,K)[0])+grootgetal(tot/aan,fornum,K)[2])+kleuren["ResetAll"]+forc10(valuta+grootgetal(toto/len(mndl),fornum,K)[1](grootgetal(toto/len(mndl),fornum,K)[0])+grootgetal(toto/len(mndl),fornum,K)[2])+fornum(perc)+"%"+col+"|"+kleuren["ResetAll"])
+    print(toplijn)
+    return
+
 def IDlijst2ok(IDlijst): # geen H
     ok = {}
     for i in IDlijst:
@@ -4282,7 +4410,7 @@ def IDlijst2ok(IDlijst): # geen H
         except(Exception) as f:
             #print(f)
             pass
-    return ok
+    return
 
 def toontransactie(rekening,header,col,ok): # geen H
     kleuren,catcol = updatekleuren(rekening)
@@ -7024,11 +7152,13 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
                     """  0 : %s
  >1 : %s
   2 : %s
-  3 : %s""" % (
+  3 : %s
+  4 : %s""" % (
           menuEN["1,0"],
           menuEN["1,1"],
           menuEN["1,2"],
-          menuEN["1,3"]
+          menuEN["1,3"],
+          menuEN["1,4"]
           )
       )
         elif Taal == "IT":
@@ -7036,11 +7166,13 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
                     """  0 : %s
  >1 : %s
   2 : %s
-  3 : %s""" % (
+  3 : %s
+  4 : %s""" % (
           menuIT["1,0"],
           menuIT["1,1"],
           menuIT["1,2"],
-          menuIT["1,3"]
+          menuIT["1,3"],
+          menuIT["1,4"]
           )
       )
         elif Taal == "CJ":
@@ -7048,11 +7180,13 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
                     """  0 : %s
  >1 : %s
   2 : %s
-  3 : %s""" % (
+  3 : %s
+  4 : %s""" % (
           menuCJ["1,0"],
           menuCJ["1,1"],
           menuCJ["1,2"],
-          menuCJ["1,3"]
+          menuCJ["1,3"],
+          menuCJ["1,4"]
           )
       )
         else:
@@ -7060,11 +7194,13 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
                     """  0 : %s
  >1 : %s
   2 : %s
-  3 : %s""" % (
+  3 : %s
+  4 : %s""" % (
           menu["1,0"],
           menu["1,1"],
           menu["1,2"],
-          menu["1,3"]
+          menu["1,3"],
+          menu["1,4"]
           )
       )
     loop2 = True
@@ -7214,6 +7350,13 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
             except(Exception) as f:
                 #print(f)
                 ok = toontransactie(rekening,header,col,ok)
+                return rekening,header,col,keuze1lijst,ok
+        elif keuze2 == "4":
+            try:
+                keuze3
+            except(Exception) as f:
+                #print(f)
+                rapportage(rekening,header,col,ok)
                 return rekening,header,col,keuze1lijst,ok
         else: # "1"
             try:
