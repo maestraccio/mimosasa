@@ -6,7 +6,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
 cwd = os.getcwd()
 print(cwd)
-versie = "0.0.981"
+versie = "0.0.982"
 versiedatum = "20251203"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
@@ -21,10 +21,12 @@ forl2 = "{:<2}".format
 forc3 = "{:^3}".format
 forl3 = "{:<3}".format
 forr3 = "{:>3}".format
+forc4 = "{:^4}".format
 forl4 = "{:<4}".format
 forr4 = "{:>4}".format
 forc5 = "{:^5}".format
 forr5 = "{:>5}".format
+forc6 = "{:^6}".format
 forr6 = "{:>6}".format
 forc7 = "{:^7}".format
 forl8 = "{:<8}".format
@@ -40,6 +42,10 @@ forr14 = "{:>14}".format
 forc15 = "{:^15}".format
 forl15 = "{:<15}".format
 forr15 = "{:>15}".format
+forc16 = "{:^16}".format
+forc17 = "{:^17}".format
+forc18 = "{:^18}".format
+forc19 = "{:^19}".format
 forc20 = "{:^20}".format
 forl20 = "{:<20}".format
 forr20 = "{:>20}".format
@@ -4224,7 +4230,7 @@ def maandanalyse(rekening,datumlijst,ok): # H
     print(uitlijn)
     if header[nieuwheaderlijst[13]] == ">":
         with open(os.path.join(rekening,str(datumlijst[0])[:6])+"a","a") as a:
-            print(uinlijnmc, file = a)
+            print(uitlijnmc, file = a)
     for i in crylijst:
         alt = vertaalv(alternatievenamendict[i[0][0]])
         voort = int(round(i[2]/i[1]*voortlen)) * -1 # het aantal streepjes per categorie (int)
@@ -4283,6 +4289,7 @@ def maandanalyse(rekening,datumlijst,ok): # H
     if header[nieuwheaderlijst[13]] == ">":
         with open(os.path.join(rekening,str(datumlijst[0])[:6])+"a","a") as a:
             print(totalijnmc, file = a)
+    return ok
 
 def IDlijst2ok(IDlijst): # geen H
     ok = {}
@@ -4304,7 +4311,7 @@ def rapportage(rekening,header,col,ok):
     Taal = header[nieuwheaderlijst[3]]
     valuta = header[nieuwheaderlijst[4]]
     if Taal == "EN":
-        CAT = woordcategorieEN[:3]
+        CAT = woordcategorieEN[:1]
         ALT = woordcategorieEN
         BUD = "Budget"
         TOT = "Total"
@@ -4312,9 +4319,10 @@ def rapportage(rekening,header,col,ok):
         GEM = "Average"
         MND = "Month"
         GMD = "MnthlyAvg"
-        PRC = "Percent"
+        #PRC = "Percent"
+        PRC = "%"
     elif Taal == "IT":
-        CAT = woordcategorieIT[:3]
+        CAT = woordcategorieIT[:1]
         ALT = woordcategorieIT
         BUD = "Budget"
         TOT = "Totale"
@@ -4322,9 +4330,10 @@ def rapportage(rekening,header,col,ok):
         GEM = "Media"
         MND = "Mese"
         GMD = "MedMens"
-        PRC = "Percent"
+        #PRC = "Percent"
+        PRC = "%"
     elif Taal == "CJ":
-        CAT = "pbw"
+        CAT = "b"
         ALT = woordcategorieCJ
         BUD = "hubiŋo"
         TOT = "hubipu"
@@ -4332,9 +4341,10 @@ def rapportage(rekening,header,col,ok):
         GEM = "huñañüa"
         MND = "huqipo"
         GMD = "hññqp"
-        PRC = "hubüibebb"
+        #PRC = "hubüibebb"
+        PRC = "%"
     else:
-        CAT = woordcategorie[:3]
+        CAT = woordcategorie[:1]
         ALT = woordcategorie
         BUD = "Budget"
         TOT = "Totaal"
@@ -4342,7 +4352,8 @@ def rapportage(rekening,header,col,ok):
         GEM = "Gemiddeld"
         MND = "Maand"
         GMD = "MndlksGem"
-        PRC = "Procent"
+        #PRC = "Procent"
+        PRC = "%"
     loop = True
     while loop == True:
         mm = input(col+MND+inputindent)
@@ -4381,9 +4392,9 @@ def rapportage(rekening,header,col,ok):
                 MM = nustr[4:6]
     else:
         MM = nustr[4:6]
-    lijn = col+"+"+"-"*3+"+"+"-"*15+"+"+"-"*9+"+"+"-"*9+"+"+"-"*8+"+"+"-"*9+"+"+"-"*9+"+"+"-"*9+"+"+kleuren["ResetAll"]
-    toplijn = col+"+"+"-"*3+"+"+"-"*15+"+"+"-"*9+"+"+"-"+rekening[-4:]+"-"+MM+"-"+"+"+"-"+rekening[-4:]+MM+"-"+"+"+"-"+rekening[-4:]+"-"+MM+"-"+"+"+"---"+rekening[-4:]+"--"+"+"+"---"+rekening[-4:]+"--"+"+"+kleuren["ResetAll"]
-    koplijn = col+"|"+forc3(CAT)+" "+forc15(ALT)+" "+forc10(BUD)+forc10(TOT)+forc9(AAN)+forc10(GEM)+forc10(GMD)+forc9(PRC)+"|"+kleuren["ResetAll"]
+    toplijn = col+"+"+"-"*16+"+"+"-"*9+"+"+"--"+MM+"--"+"+"+"----"+MM+"---"+"+"+"----"+MM+"---"+"+"+"--"+MM+"--"+"+"+"---"+rekening[-4:]+"--"+"+"+"-"+rekening[-4:]+"+"+"-"+"+"+kleuren["ResetAll"]
+    koplijn = col+"|"+" "+forc15(ALT)+" "+forc10(BUD)+forc7(AAN)+forc10(GEM)+forc10(TOT)+forc7(PRC)+forc10(GMD)+forc6(PRC)+CAT+"|"+kleuren["ResetAll"]
+    lijn = col+"+"+"-"+"+"+"-"*14+"+"+"-"*9+"+"+"-"*6+"+"+"-"*9+"+"+"-"*9+"+"+"-"*6+"+"+"-"*9+"+"+"-"*5+"+"+"-"+"+"+kleuren["ResetAll"]
     print(toplijn)
     print(koplijn)
     print(lijn)
@@ -4408,9 +4419,11 @@ def rapportage(rekening,header,col,ok):
             aan = budgetnul
         if bud == budgetnul:
             perc = 0
+            mprc = 0
         else:
-            perc = toto/len(mndl)/bud*-100
-        print(col+"|"+kleuren["ResetAll"]+catcol[i]+forc3(i)+" "+forc15(j)+kleuren["ResetAll"]+" "+grotegetalkleuren(rekening,header,bud)+forc10(valuta+grootgetal(bud,fornum,K)[1](grootgetal(bud,fornum,K)[0])+grootgetal(bud,fornum,K)[2])+kleuren["ResetAll"]+grotegetalkleuren(rekening,header,tot)+forc10(valuta+grootgetal(tot,fornum,K)[1](grootgetal(tot,fornum,K)[0])+grootgetal(tot,fornum,K)[2])+kleuren["ResetAll"]+catcol[i]+forr5(round(aan))+kleuren["ResetAll"]+" "*4+kleinegetalkleuren(tot/aan)+forc10(valuta+grootgetal(tot/aan,fornum,K)[1](grootgetal(tot/aan,fornum,K)[0])+grootgetal(tot/aan,fornum,K)[2])+kleuren["ResetAll"]+forc10(valuta+grootgetal(toto/len(mndl),fornum,K)[1](grootgetal(toto/len(mndl),fornum,K)[0])+grootgetal(toto/len(mndl),fornum,K)[2])+fornum(perc)+"%"+col+"|"+kleuren["ResetAll"])
+            perc = round(toto/len(mndl)/bud*-100)
+            mprc = round(tot/bud*-100)
+        print(col+"|"+kleuren["ResetAll"]+catcol[i]+i+" "+forc15(j)+kleuren["ResetAll"]+grotegetalkleuren(rekening,header,bud)+forc10(valuta+grootgetal(bud,fornum,K)[1](grootgetal(bud,fornum,K)[0])+grootgetal(bud,fornum,K)[2])+kleuren["ResetAll"]+catcol[i]+forr4(round(aan))+kleuren["ResetAll"]+" "*3+kleinegetalkleuren(tot/aan)+forc10(valuta+grootgetal(tot/aan,fornum,K)[1](grootgetal(tot/aan,fornum,K)[0])+grootgetal(tot/aan,fornum,K)[2])+kleuren["ResetAll"]+grotegetalkleuren(rekening,header,tot)+forc10(valuta+grootgetal(tot,fornum,K)[1](grootgetal(tot,fornum,K)[0])+grootgetal(tot,fornum,K)[2])+kleuren["ResetAll"]+catcol[i]+forr5(mprc)+"% "+kleuren["ResetAll"]+forc10(valuta+grootgetal(toto/len(mndl),fornum,K)[1](grootgetal(toto/len(mndl),fornum,K)[0])+grootgetal(toto/len(mndl),fornum,K)[2])+forr4(perc)+"%"+" "+kleuren["ResetAll"]+catcol[i]+i+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"])
     print(lijn)
     return ok
 
@@ -7344,7 +7357,7 @@ def toonkeuze(rekening,header,col,keuze1lijst,ok): # H
             except(Exception) as f:
                 #print(f)
                 datumlijst = [startdatum,einddatum]
-                maandanalyse(rekening,datumlijst)
+                maandanalyse(rekening,datumlijst,ok)
                 return rekening,header,col,keuze1lijst,ok
         elif keuze2 == "3":
             try:
