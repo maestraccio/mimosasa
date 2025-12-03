@@ -6,8 +6,8 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
 cwd = os.getcwd()
 print(cwd)
-versie = "0.0.98"
-versiedatum = "20251202"
+versie = "0.0.981"
+versiedatum = "20251203"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -4342,7 +4342,7 @@ def rapportage(rekening,header,col,ok):
         GEM = "Gemiddeld"
         MND = "Maand"
         GMD = "MndlksGem"
-        PRC = "Percent"
+        PRC = "Procent"
     loop = True
     while loop == True:
         mm = input(col+MND+inputindent)
@@ -4381,11 +4381,12 @@ def rapportage(rekening,header,col,ok):
                 MM = nustr[4:6]
     else:
         MM = nustr[4:6]
-    toplijn = col+"+"+"-"*3+"+"+"-"*15+"+"+"-"*9+"+"+"-"*9+"+"+"-"*8+"+"+"-"*9+"+"+"-"*9+"+"+"-"*9+"+"+kleuren["ResetAll"]
+    lijn = col+"+"+"-"*3+"+"+"-"*15+"+"+"-"*9+"+"+"-"*9+"+"+"-"*8+"+"+"-"*9+"+"+"-"*9+"+"+"-"*9+"+"+kleuren["ResetAll"]
+    toplijn = col+"+"+"-"*3+"+"+"-"*15+"+"+"-"*9+"+"+"-"+rekening[-4:]+"-"+MM+"-"+"+"+"-"+rekening[-4:]+MM+"-"+"+"+"-"+rekening[-4:]+"-"+MM+"-"+"+"+"---"+rekening[-4:]+"--"+"+"+"---"+rekening[-4:]+"--"+"+"+kleuren["ResetAll"]
     koplijn = col+"|"+forc3(CAT)+" "+forc15(ALT)+" "+forc10(BUD)+forc10(TOT)+forc9(AAN)+forc10(GEM)+forc10(GMD)+forc9(PRC)+"|"+kleuren["ResetAll"]
     print(toplijn)
     print(koplijn)
-    print(toplijn)
+    print(lijn)
     for i,j in alternatievenamendict.items():
         with open(os.path.join(rekening,i),"r") as cat:
             ca = ast.literal_eval(cat.read())
@@ -4399,7 +4400,8 @@ def rapportage(rekening,header,col,ok):
                 if str(k[0])[4:6] == MM:
                     tot += k[1]
                     aan += 1
-                toto += k[1]
+                if str(k[0])[4:6] != nustr[4:6]:
+                    toto += k[1]
                 if str(k[0])[4:6] not in mndl:
                     mndl.append(str(k[0])[4:6])
         if aan == 0:
@@ -4408,8 +4410,8 @@ def rapportage(rekening,header,col,ok):
             perc = 0
         else:
             perc = toto/len(mndl)/bud*-100
-        print(col+"|"+kleuren["ResetAll"]+catcol[i]+forc3(i)+" "+forc15(j)+kleuren["ResetAll"]+" "+grotegetalkleuren(rekening,header,bud)+forc10(valuta+grootgetal(bud,fornum,K)[1](grootgetal(bud,fornum,K)[0])+grootgetal(bud,fornum,K)[2])+kleuren["ResetAll"]+grotegetalkleuren(rekening,header,tot)+forc10(valuta+grootgetal(tot,fornum,K)[1](grootgetal(tot,fornum,K)[0])+grootgetal(tot,fornum,K)[2])+kleuren["ResetAll"]+forr5(round(aan))+" "*4+kleinegetalkleuren(tot/aan)+forc10(valuta+grootgetal(tot/aan,fornum,K)[1](grootgetal(tot/aan,fornum,K)[0])+grootgetal(tot/aan,fornum,K)[2])+kleuren["ResetAll"]+forc10(valuta+grootgetal(toto/len(mndl),fornum,K)[1](grootgetal(toto/len(mndl),fornum,K)[0])+grootgetal(toto/len(mndl),fornum,K)[2])+fornum(perc)+"%"+col+"|"+kleuren["ResetAll"])
-    print(toplijn)
+        print(col+"|"+kleuren["ResetAll"]+catcol[i]+forc3(i)+" "+forc15(j)+kleuren["ResetAll"]+" "+grotegetalkleuren(rekening,header,bud)+forc10(valuta+grootgetal(bud,fornum,K)[1](grootgetal(bud,fornum,K)[0])+grootgetal(bud,fornum,K)[2])+kleuren["ResetAll"]+grotegetalkleuren(rekening,header,tot)+forc10(valuta+grootgetal(tot,fornum,K)[1](grootgetal(tot,fornum,K)[0])+grootgetal(tot,fornum,K)[2])+kleuren["ResetAll"]+catcol[i]+forr5(round(aan))+kleuren["ResetAll"]+" "*4+kleinegetalkleuren(tot/aan)+forc10(valuta+grootgetal(tot/aan,fornum,K)[1](grootgetal(tot/aan,fornum,K)[0])+grootgetal(tot/aan,fornum,K)[2])+kleuren["ResetAll"]+forc10(valuta+grootgetal(toto/len(mndl),fornum,K)[1](grootgetal(toto/len(mndl),fornum,K)[0])+grootgetal(toto/len(mndl),fornum,K)[2])+fornum(perc)+"%"+col+"|"+kleuren["ResetAll"])
+    print(lijn)
     return ok
 
 def toontransactie(rekening,header,col,ok): # geen H
