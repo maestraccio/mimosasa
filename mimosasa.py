@@ -6,8 +6,8 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
 cwd = os.getcwd()
 print(cwd)
-versie = "0.0.984"
-versiedatum = "20251205"
+versie = "0.0.985"
+versiedatum = "20251206"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -88,6 +88,7 @@ standaardeinddatum = 99991231
 standaardbodembedrag = -9999999.99
 standaardtopbedrag = 9999999.99
 budgetnul = 0.0001
+budgetnulneg = -0.0001
 oepsEN = "Oops, something went wrong"
 oepsIT = "Ups, qualcosa è andato storto"
 #STI:CAUSAL(                                #               # mu
@@ -2757,7 +2758,10 @@ def maaknieuwerekening(): # geen H
         print(nieuwheader, file = hbu, end = "")
     for i in huishoudelijkelijst:
         with open(os.path.join(nieuwerekening,i),"w") as c:
-            print([[nieuwalternatievenamendict[i],budgetnul]], file = c, end = "")
+            if i == huishoudelijkelijst[0]:
+                print([[nieuwalternatievenamendict[i],budgetnulneg]], file = c, end = "")
+            else:
+                print([[nieuwalternatievenamendict[i],budgetnul]], file = c, end = "")
     return nieuwerekening
 
 def vertaalv(v): # geen H
@@ -2896,7 +2900,7 @@ def kleinegetalkleuren(getal): # geen H
         getalkleur = kleuren["Omkeren"]+kleuren["colgoed"]
     elif getal > 0:
         getalkleur = kleuren["colgoed"]
-    elif getal == 0:
+    elif getal in [budgetnulneg,-0,0,budgetnul]:
         getalkleur = kleuren["colmatig"]
     elif getal < ondergrens:
         getalkleur = kleuren["Omkeren"]+kleuren["colslecht"]
@@ -2907,14 +2911,18 @@ def kleinegetalkleuren(getal): # geen H
 def grotegetalkleuren(rekening,header,getal): # geen H
     try:
         kleuren,catcol = updatekleuren(rekening)
-        if getal >= 0:
+        if getal > budgetnul:
             getalkleur = kleuren["colgoed"]
+        elif budgetnulneg <= getal <= budgetnul:
+            getalkleur = kleuren["colmatig"]
         else:
             getalkleur = kleuren["colslecht"]
     except(Exception) as f:
         #print(f)
-        if getal >= 0:
+        if getal > budgetnul:
             getalkleur = colgoed
+        elif budgetnulneg <= getal <= budgetnul:
+            getalkleur = colmatig
         else:
             getalkleur = colslecht
     return getalkleur
@@ -4228,7 +4236,7 @@ def maandanalyse(rekening,datumlijst,ok): # H
             colvoort = kleuren["colhuh"]
             streepje = "#"
             buffer = 0
-        if i[1] == budgetnul:
+        if i[1] == budgetnul or i[1] == budgetnulneg:
             perc = "---"
         else:
             perc = str(round(voort/voortlen*100))
@@ -4273,7 +4281,7 @@ def maandanalyse(rekening,datumlijst,ok): # H
             colvoort = kleuren["colhuh"]
             streepje = "#"
             buffer = 0
-        if i[1] == budgetnul:
+        if i[1] == budgetnul or i[1] == budgetnulneg:
             perc = "---"
         else:
             perc = str(round(voort/voortlen*100))
@@ -4316,7 +4324,7 @@ def IDlijst2ok(IDlijst): # geen H
             pass
     return ok
 
-def rapportage(rekening,header,col,ok):
+def rapportage(rekening,header,col,ok): # H
     kleuren,catcol = updatekleuren(rekening)
     header = haalheader(rekening)
     categorieenlijst = haalcategorieen(rekening)
@@ -4405,10 +4413,11 @@ def rapportage(rekening,header,col,ok):
                 MM = nustr[4:6]
     else:
         MM = nustr[4:6]
-    toplijn = col+"+"+"-"*16+"+"+"-"*9+"+"+"--"+MM+"--"+"+"+"----"+MM+"---"+"+"+"----"+MM+"---"+"+"+"--"+MM+"--"+"+"+"---"+rekening[-4:]+"--"+"+"+"-"+rekening[-4:]+"+"+"-"+"+"+kleuren["ResetAll"]
+    toplijn = col+"+"+"-"*16+"+"+"-"*9+"+"+"-"+MM+"-"+"#"+"-"+"+"+"--"+MM+"--"+valuta+"--"+"+"+"--"+MM+"--"+valuta+"--"+"+"+"-"+MM+"-"+"%"+"-"+"+"+"-"+rekening[-4:]+"--"+valuta+"-"+"+"+rekening[-4:]+"%"+"+"+"-"+"+"+kleuren["ResetAll"]
     koplijn = col+"|"+" "+forc15(ALT)+" "+forc10(BUD)+forc7(AAN)+forc10(GEM)+forc10(TOT)+forc7(PRC)+forc10(GMD)+forc6(PRC)+CAT+"|"+kleuren["ResetAll"]
     lijn = col+"+"+"-"+"+"+"-"*14+"+"+"-"*9+"+"+"-"*6+"+"+"-"*9+"+"+"-"*9+"+"+"-"*6+"+"+"-"*9+"+"+"-"*5+"+"+"-"+"+"+kleuren["ResetAll"]
-    toplijnmc = "+"+"-"*16+"+"+"-"*9+"+"+"--"+MM+"--"+"+"+"----"+MM+"---"+"+"+"----"+MM+"---"+"+"+"--"+MM+"--"+"+"+"---"+rekening[-4:]+"--"+"+"+"-"+rekening[-4:]+"+"+"-"+"+"
+    #toplijnmc = "+"+"-"*16+"+"+"-"*9+"+"+"--"+MM+"--"+"+"+"----"+MM+"---"+"+"+"----"+MM+"---"+"+"+"--"+MM+"--"+"+"+"---"+rekening[-4:]+"--"+"+"+"-"+rekening[-4:]+"+"+"-"+"+"
+    toplijnmc = "+"+"-"*16+"+"+"-"*9+"+"+"-"+MM+"-"+"#"+"-"+"+"+"--"+MM+"--"+valuta+"--"+"+"+"--"+MM+"--"+valuta+"--"+"+"+"-"+MM+"-"+"%"+"-"+"+"+"-"+rekening[-4:]+"--"+valuta+"-"+"+"+rekening[-4:]+"%"+"+"+"-"+"+"
     koplijnmc = "|"+" "+forc15(ALT)+" "+forc10(BUD)+forc7(AAN)+forc10(GEM)+forc10(TOT)+forc7(PRC)+forc10(GMD)+forc6(PRC)+CAT+"|"
     lijnmc = "+"+"-"+"+"+"-"*14+"+"+"-"*9+"+"+"-"*6+"+"+"-"*9+"+"+"-"*9+"+"+"-"*6+"+"+"-"*9+"+"+"-"*5+"+"+"-"+"+"
     print(toplijn)
@@ -4442,13 +4451,13 @@ def rapportage(rekening,header,col,ok):
             mndll = budgetnul
         if aan == 0:
             aan = budgetnul
-        if bud == budgetnul:
+        if bud == budgetnul or bud == budgetnulneg:
             perc = 0
             mprc = 0
         else:
             perc = round(toto/len(mndl)/bud*-100)
             mprc = round(tot/bud*-100)
-        print(col+"|"+kleuren["ResetAll"]+catcol[i]+i+" "+forc15(j)+kleuren["ResetAll"]+grotegetalkleuren(rekening,header,bud)+forc10(valuta+grootgetal(bud,fornum,K)[1](grootgetal(bud,fornum,K)[0])+grootgetal(bud,fornum,K)[2])+kleuren["ResetAll"]+catcol[i]+forr4(round(aan))+" "*3+kleuren["ResetAll"]+kleinegetalkleuren(tot/aan)+forc10(valuta+grootgetal(tot/aan,fornum,K)[1](grootgetal(tot/aan,fornum,K)[0])+grootgetal(tot/aan,fornum,K)[2])+kleuren["ResetAll"]+grotegetalkleuren(rekening,header,tot)+forc10(valuta+grootgetal(tot,fornum,K)[1](grootgetal(tot,fornum,K)[0])+grootgetal(tot,fornum,K)[2])+kleuren["ResetAll"]+catcol[i]+forr5(mprc)+"% "+kleuren["ResetAll"]+forc10(valuta+grootgetal(toto/mndll,fornum,K)[1](grootgetal(toto/mndll,fornum,K)[0])+grootgetal(toto/mndll,fornum,K)[2])+forr4(perc)+"%"+" "+kleuren["ResetAll"]+catcol[i]+i+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"])
+        print(col+"|"+kleuren["ResetAll"]+catcol[i]+i+kleuren["ResetAll"]+" "+catcol[i]+forc15(vertaalv(j))+kleuren["ResetAll"]+grotegetalkleuren(rekening,header,bud)+forc10(valuta+grootgetal(bud,fornum,K)[1](grootgetal(bud,fornum,K)[0])+grootgetal(bud,fornum,K)[2])+kleuren["ResetAll"]+catcol[i]+forr4(round(aan))+" "*3+kleuren["ResetAll"]+kleinegetalkleuren(tot/aan)+forc10(valuta+grootgetal(tot/aan,fornum,K)[1](grootgetal(tot/aan,fornum,K)[0])+grootgetal(tot/aan,fornum,K)[2])+kleuren["ResetAll"]+grotegetalkleuren(rekening,header,tot)+forc10(valuta+grootgetal(tot,fornum,K)[1](grootgetal(tot,fornum,K)[0])+grootgetal(tot,fornum,K)[2])+kleuren["ResetAll"]+catcol[i]+forr5(mprc)+"% "+kleuren["ResetAll"]+forc10(valuta+grootgetal(toto/mndll,fornum,K)[1](grootgetal(toto/mndll,fornum,K)[0])+grootgetal(toto/mndll,fornum,K)[2])+forr4(perc)+"%"+" "+kleuren["ResetAll"]+catcol[i]+i+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"])
     print(lijn)
     if header[nieuwheaderlijst[17]] == ">":
         with open(os.path.join(rekening,rekening[-4:])+MM+"r","a") as r:
@@ -4474,7 +4483,7 @@ def rapportage(rekening,header,col,ok):
                     mndll = budgetnul
                 if aan == 0:
                     aan = budgetnul
-                if bud == budgetnul:
+                if bud == budgetnul or bud == budgetnulneg:
                     perc = 0
                     mprc = 0
                 else:
@@ -5526,6 +5535,8 @@ def budgetcorrectie(rekening): # geen H
                     categorie.append(['',budgetnul])
                 elif categorie[0][1] == 0 or categorie[0][1] == 0.0:
                     categorie[0][1] = budgetnul
+                elif categorie[0][1] == -0 or categorie[0][1] == -0.0:
+                    categorie[0][1] = budgetnulneg
             except(Exception) as f:
                 #print(f)
                 categorie = [['',budgetnul]]
