@@ -4242,10 +4242,18 @@ def maandanalyse(rekening,datumlijst,ok): # H
             perc = str(round(voort/voortlen*100))
         catuin = col+"|"+kleuren["ResetAll"]+catcol[i[0][0]]+i[0][0]+" "+forc15(alt)+kleuren["ResetAll"]+" "+colvoort+streepje*(voorts-calen)+kleuren["ResetAll"]+str(i[3])+" "*(voortlen-voorts+buffer)+" "+forr4(perc)+"% "+grotegetalkleuren(rekening,header,i[2])+forr8(grootgetal(i[2],fornum,K)[1](grootgetal(i[2],fornum,K)[0])+grootgetal(i[2],fornum,K)[2])+kleuren["ResetAll"]+" "+catcol[i[0][0]]+i[0][0]+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"]
         catuinmc = "|"+i[0][0]+" "+forc15(alt)+" "+streepje*(voorts-calen)+str(i[3])+" "*(voortlen-voorts+buffer)+" "+forr4(perc)+"% "+forr8(grootgetal(i[2],fornum,K)[1](grootgetal(i[2],fornum,K)[0])+grootgetal(i[2],fornum,K)[2])+" "+i[0][0]+"|"
-        print(catuin)
+        if header[nieuwheaderlijst[8]] == "<":
+            if i[2]/i[1]*voortlen < 0:
+                print(catuin)
+        else:
+            print(catuin)
         if header[nieuwheaderlijst[13]] == ">":
             with open(os.path.join(rekening,str(datumlijst[0])[:6])+"a","a") as a:
-                print(catuinmc, file = a)
+                if header[nieuwheaderlijst[8]] == "<":
+                    if i[2]/i[1]*voortlen < 0:
+                        print(catuinmc, file = a)
+                else:
+                    print(catuinmc, file = a)
     uitlijn = col+"+"+kleuren["ResetAll"]+kleuren["colslecht"]+uit+kleuren["ResetAll"]+" "*(80-2-len(uit))+col+"+"+kleuren["ResetAll"]
     uitlijnmc = "+"+uit+" "*(80-2-len(uit))+"+"
     print(uitlijn)
@@ -4288,10 +4296,18 @@ def maandanalyse(rekening,datumlijst,ok): # H
         num = grootgetal(i[2],fornum,K)
         catuit = col+"|"+kleuren["ResetAll"]+catcol[i[0][0]]+i[0][0]+" "+forc15(alt)+kleuren["ResetAll"]+" "+colvoort+streepje*(voorts-calen)+kleuren["ResetAll"]+str(i[3])+" "*(voortlen-voorts+buffer)+" "+forr4(perc)+"% "+grotegetalkleuren(rekening,header,i[2])+forr8(grootgetal(i[2],fornum,K)[1](grootgetal(i[2],fornum,K)[0])+grootgetal(i[2],fornum,K)[2])+kleuren["ResetAll"]+" "+catcol[i[0][0]]+i[0][0]+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"]
         catuitmc = "|"+i[0][0]+" "+forc15(alt)+" "+streepje*(voorts-calen)+str(i[3])+" "*(voortlen-voorts+buffer)+" "+forr4(perc)+"% "+forr8(grootgetal(i[2],fornum,K)[1](grootgetal(i[2],fornum,K)[0])+grootgetal(i[2],fornum,K)[2])+" "+i[0][0]+"|"
-        print(catuit)
+        if header[nieuwheaderlijst[8]] == "<":
+            if i[2]/i[1]*voortlen < 0:
+                print(catuit)
+        else:
+            print(catuit)
         if header[nieuwheaderlijst[13]] == ">":
             with open(os.path.join(rekening,str(datumlijst[0])[:6])+"a","a") as a:
-                print(catuitmc, file = a)
+                if header[nieuwheaderlijst[8]] == "<":
+                    if i[2]/i[1]*voortlen < 0:
+                        print(catuitmc, file = a)
+                else:
+                    print(catuitmc, file = a)
     print(analijn)
     if header[nieuwheaderlijst[13]] == ">":
         with open(os.path.join(rekening,str(datumlijst[0])[:6])+"a","a") as a:
@@ -4437,7 +4453,6 @@ def rapportage(rekening,header,col,ok): # H
             aan = 0
             toto = 0
             mndl = []
-            amnd = 0
             for k in ca[1:]:
                 if str(k[0])[4:6] == MM:
                     tot += k[1]
@@ -4447,17 +4462,22 @@ def rapportage(rekening,header,col,ok): # H
                 if str(k[0])[4:6] not in mndl:
                     mndl.append(str(k[0])[4:6])
         mndll = len(mndl)
-        if mndll == 0:
-            mndll = budgetnul
         if aan == 0:
             aan = budgetnul
+        if mndll == 0:
+            mndll = budgetnul
         if bud == budgetnul or bud == budgetnulneg:
             perc = 0
             mprc = 0
         else:
-            perc = round(toto/len(mndl)/bud*-100)
+            perc = round(toto/mndll/bud*-100)
             mprc = round(tot/bud*-100)
-        print(col+"|"+kleuren["ResetAll"]+catcol[i]+i+kleuren["ResetAll"]+" "+catcol[i]+forc15(vertaalv(j))+kleuren["ResetAll"]+grotegetalkleuren(rekening,header,bud)+forc10(valuta+grootgetal(bud,fornum,K)[1](grootgetal(bud,fornum,K)[0])+grootgetal(bud,fornum,K)[2])+kleuren["ResetAll"]+catcol[i]+forr4(round(aan))+" "*3+kleuren["ResetAll"]+kleinegetalkleuren(tot/aan)+forc10(valuta+grootgetal(tot/aan,fornum,K)[1](grootgetal(tot/aan,fornum,K)[0])+grootgetal(tot/aan,fornum,K)[2])+kleuren["ResetAll"]+grotegetalkleuren(rekening,header,tot)+forc10(valuta+grootgetal(tot,fornum,K)[1](grootgetal(tot,fornum,K)[0])+grootgetal(tot,fornum,K)[2])+kleuren["ResetAll"]+catcol[i]+forr5(mprc)+"% "+kleuren["ResetAll"]+forc10(valuta+grootgetal(toto/mndll,fornum,K)[1](grootgetal(toto/mndll,fornum,K)[0])+grootgetal(toto/mndll,fornum,K)[2])+forr4(perc)+"%"+" "+kleuren["ResetAll"]+catcol[i]+i+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"])
+        printlijn = col+"|"+kleuren["ResetAll"]+catcol[i]+i+kleuren["ResetAll"]+" "+catcol[i]+forc15(vertaalv(j))+kleuren["ResetAll"]+grotegetalkleuren(rekening,header,bud)+forc10(valuta+grootgetal(bud,fornum,K)[1](grootgetal(bud,fornum,K)[0])+grootgetal(bud,fornum,K)[2])+kleuren["ResetAll"]+catcol[i]+forr4(round(aan))+" "*3+kleuren["ResetAll"]+kleinegetalkleuren(tot/aan)+forc10(valuta+grootgetal(tot/aan,fornum,K)[1](grootgetal(tot/aan,fornum,K)[0])+grootgetal(tot/aan,fornum,K)[2])+kleuren["ResetAll"]+grotegetalkleuren(rekening,header,bud+tot)+forc10(valuta+grootgetal(tot,fornum,K)[1](grootgetal(tot,fornum,K)[0])+grootgetal(tot,fornum,K)[2])+kleuren["ResetAll"]+catcol[i]+forr5(mprc)+"% "+kleuren["ResetAll"]+forc10(valuta+grootgetal(toto/mndll,fornum,K)[1](grootgetal(toto/mndll,fornum,K)[0])+grootgetal(toto/mndll,fornum,K)[2])+forr4(perc)+"%"+" "+kleuren["ResetAll"]+catcol[i]+i+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"]
+        if header[nieuwheaderlijst[8]] == "<":
+            if aan > budgetnul:
+                print(printlijn)
+        else:
+            print(printlijn)
     print(lijn)
     if header[nieuwheaderlijst[17]] == ">":
         with open(os.path.join(rekening,rekening[-4:])+MM+"r","a") as r:
@@ -4469,7 +4489,6 @@ def rapportage(rekening,header,col,ok): # H
                     aan = 0
                     toto = 0
                     mndl = []
-                    amnd = 0
                     for k in ca[1:]:
                         if str(k[0])[4:6] == MM:
                             tot += k[1]
@@ -4479,17 +4498,22 @@ def rapportage(rekening,header,col,ok): # H
                         if str(k[0])[4:6] not in mndl:
                             mndl.append(str(k[0])[4:6])
                 mndll = len(mndl)
-                if mndll == 0:
-                    mndll = budgetnul
                 if aan == 0:
                     aan = budgetnul
+                if mndll == 0:
+                    mndll = budgetnul
                 if bud == budgetnul or bud == budgetnulneg:
                     perc = 0
                     mprc = 0
                 else:
-                    perc = round(toto/len(mndl)/bud*-100)
+                    perc = round(toto/mndll/bud*-100)
                     mprc = round(tot/bud*-100)
-                print("|"+i+" "+forc15(j)+forc10(valuta+grootgetal(bud,fornum,K)[1](grootgetal(bud,fornum,K)[0])+grootgetal(bud,fornum,K)[2])+forr4(round(aan))+" "*3+forc10(valuta+grootgetal(tot/aan,fornum,K)[1](grootgetal(tot/aan,fornum,K)[0])+grootgetal(tot/aan,fornum,K)[2])+forc10(valuta+grootgetal(tot,fornum,K)[1](grootgetal(tot,fornum,K)[0])+grootgetal(tot,fornum,K)[2])+forr5(mprc)+"% "+forc10(valuta+grootgetal(toto/mndll,fornum,K)[1](grootgetal(toto/mndll,fornum,K)[0])+grootgetal(toto/mndll,fornum,K)[2])+forr4(perc)+"%"+" "+i+"|", file = r)
+                printlijnmc = "|"+i+" "+forc15(j)+forc10(valuta+grootgetal(bud,fornum,K)[1](grootgetal(bud,fornum,K)[0])+grootgetal(bud,fornum,K)[2])+forr4(round(aan))+" "*3+forc10(valuta+grootgetal(tot/aan,fornum,K)[1](grootgetal(tot/aan,fornum,K)[0])+grootgetal(tot/aan,fornum,K)[2])+forc10(valuta+grootgetal(tot,fornum,K)[1](grootgetal(tot,fornum,K)[0])+grootgetal(tot,fornum,K)[2])+forr5(mprc)+"% "+forc10(valuta+grootgetal(toto/mndll,fornum,K)[1](grootgetal(toto/mndll,fornum,K)[0])+grootgetal(toto/mndll,fornum,K)[2])+forr4(perc)+"%"+" "+i+"|"
+                if header[nieuwheaderlijst[8]] == "<":
+                    if aan > budgetnul:
+                        print(printlijnmc, file = r)
+                else:
+                    print(printlijnmc, file = r)
             print(lijnmc, file = r)
     return ok
 
