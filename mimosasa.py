@@ -6,8 +6,8 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
 cwd = os.getcwd()
 print(cwd)
-versie = "0.0.985"
-versiedatum = "20251206"
+versie = "0.0.987"
+versiedatum = "20251213"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -3115,7 +3115,11 @@ def geefeendatum(rekening,header,col,ok,datum): # H
                 else:
                     test = checkint(datumkeuze)
                     if test == True:
-                        transactiedatum = int(datetime.strftime(datetime.strptime(str(datum),"%Y%m%d") - timedelta(days = int(datumkeuze)),"%Y%m%d"))
+                        try:
+                            transactiedatum = int(datetime.strftime(datetime.strptime(str(datum),"%Y%m%d") - timedelta(days = int(datumkeuze)),"%Y%m%d"))
+                        except:
+                            dezemaandeind = calendar.monthrange(int(datumkeuze[:4]),int(datumkeuze[4:6]))[1]
+                            transactiedatum = int(datumkeuze[:6]+str(dezemaandeind))
                     else:
                         transactiedatum = datum 
             toondatum = opmaakdatum(transactiedatum)
@@ -3139,6 +3143,16 @@ def geefdatumbereik(rekening,header,col,ok,datum): # geen H
         return "<"
     elif startdatum == "*":
         return [standaardstartdatum,standaardeinddatum]
+    if str(startdatum)[-2:] == "01":
+        dezemaandeind = calendar.monthrange(int(str(startdatum)[:4]),int(str(startdatum)[4:6]))[1]
+        if Taal == "EN":
+            print("This month has %s days." % (dezemaandeind))
+        elif Taal == "IT":
+            print("Questo mese ha %s giorni." % (dezemaandeind))
+        elif Taal == "CJ":
+            print("ma huqipo hiŋo huqi %s." % (dezemaandeind))
+        else:
+            print("Deze maand heeft %s dagen." % (dezemaandeind))
     if Taal == "EN":
         print("End")
     elif Taal == "IT":
