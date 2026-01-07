@@ -5,9 +5,9 @@ from datetime import datetime, date, timedelta
 dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
 cwd = os.getcwd()
-print(cwd)
-versie = "0.0.987"
-versiedatum = "20251213"
+#print(cwd)
+versie = "0.0.988"
+versiedatum = "20260107"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -6689,7 +6689,7 @@ def resetcategorie(rekening,header,col): # geen H
         elif antwoord.upper() in neelijst:
             return
         elif antwoord.upper() in ["0","1"]:
-            for i in lijst:
+            for i in categorieenlijst:
                 try:
                     os.remove(os.path.join(rekening,i))
                 except(Exception) as f:
@@ -6698,11 +6698,17 @@ def resetcategorie(rekening,header,col): # geen H
             if antwoord.upper() == "0":
                 for i in huishoudelijkelijst:
                     with open(os.path.join(rekening,i),"w") as c:
-                        print([budgetnul], file = c, end = "")
+                        if i == huishoudelijkelijst[0]:
+                            print([[nieuwalternatievenamendict[i],budgetnulneg]], file = c, end = "")
+                        else:
+                            print([[nieuwalternatievenamendict[i],budgetnul]], file = c, end = "")
             else:
                 for i in zakelijkelijst:
                     with open(os.path.join(rekening,i),"w") as c:
-                        print([budgetnul], file = c, end = "")
+                        if i == zakelijkelijst[0]:
+                            print([[nieuwalternatievenamendict[i],budgetnulneg]], file = c, end = "")
+                        else:
+                            print([[nieuwalternatievenamendict[i],budgetnul]], file = c, end = "")
 
 def verwijderrekening(rekening,header,col): # geen H
     Taal = header[nieuwheaderlijst[3]]
