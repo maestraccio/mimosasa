@@ -6,8 +6,8 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
 cwd = os.getcwd()
 #print(cwd)
-versie = "0.0.988"
-versiedatum = "20260107"
+versie = "0.0.989"
+versiedatum = "20260123"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -4254,7 +4254,7 @@ def maandanalyse(rekening,datumlijst,ok): # H
             perc = "---"
         else:
             perc = str(round(voort/voortlen*100))
-        catuin = col+"|"+kleuren["ResetAll"]+catcol[i[0][0]]+i[0][0]+" "+forc15(alt)+kleuren["ResetAll"]+" "+colvoort+streepje*(voorts-calen)+kleuren["ResetAll"]+str(i[3])+" "*(voortlen-voorts+buffer)+" "+forr4(perc)+"% "+grotegetalkleuren(rekening,header,i[2])+forr8(grootgetal(i[2],fornum,K)[1](grootgetal(i[2],fornum,K)[0])+grootgetal(i[2],fornum,K)[2])+kleuren["ResetAll"]+" "+catcol[i[0][0]]+i[0][0]+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"]
+        catuin = col+"|"+kleuren["ResetAll"]+catcol[i[0][0]]+i[0][0]+" "+forc15(alt)+kleuren["ResetAll"]+" "+colvoort+streepje*(voorts-calen)+kleuren["ResetAll"]+catcol[i[0][0]]+kleuren["Omkeren"]+str(i[3])+kleuren["ResetAll"]+" "*(voortlen-voorts+buffer)+" "+forr4(perc)+"% "+grotegetalkleuren(rekening,header,i[2])+forr8(grootgetal(i[2],fornum,K)[1](grootgetal(i[2],fornum,K)[0])+grootgetal(i[2],fornum,K)[2])+kleuren["ResetAll"]+" "+catcol[i[0][0]]+i[0][0]+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"]
         catuinmc = "|"+i[0][0]+" "+forc15(alt)+" "+streepje*(voorts-calen)+str(i[3])+" "*(voortlen-voorts+buffer)+" "+forr4(perc)+"% "+forr8(grootgetal(i[2],fornum,K)[1](grootgetal(i[2],fornum,K)[0])+grootgetal(i[2],fornum,K)[2])+" "+i[0][0]+"|"
         if header[nieuwheaderlijst[8]] == "<":
             if i[2]/i[1]*voortlen < 0:
@@ -4308,7 +4308,7 @@ def maandanalyse(rekening,datumlijst,ok): # H
         else:
             perc = str(round(voort/voortlen*100))
         num = grootgetal(i[2],fornum,K)
-        catuit = col+"|"+kleuren["ResetAll"]+catcol[i[0][0]]+i[0][0]+" "+forc15(alt)+kleuren["ResetAll"]+" "+colvoort+streepje*(voorts-calen)+kleuren["ResetAll"]+str(i[3])+" "*(voortlen-voorts+buffer)+" "+forr4(perc)+"% "+grotegetalkleuren(rekening,header,i[2])+forr8(grootgetal(i[2],fornum,K)[1](grootgetal(i[2],fornum,K)[0])+grootgetal(i[2],fornum,K)[2])+kleuren["ResetAll"]+" "+catcol[i[0][0]]+i[0][0]+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"]
+        catuit = col+"|"+kleuren["ResetAll"]+catcol[i[0][0]]+i[0][0]+" "+forc15(alt)+kleuren["ResetAll"]+" "+colvoort+streepje*(voorts-calen)+kleuren["ResetAll"]+catcol[i[0][0]]+kleuren["Omkeren"]+str(i[3])+kleuren["ResetAll"]+" "*(voortlen-voorts+buffer)+" "+forr4(perc)+"% "+grotegetalkleuren(rekening,header,i[2])+forr8(grootgetal(i[2],fornum,K)[1](grootgetal(i[2],fornum,K)[0])+grootgetal(i[2],fornum,K)[2])+kleuren["ResetAll"]+" "+catcol[i[0][0]]+i[0][0]+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"]
         catuitmc = "|"+i[0][0]+" "+forc15(alt)+" "+streepje*(voorts-calen)+str(i[3])+" "*(voortlen-voorts+buffer)+" "+forr4(perc)+"% "+forr8(grootgetal(i[2],fornum,K)[1](grootgetal(i[2],fornum,K)[0])+grootgetal(i[2],fornum,K)[2])+" "+i[0][0]+"|"
         if header[nieuwheaderlijst[8]] == "<":
             if i[2]/i[1]*voortlen < 0:
