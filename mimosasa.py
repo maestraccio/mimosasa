@@ -6,8 +6,8 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
 cwd = os.getcwd()
 #print(cwd)
-versie = "0.0.989"
-versiedatum = "20260123"
+versie = "0.0.990"
+versiedatum = "20260126"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -4225,6 +4225,7 @@ def maandanalyse(rekening,datumlijst,ok): # H
         alt = vertaalv(alternatievenamendict[i[0][0]])
         voort = int(round(i[2]/i[1]*voortlen)) * -1 # het aantal streepjes per categorie (int)
         calen = len(str(i[3]))                      # de lengte in karakters van dat getal
+        toon = True
         if 0 < voort < voortlen:
             voorts = voort
             colvoort = kleuren["colslecht"]
@@ -4240,6 +4241,7 @@ def maandanalyse(rekening,datumlijst,ok): # H
             colvoort = kleuren["colonbepaald"]
             streepje = "="
             buffer = -1
+            toon = False
         elif 0 > voort > voortlen*-1: 
             voorts = voort
             colvoort = kleuren["colgoed"]
@@ -4257,14 +4259,14 @@ def maandanalyse(rekening,datumlijst,ok): # H
         catuin = col+"|"+kleuren["ResetAll"]+catcol[i[0][0]]+i[0][0]+" "+forc15(alt)+kleuren["ResetAll"]+" "+colvoort+streepje*(voorts-calen)+kleuren["ResetAll"]+catcol[i[0][0]]+kleuren["Omkeren"]+str(i[3])+kleuren["ResetAll"]+" "*(voortlen-voorts+buffer)+" "+forr4(perc)+"% "+grotegetalkleuren(rekening,header,i[2])+forr8(grootgetal(i[2],fornum,K)[1](grootgetal(i[2],fornum,K)[0])+grootgetal(i[2],fornum,K)[2])+kleuren["ResetAll"]+" "+catcol[i[0][0]]+i[0][0]+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"]
         catuinmc = "|"+i[0][0]+" "+forc15(alt)+" "+streepje*(voorts-calen)+str(i[3])+" "*(voortlen-voorts+buffer)+" "+forr4(perc)+"% "+forr8(grootgetal(i[2],fornum,K)[1](grootgetal(i[2],fornum,K)[0])+grootgetal(i[2],fornum,K)[2])+" "+i[0][0]+"|"
         if header[nieuwheaderlijst[8]] == "<":
-            if i[2]/i[1]*voortlen < 0:
+            if toon == True:
                 print(catuin)
         else:
             print(catuin)
         if header[nieuwheaderlijst[13]] == ">":
             with open(os.path.join(rekening,str(datumlijst[0])[:6])+"a","a") as a:
                 if header[nieuwheaderlijst[8]] == "<":
-                    if i[2]/i[1]*voortlen < 0:
+                    if toon == True:
                         print(catuinmc, file = a)
                 else:
                     print(catuinmc, file = a)
@@ -4278,6 +4280,7 @@ def maandanalyse(rekening,datumlijst,ok): # H
         alt = vertaalv(alternatievenamendict[i[0][0]])
         voort = int(round(i[2]/i[1]*voortlen)) * -1 # het aantal streepjes per categorie (int)
         calen = len(str(i[3]))                      # de lengte in karakters van dat getal
+        toon = True
         if 0 < voort < voortlen:
             voorts = voort
             colvoort = kleuren["colgoed"]
@@ -4293,6 +4296,7 @@ def maandanalyse(rekening,datumlijst,ok): # H
             colvoort = kleuren["colonbepaald"]
             streepje = "="
             buffer = -1
+            toon = False
         elif 0 > voort > voortlen*-1: 
             voorts = voort
             colvoort = kleuren["colgoed"]
@@ -4311,14 +4315,14 @@ def maandanalyse(rekening,datumlijst,ok): # H
         catuit = col+"|"+kleuren["ResetAll"]+catcol[i[0][0]]+i[0][0]+" "+forc15(alt)+kleuren["ResetAll"]+" "+colvoort+streepje*(voorts-calen)+kleuren["ResetAll"]+catcol[i[0][0]]+kleuren["Omkeren"]+str(i[3])+kleuren["ResetAll"]+" "*(voortlen-voorts+buffer)+" "+forr4(perc)+"% "+grotegetalkleuren(rekening,header,i[2])+forr8(grootgetal(i[2],fornum,K)[1](grootgetal(i[2],fornum,K)[0])+grootgetal(i[2],fornum,K)[2])+kleuren["ResetAll"]+" "+catcol[i[0][0]]+i[0][0]+kleuren["ResetAll"]+col+"|"+kleuren["ResetAll"]
         catuitmc = "|"+i[0][0]+" "+forc15(alt)+" "+streepje*(voorts-calen)+str(i[3])+" "*(voortlen-voorts+buffer)+" "+forr4(perc)+"% "+forr8(grootgetal(i[2],fornum,K)[1](grootgetal(i[2],fornum,K)[0])+grootgetal(i[2],fornum,K)[2])+" "+i[0][0]+"|"
         if header[nieuwheaderlijst[8]] == "<":
-            if i[2]/i[1]*voortlen < 0:
+            if toon == True:
                 print(catuit)
         else:
             print(catuit)
         if header[nieuwheaderlijst[13]] == ">":
             with open(os.path.join(rekening,str(datumlijst[0])[:6])+"a","a") as a:
                 if header[nieuwheaderlijst[8]] == "<":
-                    if i[2]/i[1]*voortlen < 0:
+                    if toon == True:
                         print(catuitmc, file = a)
                 else:
                     print(catuitmc, file = a)
