@@ -6,8 +6,8 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
 cwd = os.getcwd()
 #print(cwd)
-versie = "0.0.990"
-versiedatum = "20260126"
+versie = "0.0.991"
+versiedatum = "20260427"
 nu = datetime.now()
 nustr = datetime.strftime(nu,"%Y%m%d")
 #hucojialfabet = "ü i e a o u m t d k g h s z ʃ ʒ p b n ñ ŋ c j x q r f v w y l"
@@ -3320,7 +3320,7 @@ def geefwederpartij(rekening,header,col,ok): # H
     maxlen = len(max(elcat,key = len))
     loop = True
     while loop == True:
-        wederpartij = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(elcat[2].upper())+ResetAll+inputindent).replace(",","")
+        wederpartij = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(elcat[2].upper())+ResetAll+inputindent).replace(",",".")
         if wederpartij.upper() in afsluitlijst:
             doei()
         elif wederpartij.upper() in neelijst:
@@ -3356,7 +3356,7 @@ def geefonderwerp(rekening,header,col,ok): # H
     maxlen = len(max(elcat,key = len))
     loop = True
     while loop == True:
-        onderwerp = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(elcat[3].upper())+ResetAll+inputindent).replace(",","")
+        onderwerp = input(kleuren["Omkeren"]+col+("{:^%d}" % (maxlen)).format(elcat[3].upper())+ResetAll+inputindent).replace(",",".")
         if onderwerp.upper() in afsluitlijst:
             doei()
         elif onderwerp.upper() in neelijst:
